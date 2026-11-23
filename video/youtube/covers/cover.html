@@ -1,0 +1,20 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+html,body{margin:0;background:#0d0e10}
+.c{position:relative;overflow:hidden;background:radial-gradient(900px 600px at 85% -10%,rgba(240,185,11,.18),transparent 60%),#0d0e10;color:#eceae4;font-family:"PingFang SC","Hiragino Sans GB",sans-serif;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box}
+.k{font-family:Menlo,monospace;color:#f0b90b;letter-spacing:.14em;font-weight:700}
+h1{font-family:"Songti SC","STSong",serif;font-weight:900;margin:0;line-height:1.12}
+.s{color:#9ea3ad}
+.chips{display:flex;flex-wrap:wrap;gap:14px}
+.chip{border:2px solid #2c3038;background:#16181c;border-radius:999px;padding:8px 22px;color:#eceae4}
+.bar{position:absolute;left:0;bottom:0;height:14px;background:#f0b90b}
+.grid{position:absolute;right:-40px;top:-40px;opacity:.5}
+</style></head><body><div id="c" class="c"></div>
+<script>
+const q=new URLSearchParams(location.search), w=+q.get('w'), h=+q.get('h');
+const S={EP:['主线','17 集','托管 · 账本 · 撮合 · 清算 · 风控 · 合约'],P:['产品深潜','11 集','杠杆 · 理财 · 期权 · P2P · 上币 · 跟单'],B:['幕后核心','12 集','合规 · 安全 · 对账 · 风控 · 金库 · 应急']}[q.get('s')];
+const c=document.getElementById('c'); c.style.width=w+'px'; c.style.height=h+'px'; const u=w/1920*(h/w>0.7?1.25:1); c.style.padding=`0 ${140*u}px`; c.style.gap=`${34*u}px`;
+c.innerHTML=`<div class="k" style="font-size:${34*u}px">CEX 交易所系统讲解 · ${S[1]}</div>
+<h1 style="font-size:${150*u}px">从零拆解<br><span style="color:#f0b90b">中心化交易所</span></h1>
+<div class="chips" style="font-size:${40*u}px"><span class="chip" style="border-color:#f0b90b;color:#f0b90b">${S[0]}</span><span class="chip">${S[2]}</span></div>
+<div class="s" style="font-size:${30*u}px">动画讲解 · 逐句字幕 · 系统设计与业务逻辑</div><div class="bar" style="width:${w*0.42}px"></div>`;
+</script></body></html>

@@ -1,0 +1,402 @@
+[
+  {
+    "ep": "EP01",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP01-what-is-cex.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP01-what-is-cex.srt",
+    "title": "交易所到底是什么：托管、记账、撮合｜CEX 交易所系统讲解 EP01",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP01。\n\n交易所到底是什么：托管、记账、撮合\n\n章节\n0:00 开场\n0:23 本集路线图\n0:49 没有交易所会怎样\n1:41 赌场比喻\n2:26 和银行券商DEX对比\n3:19 币安业务版图\n3:57 新用户的旅程\n4:56 资金的路线\n5:36 三本账\n6:42 三本账要对得上\n7:40 托管记账撮合\n8:23 币安怎么做\n9:15 哪里会出错\n9:59 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.6,
+    "chapters": 14
+  },
+  {
+    "ep": "EP02",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP02-architecture-map.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP02-architecture-map.srt",
+    "title": "一张图看懂交易所架构｜CEX 交易所系统讲解 EP02",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP02。\n\n一张图看懂交易所架构\n\n章节\n0:00 开场\n0:24 本集路线图\n0:51 三个矛盾\n1:52 银行网点比喻\n2:48 六层架构\n4:06 三条关键连线\n5:07 每层的快与对\n6:11 算一笔延迟账\n6:57 单点\n7:53 热点账户\n8:45 币安怎么做\n9:50 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.6,
+    "chapters": 12
+  },
+  {
+    "ep": "EP03",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP03-order-journey.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP03-order-journey.srt",
+    "title": "一笔订单的旅程：调用链、同步异步与故障｜CEX 交易所系统讲解 EP03",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP03。\n\n一笔订单的旅程：调用链、同步异步与故障\n\n章节\n0:00 开场\n0:27 本集路线图\n0:55 下单调用链\n2:07 钱什么时候扣掉\n2:58 响应之后的异步事件\n3:48 充值调用链\n4:57 提币调用链\n5:56 同步与异步的边界\n6:49 Outbox 模式\n7:48 最危险的一步\n8:43 更多故障\n9:40 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.5,
+    "chapters": 12
+  },
+  {
+    "ep": "EP04",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP04-account-identity.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP04-account-identity.srt",
+    "title": "账户与身份：登录、2FA、API 签名、KYC｜CEX 交易所系统讲解 EP04",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP04。\n\n账户与身份：登录、2FA、API 签名、KYC\n\n章节\n0:00 开场\n0:39 认证与授权\n1:27 注册与登录\n2:08 会话令牌\n3:04 TOTP 双因素认证\n4:09 设备指纹\n4:50 API Key 与 HMAC 签名\n6:00 timestamp 与 recvWindow 防重放\n7:13 API Key 权限\n8:03 KYC 分级\n8:52 KYC 状态机\n9:49 攻击路径与多层防护\n11:03 常见误区\n11:55 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 12.7,
+    "chapters": 14
+  },
+  {
+    "ep": "EP05",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP05-deposit-confirmations.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP05-deposit-confirmations.srt",
+    "title": "充值：地址、确认数与链重组｜CEX 交易所系统讲解 EP05",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP05。\n\n充值：地址、确认数与链重组\n\n章节\n0:00 开场\n0:40 链上资产与账本\n1:27 两种地址模型\n2:23 地址派生\n3:19 链上监听与状态\n4:17 确认数动画\n5:20 链重组是什么\n6:17 重组让充值消失\n7:21 阈值怎么定\n8:17 失败一：充错链\n9:08 失败二：漏填 memo\n9:55 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.7,
+    "chapters": 12
+  },
+  {
+    "ep": "EP06",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP06-withdrawal-wallets-por.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP06-withdrawal-wallets-por.srt",
+    "title": "提币、冷热钱包与储备金证明｜CEX 交易所系统讲解 EP06",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP06。\n\n提币、冷热钱包与储备金证明\n\n章节\n0:00 开场\n0:49 本集路线图\n1:22 提币流水线\n2:45 提币状态机\n3:25 热温冷三层\n4:08 水位管理\n5:04 归集与 Gas\n6:09 私钥保护\n7:16 储备金证明是什么\n7:59 Merkle 证明路径\n9:07 zk-SNARK 补上的缺口\n10:01 PoR 局限与 SAFU\n10:58 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 11.7,
+    "chapters": 13
+  },
+  {
+    "ep": "EP07",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP07-ledger-double-entry.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP07-ledger-double-entry.srt",
+    "title": "账本：双分录与冻结｜CEX 交易所系统讲解 EP07",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP07。\n\n账本：双分录与冻结\n\n章节\n0:00 开场\n0:53 本集路线\n1:20 余额表还是账本\n2:02 双分录记账\n2:55 借和贷的方向\n3:43 账户科目\n4:48 余额分层\n5:56 冻结扣减解冻\n7:13 冻结状态机\n8:06 精确算术\n9:01 常见误区\n9:42 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.4,
+    "chapters": 12
+  },
+  {
+    "ep": "EP08",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP08-ledger-reliability.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP08-ledger-reliability.srt",
+    "title": "账本可靠性：幂等、对账与热点账户｜CEX 交易所系统讲解 EP08",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP08。\n\n账本可靠性：幂等、对账与热点账户\n\n章节\n0:00 开场\n0:38 本集路线\n1:09 重复一定会发生\n1:49 幂等动画\n2:42 幂等键怎么做\n3:30 只追加与冲正\n4:21 快照与内部对账\n5:05 三方对账\n6:03 对账的局限\n6:47 热点账户\n7:43 分桶与异步汇总\n8:25 Outbox 模式\n9:12 去重与死信\n9:53 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.5,
+    "chapters": 14
+  },
+  {
+    "ep": "EP09",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP09-order-book-rules.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP09-order-book-rules.srt",
+    "title": "订单簿与撮合规则｜CEX 交易所系统讲解 EP09",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP09。\n\n订单簿与撮合规则\n\n章节\n0:00 开场\n0:24 本集路线图\n0:50 订单簿结构\n2:03 价格优先、时间优先\n2:58 一笔撮合的全过程\n4:06 限价单与市价单\n5:02 止损单与 OCO\n5:54 冰山单与 Post-Only\n6:54 GTC、IOC、FOK\n7:58 订单状态机\n9:00 常见误区\n9:48 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.5,
+    "chapters": 12
+  },
+  {
+    "ep": "EP10",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP10-matching-engine-internals.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP10-matching-engine-internals.srt",
+    "title": "撮合引擎内部：数据结构、定序与重放｜CEX 交易所系统讲解 EP10",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP10。\n\n撮合引擎内部：数据结构、定序与重放\n\n章节\n0:00 开场\n0:27 本集路线图\n0:56 为什么是单线程\n1:44 订单簿的三种操作\n2:14 价格档、链表与哈希索引\n3:06 为什么用整数\n3:44 定序器与事件日志\n4:31 快照与重放恢复\n5:32 确定性的五条规则\n6:31 LMAX 架构思路\n7:20 tickSize、stepSize、minNotional\n8:17 自成交预防 STP\n9:19 撮合引擎的局限\n10:10 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 11.0,
+    "chapters": 14
+  },
+  {
+    "ep": "EP11",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP11-clearing-fees.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP11-clearing-fees.srt",
+    "title": "成交之后：清算、结算与手续费｜CEX 交易所系统讲解 EP11",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP11。\n\n成交之后：清算、结算与手续费\n\n章节\n0:00 开场\n0:46 本集路线\n1:16 清算与结算\n2:12 成交后的链路\n3:19 场景与手续费\n4:11 BTC 分录\n4:58 USDT 分录\n6:04 Maker 与 Taker\n6:37 VIP 等级\n7:23 BNB 抵扣\n8:22 返佣与返现\n9:30 零手续费\n10:27 结算失败与恢复\n11:36 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 12.4,
+    "chapters": 14
+  },
+  {
+    "ep": "EP12",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP12-market-data.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP12-market-data.srt",
+    "title": "行情：深度、K 线与增量同步｜CEX 交易所系统讲解 EP12",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP12。\n\n行情：深度、K 线与增量同步\n\n章节\n0:00 开场\n0:20 本集路线图\n0:43 从撮合事件到行情\n1:42 深度怎么生成\n2:28 K 线聚合与 Ticker\n3:29 大周期合并与迟到成交\n4:16 快照加增量：三个序号\n5:00 同步步骤：对齐与缺口\n6:19 为什么先连接后快照\n7:14 WebSocket 扇出\n8:10 公共行情与私有推送\n9:04 指数价格\n9:56 延迟与一致性\n10:51 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 11.5,
+    "chapters": 14
+  },
+  {
+    "ep": "EP13",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP13-risk-control.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP13-risk-control.srt",
+    "title": "风控：交易前、交易中与限流｜CEX 交易所系统讲解 EP13",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP13。\n\n风控：交易前、交易中与限流\n\n章节\n0:00 开场\n0:40 本集路线图\n1:05 四层风控\n2:03 交易前五道检查\n2:50 价格保护带\n3:50 交易中风控\n4:41 提币与账户风控\n5:57 决策流\n7:10 同步与异步的延迟预算\n8:05 令牌桶限流\n9:08 币安 API 权重与 429、418\n10:04 误杀与漏放\n11:17 制裁合规与失败即关闭\n12:29 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 13.2,
+    "chapters": 14
+  },
+  {
+    "ep": "EP14",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP14-perpetual-funding-mark.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP14-perpetual-funding-mark.srt",
+    "title": "永续合约：资金费率与标记价格｜CEX 交易所系统讲解 EP14",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP14。\n\n永续合约：资金费率与标记价格\n\n章节\n0:00 开场\n0:34 本集路线图\n0:57 四种交易方式\n1:49 永续为什么需要资金费率\n2:34 资金费率公式\n3:54 谁付给谁\n4:49 负反馈回路\n5:30 三种价格\n6:13 指数价格的偏离截断\n6:45 插针：最新价与标记价格\n7:53 案例：2025-10-10\n9:01 常见误区\n9:39 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 10.4,
+    "chapters": 13
+  },
+  {
+    "ep": "EP15",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP15-margin-liquidation.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP15-margin-liquidation.srt",
+    "title": "保证金与强平：保险基金和 ADL｜CEX 交易所系统讲解 EP15",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP15。\n\n保证金与强平：保险基金和 ADL\n\n章节\n0:00 开场\n0:36 本集路线图\n0:58 保证金的四个概念\n1:49 保证金率走向 100%\n2:40 分层杠杆与速算额\n3:48 逐仓与全仓\n4:49 强平价公式推导\n6:03 破产价与杠杆\n6:53 强平流程\n7:48 保险基金\n8:35 自动减仓 ADL\n9:38 极端行情与误区\n10:25 币本位与组合保证金\n11:26 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 12.2,
+    "chapters": 14
+  },
+  {
+    "ep": "EP16",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP16-business-model.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP16-business-model.srt",
+    "title": "交易所怎么赚钱：产品生态与商业模式｜CEX 交易所系统讲解 EP16",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP16。\n\n交易所怎么赚钱：产品生态与商业模式\n\n章节\n0:00 开场\n0:36 本集路线图\n1:08 产品 = 底层能力的组合\n2:04 闪兑的隐含价差\n3:05 收入构成\n4:03 手续费的层层折扣\n5:03 飞轮效应\n6:11 做市商计划\n7:03 BNB 代币经济\n8:03 成本结构与 SAFU\n9:03 全球合规与地区路由\n9:46 2023 年美国和解\n10:57 常见误区\n11:32 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 12.3,
+    "chapters": 14
+  },
+  {
+    "ep": "EP17",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP17-reliability-incidents.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/EP17-reliability-incidents.srt",
+    "title": "交易所怎样倒下：可靠性与事故复盘｜CEX 交易所系统讲解 EP17",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「主线」系列，EP17。\n\n交易所怎样倒下：可靠性与事故复盘\n\n章节\n0:00 开场\n0:35 本集路线图\n1:01 多机房与灾备\n2:11 主备切换与冷启动重放\n3:21 降级与恢复顺序\n4:12 可观测性\n5:04 安全纵深四层防线\n6:06 案例一：2019 币安热钱包被盗\n7:11 案例二：2022 BNB Chain 跨链桥\n8:05 案例三：2022 FTX\n9:10 案例四：2014 Mt.Gox\n10:11 四个案例对比\n10:57 账本隔离与储备金证明\n11:59 边界、小结与系列结语\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜主线",
+    "minutes": 13.4,
+    "chapters": 14
+  },
+  {
+    "ep": "P01",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P01-margin-and-loans.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P01-margin-and-loans.srt",
+    "title": "杠杆与借贷：钱从哪来，利率怎么定｜CEX 交易所系统讲解 P01",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P01。\n\n杠杆与借贷：钱从哪来，利率怎么定\n\n章节\n0:00 开场\n0:32 本集路线图\n0:59 杠杆账户：用户看到什么\n1:53 杠杆买入的资金流\n3:07 追保价、强平价与破产价\n4:14 杠杆账户状态机\n5:05 质押借币与 LTV\n6:28 质押物的双重身份\n7:36 VIP 机构借贷\n8:47 资金池与拐点利率\n9:59 挤兑推演\n11:02 平台怎么赚钱\n11:50 强平到坏账\n12:56 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 13.8,
+    "chapters": 14
+  },
+  {
+    "ep": "P02",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P02-convert-otc.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P02-convert-otc.srt",
+    "title": "闪兑与 OTC：平台报价背后的风险｜CEX 交易所系统讲解 P02",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P02。\n\n闪兑与 OTC：平台报价背后的风险\n\n章节\n0:00 开场\n0:33 本集路线图\n1:11 闪兑：用户看到什么\n2:02 闪兑的资金流\n2:46 RFQ 状态机与倒计时\n3:40 调用链\n4:36 报价怎么算\n5:33 平台单笔盈亏\n6:13 逆向选择与毒性流量\n6:59 平台的防线\n8:05 大宗 OTC\n9:23 银行卡买币\n10:24 拒付攻击链\n11:22 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 12.1,
+    "chapters": 14
+  },
+  {
+    "ep": "P03",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P03-p2p-fiat.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P03-p2p-fiat.srt",
+    "title": "P2P 与法币通道：担保交易和反诈｜CEX 交易所系统讲解 P03",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P03。\n\nP2P 与法币通道：担保交易和反诈\n\n章节\n0:00 开场\n0:33 本集路线图\n1:13 角色与公开规则\n2:19 托管的资金流\n3:15 P2P 订单状态机\n4:19 调用链\n5:08 仲裁与证据\n6:06 平台怎么赚钱\n7:09 商家认证与三类风险\n8:12 冻卡链条\n9:09 失败场景\n9:51 法币充提通道\n10:52 回调、对账与通道风险\n11:52 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 12.8,
+    "chapters": 14
+  },
+  {
+    "ep": "P04",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P04-advanced-derivatives.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P04-advanced-derivatives.srt",
+    "title": "合约进阶：统一账户、组合保证金与期权｜CEX 交易所系统讲解 P04",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P04。\n\n合约进阶：统一账户、组合保证金与期权\n\n章节\n0:00 开场\n0:49 本集路线图\n1:38 多资产保证金\n2:44 统一账户与 uniMMR\n3:40 对冲为什么省保证金\n4:50 uniMMR 状态机\n5:38 组合风险引擎调用链\n6:29 平台收益与组合风险\n7:32 期权：用户看到什么\n8:18 收益曲线与 Greeks\n9:32 期权的资金流与做市\n10:29 卖方保证金与失败案例\n11:52 风险限额与分层\n13:04 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 13.9,
+    "chapters": 14
+  },
+  {
+    "ep": "P05",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P05-earn-savings-staking.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P05-earn-savings-staking.srt",
+    "title": "存币生息：活期、定期与流动性质押｜CEX 交易所系统讲解 P05",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P05。\n\n存币生息：活期、定期与流动性质押\n\n章节\n0:00 开场\n0:38 本集路线图\n1:23 活期与定期：用户看到什么\n2:22 活期的资金流\n3:14 活期 APR 怎么定\n4:21 调用链与账本分录\n5:37 挤兑、兜底与故障\n6:42 WBETH 汇率模型\n7:46 质押调用链与赎回队列\n8:44 质押收益与风险\n9:42 2025-10-10 指数偏离\n10:45 定投 Auto-Invest\n11:58 BNB Vault\n13:02 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 13.8,
+    "chapters": 14
+  },
+  {
+    "ep": "P06",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P06-structured-products.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P06-structured-products.srt",
+    "title": "双币投资：高收益背后的期权｜CEX 交易所系统讲解 P06",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P06。\n\n双币投资：高收益背后的期权\n\n章节\n0:00 开场\n0:43 本集路线图\n1:30 用户看到什么\n2:26 1000 USDT 完整算例\n3:50 两条曲线完全重合\n5:05 资金流\n5:53 平台抽成\n6:34 高收益就是卖出波动率\n7:17 状态机与调用链\n8:26 风险与适当性评估\n9:24 失败场景\n10:11 鲨鱼鳍：收益曲线\n11:05 鲨鱼鳍的拆解与定价\n12:20 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 13.2,
+    "chapters": 14
+  },
+  {
+    "ep": "P07",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P07-listing-launch.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P07-listing-launch.srt",
+    "title": "上币与新币分发：Launchpad、Launchpool 与空投｜CEX 交易所系统讲解 P07",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P07。\n\n上币与新币分发：Launchpad、Launchpool 与空投\n\n章节\n0:00 开场\n0:31 本集路线图\n0:57 上币状态机\n1:50 尽调与风险标签\n3:08 技术接入调用链\n4:16 开盘：卖单从哪来\n5:20 平台收益与上币费争议\n6:25 Launchpad：快照取平均\n7:23 Launchpad：认购、扣款与退款\n8:43 Launchpool：按份额挖矿与稀释\n9:53 Launchpool：小时内随机快照\n10:41 空投：HODLer、Megadrop 与 Alpha\n12:07 BNB 飞轮\n12:52 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 13.6,
+    "chapters": 14
+  },
+  {
+    "ep": "P08",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P08-strategy-copy-trading.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P08-strategy-copy-trading.srt",
+    "title": "策略交易与跟单：网格、定投与带单分润｜CEX 交易所系统讲解 P08",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P08。\n\n策略交易与跟单：网格、定投与带单分润\n\n章节\n0:00 开场\n0:31 本集路线图\n0:49 网格：怎样画线\n1:32 网格：每格利润\n2:34 网格：价格来回，逐格成交\n3:28 网格：状态机与调用链\n4:26 网格：收益拆解与单边下跌\n5:21 定投：平均成本\n6:17 TWAP：母单拆子单\n7:12 跟单：分成规则与仓位映射\n8:09 跟单：调用链与滑点\n8:56 跟单：高水位线分成\n10:05 策略引擎的系统架构\n11:01 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 11.7,
+    "chapters": 14
+  },
+  {
+    "ep": "P09",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P09-pay-and-card.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P09-pay-and-card.srt",
+    "title": "支付与卡：Binance Pay、礼品卡与加密借记卡｜CEX 交易所系统讲解 P09",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P09。\n\n支付与卡：Binance Pay、礼品卡与加密借记卡\n\n章节\n0:00 开场\n0:30 本集路线图：三个产品的边界\n1:11 Binance Pay：用户看到什么\n2:17 Pay 资金流：链上与链下\n3:00 Pay 商户订单状态机\n3:49 Pay 调用链与分录\n4:59 Pay 的风险与故障\n5:56 礼品卡：资金流\n6:51 礼品卡：并发兑换与风险\n7:51 Binance Card：用户看到什么\n8:47 刷卡：授权与清算两阶段\n9:55 授权不等于清算\n10:45 单笔经济学\n11:28 小结与下集预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 12.2,
+    "chapters": 14
+  },
+  {
+    "ep": "P10",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P10-web3-wallet.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P10-web3-wallet.srt",
+    "title": "Web3 钱包：MPC、DEX 聚合与授权风险｜CEX 交易所系统讲解 P10",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P10。\n\nWeb3 钱包：MPC、DEX 聚合与授权风险\n\n章节\n0:00 开场\n0:35 本集路线图\n1:01 三种托管模式\n1:44 MPC 三片密钥\n2:55 钱包生命周期\n3:59 资金流：划转即提币\n4:45 一次签名的调用链\n5:49 DEX 聚合交易\n6:45 MEV 与三明治攻击\n7:39 跨链桥与链上赚币\n8:42 平台怎么赚钱\n9:34 无限授权钓鱼\n10:32 风险与失败场景\n11:14 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 12.1,
+    "chapters": 14
+  },
+  {
+    "ep": "P11",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P11-growth-institutional.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/P11-growth-institutional.srt",
+    "title": "增长与机构：推荐返佣、VIP、经纪商与做市商｜CEX 交易所系统讲解 P11",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「产品深潜」系列，P11。\n\n增长与机构：推荐返佣、VIP、经纪商与做市商\n\n章节\n0:00 开场\n0:29 本集路线图\n1:09 返佣比例从哪来\n2:05 返佣分账流程\n3:00 体验金：受限资产账本\n4:12 体验金状态机与 ROI\n5:07 获客漏斗\n5:47 VIP 与子账户\n6:52 经纪商计划\n8:11 做市商负费率\n9:20 做市义务与低延迟\n10:17 场外结算\n11:24 风险与失败场景\n12:20 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜产品深潜",
+    "minutes": 13.4,
+    "chapters": 14
+  },
+  {
+    "ep": "B01",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B01-compliance.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B01-compliance.srt",
+    "title": "合规防护：KYC、反洗钱与 Travel Rule｜CEX 交易所系统讲解 B01",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B01。\n\n合规防护：KYC、反洗钱与 Travel Rule\n\n章节\n0:00 开场：纵深防御\n1:01 本集路线图\n1:36 威胁模型与监管地图\n2:56 六层防线\n3:51 KYC 生命周期\n4:54 客户风险评级\n5:44 告警、案件与报告\n6:32 AML 图谱：拆分与分层\n7:37 链上 KYT：风险暴露\n8:44 Travel Rule\n9:44 制裁筛查与执法协作\n10:46 真实案例：2023 年和解\n11:53 指标与权衡\n12:46 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.4,
+    "chapters": 14
+  },
+  {
+    "ep": "B02",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B02-platform-security.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B02-platform-security.srt",
+    "title": "平台安全：密钥、内控与供应链｜CEX 交易所系统讲解 B02",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B02。\n\n平台安全：密钥、内控与供应链\n\n章节\n0:00 开场\n0:36 威胁模型\n1:55 四层防线\n2:54 密钥生命周期\n4:09 MPC 分片\n5:03 签名策略引擎\n6:13 签名调用链\n7:11 所见即所签\n7:57 案例：Bybit 2025\n9:13 内控\n10:08 基础设施与供应链\n11:02 指标与告警\n11:49 权衡与误区\n12:42 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.5,
+    "chapters": 14
+  },
+  {
+    "ep": "B03",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B03-account-security.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B03-account-security.srt",
+    "title": "账户安全：盗号攻击链与逐层防御｜CEX 交易所系统讲解 B03",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B03。\n\n账户安全：盗号攻击链与逐层防御\n\n章节\n0:00 开场\n0:29 盗号攻击链\n1:29 攻击剧本\n2:16 四层防线\n3:12 攻防实验\n4:21 风险评分\n5:34 敏感操作状态机\n6:25 账户恢复\n7:16 规则表\n8:15 监控指标\n8:58 案例：2018 VIA\n10:08 权衡\n11:01 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 11.8,
+    "chapters": 13
+  },
+  {
+    "ep": "B04",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B04-reconciliation.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B04-reconciliation.srt",
+    "title": "系统对账：全链路对账与提币熔断｜CEX 交易所系统讲解 B04",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B04。\n\n系统对账：全链路对账与提币熔断\n\n章节\n0:00 开场\n0:34 超市三道清点\n1:12 错误从哪来\n1:50 对账矩阵\n3:19 注入差异实验\n4:29 差异分类\n5:19 差异处置状态机\n6:19 人工调账\n7:19 资产负债恒等式\n8:20 总分账与 PoR\n9:07 提币熔断\n10:36 案例：FTX 2022\n11:40 权衡与局限\n12:24 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.1,
+    "chapters": 14
+  },
+  {
+    "ep": "B05",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B05-business-risk.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B05-business-risk.srt",
+    "title": "业务风控：薅羊毛、市场操纵与信用风险｜CEX 交易所系统讲解 B05",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B05。\n\n业务风控：薅羊毛、市场操纵与信用风险\n\n章节\n0:00 开场\n0:42 业务风控是什么\n1:32 六类业务风险\n2:23 五层防线\n3:22 营销反作弊：图关联\n4:26 奖励后置\n5:29 幌骗与分层挂单\n6:31 对敲与关联度\n7:24 拉盘砸盘\n8:09 内幕抢跑与做市商\n9:44 信用风险与资产风险\n11:04 风险参数治理\n12:03 案例：2024 Lista Megadrop\n12:59 权衡、小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 14.2,
+    "chapters": 14
+  },
+  {
+    "ep": "B06",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B06-treasury-liquidity.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B06-treasury-liquidity.srt",
+    "title": "金库与流动性：储备、调拨与挤兑压力｜CEX 交易所系统讲解 B06",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B06。\n\n金库与流动性：储备、调拨与挤兑压力\n\n章节\n0:00 开场\n0:46 金库运营的目标\n1:31 资产负债表视角\n2:11 逐币种 1:1 储备\n3:08 金库要防的八类风险\n3:52 六层防线\n4:49 按币种按链的水位\n6:11 调拨审批流\n7:26 跨链再平衡与稳定币\n8:44 平台敞口与对冲\n9:31 挤兑压力测试\n11:02 保险基金、SAFU 与坏账\n11:44 案例：2022 挤兑与传染\n12:54 权衡、小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 14.2,
+    "chapters": 14
+  },
+  {
+    "ep": "B07",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B07-incident-response.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B07-incident-response.srt",
+    "title": "应急响应：事故分级、止血与追回｜CEX 交易所系统讲解 B07",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B07。\n\n应急响应：事故分级、止血与追回\n\n章节\n0:00 开场\n0:48 像急诊一样处置\n1:30 事件从哪里来\n2:05 事件分级 SEV1 到 SEV4\n2:55 四层防线与损失窗口\n3:51 值班与升级\n4:41 止血决策树\n6:00 自动止血规则与响应指标\n7:11 黑客事件处置时序\n8:20 链上追踪与联合冻结\n9:27 对外沟通\n10:32 案例：2025 Bybit 被盗\n11:37 无责复盘与演练\n12:44 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.9,
+    "chapters": 14
+  },
+  {
+    "ep": "B08",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B08-risk-platform.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B08-risk-platform.srt",
+    "title": "实时风控平台：特征、规则、模型与灰度｜CEX 交易所系统讲解 B08",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B08。\n\n实时风控平台：特征、规则、模型与灰度\n\n章节\n0:00 开场\n0:32 交通指挥中心\n1:20 问题模型\n1:56 平台总架构\n2:56 一次提币的同步决策\n3:57 特征工程\n5:27 在线离线一致性\n6:16 规则生命周期\n7:37 模型生命周期与案件\n9:06 延迟预算与降级矩阵\n10:23 案例：2025-10-10\n11:54 虚构示例：阈值少两个零\n12:47 权衡与局限\n13:29 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 14.4,
+    "chapters": 14
+  },
+  {
+    "ep": "B09",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B09-global-licensing.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B09-global-licensing.srt",
+    "title": "全球监管与牌照：一家交易所怎样分区经营｜CEX 交易所系统讲解 B09",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B09。\n\n全球监管与牌照：一家交易所怎样分区经营\n\n章节\n0:00 开场：7 月 1 日\n0:52 本集路线图\n1:34 监管地图：三层与七地\n2:26 美国：双层结构与立法时间线\n3:44 欧盟：MiCA\n4:43 英国、新加坡、香港、日本、阿联酋\n6:25 分区经营：多实体与地理围栏\n7:23 产品矩阵与分区开户\n8:27 合规组织：三道防线\n9:09 上币合规：证券属性与上下架\n10:17 横向对照：同一要求，七种答案\n11:17 真实案例：MiCA 截止日与日本\n12:20 权衡与指标\n13:03 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.7,
+    "chapters": 14
+  },
+  {
+    "ep": "B10",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B10-tax-privacy.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B10-tax-privacy.srt",
+    "title": "税务报送与数据隐私：交易所也是信息报送人｜CEX 交易所系统讲解 B10",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B10。\n\n税务报送与数据隐私：交易所也是信息报送人\n\n章节\n0:00 开场\n0:54 为什么是交易所\n1:56 三套规则报什么\n2:59 自我证明融入 KYC\n3:52 交易分类\n4:36 成本基础与 FIFO\n5:39 年度报送流水线\n6:25 与账本对账\n7:15 隐私法规与冲突\n8:07 分级、加密与掩码\n9:10 案例：Coinbase 2025\n10:15 DSR 与泄露通知\n11:11 冲突化解与权衡\n12:15 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 12.9,
+    "chapters": 14
+  },
+  {
+    "ep": "B11",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B11-security-engineering.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B11-security-engineering.srt",
+    "title": "安全工程：把安全做进研发与运营｜CEX 交易所系统讲解 B11",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B11。\n\n安全工程：把安全做进研发与运营\n\n章节\n0:00 开场\n0:47 防线分层\n1:36 SDL 与安全需求\n2:20 STRIDE 威胁建模\n3:37 CI 安全扫描\n4:31 资金路径与发布门禁\n5:25 软件供应链\n6:16 云与着陆区\n7:21 终端与员工\n8:42 检测工程\n9:40 红队、蓝队与紫队\n10:33 漏洞赏金运营\n11:29 指标与成熟度\n12:40 小结与预告\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.3,
+    "chapters": 14
+  },
+  {
+    "ep": "B12",
+    "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B12-incident-casebook.mp4",
+    "srt": "/Users/k/Workon/Learning/web3/CEX/video/output/B12-incident-casebook.srt",
+    "title": "安全事故案例库：防线是怎样被突破的｜CEX 交易所系统讲解 B12",
+    "description": "以币安为例，讲清中心化交易所（CEX）的系统组成与底层逻辑。本集属于「幕后核心」系列，B12。\n\n安全事故案例库：防线是怎样被突破的\n\n章节\n0:00 开场\n0:52 10 类攻击路径\n1:53 十年时间线\n3:08 案例：热钱包密钥泄露 Coincheck\n4:15 案例：签名流程操纵 WazirX\n5:28 案例：被收买员工与员工社工\n6:31 案例：价格操纵与内部挪用\n7:31 跨案例：按路径统计\n8:12 趋势：从偷钥匙到骗签名人\n9:17 防线覆盖矩阵\n10:11 把案例变成检查单\n11:07 用户结局\n12:01 小结\n12:27 系列结语\n\n说明\n· 配音为 AI 合成语音（微软神经语音），画面为动画讲解页，字幕与口播逐句对应。\n· 涉及币安的事实以截至 2026 年的公开资料为准，标注「示例」的数字为教学演示。\n· 本视频仅用于学习交易所系统设计与业务逻辑，不构成任何投资、法律或税务建议。\n\n#加密货币交易所 #系统设计 #区块链",
+    "playlist": "CEX 交易所系统讲解｜幕后核心",
+    "minutes": 13.3,
+    "chapters": 14
+  }
+]

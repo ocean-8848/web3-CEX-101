@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EP00 模板</title>
+<link rel="stylesheet" href="assets/player.css">
+<style>
+  /* page-specific styles go here */
+  .book { font-family: var(--mono); font-size: 34px; width: 640px; }
+  .book .lv { display: grid; grid-template-columns: 1fr 1fr; padding: 6px 16px; border-radius: 6px; transition: background .3s, opacity .3s; }
+  .book .ask { color: var(--sell); } .book .bid { color: var(--buy); }
+  .book .lv.hit { background: var(--gold-soft); }
+  .book .lv.gone { opacity: .15; text-decoration: line-through; }
+</style>
+</head>
+<body>
+<div class="stage" data-ep="EP00" data-title="模板：所有组件示例">
+
+  <!-- Scene 1: title card. Each <li> in ol.say is the narration for one step (step 0, 1, 2...). -->
+  <section class="scene title" data-title="开场">
+    <div class="kicker">CEX 交易所系统 · 技术讲解</div>
+    <h1>模板集：<span class="hl">一张订单</span>怎样成交</h1>
+    <p class="lead" data-step="1">本模板展示播放器的全部组件和写法。</p>
+    <ol class="say">
+      <li>大家好，欢迎来到交易所系统技术讲解。这是一集模板，用来演示画面组件怎么写。</li>
+      <li>每一步画面，对应这里的一段口播。口播写成口语，一句话只讲一件事。</li>
+    </ol>
+  </section>
+
+  <!-- Scene 2: flow with progressive reveal -->
+  <section class="scene" data-title="调用链">
+    <div class="kicker">调用链</div>
+    <h2>下单请求经过的四个服务</h2>
+    <div class="flow">
+      <div class="node info">API 网关<small>验签、限流</small></div>
+      <div class="arrow" data-step="1"></div>
+      <div class="node" data-step="1">风控<small>余额、价格带</small></div>
+      <div class="arrow" data-step="2"></div>
+      <div class="node gold" data-step="2">账本<small>冻结资金</small></div>
+      <div class="arrow gold" data-step="3"></div>
+      <div class="node buy" data-step="3">撮合引擎<small>配对成交</small></div>
+    </div>
+    <div class="card warn" data-step="4">先冻结，再撮合。顺序反了，同一笔钱可能被花两次。</div>
+    <ol class="say">
+      <li>先看一笔下单请求要经过哪些服务。第一站是 API 网关，它负责验证签名和限流。</li>
+      <li>网关放行以后，请求进入风控。风控检查余额够不够，价格有没有偏离太多。</li>
+      <li>风控通过，账本服务把这笔钱冻结起来。冻结的钱不能再用于别的订单。</li>
+      <li>最后，订单才进入撮合引擎，和对手方配对。</li>
+      <li>注意这个顺序：先冻结，再撮合。如果顺序反过来，同一笔钱就可能被花两次。</li>
+    </ol>
+  </section>
+
+  <!-- Scene 3: custom per-step animation via data-onstep (idempotent: draw the state for step st) -->
+  <section class="scene" data-title="吃单动画" data-onstep="bookStep">
+    <div class="kicker">撮合演示</div>
+    <h2>市价买入 1.5 BTC，逐档吃掉卖单</h2>
+    <div class="row">
+      <div class="book card" id="book">
+        <div class="lv ask" data-p="50020"><span>50,020</span><span>1.0</span></div>
+        <div class="lv ask" data-p="50010"><span>50,010</span><span>0.8</span></div>
+        <div class="lv ask" data-p="50000"><span>50,000</span><span>0.7</span></div>
+        <div class="lv bid"><span>49,990</span><span>1.2</span></div>
+        <div class="lv bid"><span>49,980</span><span>2.0</span></div>
+      </div>
+      <div class="col">
+        <div class="stat"><div class="k">已成交</div><div class="v" id="filled">0.0 BTC</div></div>
+        <div class="stat"><div class="k">成交均价</div><div class="v hl" id="avg">—</div></div>
+      </div>
+    </div>
+    <ol class="say">
+      <li>来看一个具体例子。卖盘最低价是五万，挂了零点七个 BTC。现在来了一笔市价买单，要买一点五个 BTC。</li>
+      <li>撮合引擎先吃掉最便宜的一档：五万价格，零点七个，全部成交。</li>
+      <li>还差零点八个，于是吃下一档：五万零一十，正好零点八个。订单全部成交，均价大约五万零五块三。</li>
+    </ol>
+  </section>
+
+  <!-- Scene 4: formula + summary -->
+  <section class="scene" data-title="小结">
+    <div class="kicker">本集小结</div>
+    <h2>记住三件事</h2>
+    <ul class="bullets">
+      <li data-step="0">请求按固定顺序穿过网关、风控、账本、撮合。</li>
+      <li data-step="1">资金<span class="hl">先冻结</span>，订单再进入撮合。</li>
+      <li data-step="2">市价单从最优价开始，<span class="hl">逐档</span>成交。</li>
+    </ul>
+    <ol class="say">
+      <li>最后小结一下。第一，下单请求按固定顺序，依次穿过网关、风控、账本和撮合。</li>
+      <li>第二，资金先冻结，订单再进入撮合。</li>
+      <li>第三，市价单从最优价格开始，一档一档往上吃。下一集，我们拆开撮合引擎看看里面的数据结构。</li>
+    </ol>
+  </section>
+</div>
+<script>
+  // Idempotent renderer for scene 3: compute state purely from step number.
+  function bookStep(el, st) {
+    const fills = [[], [[50000, 0.7]], [[50000, 0.7], [50010, 0.8]]][st];
+    el.querySelectorAll('.lv.ask').forEach(lv => {
+      const p = +lv.dataset.p, done = fills.some(f => f[0] === p);
+      lv.classList.toggle('gone', done); lv.classList.toggle('hit', done);
+    });
+    const qty = fills.reduce((a, f) => a + f[1], 0);
+    const cost = fills.reduce((a, f) => a + f[0] * f[1], 0);
+    el.querySelector('#filled').textContent = qty.toFixed(1) + ' BTC';
+    el.querySelector('#avg').textContent = qty ? (cost / qty).toFixed(2) : '—';
+  }
+</script>
+<script src="assets/player.js"></script>
+</body>
+</html>
