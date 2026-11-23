@@ -1,6 +1,6 @@
 # B12 安全事故案例库：防线是怎样被突破的
 
-> 口播约 3977 字，预计 13.7 分钟。画面：[slides/B12-incident-casebook.html](../slides/B12-incident-casebook.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B12-incident-casebook.mp4`。
+> 口播约 3977 字，预计 13.7 分钟。画面：[slides/B12-incident-casebook.html](../../slides/B12-incident-casebook.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B12-incident-casebook.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # EP02 一张图看懂交易所架构
 
-> 口播约 3018 字，预计 10.4 分钟。画面：[slides/EP02-architecture-map.html](../slides/EP02-architecture-map.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP02-architecture-map.mp4`。
+> 口播约 3018 字，预计 10.4 分钟。画面：[slides/EP02-architecture-map.html](../../slides/EP02-architecture-map.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP02-architecture-map.mp4`。
 
 ## 场景目录
 

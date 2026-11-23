@@ -1,6 +1,6 @@
 # B05 业务风控：薅羊毛、市场操纵与信用风险
 
-> 口播约 4000 字，预计 13.8 分钟。画面：[slides/B05-business-risk.html](../slides/B05-business-risk.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B05-business-risk.mp4`。
+> 口播约 4000 字，预计 13.8 分钟。画面：[slides/B05-business-risk.html](../../slides/B05-business-risk.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B05-business-risk.mp4`。
 
 ## 场景目录
 

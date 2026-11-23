@@ -1,6 +1,6 @@
 # P04 合约进阶：统一账户、组合保证金与期权
 
-> 口播约 4012 字，预计 13.8 分钟。画面：[slides/P04-advanced-derivatives.html](../slides/P04-advanced-derivatives.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P04-advanced-derivatives.mp4`。
+> 口播约 4012 字，预计 13.8 分钟。画面：[slides/P04-advanced-derivatives.html](../../slides/P04-advanced-derivatives.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P04-advanced-derivatives.mp4`。
 
 ## 场景目录
 

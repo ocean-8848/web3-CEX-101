@@ -1,6 +1,6 @@
 # P09 支付与卡：Binance Pay、礼品卡与加密借记卡
 
-> 口播约 3575 字，预计 12.3 分钟。画面：[slides/P09-pay-and-card.html](../slides/P09-pay-and-card.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P09-pay-and-card.mp4`。
+> 口播约 3575 字，预计 12.3 分钟。画面：[slides/P09-pay-and-card.html](../../slides/P09-pay-and-card.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P09-pay-and-card.mp4`。
 
 ## 场景目录
 

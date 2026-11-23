@@ -1,6 +1,6 @@
 # EP01 交易所到底是什么：托管、记账、撮合
 
-> 口播约 3075 字，预计 10.6 分钟。画面：[slides/EP01-what-is-cex.html](../slides/EP01-what-is-cex.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP01-what-is-cex.mp4`。
+> 口播约 3075 字，预计 10.6 分钟。画面：[slides/EP01-what-is-cex.html](../../slides/EP01-what-is-cex.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP01-what-is-cex.mp4`。
 
 ## 场景目录
 

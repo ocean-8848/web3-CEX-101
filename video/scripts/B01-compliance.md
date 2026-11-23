@@ -1,6 +1,6 @@
 # B01 合规防护：KYC、反洗钱与 Travel Rule
 
-> 口播约 3862 字，预计 13.3 分钟。画面：[slides/B01-compliance.html](../slides/B01-compliance.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B01-compliance.mp4`。
+> 口播约 3862 字，预计 13.3 分钟。画面：[slides/B01-compliance.html](../../slides/B01-compliance.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B01-compliance.mp4`。
 
 ## 场景目录
 

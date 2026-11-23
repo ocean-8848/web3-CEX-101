@@ -1,6 +1,6 @@
 # EP13 风控：交易前、交易中与限流
 
-> 口播约 3706 字，预计 12.8 分钟。画面：[slides/EP13-risk-control.html](../slides/EP13-risk-control.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP13-risk-control.mp4`。
+> 口播约 3706 字，预计 12.8 分钟。画面：[slides/EP13-risk-control.html](../../slides/EP13-risk-control.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP13-risk-control.mp4`。
 
 ## 场景目录
 

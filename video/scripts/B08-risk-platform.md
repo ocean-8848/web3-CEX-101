@@ -1,6 +1,6 @@
 # B08 实时风控平台：特征、规则、模型与灰度
 
-> 口播约 4160 字，预计 14.3 分钟。画面：[slides/B08-risk-platform.html](../slides/B08-risk-platform.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B08-risk-platform.mp4`。
+> 口播约 4160 字，预计 14.3 分钟。画面：[slides/B08-risk-platform.html](../../slides/B08-risk-platform.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B08-risk-platform.mp4`。
 
 ## 场景目录
 

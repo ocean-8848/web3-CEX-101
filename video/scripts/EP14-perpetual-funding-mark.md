@@ -1,6 +1,6 @@
 # EP14 永续合约：资金费率与标记价格
 
-> 口播约 2973 字，预计 10.3 分钟。画面：[slides/EP14-perpetual-funding-mark.html](../slides/EP14-perpetual-funding-mark.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP14-perpetual-funding-mark.mp4`。
+> 口播约 2973 字，预计 10.3 分钟。画面：[slides/EP14-perpetual-funding-mark.html](../../slides/EP14-perpetual-funding-mark.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP14-perpetual-funding-mark.mp4`。
 
 ## 场景目录
 

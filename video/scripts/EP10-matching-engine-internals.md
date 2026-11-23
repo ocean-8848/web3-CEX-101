@@ -1,6 +1,6 @@
 # EP10 撮合引擎内部：数据结构、定序与重放
 
-> 口播约 3223 字，预计 11.1 分钟。画面：[slides/EP10-matching-engine-internals.html](../slides/EP10-matching-engine-internals.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP10-matching-engine-internals.mp4`。
+> 口播约 3223 字，预计 11.1 分钟。画面：[slides/EP10-matching-engine-internals.html](../../slides/EP10-matching-engine-internals.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP10-matching-engine-internals.mp4`。
 
 ## 场景目录
 

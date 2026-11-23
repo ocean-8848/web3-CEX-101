@@ -1,6 +1,6 @@
 # P06 双币投资：高收益背后的期权
 
-> 口播约 3849 字，预计 13.3 分钟。画面：[slides/P06-structured-products.html](../slides/P06-structured-products.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P06-structured-products.mp4`。
+> 口播约 3849 字，预计 13.3 分钟。画面：[slides/P06-structured-products.html](../../slides/P06-structured-products.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P06-structured-products.mp4`。
 
 ## 场景目录
 

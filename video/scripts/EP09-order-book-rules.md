@@ -1,6 +1,6 @@
 # EP09 订单簿与撮合规则
 
-> 口播约 3215 字，预计 11.1 分钟。画面：[slides/EP09-order-book-rules.html](../slides/EP09-order-book-rules.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP09-order-book-rules.mp4`。
+> 口播约 3215 字，预计 11.1 分钟。画面：[slides/EP09-order-book-rules.html](../../slides/EP09-order-book-rules.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP09-order-book-rules.mp4`。
 
 ## 场景目录
 

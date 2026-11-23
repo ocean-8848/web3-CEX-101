@@ -1,6 +1,6 @@
 # P01 杠杆与借贷：钱从哪来，利率怎么定
 
-> 口播约 3845 字，预计 13.3 分钟。画面：[slides/P01-margin-and-loans.html](../slides/P01-margin-and-loans.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P01-margin-and-loans.mp4`。
+> 口播约 3845 字，预计 13.3 分钟。画面：[slides/P01-margin-and-loans.html](../../slides/P01-margin-and-loans.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P01-margin-and-loans.mp4`。
 
 ## 场景目录
 

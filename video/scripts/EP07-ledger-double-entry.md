@@ -1,6 +1,6 @@
 # EP07 账本：双分录与冻结
 
-> 口播约 3082 字，预计 10.6 分钟。画面：[slides/EP07-ledger-double-entry.html](../slides/EP07-ledger-double-entry.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP07-ledger-double-entry.mp4`。
+> 口播约 3082 字，预计 10.6 分钟。画面：[slides/EP07-ledger-double-entry.html](../../slides/EP07-ledger-double-entry.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP07-ledger-double-entry.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # P02 闪兑与 OTC：平台报价背后的风险
 
-> 口播约 3410 字，预计 11.8 分钟。画面：[slides/P02-convert-otc.html](../slides/P02-convert-otc.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P02-convert-otc.mp4`。
+> 口播约 3410 字，预计 11.8 分钟。画面：[slides/P02-convert-otc.html](../../slides/P02-convert-otc.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P02-convert-otc.mp4`。
 
 ## 场景目录
 

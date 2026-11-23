@@ -1,6 +1,6 @@
 # EP12 行情：深度、K 线与增量同步
 
-> 口播约 3536 字，预计 12.2 分钟。画面：[slides/EP12-market-data.html](../slides/EP12-market-data.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP12-market-data.mp4`。
+> 口播约 3536 字，预计 12.2 分钟。画面：[slides/EP12-market-data.html](../../slides/EP12-market-data.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP12-market-data.mp4`。
 
 ## 场景目录
 

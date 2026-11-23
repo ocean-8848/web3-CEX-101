@@ -1,6 +1,6 @@
 # EP04 账户与身份：登录、2FA、API 签名、KYC
 
-> 口播约 3836 字，预计 13.2 分钟。画面：[slides/EP04-account-identity.html](../slides/EP04-account-identity.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP04-account-identity.mp4`。
+> 口播约 3836 字，预计 13.2 分钟。画面：[slides/EP04-account-identity.html](../../slides/EP04-account-identity.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP04-account-identity.mp4`。
 
 ## 场景目录
 

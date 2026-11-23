@@ -1,6 +1,6 @@
 # B10 税务报送与数据隐私：交易所也是信息报送人
 
-> 口播约 3999 字，预计 13.8 分钟。画面：[slides/B10-tax-privacy.html](../slides/B10-tax-privacy.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B10-tax-privacy.mp4`。
+> 口播约 3999 字，预计 13.8 分钟。画面：[slides/B10-tax-privacy.html](../../slides/B10-tax-privacy.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B10-tax-privacy.mp4`。
 
 ## 场景目录
 

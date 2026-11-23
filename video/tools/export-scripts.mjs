@@ -35,7 +35,7 @@ for (const f of decks) {
   const chars = data.scenes.reduce((a, s) => a + s.steps.join('').length, 0);
   const mins = (chars / CPM).toFixed(1);
   let md = `# ${data.ep} ${data.title}\n\n`;
-  md += `> 口播约 ${chars} 字，预计 ${mins} 分钟。画面：[slides/${f}](../slides/${f})（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：\`output/${f.replace('.html', '.mp4')}\`。\n\n`;
+  md += `> 口播约 ${chars} 字，预计 ${mins} 分钟。画面：[slides/${f}](../../slides/${f})（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：\`output/${f.replace('.html', '.mp4')}\`。\n\n`;
   md += `## 场景目录\n\n` + data.scenes.map((s, i) => `${i + 1}. ${s.title}${s.heading ? ' · ' + s.heading : ''}`).join('\n') + '\n\n';
   data.scenes.forEach((s, i) => {
     md += `## 场景 ${i + 1}：${s.title}\n\n`;

@@ -1,6 +1,6 @@
 # EP06 提币、冷热钱包与储备金证明
 
-> 口播约 3584 字，预计 12.4 分钟。画面：[slides/EP06-withdrawal-wallets-por.html](../slides/EP06-withdrawal-wallets-por.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP06-withdrawal-wallets-por.mp4`。
+> 口播约 3584 字，预计 12.4 分钟。画面：[slides/EP06-withdrawal-wallets-por.html](../../slides/EP06-withdrawal-wallets-por.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP06-withdrawal-wallets-por.mp4`。
 
 ## 场景目录
 

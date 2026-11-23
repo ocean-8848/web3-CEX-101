@@ -98,9 +98,19 @@ flowchart TD
 | B11 | [安全工程](backstage/B11-security-engineering.md) | — |
 | B12 | [安全事故案例库](backstage/B12-incident-casebook.md) | [事故案例浏览器](interactive/incident-explorer.html) |
 
-### 视频系列 · 主线 17 集（[video/](video/README.md)）
+### 讲解幻灯片与视频 · 40 集（[slides/](slides/index.html)）
 
-主线 13 章拆成 17 集讲解视频，每集 10–15 分钟，技术教学风格，带中文配音和字幕。浏览器打开 [video/index.html](video/index.html) 选集观看；口播稿见 [video/scripts/](video/scripts/README.md)，可作为真人录制的提词稿。
+主线 17 集 + 幕后核心 B01–B12 + 产品深潜 P01–P11，每集一个可翻页的动画讲解页，讲稿写在页面里。浏览器打开 [slides/index.html](slides/index.html) 选集，→ 键逐步播放，N 键显示讲稿。
+
+配音视频不放在仓库里，请在线观看：
+
+| 系列 | B 站 | YouTube |
+| --- | --- | --- |
+| 主线 EP01–EP17 | [合集](https://www.bilibili.com/video/BV15wpE6PETm/) | EP01–EP10 已发布，见 [published.tsv](video/youtube/published.tsv) |
+| 幕后核心 B01–B12 | [合集](https://www.bilibili.com/video/BV1jop76qE2y/) | — |
+| 产品深潜 P01–P11 | [合集](https://www.bilibili.com/video/BV1GKpE6hEE6/) | — |
+
+口播稿见 [video/scripts/](video/scripts/README.md)；视频制作工具和说明见 [video/README.md](video/README.md)。
 
 全部交互实验入口：[interactive/index.html](interactive/index.html)（用浏览器直接打开即可，无需服务器）。
 

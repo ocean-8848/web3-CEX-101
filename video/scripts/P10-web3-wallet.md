@@ -1,6 +1,6 @@
 # P10 Web3 钱包：MPC、DEX 聚合与授权风险
 
-> 口播约 3570 字，预计 12.3 分钟。画面：[slides/P10-web3-wallet.html](../slides/P10-web3-wallet.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P10-web3-wallet.mp4`。
+> 口播约 3570 字，预计 12.3 分钟。画面：[slides/P10-web3-wallet.html](../../slides/P10-web3-wallet.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P10-web3-wallet.mp4`。
 
 ## 场景目录
 

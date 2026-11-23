@@ -1,6 +1,6 @@
 # P03 P2P 与法币通道：担保交易和反诈
 
-> 口播约 3511 字，预计 12.1 分钟。画面：[slides/P03-p2p-fiat.html](../slides/P03-p2p-fiat.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P03-p2p-fiat.mp4`。
+> 口播约 3511 字，预计 12.1 分钟。画面：[slides/P03-p2p-fiat.html](../../slides/P03-p2p-fiat.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P03-p2p-fiat.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # P08 策略交易与跟单：网格、定投与带单分润
 
-> 口播约 3311 字，预计 11.4 分钟。画面：[slides/P08-strategy-copy-trading.html](../slides/P08-strategy-copy-trading.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P08-strategy-copy-trading.mp4`。
+> 口播约 3311 字，预计 11.4 分钟。画面：[slides/P08-strategy-copy-trading.html](../../slides/P08-strategy-copy-trading.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P08-strategy-copy-trading.mp4`。
 
 ## 场景目录
 

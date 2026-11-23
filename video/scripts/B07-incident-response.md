@@ -1,6 +1,6 @@
 # B07 应急响应：事故分级、止血与追回
 
-> 口播约 3945 字，预计 13.6 分钟。画面：[slides/B07-incident-response.html](../slides/B07-incident-response.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B07-incident-response.mp4`。
+> 口播约 3945 字，预计 13.6 分钟。画面：[slides/B07-incident-response.html](../../slides/B07-incident-response.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B07-incident-response.mp4`。
 
 ## 场景目录
 

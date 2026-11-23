@@ -1,6 +1,6 @@
 # B04 系统对账：全链路对账与提币熔断
 
-> 口播约 3831 字，预计 13.2 分钟。画面：[slides/B04-reconciliation.html](../slides/B04-reconciliation.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B04-reconciliation.mp4`。
+> 口播约 3831 字，预计 13.2 分钟。画面：[slides/B04-reconciliation.html](../../slides/B04-reconciliation.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B04-reconciliation.mp4`。
 
 ## 场景目录
 

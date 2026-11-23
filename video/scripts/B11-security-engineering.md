@@ -1,6 +1,6 @@
 # B11 安全工程：把安全做进研发与运营
 
-> 口播约 3960 字，预计 13.7 分钟。画面：[slides/B11-security-engineering.html](../slides/B11-security-engineering.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B11-security-engineering.mp4`。
+> 口播约 3960 字，预计 13.7 分钟。画面：[slides/B11-security-engineering.html](../../slides/B11-security-engineering.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B11-security-engineering.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # EP03 一笔订单的旅程：调用链、同步异步与故障
 
-> 口播约 3104 字，预计 10.7 分钟。画面：[slides/EP03-order-journey.html](../slides/EP03-order-journey.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP03-order-journey.mp4`。
+> 口播约 3104 字，预计 10.7 分钟。画面：[slides/EP03-order-journey.html](../../slides/EP03-order-journey.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP03-order-journey.mp4`。
 
 ## 场景目录
 

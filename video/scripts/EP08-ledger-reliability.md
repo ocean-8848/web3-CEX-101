@@ -1,6 +1,6 @@
 # EP08 账本可靠性：幂等、对账与热点账户
 
-> 口播约 3056 字，预计 10.5 分钟。画面：[slides/EP08-ledger-reliability.html](../slides/EP08-ledger-reliability.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP08-ledger-reliability.mp4`。
+> 口播约 3056 字，预计 10.5 分钟。画面：[slides/EP08-ledger-reliability.html](../../slides/EP08-ledger-reliability.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP08-ledger-reliability.mp4`。
 
 ## 场景目录
 

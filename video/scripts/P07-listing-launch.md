@@ -1,6 +1,6 @@
 # P07 上币与新币分发：Launchpad、Launchpool 与空投
 
-> 口播约 3924 字，预计 13.5 分钟。画面：[slides/P07-listing-launch.html](../slides/P07-listing-launch.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P07-listing-launch.mp4`。
+> 口播约 3924 字，预计 13.5 分钟。画面：[slides/P07-listing-launch.html](../../slides/P07-listing-launch.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P07-listing-launch.mp4`。
 
 ## 场景目录
 

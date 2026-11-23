@@ -1,6 +1,6 @@
 # B06 金库与流动性：储备、调拨与挤兑压力
 
-> 口播约 4041 字，预计 13.9 分钟。画面：[slides/B06-treasury-liquidity.html](../slides/B06-treasury-liquidity.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B06-treasury-liquidity.mp4`。
+> 口播约 4041 字，预计 13.9 分钟。画面：[slides/B06-treasury-liquidity.html](../../slides/B06-treasury-liquidity.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B06-treasury-liquidity.mp4`。
 
 ## 场景目录
 

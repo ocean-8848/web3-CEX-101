@@ -1,6 +1,6 @@
 # EP16 交易所怎么赚钱：产品生态与商业模式
 
-> 口播约 3482 字，预计 12.0 分钟。画面：[slides/EP16-business-model.html](../slides/EP16-business-model.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP16-business-model.mp4`。
+> 口播约 3482 字，预计 12.0 分钟。画面：[slides/EP16-business-model.html](../../slides/EP16-business-model.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP16-business-model.mp4`。
 
 ## 场景目录
 

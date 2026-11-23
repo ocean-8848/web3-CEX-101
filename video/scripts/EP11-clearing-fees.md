@@ -1,6 +1,6 @@
 # EP11 成交之后：清算、结算与手续费
 
-> 口播约 3789 字，预计 13.1 分钟。画面：[slides/EP11-clearing-fees.html](../slides/EP11-clearing-fees.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP11-clearing-fees.mp4`。
+> 口播约 3789 字，预计 13.1 分钟。画面：[slides/EP11-clearing-fees.html](../../slides/EP11-clearing-fees.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP11-clearing-fees.mp4`。
 
 ## 场景目录
 

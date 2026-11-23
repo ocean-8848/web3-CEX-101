@@ -1,6 +1,6 @@
 # EP15 保证金与强平：保险基金和 ADL
 
-> 口播约 3460 字，预计 11.9 分钟。画面：[slides/EP15-margin-liquidation.html](../slides/EP15-margin-liquidation.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP15-margin-liquidation.mp4`。
+> 口播约 3460 字，预计 11.9 分钟。画面：[slides/EP15-margin-liquidation.html](../../slides/EP15-margin-liquidation.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP15-margin-liquidation.mp4`。
 
 ## 场景目录
 

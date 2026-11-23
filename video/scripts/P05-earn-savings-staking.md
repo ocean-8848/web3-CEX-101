@@ -1,6 +1,6 @@
 # P05 存币生息：活期、定期与流动性质押
 
-> 口播约 4077 字，预计 14.1 分钟。画面：[slides/P05-earn-savings-staking.html](../slides/P05-earn-savings-staking.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P05-earn-savings-staking.mp4`。
+> 口播约 4077 字，预计 14.1 分钟。画面：[slides/P05-earn-savings-staking.html](../../slides/P05-earn-savings-staking.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P05-earn-savings-staking.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # B03 账户安全：盗号攻击链与逐层防御
 
-> 口播约 3480 字，预计 12.0 分钟。画面：[slides/B03-account-security.html](../slides/B03-account-security.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B03-account-security.mp4`。
+> 口播约 3480 字，预计 12.0 分钟。画面：[slides/B03-account-security.html](../../slides/B03-account-security.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B03-account-security.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # EP17 交易所怎样倒下：可靠性与事故复盘
 
-> 口播约 3805 字，预计 13.1 分钟。画面：[slides/EP17-reliability-incidents.html](../slides/EP17-reliability-incidents.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP17-reliability-incidents.mp4`。
+> 口播约 3805 字，预计 13.1 分钟。画面：[slides/EP17-reliability-incidents.html](../../slides/EP17-reliability-incidents.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/EP17-reliability-incidents.mp4`。
 
 ## 场景目录
 

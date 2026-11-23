@@ -1,6 +1,6 @@
 # P11 增长与机构：推荐返佣、VIP、经纪商与做市商
 
-> 口播约 3999 字，预计 13.8 分钟。画面：[slides/P11-growth-institutional.html](../slides/P11-growth-institutional.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P11-growth-institutional.mp4`。
+> 口播约 3999 字，预计 13.8 分钟。画面：[slides/P11-growth-institutional.html](../../slides/P11-growth-institutional.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/P11-growth-institutional.mp4`。
 
 ## 场景目录
 

@@ -1,6 +1,6 @@
 # B02 平台安全：密钥、内控与供应链
 
-> 口播约 3937 字，预计 13.6 分钟。画面：[slides/B02-platform-security.html](../slides/B02-platform-security.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B02-platform-security.mp4`。
+> 口播约 3937 字，预计 13.6 分钟。画面：[slides/B02-platform-security.html](../../slides/B02-platform-security.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B02-platform-security.mp4`。
 
 ## 场景目录
 

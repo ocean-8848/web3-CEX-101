@@ -1,6 +1,6 @@
 # B09 全球监管与牌照：一家交易所怎样分区经营
 
-> 口播约 3945 字，预计 13.6 分钟。画面：[slides/B09-global-licensing.html](../slides/B09-global-licensing.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B09-global-licensing.mp4`。
+> 口播约 3945 字，预计 13.6 分钟。画面：[slides/B09-global-licensing.html](../../slides/B09-global-licensing.html)（浏览器打开，→ 键逐步播放，N 键显示讲稿）。成片：`output/B09-global-licensing.mp4`。
 
 ## 场景目录
 
