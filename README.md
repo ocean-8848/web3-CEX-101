@@ -110,7 +110,7 @@ flowchart TD
 | 幕后核心 B01–B12 | [合集](https://www.bilibili.com/video/BV1jop76qE2y/) | — |
 | 产品深潜 P01–P11 | [合集](https://www.bilibili.com/video/BV1GKpE6hEE6/) | — |
 
-口播稿见 [video/scripts/](video/scripts/README.md)；视频制作工具和说明见 [video/README.md](video/README.md)。
+本地渲染过视频的话，用浏览器打开 [video/index.html](video/index.html) 播放：讲稿逐句同步，可切到 PPT 模式。口播稿见 [video/scripts/](video/scripts/README.md)；视频制作工具和说明见 [video/README.md](video/README.md)。
 
 全部交互实验入口：[interactive/index.html](interactive/index.html)（用浏览器直接打开即可，无需服务器）。
 

@@ -2,7 +2,7 @@
 
 > 来源：主线 01–13 章。每集 10–15 分钟，技术教学风格。
 > 形式：每集一个动画讲解页（`slides/EPxx-*.html`），口播写在页面里；渲染脚本自动合成配音、字幕和章节，输出 MP4。
-> **观看**：用浏览器打开 [index.html](index.html)（选集播放器）。成片在 `output/`，口播稿在 [scripts/](scripts/README.md)。
+> **观看**：用浏览器打开 [index.html](index.html)（选集播放器：讲稿逐句同步、点句跳转、PPT 模式、倍速连播；本地没有成片时回退到 B 站）。成片在 `output/`，口播稿在 [scripts/](scripts/README.md)。渲染新集后运行 `node tools/build-player.mjs` 刷新播放器数据 `player-data.js`。
 
 ## 1. 剧集表
 
@@ -112,3 +112,5 @@ video/tools/render-all.sh
 ## 5. 口播稿
 
 `scripts/EPxx-*.md` 由讲解页自动导出（`node tools/export-scripts.mjs`），包含每个场景的口播全文和对应画面步骤，可直接作为真人录制的提词稿。
+
+`player-data.js` 由 `node tools/build-player.mjs` 生成：读取口播稿的场景和步骤，再把 `output/*.srt` 的每句字幕对齐到步骤，供播放器显示带时间戳的讲稿，并在 PPT 模式中打开对应步骤。没有 SRT 的集只显示讲稿文字。
