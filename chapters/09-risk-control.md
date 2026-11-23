@@ -6,14 +6,14 @@
 > 3. 用误杀率和漏放率评估一组阈值，并说明币安 API 限频（权重、429、418）的公开规则。
 >
 > 前置章节：[03 账户身份与安全](03-account-identity-security.md)、[04 钱包与托管](04-wallet-custody.md)、[06 订单与撮合](06-order-matching.md)
-> 交互实验：[risk-rules-lab.html](interactive/risk-rules-lab.html)（风控规则实验室）
+> 交互实验：[risk-rules-lab.html](../interactive/risk-rules-lab.html)（风控规则实验室）
 
 > ⚠️ 警告：本章内容仅用于学习交易所系统设计。本章不构成任何投资建议。本章的数值除标注"公开资料"外，都是示例。
 
 ---
 
 
-> 🔎 进阶：风控系统怎样工程化，见 [B08 实时风控平台工程](backstage/B08-risk-platform.md)；业务风控见 [B05](backstage/B05-business-risk.md)。
+> 🔎 进阶：风控系统怎样工程化，见 [B08 实时风控平台工程](../backstage/B08-risk-platform.md)；业务风控见 [B05](../backstage/B05-business-risk.md)。
 
 ## 1. 一句话理解
 
@@ -273,7 +273,7 @@ flowchart LR
 - 队列积压本身也是一种成本。正常用户等待 6 小时提币，体验等同于误杀。
 - 阈值的选择是商业决策：一次漏放的损失 vs 一次误杀的损失 × 误杀次数。
 
-去 [risk-rules-lab.html](interactive/risk-rules-lab.html) 拖动阈值，观察这两个指标如何此消彼长。
+去 [risk-rules-lab.html](../interactive/risk-rules-lab.html) 拖动阈值，观察这两个指标如何此消彼长。
 
 ---
 
@@ -388,6 +388,6 @@ flowchart LR
 
 ## 8. 思考题
 
-1. 打开 [risk-rules-lab.html](interactive/risk-rules-lab.html)。把"单笔提币限额"从最高拖到最低。误杀率和漏放率分别怎么变？人工审核队列长度怎么变？哪一个阈值让"误杀率 + 漏放率"最小？
+1. 打开 [risk-rules-lab.html](../interactive/risk-rules-lab.html)。把"单笔提币限额"从最高拖到最低。误杀率和漏放率分别怎么变？人工审核队列长度怎么变？哪一个阈值让"误杀率 + 漏放率"最小？
 2. 在实验室里关闭"改密后冷却"规则，只生成"盗号者"事件。漏放率变成多少？这说明账户风控信号对资金风控有什么作用？
 3. 本仓库的限频是 60 秒固定窗口、120 次。一个客户端在第 59 秒发 120 次、第 61 秒再发 120 次。2 秒内服务端收到多少请求？换成令牌桶（速率 2 次/秒，容量 120）结果是多少？

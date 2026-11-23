@@ -9,10 +9,10 @@
 
 | 底层能力 | 主线章节 | 一句话 |
 |---|---|---|
-| 托管（Custody） | [04 钱包与托管](../04-wallet-custody.md) | 用户的币放在平台控制的地址里 |
-| 记账（Ledger） | [05 账本](../05-ledger.md) | 每一次所有权变化都是一组借贷分录 |
-| 撮合（Matching） | [06 订单与撮合](../06-order-matching.md) | 把买卖意图配对成成交 |
-| 授信（Credit） | [10 合约](../10-derivatives-futures.md) · [P01](P01-margin-and-loans.md) | 平台或其他用户先把钱借给你，用保证金兜底 |
+| 托管（Custody） | [04 钱包与托管](../chapters/04-wallet-custody.md) | 用户的币放在平台控制的地址里 |
+| 记账（Ledger） | [05 账本](../chapters/05-ledger.md) | 每一次所有权变化都是一组借贷分录 |
+| 撮合（Matching） | [06 订单与撮合](../chapters/06-order-matching.md) | 把买卖意图配对成成交 |
+| 授信（Credit） | [10 合约](../chapters/10-derivatives-futures.md) · [P01](P01-margin-and-loans.md) | 平台或其他用户先把钱借给你，用保证金兜底 |
 | 定价与对冲（Pricing & Hedging） | [P02](P02-convert-otc.md) · [P06](P06-structured-products.md) | 平台报一个价，承担风险，再到市场上对冲 |
 
 > 🎯 打个比方：币安主站像一家大型商场。店铺招牌各不相同，但水、电、收银、保安都由同一套系统供应。学会这五套系统，就能看懂任何一家新开的"店铺"。

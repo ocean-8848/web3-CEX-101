@@ -5,7 +5,7 @@
 > 2. 说清定投、TWAP 拆单、跟单交易分别把"一个用户意图"拆成了哪些订单。
 > 3. 画出策略引擎的系统架构：触发器、风控、限频，以及它与撮合引擎的关系。
 >
-> 前置章节：[06 订单与撮合](../06-order-matching.md)、[09 风控](../09-risk-control.md)、[10 合约与衍生品](../10-derivatives-futures.md)、[11 产品生态](../11-products-ecosystem.md)
+> 前置章节：[06 订单与撮合](../chapters/06-order-matching.md)、[09 风控](../chapters/09-risk-control.md)、[10 合约与衍生品](../chapters/10-derivatives-futures.md)、[11 产品生态](../chapters/11-products-ecosystem.md)
 > 交互实验：[grid-bot.html](../interactive/grid-bot.html)（网格策略回测）
 >
 > ⚠️ 本章不构成投资建议。策略工具不保证盈利。合约网格和合约跟单使用杠杆，可能损失全部保证金。
@@ -140,7 +140,7 @@ sequenceDiagram
 | 风险方 | 风险 | 兜底 |
 |---|---|---|
 | 用户 | 单边行情，网格失效 | 止损价、止盈价、区间外自动停止 |
-| 用户（合约网格） | 杠杆导致强平 | 强平价提示；见 [10 章](../10-derivatives-futures.md) |
+| 用户（合约网格） | 杠杆导致强平 | 强平价提示；见 [10 章](../chapters/10-derivatives-futures.md) |
 | 平台 | 大量网格挂单在同一价位，形成"假深度" | 行情突破时这些挂单被集中吃掉，深度瞬间变薄 |
 | 平台 | 策略引擎宕机，补挂单缺失 | 重启后用订单状态对账，补齐缺失的反向单 |
 
@@ -435,7 +435,7 @@ flowchart TB
 读图要点：
 
 - 策略引擎位于撮合引擎**之外**。它是撮合引擎的"客户端"，与普通 API 用户走同一条下单路径。
-- 撮合引擎保持单线程、确定性（见 [06 章](../06-order-matching.md)）。把策略逻辑放进撮合引擎，会破坏确定性和吞吐。
+- 撮合引擎保持单线程、确定性（见 [06 章](../chapters/06-order-matching.md)）。把策略逻辑放进撮合引擎，会破坏确定性和吞吐。
 - 限频有两层：单策略限频防止一个策略刷单；全局令牌桶防止策略流量挤占人工下单。
 - 出错点：策略引擎重启后状态丢失。【业界】做法：状态持久化，重启后与 order-service 的订单状态对账，补发或撤销。
 
@@ -450,11 +450,11 @@ flowchart TB
 
 | 本章环节 | 依赖的主线能力 | 主线章节 |
 |---|---|---|
-| 预埋限价单、clientOrderId | 订单类型、撮合 | [06 订单与撮合](../06-order-matching.md) |
-| 子账户、冻结 | 账本 | [05 账本](../05-ledger.md) |
-| 合约网格、合约跟单 | 保证金、强平 | [10 合约与衍生品](../10-derivatives-futures.md) |
-| 限频、下单风控 | 风控 | [09 风控](../09-risk-control.md) |
-| 拆单与滑点 | 深度 | [08 行情](../08-market-data.md) |
+| 预埋限价单、clientOrderId | 订单类型、撮合 | [06 订单与撮合](../chapters/06-order-matching.md) |
+| 子账户、冻结 | 账本 | [05 账本](../chapters/05-ledger.md) |
+| 合约网格、合约跟单 | 保证金、强平 | [10 合约与衍生品](../chapters/10-derivatives-futures.md) |
+| 限频、下单风控 | 风控 | [09 风控](../chapters/09-risk-control.md) |
+| 拆单与滑点 | 深度 | [08 行情](../chapters/08-market-data.md) |
 | 带单员刷业绩监控 | 市场监控 | [B05 业务风控](../backstage/B05-business-risk.md) |
 
 **本仓库对照**（web3-cex-demo）：

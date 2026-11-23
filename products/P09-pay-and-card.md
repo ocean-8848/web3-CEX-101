@@ -5,7 +5,7 @@
 > 2. 用"冻结 → 划转 → 解冻"三个账本动作解释站内支付和礼品卡。
 > 3. 说清加密借记卡的"授权 → 清算"两阶段，以及平台在哪一步卖币、承担什么汇率风险。
 >
-> 前置章节：[../05-ledger.md](../05-ledger.md)（冻结与双分录）、[../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md)（手续费分录）、[../11-products-ecosystem.md](../11-products-ecosystem.md) 第 3.9 节（Pay 概览）、[../04-wallet-custody.md](../04-wallet-custody.md)（充提与链上边界）
+> 前置章节：[../05-ledger.md](../chapters/05-ledger.md)（冻结与双分录）、[../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md)（手续费分录）、[../11-products-ecosystem.md](../chapters/11-products-ecosystem.md) 第 3.9 节（Pay 概览）、[../04-wallet-custody.md](../chapters/04-wallet-custody.md)（充提与链上边界）
 > 交互实验：[../interactive/ledger-double-entry.html](../interactive/ledger-double-entry.html)（用"划转"理解 Pay）、[../interactive/revenue-model.html](../interactive/revenue-model.html)（支付类收入在总收入中的位置）
 
 ## 0. 一句话理解
@@ -23,7 +23,7 @@
 | 礼品卡 | 否 | 否 | 冻结 → 消耗 → 划转 | 创建手续费 |
 | Binance Card | 否（币不上链） | 是：发卡行、卡组织、收单行 | 冻结 → 卖币 → 法币清算 | 兑换价差、交换费分成 |
 
-> 💡 注意：本章的"不上链"指资金在币安账本内移动。用户最终提币到外部地址时，仍然走 [04 章](../04-wallet-custody.md) 的提币流程。
+> 💡 注意：本章的"不上链"指资金在币安账本内移动。用户最终提币到外部地址时，仍然走 [04 章](../chapters/04-wallet-custody.md) 的提币流程。
 
 ## 1. Binance Pay（站内转账与商户收款）
 
@@ -111,7 +111,7 @@ stateDiagram-v2
 
 ### 1.4 系统组件与调用链
 
-`pay-service` 不在主线 [02 章](../02-system-architecture.md) 的架构图里。业界通常把它做成独立的业务服务，向下调用 `ledger-service`。
+`pay-service` 不在主线 [02 章](../chapters/02-system-architecture.md) 的架构图里。业界通常把它做成独立的业务服务，向下调用 `ledger-service`。
 
 ```mermaid
 sequenceDiagram
@@ -162,7 +162,7 @@ sequenceDiagram
 | 3（自动兑换） | 商户-USDT-可用 | 平台做市账户-USDT | 99 USDT |
 | 4（自动兑换） | 平台做市账户-稳定币 X | 商户-稳定币 X-可用 | 98.901 X |
 
-平台的真正价值不在 1 USDT 手续费。Pay 把资金留在账本内，减少提币。每少一次提币，平台少付一次链上 gas，少一次热钱包出金风险（见 [04 章](../04-wallet-custody.md)）。
+平台的真正价值不在 1 USDT 手续费。Pay 把资金留在账本内，减少提币。每少一次提币，平台少付一次链上 gas，少一次热钱包出金风险（见 [04 章](../chapters/04-wallet-custody.md)）。
 
 ### 1.6 风险与对冲
 
@@ -428,7 +428,7 @@ sequenceDiagram
 | 发卡与卡组织成本 | 每笔固定 + 比例 | −0.10 EUR |
 | 平台单笔净收入 | — | −0.10 EUR |
 
-示例说明：高返现会让卡业务亏损。平台用卡获客、锁定 BNB 持仓，而不是靠卡本身盈利。这与 [12 章](../12-business-model.md) 的飞轮逻辑一致。
+示例说明：高返现会让卡业务亏损。平台用卡获客、锁定 BNB 持仓，而不是靠卡本身盈利。这与 [12 章](../chapters/12-business-model.md) 的飞轮逻辑一致。
 
 ### 3.6 风险与对冲
 
@@ -450,12 +450,12 @@ sequenceDiagram
 
 | 本章内容 | 依赖主线章节 | 依赖点 |
 |---|---|---|
-| Pay 划转 | [../05-ledger.md](../05-ledger.md) | 双分录、幂等键、同一事务内借贷 |
-| 礼品卡冻结 | [../05-ledger.md](../05-ledger.md) | 冻结 / 消耗冻结 |
-| 商户手续费 | [../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md) | 手续费收入科目 |
+| Pay 划转 | [../05-ledger.md](../chapters/05-ledger.md) | 双分录、幂等键、同一事务内借贷 |
+| 礼品卡冻结 | [../05-ledger.md](../chapters/05-ledger.md) | 冻结 / 消耗冻结 |
+| 商户手续费 | [../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md) | 手续费收入科目 |
 | 自动兑换 | [P02-convert-otc.md](P02-convert-otc.md) | RFQ 报价与对冲 |
-| 链上边界 | [../04-wallet-custody.md](../04-wallet-custody.md) | 提币是唯一上链出口 |
-| 风控 | [../09-risk-control.md](../09-risk-control.md)、[B05-business-risk.md](../backstage/B05-business-risk.md) | 限额、商户风险等级 |
+| 链上边界 | [../04-wallet-custody.md](../chapters/04-wallet-custody.md) | 提币是唯一上链出口 |
+| 风控 | [../09-risk-control.md](../chapters/09-risk-control.md)、[B05-business-risk.md](../backstage/B05-business-risk.md) | 限额、商户风险等级 |
 | 账户安全 | [B03-account-security.md](../backstage/B03-account-security.md) | 盗号后的快速转移 |
 | 对账 | [B04-reconciliation.md](../backstage/B04-reconciliation.md) | 卡清算文件逐笔匹配 |
 | 法币头寸 | [B06-treasury-liquidity.md](../backstage/B06-treasury-liquidity.md) | 发卡行预存资金 |

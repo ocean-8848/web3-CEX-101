@@ -5,7 +5,7 @@
 > 2. 用抵押率（LTV）公式算出质押借币的追保价和强平价，并说明它与保证金水平的换算关系。
 > 3. 画出"理财存款 → 借贷资金池 → 借款人"的资金流，并用拐点（kink）利率曲线解释挤兑时利率为什么飙升。
 >
-> 前置章节：[05 账本](../05-ledger.md)、[09 风控](../09-risk-control.md)、[10 合约与衍生品](../10-derivatives-futures.md)、[11 产品生态 §3.1 杠杆](../11-products-ecosystem.md)
+> 前置章节：[05 账本](../chapters/05-ledger.md)、[09 风控](../chapters/09-risk-control.md)、[10 合约与衍生品](../chapters/10-derivatives-futures.md)、[11 产品生态 §3.1 杠杆](../chapters/11-products-ecosystem.md)
 > 交互实验：[margin-loan-lab.html](../interactive/margin-loan-lab.html)（借贷资金池 + 杠杆账户）
 > 相关深潜：[P05 理财与质押](P05-earn-savings-staking.md)、[P04 高级衍生品](P04-advanced-derivatives.md)、[B05 业务风控](../backstage/B05-business-risk.md)、[B06 资金与流动性](../backstage/B06-treasury-liquidity.md)
 
@@ -92,7 +92,7 @@ stateDiagram-v2
 
 ### 1.4 系统组件与调用链
 
-服务名与 [02 系统总架构](../02-system-architecture.md) 一致。`margin-service`、`interest-job`、`liquidation-engine` 是示意组件，币安内部命名未公开。
+服务名与 [02 系统总架构](../chapters/02-system-architecture.md) 一致。`margin-service`、`interest-job`、`liquidation-engine` 是示意组件，币安内部命名未公开。
 
 ```mermaid
 sequenceDiagram
@@ -121,7 +121,7 @@ sequenceDiagram
 ```
 
 读图要点：
-- 借款、计息、还款都是账本分录。幂等键防止网络重试造成重复借款，见 [05 账本](../05-ledger.md)。
+- 借款、计息、还款都是账本分录。幂等键防止网络重试造成重复借款，见 [05 账本](../chapters/05-ledger.md)。
 - `liquidation-engine` 按标记价格（指数价）计算 ML，不按本所最新价（业界通用做法）。理由同第 10 章的插针问题。
 - 强平卖单和普通订单进入同一个撮合引擎。流动性差时，强平卖单本身会砸低价格。
 
@@ -469,9 +469,9 @@ flowchart TD
 
 | 本章内容 | 依赖章节 | 依赖点 |
 |---|---|---|
-| 借款、计息、还款 | [05 账本](../05-ledger.md) | 双分录、幂等、负债账户 |
-| 杠杆买卖 | [06 订单与撮合](../06-order-matching.md) | 杠杆单进入现货撮合 |
-| 强平、指数价、保险基金 | [10 合约与衍生品](../10-derivatives-futures.md) | 标记价格、强平引擎 |
+| 借款、计息、还款 | [05 账本](../chapters/05-ledger.md) | 双分录、幂等、负债账户 |
+| 杠杆买卖 | [06 订单与撮合](../chapters/06-order-matching.md) | 杠杆单进入现货撮合 |
+| 强平、指数价、保险基金 | [10 合约与衍生品](../chapters/10-derivatives-futures.md) | 标记价格、强平引擎 |
 | 资金池来源 | [P05 理财与质押](P05-earn-savings-staking.md) | 活期理财 |
 | 流动性管理 | [B06 资金与流动性](../backstage/B06-treasury-liquidity.md) | 挤兑应对 |
 

@@ -5,7 +5,7 @@
 > 2. 用一张"案例卡"复盘事故：日期、损失、攻击路径、根因、发现、处置、用户结果、教训。
 > 3. 解释 2016–2026 年的趋势：攻击重心从"偷热钱包私钥"转向"操纵签名流程和员工"。
 >
-> 前置章节：[13 可靠性与安全事故](../13-reliability-security-incidents.md)（第 4 节已复盘币安 2019、BNB Chain 跨链桥 2022、FTX 2022、Mt.Gox 2014）、[B02 平台安全](B02-platform-security.md)、[B07 应急响应](B07-incident-response.md)
+> 前置章节：[13 可靠性与安全事故](../chapters/13-reliability-security-incidents.md)（第 4 节已复盘币安 2019、BNB Chain 跨链桥 2022、FTX 2022、Mt.Gox 2014）、[B02 平台安全](B02-platform-security.md)、[B07 应急响应](B07-incident-response.md)
 > 相关篇：[B03 账户安全](B03-account-security.md)、[B04 对账](B04-reconciliation.md)、[B06 金库与流动性](B06-treasury-liquidity.md)、[B08 风控平台](B08-risk-platform.md)、[B11 安全工程](B11-security-engineering.md)
 > 交互实验：[incident-explorer.html](../interactive/incident-explorer.html)（时间线、筛选、防线映射、根因测验）
 
@@ -592,7 +592,7 @@ flowchart LR
 | 发现与处置 | 处置：暂停全部充提；另发链上交易撤销授权；约两周内用公司资金与 SAFU 等买回被盗资产；发布临时零知识 PoR 快照；分批恢复提币；重建钱包系统 |
 | 用户结果 | 否。币安宣布全额补足用户资产。补足不等于追回：据美国司法部，政府与行业冻结超过 27 亿美元，其中约 12 亿美元获法院授权扣押或冻结 |
 | 归因 | 据 FBI，朝鲜；区块链分析公司认为是 TraderTraitor |
-| 教训 → 防线 | 签名服务是热钱包的真正控制点；暂停提币不能撤销链上授权；热钱包限额要按最坏损失定 → [B02](B02-platform-security.md)、[B07](B07-incident-response.md)、[B11](B11-security-engineering.md)；完整因果图见 [04 章 5.6 节](../04-wallet-custody.md) |
+| 教训 → 防线 | 签名服务是热钱包的真正控制点；暂停提币不能撤销链上授权；热钱包限额要按最坏损失定 → [B02](B02-platform-security.md)、[B07](B07-incident-response.md)、[B11](B11-security-engineering.md)；完整因果图见 [04 章 5.6 节](../chapters/04-wallet-custody.md) |
 
 读图要点（两起合看）：
 
@@ -628,7 +628,7 @@ flowchart LR
 | P2 签名流程操纵 | 未实现签名策略引擎和意图校验 | 同上，见 [B02 第 8 节](B02-platform-security.md) |
 | P3 / P4 内部人员与员工 | 威胁模型 TM-006（critical）：单人审批即可推进提币广播；ops token 存在 `localStorage` | `services/wallet-service/src/application/wallet-application-service.ts`、`apps/ops-console/public/app.js` |
 | P5 账户批量接管 | 已有提币 2FA、白名单、额度规则；威胁模型 TM-003、TM-004 指出 token 存储与 API key 防重放缺口 | `services/identity-service/src/application/identity-application-service.ts`、`services/api-gateway/src/http/api-key-signature.ts` |
-| P8 内部挪用 | 账本只追加、可重放，有对账命令 | 见 [13 章第 6 节](../13-reliability-security-incidents.md) |
+| P8 内部挪用 | 账本只追加、可重放，有对账命令 | 见 [13 章第 6 节](../chapters/13-reliability-security-incidents.md) |
 | L5 止血开关 | 设计文档定义四个紧急开关 | `docs/security-and-ops.md` 第 7.3 节 |
 
 关键观察：本仓库威胁模型中两个 critical 项（TM-002、TM-006）分别对应本篇 P1 和 P3/P4。也就是说，案例库里出现最多的两类路径，正是本仓库接入真实资产前必须补齐的缺口。

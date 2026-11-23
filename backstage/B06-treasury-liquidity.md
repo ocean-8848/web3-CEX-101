@@ -5,7 +5,7 @@
 > 2. 说出金库运营的日常工作：按币种按链的流动性分布、调拨审批流、跨链再平衡、稳定币与法币通道。
 > 3. 设计一次挤兑压力测试，并说明保险基金、SAFU 与坏账处置的先后顺序。
 >
-> 前置章节：[04 钱包与托管](../04-wallet-custody.md)（冷热分层、归集、PoR、SAFU）、[05 账本](../05-ledger.md)（双分录）、[10 合约与衍生品](../10-derivatives-futures.md)（保险基金、ADL）、[13 可靠性与安全事故](../13-reliability-security-incidents.md)（FTX 案例）
+> 前置章节：[04 钱包与托管](../chapters/04-wallet-custody.md)（冷热分层、归集、PoR、SAFU）、[05 账本](../chapters/05-ledger.md)（双分录）、[10 合约与衍生品](../chapters/10-derivatives-futures.md)（保险基金、ADL）、[13 可靠性与安全事故](../chapters/13-reliability-security-incidents.md)（FTX 案例）
 > 交互实验：[proof-of-reserves.html](../interactive/proof-of-reserves.html)（储备金证明）、[deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)（热冷水位）、[reconciliation-lab.html](../interactive/reconciliation-lab.html)（对账实验）
 
 > ⚠️ 警告：本章仅用于学习交易所系统设计。本章不构成投资建议。本章的比例、阈值和金额除标注"公开资料"或"据公开报道"外，都是示例。
@@ -284,7 +284,7 @@ flowchart LR
 
 ### 6.2 2026 年 10 月币安被盗后的兜底与挤兑
 
-【据公开报道，截至 2026 年 11 月】2026 年 10 月 29 日，币安热钱包被盗约 63.4 亿美元（经过见 [04 章 5.6 节](../04-wallet-custody.md)）。金库视角的关键事实：
+【据公开报道，截至 2026 年 11 月】2026 年 10 月 29 日，币安热钱包被盗约 63.4 亿美元（经过见 [04 章 5.6 节](../chapters/04-wallet-custody.md)）。金库视角的关键事实：
 
 1. 损失直接打破 1:1：用户负债不变，链上资产少了约 63.4 亿美元。
 2. 币安在约两周内用公司资金和 SAFU 等资金，在市场和场外买回被盗币种。几天内先补足约 95%，剩余 5% 是流动性较差的代币，需要更长时间采购。

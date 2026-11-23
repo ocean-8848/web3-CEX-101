@@ -6,7 +6,7 @@
 > 3. 说明储备金证明（Proof of Reserves）能证明什么、不能证明什么。
 >
 > 前置章节：[02 系统架构](02-system-architecture.md)、[03 账户与身份](03-account-identity-security.md)
-> 交互实验：[deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html)（确认数、链重组、热冷水位）、[proof-of-reserves.html](interactive/proof-of-reserves.html)（Merkle 树储备金证明）
+> 交互实验：[deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)（确认数、链重组、热冷水位）、[proof-of-reserves.html](../interactive/proof-of-reserves.html)（Merkle 树储备金证明）
 
 ---
 
@@ -137,7 +137,7 @@ flowchart LR
 
 > 💡 注意（截至 2026 年 11 月公开资料）：2025 年 12 月的 Fusaka 升级和 2026 年推进中的 Glamsterdam 升级都没有改变最终确定时间，正常情况下仍约 2 个 epoch（约 12.8 分钟）。以太坊研究者提出的"快速确认规则"（Fast Confirmation Rule）可以在几十秒内给出高置信度判断，但它是客户端侧的估计，不是协议级最终性。交易所如果采用它缩短入账时间，应只用于入账，不用于解锁提币。
 
-打开 [deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html)，用滑块调整确认阈值，观察"等待时间"和"重组风险"的权衡。
+打开 [deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)，用滑块调整确认阈值，观察"等待时间"和"重组风险"的权衡。
 
 ### 3.4 提币流程
 
@@ -238,7 +238,7 @@ flowchart TD
 - 热钱包余额就是"被盗风险暴露量"。上限越低，被盗时损失越小。
 - 下限越高，提币越不容易卡住。但下限高意味着热钱包长期放更多钱。
 - 冷钱包到热钱包的补充需要人工多签，有延迟。如果提币高峰来得太快，用户会遇到"提币排队"。
-- 在 [deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html) 第二部分，你可以调整上下限，观察提币等待和风险暴露的变化。
+- 在 [deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html) 第二部分，你可以调整上下限，观察提币等待和风险暴露的变化。
 
 ### 3.6 归集（Sweep）
 
@@ -307,7 +307,7 @@ flowchart TD
 - 8 个用户的树只要 3 个兄弟哈希就能验证。100 万用户也只要约 20 个。
 - Merkle 树只证明"我在树里"。它不能阻止交易所塞入负余额的假账户，压低负债总额。zk-SNARK 补上了这个缺口。
 - 局限：PoR 只证明某一时刻资产 ≥ 负债。它不证明负债完整（交易所可能漏掉没人验证的账户），也不证明资产不是借来的。
-- 在 [proof-of-reserves.html](interactive/proof-of-reserves.html) 里，你可以构建 Merkle 树、验证路径，并尝试篡改余额。
+- 在 [proof-of-reserves.html](../interactive/proof-of-reserves.html) 里，你可以构建 Merkle 树、验证路径，并尝试篡改余额。
 
 **事故之后的 PoR**（据公开报道，截至 2026 年 11 月）：
 
@@ -430,7 +430,7 @@ flowchart LR
 
 - 左边是入口，中间是失守点，右边是处置。失守点是**签名服务**，不是私钥存储。
 - "热钱包只放少量资金"是相对的。交易所规模越大，热钱包的绝对金额越大。约 63.4 亿美元说明热钱包上限要按"最坏一次能损失多少"来定，而不是按"日常提币需要多少"来定。
-- 暂停提币只能停住交易所自己的出口。已经写在链上的授权、已经广播的交易不受影响。应急预案必须包含"撤销链上授权"的步骤（见 [B07 应急响应](backstage/B07-incident-response.md)）。
+- 暂停提币只能停住交易所自己的出口。已经写在链上的授权、已经广播的交易不受影响。应急预案必须包含"撤销链上授权"的步骤（见 [B07 应急响应](../backstage/B07-incident-response.md)）。
 - 局限：根因细节来自币安初步调查和第三方分析，最终报告发布后可能修正。
 
 **和 Bybit 2025 对比**：
@@ -443,7 +443,7 @@ flowchart LR
 | 入口 | 供应商开发者电脑 | 自家工程师电脑 |
 | 兜底 | 借款、合作方注资 | 公司资金、SAFU 等 |
 
-> ⚠️ 警告：两起最大的交易所被盗事件都没有偷私钥。它们攻击的是"谁能让系统签名"。只把私钥放进 MPC、HSM 或冷钱包还不够，签名请求的来源、审批和策略同样需要纵深防御（见 [B02 平台安全](backstage/B02-platform-security.md)、[B11 安全工程](backstage/B11-security-engineering.md)）。
+> ⚠️ 警告：两起最大的交易所被盗事件都没有偷私钥。它们攻击的是"谁能让系统签名"。只把私钥放进 MPC、HSM 或冷钱包还不够，签名请求的来源、审批和策略同样需要纵深防御（见 [B02 平台安全](../backstage/B02-platform-security.md)、[B11 安全工程](../backstage/B11-security-engineering.md)）。
 
 ---
 
@@ -490,7 +490,7 @@ flowchart LR
 
 ## 8. 思考题
 
-1. 某条链出块时间 15 秒，攻击者重写 6 个区块的成本是 2 万美元（示例）。交易所把入账阈值设为 6，单笔充值上限应该设为多少才安全？打开 [deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html)，观察不同阈值下的重组损失。
+1. 某条链出块时间 15 秒，攻击者重写 6 个区块的成本是 2 万美元（示例）。交易所把入账阈值设为 6，单笔充值上限应该设为多少才安全？打开 [deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)，观察不同阈值下的重组损失。
 2. 热钱包上限从 500 BTC 降到 100 BTC（示例），被盗风险暴露量下降了。代价出现在哪里？用交互页的水位实验验证你的答案。
-3. 交易所在 Merkle 树里加入一个余额为 -1000 BTC 的假账户。只用 Merkle 证明，用户能发现吗？在 [proof-of-reserves.html](interactive/proof-of-reserves.html) 里试一试，再说明 zk-SNARK 如何发现它。
+3. 交易所在 Merkle 树里加入一个余额为 -1000 BTC 的假账户。只用 Merkle 证明，用户能发现吗？在 [proof-of-reserves.html](../interactive/proof-of-reserves.html) 里试一试，再说明 zk-SNARK 如何发现它。
 4. 2026 年币安事件中，暂停提币后还有一笔以太坊转账成功了。用 5.6 的因果图解释原因，并写出应急预案里应该增加的一步。

@@ -6,7 +6,7 @@
 > 3. 解释 KYC 分级、子账户、反钓鱼码、提币白名单和账户冻结各自防的是什么风险。
 >
 > 前置章节：[01 什么是 CEX](01-what-is-cex.md)、[02 系统架构](02-system-architecture.md)
-> 交互实验：[architecture-explorer.html](interactive/architecture-explorer.html)（查看身份服务在架构中的位置）、[risk-rules-lab.html](interactive/risk-rules-lab.html)（提币风控规则）
+> 交互实验：[architecture-explorer.html](../interactive/architecture-explorer.html)（查看身份服务在架构中的位置）、[risk-rules-lab.html](../interactive/risk-rules-lab.html)（提币风控规则）
 
 ---
 
@@ -143,7 +143,7 @@ sequenceDiagram
 
 客户端那一份由验证器 App 保管，通常放在系统钥匙串或安全芯片中。用户丢失手机时，靠恢复码或人工身份复核找回。
 
-> 💡 注意：TOTP 是对称密钥，服务端必须能还原明文，这是它的天然局限。通行密钥和硬件安全密钥（FIDO2/WebAuthn）用非对称签名，服务端只存公钥。公钥泄露也无法伪造登录。密钥保护的平台侧做法见 [B02 平台安全](backstage/B02-platform-security.md)。
+> 💡 注意：TOTP 是对称密钥，服务端必须能还原明文，这是它的天然局限。通行密钥和硬件安全密钥（FIDO2/WebAuthn）用非对称签名，服务端只存公钥。公钥泄露也无法伪造登录。密钥保护的平台侧做法见 [B02 平台安全](../backstage/B02-platform-security.md)。
 
 ### 3.4 设备指纹
 
@@ -436,5 +436,5 @@ flowchart LR
 ## 8. 思考题
 
 1. 某用户的 `recvWindow` 设为 60000 毫秒。攻击者截获了一笔下单请求。攻击者最多有多长时间可以重放它？如果订单带了 `newClientOrderId`，重放会成功吗？
-2. 攻击者拿到了用户的密码和 TOTP 密钥，但用户开启了提币白名单和 24 小时冷静期（示例）。攻击者还能做什么？平台在哪个环节最有机会拦截？打开 [risk-rules-lab.html](interactive/risk-rules-lab.html)，试着设计一条拦截规则。
+2. 攻击者拿到了用户的密码和 TOTP 密钥，但用户开启了提币白名单和 24 小时冷静期（示例）。攻击者还能做什么？平台在哪个环节最有机会拦截？打开 [risk-rules-lab.html](../interactive/risk-rules-lab.html)，试着设计一条拦截规则。
 3. 为什么子账户不单独做 KYC？如果允许子账户直接向外部地址提币，会给反洗钱带来什么问题？

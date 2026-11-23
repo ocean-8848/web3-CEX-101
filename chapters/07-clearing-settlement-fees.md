@@ -6,7 +6,7 @@
 > 3. 解释 Maker/Taker 费率、VIP 等级、BNB 抵扣、返佣和零手续费的商业逻辑。
 >
 > 前置章节：[05-ledger.md](05-ledger.md)、[06-order-matching.md](06-order-matching.md)
-> 交互实验：[ledger-double-entry.html](interactive/ledger-double-entry.html)（迷你账本 + 手续费计算器）
+> 交互实验：[ledger-double-entry.html](../interactive/ledger-double-entry.html)（迷你账本 + 手续费计算器）
 
 ---
 
@@ -119,14 +119,14 @@ sequenceDiagram
 
 > ⚠️ 警告：如果漏写第 5 行，journal 借贷不平衡。账本必须拒绝提交。如果账本没有平衡校验，A 和 B 的余额看起来都正确，但平台收入凭空少了一笔，对账时才会发现差额。
 
-你可以在 [ledger-double-entry.html](interactive/ledger-double-entry.html) 中逐步重现这张表。
+你可以在 [ledger-double-entry.html](../interactive/ledger-double-entry.html) 中逐步重现这张表。
 
 ### 3.3 Maker 与 Taker
 
 - 挂单方（Maker）：订单进入订单簿等待成交的一方。它为市场提供了流动性。
 - 吃单方（Taker）：订单立即与簿上已有挂单成交的一方。它消耗了流动性。
 
-交易所通常让 Maker 费率 ≤ Taker 费率。原因：挂单越多，订单簿越厚，滑点越小，更多 Taker 愿意来交易。详见 [08-market-data.md](08-market-data.md) 和 [depth-slippage.html](interactive/depth-slippage.html)。
+交易所通常让 Maker 费率 ≤ Taker 费率。原因：挂单越多，订单簿越厚，滑点越小，更多 Taker 愿意来交易。详见 [08-market-data.md](08-market-data.md) 和 [depth-slippage.html](../interactive/depth-slippage.html)。
 
 ### 3.4 币安 VIP 等级（截至 2026 年公开资料，示例）
 
@@ -169,7 +169,7 @@ flowchart LR
 - 等级由两个输入决定。交易量奖励"活跃"，BNB 持仓把用户绑定到币安生态。
 - BNB 抵扣同时改变两件事：费率打 75 折，扣费资产换成 BNB。
 - 返佣发生在手续费收取之后。平台净收入 = 手续费 − 返佣。
-- 参数会变化。用 [ledger-double-entry.html](interactive/ledger-double-entry.html) 底部的计算器体验等级变化。
+- 参数会变化。用 [ledger-double-entry.html](../interactive/ledger-double-entry.html) 底部的计算器体验等级变化。
 
 ### 3.5 BNB 抵扣手续费
 
@@ -347,8 +347,8 @@ stateDiagram-v2
 
 ## 8. 思考题
 
-1. 在 [ledger-double-entry.html](interactive/ledger-double-entry.html) 中，让 B 分 3 次吃完 A 的 0.1 BTC 买单。A 的 USDT 冻结最后是否正好为 0？如果成交价有很多位小数，尾差会去哪里？
+1. 在 [ledger-double-entry.html](../interactive/ledger-double-entry.html) 中，让 B 分 3 次吃完 A 的 0.1 BTC 买单。A 的 USDT 冻结最后是否正好为 0？如果成交价有很多位小数，尾差会去哪里？
 2. 在同一页面的手续费计算器里，把 30 天交易量设为 2,500 万 USD，BNB 持仓设为 50。切换"同时满足"和"满足任一"规则，等级和月手续费分别变成多少？
-3. 零手续费期间，平台的手续费收入为 0。请列出平台仍然能从这些用户身上获得收入的 2 个途径，并对照 [revenue-model.html](interactive/revenue-model.html) 验证。
+3. 零手续费期间，平台的手续费收入为 0。请列出平台仍然能从这些用户身上获得收入的 2 个途径，并对照 [revenue-model.html](../interactive/revenue-model.html) 验证。
 
 下一章：[08-market-data.md](08-market-data.md) 讲成交如何变成行情。

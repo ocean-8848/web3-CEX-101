@@ -6,7 +6,7 @@
 > 3. 解释 WebSocket 扇出架构、指数价格，以及行情延迟带来的问题。
 >
 > 前置章节：[06 订单与撮合](06-order-matching.md)
-> 交互实验：[depth-slippage.html](interactive/depth-slippage.html)（深度与滑点）、[order-book-matching.html](interactive/order-book-matching.html)（订单簿如何变化）
+> 交互实验：[depth-slippage.html](../interactive/depth-slippage.html)（深度与滑点）、[order-book-matching.html](../interactive/order-book-matching.html)（订单簿如何变化）
 
 ---
 
@@ -274,7 +274,7 @@ flowchart LR
 | 客户端处理慢 | 本地缓冲区积压，看到的是"过去的"订单簿 |
 | 跨地区网络 | 远离服务器的用户多出几十到几百毫秒 |
 
-> ⚠️ 警告：行情延迟时，你看到的价格不是当前价格。在剧烈波动中用市价单，实际成交价可能大幅偏离屏幕价格。在 [depth-slippage.html](interactive/depth-slippage.html) 中模拟"做市商撤单"，体验这种落差。
+> ⚠️ 警告：行情延迟时，你看到的价格不是当前价格。在剧烈波动中用市价单，实际成交价可能大幅偏离屏幕价格。在 [depth-slippage.html](../interactive/depth-slippage.html) 中模拟"做市商撤单"，体验这种落差。
 
 ### 5.2 一致性问题
 
@@ -337,5 +337,5 @@ flowchart LR
 ## 8. 思考题
 
 1. 在 3.4 节的流程中，如果先拉快照、后开 WebSocket，会丢失哪一段事件？请画出时间线说明。
-2. 打开 [depth-slippage.html](interactive/depth-slippage.html)，把流动性调到最薄，下一个大额市价单。再切换"做市商撤单"。滑点变化了多少？这对依赖最新价做强平的系统有什么风险？
+2. 打开 [depth-slippage.html](../interactive/depth-slippage.html)，把流动性调到最薄，下一个大额市价单。再切换"做市商撤单"。滑点变化了多少？这对依赖最新价做强平的系统有什么风险？
 3. 一个 1 小时 K 线由 60 根 1 分钟 K 线合并。如果第 37 分钟的 K 线丢了，合并后的 1 小时 K 线哪些字段可能出错？

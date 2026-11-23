@@ -5,7 +5,7 @@
 > 2. 用决策树判断：该暂停某个币、某条链、全站提币，还是全站只读。
 > 3. 写出黑客事件的处置时序，以及一份无责复盘报告的结构。
 >
-> 前置章节：[13 可靠性与安全事故](../13-reliability-security-incidents.md)（降级与真实案例）、[B02 平台安全](B02-platform-security.md)、[B04 对账](B04-reconciliation.md)
+> 前置章节：[13 可靠性与安全事故](../chapters/13-reliability-security-incidents.md)（降级与真实案例）、[B02 平台安全](B02-platform-security.md)、[B04 对账](B04-reconciliation.md)
 > 交互实验：[architecture-explorer.html](../interactive/architecture-explorer.html)（注入故障，观察哪个服务失败会影响资金）、[deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)（提币路径）
 
 ---
@@ -183,7 +183,7 @@ flowchart TD
 | 说清用户影响 | "你的资产是否受影响、能否提币、何时恢复" | 只讲技术细节 |
 | 一个声音 | 只由指定发言人对外 | 多名员工在社交媒体各说各话 |
 
-【据公开报道】"Funds are SAFU" 源自币安创始人赵长鹏在 2018 年的一次异常事件中发推说"Funds are safe"。之后网络视频把它念成 "SAFU"，形成迷因。2018 年 7 月，币安设立同名的用户安全资产基金 SAFU（见 [04 钱包与托管](../04-wallet-custody.md) 第 3.10 节）。2019 年热钱包被盗后，币安宣布由 SAFU 覆盖损失，用户无需承担（见 [13 章 4.1 节](../13-reliability-security-incidents.md)）。
+【据公开报道】"Funds are SAFU" 源自币安创始人赵长鹏在 2018 年的一次异常事件中发推说"Funds are safe"。之后网络视频把它念成 "SAFU"，形成迷因。2018 年 7 月，币安设立同名的用户安全资产基金 SAFU（见 [04 钱包与托管](../chapters/04-wallet-custody.md) 第 3.10 节）。2019 年热钱包被盗后，币安宣布由 SAFU 覆盖损失，用户无需承担（见 [13 章 4.1 节](../chapters/13-reliability-security-incidents.md)）。
 
 这个例子说明：一句简短、明确、说清"用户资产是否安全"的话，比长篇技术解释更能稳定信任。前提是这句话必须是真的，并且有储备支撑。
 
@@ -262,7 +262,7 @@ flowchart TD
 | 2026 | Bitget 部分热钱包与温钱包被盗，初报约 3.52 亿美元，后上调到约 3.88 亿美元 | 暂停提币，冷钱包未受影响；约 4 天后分批恢复，先恢复 BTC；用户保护基金覆盖 | Bitget 公告、媒体报道 |
 | 2026 | 币安热钱包被盗约 63.4 亿美元 | 暂停全部充提；另发链上交易撤销攻击者授权；约两周内用公司资金与 SAFU 等补足；临时 PoR 快照；分批恢复提币；政府与行业冻结超过 27 亿美元 | 币安公告、美国司法部、媒体报道 |
 
-> ⚠️ 警告：2026 年币安事件中，暂停提币之后仍有一笔已经签好的以太坊转账成功上链，因为攻击者事先签出的链上授权仍然有效（据公开报道）。止血清单必须包含两步：停止交易所自己的出口；撤销所有可能被滥用的链上授权和委托。只做第一步不够。详见 [04 章 5.6 节](../04-wallet-custody.md)。
+> ⚠️ 警告：2026 年币安事件中，暂停提币之后仍有一笔已经签好的以太坊转账成功上链，因为攻击者事先签出的链上授权仍然有效（据公开报道）。止血清单必须包含两步：停止交易所自己的出口；撤销所有可能被滥用的链上授权和委托。只做第一步不够。详见 [04 章 5.6 节](../chapters/04-wallet-custody.md)。
 
 ```mermaid
 flowchart LR

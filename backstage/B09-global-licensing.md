@@ -5,7 +5,7 @@
 > 2. 画出全球交易所"多法人实体 + 地理围栏 + 产品可用性矩阵"的系统架构，并解释用户如何被路由到对应实体。
 > 3. 说明上币合规（证券属性分析、MiCA 白皮书、下架义务）和合规组织（三道防线、MLRO/CCO、独立监察员）如何落到系统流程中。
 >
-> 前置章节：[B01 合规防护](B01-compliance.md)（AML、Travel Rule、制裁筛查，以及 2023 年和解后的监察）、[12 商业模式](../12-business-model.md) 第 4.1–4.2 节（牌照概述、2023 年美国和解金额）
+> 前置章节：[B01 合规防护](B01-compliance.md)（AML、Travel Rule、制裁筛查，以及 2023 年和解后的监察）、[12 商业模式](../chapters/12-business-model.md) 第 4.1–4.2 节（牌照概述、2023 年美国和解金额）
 > 相关幕后篇：[B08 风控平台](B08-risk-platform.md)、[B10 税务与隐私](B10-tax-privacy.md)、[B11 安全工程](B11-security-engineering.md)、[B12 事故案例集](B12-incident-casebook.md)
 > 交互实验：[license-matrix.html](../interactive/license-matrix.html)（牌照与监管矩阵 + "设计一个全球交易所"）
 

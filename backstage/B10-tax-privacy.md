@@ -5,7 +5,7 @@
 > 2. 画出"税务居民自我证明 → 交易分类 → 成本基础 → 年度报送"的系统流水线，并说明它如何与账本对账。
 > 3. 解释 GDPR、PIPL 等隐私法与反洗钱留存、Travel Rule 的冲突，以及系统用哪些机制化解冲突。
 >
-> 前置章节：[03 账户、身份与安全](../03-account-identity-security.md)（KYC 分级）、[05 账本](../05-ledger.md)（流水只追加）、[B01 合规防护](B01-compliance.md)（KYC 生命周期、Travel Rule）、[B04 系统对账](B04-reconciliation.md)（对账矩阵）
+> 前置章节：[03 账户、身份与安全](../chapters/03-account-identity-security.md)（KYC 分级）、[05 账本](../chapters/05-ledger.md)（流水只追加）、[B01 合规防护](B01-compliance.md)（KYC 生命周期、Travel Rule）、[B04 系统对账](B04-reconciliation.md)（对账矩阵）
 > 相关幕后篇：[B08 风控平台](B08-risk-platform.md)、[B09 全球牌照](B09-global-licensing.md)、[B11 安全工程](B11-security-engineering.md)、[B12 事故案例库](B12-incident-casebook.md)
 > 交互实验：—（本章暂无交互页）
 
@@ -85,7 +85,7 @@ CARF 的三类可报送交易（Reportable Transactions，公开资料）：
 | 冲突 | 一方要求 | 另一方要求 | 系统如何化解（业界通用做法） |
 |---|---|---|---|
 | 删除权 vs 反洗钱留存 | GDPR 第 17 条：用户可要求删除 | AMLR 第 77 条：关系结束后保留 5 年 | 写法律保全（Legal Hold）标记；停止使用，只保留存储；到期自动删除 |
-| 删除权 vs 账本不可改 | 用户要求删除交易记录 | 账本流水只追加（见 [05 章](../05-ledger.md)） | 账本只存假名 ID；身份映射表单独存放，到期销毁映射 |
+| 删除权 vs 账本不可改 | 用户要求删除交易记录 | 账本流水只追加（见 [05 章](../chapters/05-ledger.md)） | 账本只存假名 ID；身份映射表单独存放，到期销毁映射 |
 | 数据最小化 vs Travel Rule | 少传身份字段 | TFR 要求随转账传姓名、账号 | 只传法定最小字段；加密点对点传输；记录传输日志 |
 | 数据最小化 vs 税务报送 | 不收集无关字段 | CARF 要求出生日期、出生地、TIN | 税务字段单独建域；只有报送管道能读明文 |
 | 数据驻留 vs 全球风控 | 数据留在境内 | 集团风控需要全局视图 | 境内存明文，跨境只传令牌或聚合特征 |

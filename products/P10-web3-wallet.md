@@ -5,7 +5,7 @@
 > 2. 画出"交易所账户 ↔ Web3 钱包 ↔ 链上协议"之间的资金流，指出每一步是账本操作还是链上交易。
 > 3. 解释钱包内 DEX 聚合交易、跨链桥、链上赚币的风险，以及 approve 无限授权为什么危险。
 >
-> 前置章节：[../04-wallet-custody.md](../04-wallet-custody.md)（托管与冷热钱包）、[../03-account-identity-security.md](../03-account-identity-security.md)（设备与 2FA）、[../11-products-ecosystem.md](../11-products-ecosystem.md) 第 3.10 节（Web3 钱包概览）、[../08-market-data.md](../08-market-data.md)（滑点）
+> 前置章节：[../04-wallet-custody.md](../chapters/04-wallet-custody.md)（托管与冷热钱包）、[../03-account-identity-security.md](../chapters/03-account-identity-security.md)（设备与 2FA）、[../11-products-ecosystem.md](../chapters/11-products-ecosystem.md) 第 3.10 节（Web3 钱包概览）、[../08-market-data.md](../chapters/08-market-data.md)（滑点）
 > 交互实验：[../interactive/depth-slippage.html](../interactive/depth-slippage.html)（理解滑点）、[../interactive/deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)（理解"转入钱包 = 一次提币"）
 >
 > ⚠️ 警告：链上赚币、跨链桥、新币交易可能导致全部本金损失。本章不构成投资建议。
@@ -78,7 +78,7 @@ flowchart LR
 
 **读图要点**
 
-- 资金从交易所到钱包，是一次完整的提币：账本扣减 → 热钱包签名 → 上链。反方向是一次完整的充值，要等确认数（见 [../04-wallet-custody.md](../04-wallet-custody.md)）。
+- 资金从交易所到钱包，是一次完整的提币：账本扣减 → 热钱包签名 → 上链。反方向是一次完整的充值，要等确认数（见 [../04-wallet-custody.md](../chapters/04-wallet-custody.md)）。
 - 一旦到达钱包地址，币安账本不再记录这笔资产。币安的储备金证明也不包含它。
 - 第 ③ 步每一次都是用户签名的链上交易，要付 gas，结果不可撤销。
 - 局限：币安 App 在界面上把两者做成"一键划转"，但底层仍是链上交易。部分链上 gas 可能由平台补贴（以官网为准）。
@@ -305,10 +305,10 @@ flowchart LR
 
 | 本章内容 | 依赖主线章节 | 依赖点 |
 |---|---|---|
-| 交易所 ↔ 钱包划转 | [../04-wallet-custody.md](../04-wallet-custody.md) | 提币、充值、确认数 |
-| MPC 分片 | [../04-wallet-custody.md](../04-wallet-custody.md) | 交易所侧的 MPC 与冷热钱包 |
-| 设备分片安全 | [../03-account-identity-security.md](../03-account-identity-security.md)、[B03-account-security.md](../backstage/B03-account-security.md) | 设备指纹、账户接管防御 |
-| 滑点 | [../08-market-data.md](../08-market-data.md) | 深度与价格冲击 |
+| 交易所 ↔ 钱包划转 | [../04-wallet-custody.md](../chapters/04-wallet-custody.md) | 提币、充值、确认数 |
+| MPC 分片 | [../04-wallet-custody.md](../chapters/04-wallet-custody.md) | 交易所侧的 MPC 与冷热钱包 |
+| 设备分片安全 | [../03-account-identity-security.md](../chapters/03-account-identity-security.md)、[B03-account-security.md](../backstage/B03-account-security.md) | 设备指纹、账户接管防御 |
+| 滑点 | [../08-market-data.md](../chapters/08-market-data.md) | 深度与价格冲击 |
 | 平台安全边界 | [B02-platform-security.md](../backstage/B02-platform-security.md) | 平台分片服务的保护 |
 | 链上赚币对比 | [P05-earn-savings-staking.md](P05-earn-savings-staking.md) | 账本内理财 vs 链上协议 |
 | 新币活动 | [P07-listing-launch.md](P07-listing-launch.md) | 上币与 TGE |

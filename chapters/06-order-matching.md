@@ -6,7 +6,7 @@
 > 3. 解释撮合引擎为什么是单线程、确定性、可重放的。
 >
 > 前置章节：[02 系统架构](02-system-architecture.md)、[05 账本](05-ledger.md)
-> 交互实验：[order-book-matching.html](interactive/order-book-matching.html)（可操作的撮合引擎）
+> 交互实验：[order-book-matching.html](../interactive/order-book-matching.html)（可操作的撮合引擎）
 
 ---
 
@@ -121,7 +121,7 @@ flowchart TD
 - **冰山单**的数量上限受 `ICEBERG_PARTS` 过滤器限制。拆分份数 = 向上取整(总量 / icebergQty)。
 - **Post-Only** 常被做市商使用。Maker 手续费通常低于 Taker 手续费，见 [07 清算结算与手续费](07-clearing-settlement-fees.md)。
 
-> ⚠️ 警告：市价单在薄盘口里会吃穿多个档位，成交均价可能远差于你看到的最新价。用 [depth-slippage.html](interactive/depth-slippage.html) 体验滑点。
+> ⚠️ 警告：市价单在薄盘口里会吃穿多个档位，成交均价可能远差于你看到的最新价。用 [depth-slippage.html](../interactive/depth-slippage.html) 体验滑点。
 
 ### 3.4 有效方式 TIF
 
@@ -254,7 +254,7 @@ flowchart LR
 
 满足这五条后，重放日志就能得到逐字节相同的订单簿和成交记录。这让故障恢复、主备切换和审计对账成为可能。
 
-在 [order-book-matching.html](interactive/order-book-matching.html) 中点击"重放事件日志"按钮。页面会清空订单簿，按序号重新执行全部指令，然后比较重建结果和当前订单簿。
+在 [order-book-matching.html](../interactive/order-book-matching.html) 中点击"重放事件日志"按钮。页面会清空订单簿，按序号重新执行全部指令，然后比较重建结果和当前订单簿。
 
 ### 3.8 LMAX 架构思路
 
@@ -443,6 +443,6 @@ sequenceDiagram
 
 ## 8. 思考题
 
-1. 在 [order-book-matching.html](interactive/order-book-matching.html) 中，用 FOK 下一个数量超过卖盘总量的市价买单。订单簿有没有变化？为什么 FOK 需要"预演"？
+1. 在 [order-book-matching.html](../interactive/order-book-matching.html) 中，用 FOK 下一个数量超过卖盘总量的市价买单。订单簿有没有变化？为什么 FOK 需要"预演"？
 2. 在同一个页面勾选 Post-Only，挂一个价格高于卖一价的买单。系统怎么处理？做市商为什么需要这个选项？
 3. 连续下几笔单后点击"重放事件日志"。如果撮合逻辑里使用了 `Math.random()` 决定同价订单的顺序，重放结果还会一致吗？

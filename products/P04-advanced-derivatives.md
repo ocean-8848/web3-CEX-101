@@ -5,7 +5,7 @@
 > 2. 解释欧式期权的买方和卖方、四个常用 Greeks，并算出一个卖方保证金示例。
 > 3. 画出合约风险限额的分层结构，说明平台为什么限制单个用户和全市场的持仓规模。
 >
-> 前置章节：[10 合约与衍生品](../10-derivatives-futures.md)（必读：标记价格、分层杠杆、强平、保险基金、ADL）、[09 风控](../09-risk-control.md)、[P01 杠杆与借贷](P01-margin-and-loans.md)
+> 前置章节：[10 合约与衍生品](../chapters/10-derivatives-futures.md)（必读：标记价格、分层杠杆、强平、保险基金、ADL）、[09 风控](../chapters/09-risk-control.md)、[P01 杠杆与借贷](P01-margin-and-loans.md)
 > 交互实验：[perpetual-liquidation.html](../interactive/perpetual-liquidation.html)（单仓位强平）、[margin-loan-lab.html](../interactive/margin-loan-lab.html)（保证金水平）、[dual-investment.html](../interactive/dual-investment.html)（卖期权的用户视角）
 > 相关深潜：[P06 结构化产品](P06-structured-products.md)、[B05 业务风控](../backstage/B05-business-risk.md)
 
@@ -381,7 +381,7 @@ flowchart LR
 
 ### 4.3 状态机与组件
 
-限额检查发生在交易前风控，见 [09 风控](../09-risk-control.md)。
+限额检查发生在交易前风控，见 [09 风控](../chapters/09-risk-control.md)。
 
 ```mermaid
 sequenceDiagram
@@ -431,11 +431,11 @@ sequenceDiagram
 
 | 本章内容 | 依赖章节 | 依赖点 |
 |---|---|---|
-| 多资产保证金 | [10 合约与衍生品](../10-derivatives-futures.md) | 全仓、标记价格、强平 |
+| 多资产保证金 | [10 合约与衍生品](../chapters/10-derivatives-futures.md) | 全仓、标记价格、强平 |
 | 组合保证金 | [P01 杠杆与借贷](P01-margin-and-loans.md) | 现货杠杆负债、保证金水平 |
-| 期权撮合 | [06 订单与撮合](../06-order-matching.md) | 限价单、价格带 |
-| 期权行情 | [08 行情](../08-market-data.md) | 指数价、标记价推送 |
-| 风险限额 | [09 风控](../09-risk-control.md) | 交易前风控 |
+| 期权撮合 | [06 订单与撮合](../chapters/06-order-matching.md) | 限价单、价格带 |
+| 期权行情 | [08 行情](../chapters/08-market-data.md) | 指数价、标记价推送 |
+| 风险限额 | [09 风控](../chapters/09-risk-control.md) | 交易前风控 |
 | 期权型理财 | [P06 结构化产品](P06-structured-products.md) | 双币投资 |
 
 ### 术语表

@@ -6,7 +6,7 @@
 > 3. 解释三方对账、热点账户和 outbox 模式各解决什么问题。
 >
 > 前置章节：[02-system-architecture.md](02-system-architecture.md)、[04-wallet-custody.md](04-wallet-custody.md)
-> 交互实验：[ledger-double-entry.html](interactive/ledger-double-entry.html)（迷你账本 + 制造 bug）
+> 交互实验：[ledger-double-entry.html](../interactive/ledger-double-entry.html)（迷你账本 + 制造 bug）
 
 ---
 
@@ -138,7 +138,7 @@ L1 和 L2 是平台对用户的负债。L3 和 L4 是平台的资产。平台的
 
 `Σ 所有用户(available + frozen) ≤ 链上余额 + 托管余额`
 
-币安公开的储备金证明（Proof of Reserves）就是在向用户证明这个不等式成立。详见 [04-wallet-custody.md](04-wallet-custody.md) 和交互页 [proof-of-reserves.html](interactive/proof-of-reserves.html)。
+币安公开的储备金证明（Proof of Reserves）就是在向用户证明这个不等式成立。详见 [04-wallet-custody.md](04-wallet-custody.md) 和交互页 [proof-of-reserves.html](../interactive/proof-of-reserves.html)。
 
 ### 3.4 冻结—解冻—扣减生命周期
 
@@ -258,7 +258,7 @@ flowchart TB
 3. 程序中用大整数（BigInt）或十进制库计算。
 4. 每次乘除都明确舍入方向。手续费通常向下取整，差额留在规则中写明的一方。
 
-交互页 [ledger-double-entry.html](interactive/ledger-double-entry.html) 全部用 BigInt 按 10^-8 单位计算。你可以输入 `0.1` 和 `0.2` 验证结果没有误差。
+交互页 [ledger-double-entry.html](../interactive/ledger-double-entry.html) 全部用 BigInt 按 10^-8 单位计算。你可以输入 `0.1` 和 `0.2` 验证结果没有误差。
 
 ### 3.9 热点账户问题
 
@@ -381,7 +381,7 @@ sequenceDiagram
 - 对账有延迟。对账周期内发生的错误，会先影响用户，再被发现。
 - 储备金证明只证明某一时刻的资产 ≥ 负债。它不证明平台没有其他隐藏负债。
 
-去 [ledger-double-entry.html](interactive/ledger-double-entry.html) 打开"制造 bug"开关，亲手触发前两类故障。
+去 [ledger-double-entry.html](../interactive/ledger-double-entry.html) 打开"制造 bug"开关，亲手触发前两类故障。
 
 ---
 
@@ -435,7 +435,7 @@ sequenceDiagram
 
 ## 8. 思考题
 
-1. 在 [ledger-double-entry.html](interactive/ledger-double-entry.html) 中打开"忘记记手续费分录"，完成一笔成交。哪一条恒等式先变红？为什么"资产 = 负债 + 权益"也会同时失败？
+1. 在 [ledger-double-entry.html](../interactive/ledger-double-entry.html) 中打开"忘记记手续费分录"，完成一笔成交。哪一条恒等式先变红？为什么"资产 = 负债 + 权益"也会同时失败？
 2. 打开"关闭幂等"，然后点击"重投最近成交事件"。每个 journal 自身仍然借贷平衡，"资产 = 负债 + 权益"也仍然成立。系统靠什么发现错误？如果没有这项检查，用户 A 能做什么？
 3. 手续费账户分成 64 个桶后，运营要查"今天手续费收入"。你会直接对 64 个桶求和，还是读汇总表？两者的数值在什么时刻可能不同？
 

@@ -6,7 +6,7 @@
 > 3. 指出架构中的单点、热点和同步/异步边界。
 >
 > 前置章节：[01-what-is-cex.md](01-what-is-cex.md)
-> 交互实验：[architecture-explorer.html](interactive/architecture-explorer.html)
+> 交互实验：[architecture-explorer.html](../interactive/architecture-explorer.html)
 
 ---
 
@@ -331,7 +331,7 @@ flowchart LR
 
 > ⚠️ 警告：任何补偿动作都必须**幂等**。如果"解冻"执行两次，用户会多出一笔可用余额。这是真实的资金损失。
 
-去 [architecture-explorer.html](interactive/architecture-explorer.html)，在节点上注入故障，观察每个场景在哪一步失败、系统如何补偿。
+去 [architecture-explorer.html](../interactive/architecture-explorer.html)，在节点上注入故障，观察每个场景在哪一步失败、系统如何补偿。
 
 ---
 
@@ -383,7 +383,7 @@ flowchart LR
 ## 8. 思考题
 
 1. 为什么撮合引擎不直接修改账本余额？如果它直接改，会出现什么问题？
-2. 在 [architecture-explorer.html](interactive/architecture-explorer.html) 中把 Kafka 设为故障，然后运行"下单成交"。用户的资金是否正确？用户看到的是否正确？
+2. 在 [architecture-explorer.html](../interactive/architecture-explorer.html) 中把 Kafka 设为故障，然后运行"下单成交"。用户的资金是否正确？用户看到的是否正确？
 3. 手续费账户为什么会成为热点？如果把它拆成 16 个子账户，对账时需要多做什么？
 
 下一章：[03-account-identity-security.md](03-account-identity-security.md)

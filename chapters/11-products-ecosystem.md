@@ -6,7 +6,7 @@
 > 3. 把任意新产品拆回到"账本 + 撮合 + 风控 + 钱包"这四个底层能力。
 >
 > 前置章节：[05-ledger.md](05-ledger.md)、[06-order-matching.md](06-order-matching.md)、[09-risk-control.md](09-risk-control.md)、[10-derivatives-futures.md](10-derivatives-futures.md)
-> 交互实验：[revenue-model.html](interactive/revenue-model.html)、[risk-rules-lab.html](interactive/risk-rules-lab.html)、[perpetual-liquidation.html](interactive/perpetual-liquidation.html)
+> 交互实验：[revenue-model.html](../interactive/revenue-model.html)、[risk-rules-lab.html](../interactive/risk-rules-lab.html)、[perpetual-liquidation.html](../interactive/perpetual-liquidation.html)
 
 ## 1. 一句话理解
 
@@ -109,7 +109,7 @@ flowchart TB
 
 **风险在哪**：极端行情下，强平成交价可能低于负债。差额形成穿仓损失，由平台保险基金承担。
 
-> 🔎 深潜：[P01-margin-and-loans.md](products/P01-margin-and-loans.md)
+> 🔎 深潜：[P01-margin-and-loans.md](../products/P01-margin-and-loans.md)
 
 ### 3.2 闪兑（Convert）
 
@@ -152,7 +152,7 @@ sequenceDiagram
 
 > 🎯 打个比方：闪兑像机场的货币兑换柜台。柜台直接卖给你外币，牌价里已经包含利润。柜台再去银行补货。牌价变化快时，柜台可能补货亏钱。
 
-> 🔎 深潜：[P02-convert-otc.md](products/P02-convert-otc.md)
+> 🔎 深潜：[P02-convert-otc.md](../products/P02-convert-otc.md)
 
 ### 3.3 P2P / C2C 交易
 
@@ -191,7 +191,7 @@ stateDiagram-v2
 
 **风险在哪**：诈骗、洗钱、银行卡被冻结。平台通过 KYC、商家保证金、限额和风控模型降低风险。
 
-> 🔎 深潜：[P03-p2p-fiat.md](products/P03-p2p-fiat.md)
+> 🔎 深潜：[P03-p2p-fiat.md](../products/P03-p2p-fiat.md)
 
 ### 3.4 法币出入金
 
@@ -211,7 +211,7 @@ stateDiagram-v2
 
 **风险在哪**：银行合作关系不稳定（银行可能因合规压力终止合作）；拒付欺诈；各国监管要求不同。
 
-> 🔎 深潜：[P03-p2p-fiat.md](products/P03-p2p-fiat.md)
+> 🔎 深潜：[P03-p2p-fiat.md](../products/P03-p2p-fiat.md)
 
 ### 3.5 Earn 理财
 
@@ -268,7 +268,7 @@ flowchart LR
 - 出错点：用户把它当成"保本理财"。它不保本（以币本位计算会损失上涨收益）。
 - 局限：平台的对冲细节属于内部实现。本节描述的是业界通用做法。
 
-> 🔎 深潜：[P05-earn-savings-staking.md](products/P05-earn-savings-staking.md) · [P06 结构化产品](products/P06-structured-products.md)
+> 🔎 深潜：[P05-earn-savings-staking.md](../products/P05-earn-savings-staking.md) · [P06 结构化产品](../products/P06-structured-products.md)
 
 ### 3.6 Launchpad 与上币流程
 
@@ -304,7 +304,7 @@ flowchart TB
 
 **风险在哪**：新币价格波动大；监管机构可能认定某些代币为证券；上币决策被质疑存在利益冲突。
 
-> 🔎 深潜：[P07-listing-launch.md](products/P07-listing-launch.md)
+> 🔎 深潜：[P07-listing-launch.md](../products/P07-listing-launch.md)
 
 ### 3.7 跟单交易（Copy Trading）
 
@@ -322,7 +322,7 @@ flowchart TB
 
 **风险在哪**：跟随者的成交价有滑点；带单员可能在排行榜上"刷业绩"；大量跟单集中下单会冲击盘口。
 
-> 🔎 深潜：[P08-strategy-copy-trading.md](products/P08-strategy-copy-trading.md)
+> 🔎 深潜：[P08-strategy-copy-trading.md](../products/P08-strategy-copy-trading.md)
 
 ### 3.8 策略交易与合约网格
 
@@ -341,7 +341,7 @@ flowchart TB
 
 **风险在哪**：单边行情下，网格会持续买入下跌资产或过早卖出上涨资产；合约网格叠加杠杆，可能被强平。
 
-> 🔎 深潜：[P08-strategy-copy-trading.md](products/P08-strategy-copy-trading.md)
+> 🔎 深潜：[P08-strategy-copy-trading.md](../products/P08-strategy-copy-trading.md)
 
 ### 3.9 Binance Pay
 
@@ -355,7 +355,7 @@ flowchart TB
 
 **风险在哪**：盗号后快速转走资产；被用于洗钱。平台用风控规则和限额控制。
 
-> 🔎 深潜：[P09-pay-and-card.md](products/P09-pay-and-card.md)
+> 🔎 深潜：[P09-pay-and-card.md](../products/P09-pay-and-card.md)
 
 ### 3.10 Web3 钱包
 
@@ -370,7 +370,7 @@ flowchart TB
 
 **风险在哪**：用户与恶意合约交互后授权被滥用；链上交易不可撤销，平台无法冻结或追回。
 
-> 🔎 深潜：[P10-web3-wallet.md](products/P10-web3-wallet.md)
+> 🔎 深潜：[P10-web3-wallet.md](../products/P10-web3-wallet.md)
 
 ### 3.11 BNB Chain 与 BNB
 
@@ -386,7 +386,7 @@ flowchart TB
 
 > 💡 注意：BNB Chain 的运营主体与币安交易所对外表述为相互独立。本系列不评价二者的治理关系，只描述公开的技术关系。
 
-> 🔎 深潜：[P10-web3-wallet.md](products/P10-web3-wallet.md)
+> 🔎 深潜：[P10-web3-wallet.md](../products/P10-web3-wallet.md)
 
 ### 3.12 汇总表
 
@@ -467,6 +467,6 @@ flowchart TB
 
 ## 8. 思考题
 
-1. 闪兑宣传"零手续费"。打开 [revenue-model.html](interactive/revenue-model.html)，想一想：如果把闪兑的价差折算成费率，它应该放进哪一类收入？
+1. 闪兑宣传"零手续费"。打开 [revenue-model.html](../interactive/revenue-model.html)，想一想：如果把闪兑的价差折算成费率，它应该放进哪一类收入？
 2. 双币投资中，如果 BTC 到期价格是目标价的 1.5 倍，用户相对于"一直持有 BTC"少赚了多少？用期权的语言解释这个差额。
-3. P2P 申诉状态下，资产保持冻结。如果申诉处理需要 7 天，这对买家、卖家和平台分别意味着什么？结合 [risk-rules-lab.html](interactive/risk-rules-lab.html) 设计一条降低 P2P 欺诈的风控规则。
+3. P2P 申诉状态下，资产保持冻结。如果申诉处理需要 7 天，这对买家、卖家和平台分别意味着什么？结合 [risk-rules-lab.html](../interactive/risk-rules-lab.html) 设计一条降低 P2P 欺诈的风控规则。

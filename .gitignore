@@ -1,0 +1,20 @@
+# 系统与编辑器
+.DS_Store
+.claude/
+
+# 依赖
+node_modules/
+__pycache__/
+*.pyc
+
+# 视频渲染产物与媒体（只保留脚本、幻灯片和工具源码）
+video/output/
+video/output-web*/
+video/voice-samples/
+*.mp4
+*.mov
+*.webm
+*.wav
+*.mp3
+*.m4a
+*.log

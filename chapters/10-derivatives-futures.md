@@ -6,7 +6,7 @@
 > 3. 画出强平流程：强平引擎接管 → 市场平仓 → 保险基金 → 自动减仓（ADL）。
 >
 > 前置章节：[05 账本](05-ledger.md)、[06 订单与撮合](06-order-matching.md)、[09 风控](09-risk-control.md)
-> 交互实验：[perpetual-liquidation.html](interactive/perpetual-liquidation.html)（永续合约实验室）
+> 交互实验：[perpetual-liquidation.html](../interactive/perpetual-liquidation.html)（永续合约实验室）
 
 > ⚠️ 警告：本章内容仅用于学习交易所系统设计，不构成任何投资建议。杠杆交易会放大亏损，可能在几分钟内损失全部保证金。本章所有数值除标注"公开资料"外，都是示例。
 
@@ -402,6 +402,6 @@ ADL（Auto-Deleveraging）选择"盈利最多、杠杆最高"的对手方先减�
 
 ## 8. 思考题
 
-1. 打开 [perpetual-liquidation.html](interactive/perpetual-liquidation.html)。多仓、开仓价 50,000、MMR 0.4%。把杠杆从 10x 拖到 125x。强平价离开仓价的距离如何变化？距离和杠杆是什么关系？
+1. 打开 [perpetual-liquidation.html](../interactive/perpetual-liquidation.html)。多仓、开仓价 50,000、MMR 0.4%。把杠杆从 10x 拖到 125x。强平价离开仓价的距离如何变化？距离和杠杆是什么关系？
 2. 在资金费率标签页，把溢价指数设为 0.03%。资金费率是多少？为什么它等于 0.01%，而不是 0.03%？把溢价指数设为 0.2% 呢？
 3. 在"插针对比"标签页，让最新价插针到强平价下方。用最新价判断会不会强平？用标记价格呢？如果全部现货交易所同时下跌，标记价格还能保护仓位吗？

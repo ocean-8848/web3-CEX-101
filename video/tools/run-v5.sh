@@ -1,5 +1,5 @@
 #!/bin/zsh
-P=/Users/k/Workon/Learning/web3/CEX/video
+P=/Users/k/Workon/Learning/web3/web3-CEX-101/video
 OUT="$P/output-web-v5"
 mkdir -p "$OUT"
 ls -1 "$P/output"/*.mp4 | tr '\n' '\0' | xargs -0 -P 5 -I{} zsh -c '

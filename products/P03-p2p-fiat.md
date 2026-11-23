@@ -5,7 +5,7 @@
 > 2. 解释平台为什么只托管加密资产、不经手法币，以及这个设计带来的反诈难题。
 > 3. 说出法币充提通道（银行卡、银行转账、SEPA 等）的资金流和对账要点。
 >
-> 前置章节：[03 账户、身份与安全](../03-account-identity-security.md)、[05 账本 §3.4 冻结生命周期](../05-ledger.md)、[09 风控](../09-risk-control.md)、[11 产品生态 §3.3 与 §3.4](../11-products-ecosystem.md)
+> 前置章节：[03 账户、身份与安全](../chapters/03-account-identity-security.md)、[05 账本 §3.4 冻结生命周期](../chapters/05-ledger.md)、[09 风控](../chapters/09-risk-control.md)、[11 产品生态 §3.3 与 §3.4](../chapters/11-products-ecosystem.md)
 > 交互实验：[p2p-escrow.html](../interactive/p2p-escrow.html)（P2P 订单状态机）、[aml-graph.html](../interactive/aml-graph.html)（资金关系图）
 
 > ⚠️ 警告：本章只讲系统设计和风险机制，不构成投资或法律建议。P2P 和法币兑换在不同国家和地区的法律地位不同，读者应遵守所在地法律。本章数值除标注"截至 2026 年公开资料"外，都是示例。
@@ -58,7 +58,7 @@ flowchart LR
 - 加密资产只在平台账本内移动：冻结 → 划转或解冻。法币只在两家银行之间移动。
 - 平台账本里**没有任何法币分录**。平台对第 2 步的了解只来自买家标记、卖家确认和截图凭证。
 - 出错点：第 2 步可能根本没发生（假截图），可能由第三人付款（三方支付），也可能是诈骗赃款。
-- "托管"在账本上就是冻结。它对应 [05 账本](../05-ledger.md) 的冻结、解冻、扣减三种操作。
+- "托管"在账本上就是冻结。它对应 [05 账本](../chapters/05-ledger.md) 的冻结、解冻、扣减三种操作。
 
 ### 1.3 状态机
 
@@ -340,11 +340,11 @@ sequenceDiagram
 
 | 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（web3-cex-demo） |
 |---|---|---|---|
-| P2P 托管 = 冻结 | [05 账本 §3.4](../05-ledger.md) | 下单冻结卖家币 | `freezeBalance`，`/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 第 105 行 |
-| 取消 = 解冻 | [05 账本 §3.4](../05-ledger.md) | 超时、取消、裁决卖家胜 | 同文件 `releaseBalance`（第 174 行） |
-| 放币 = 扣减 + 入账 | [05 账本](../05-ledger.md) | 卖家确认或裁决买家胜 | 同文件 `consumeBalance`（第 227 行）、`postJournal`（第 70 行） |
-| 实名与 2FA | [03 账户、身份与安全](../03-account-identity-security.md) | 户名比对、放币二次验证 | `/Users/k/Workon/codex/web3-cex-demo/services/identity-service` |
-| 限额与反诈 | [09 风控](../09-risk-control.md) | 下单前检查、提币观察期 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src` |
+| P2P 托管 = 冻结 | [05 账本 §3.4](../chapters/05-ledger.md) | 下单冻结卖家币 | `freezeBalance`，`/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 第 105 行 |
+| 取消 = 解冻 | [05 账本 §3.4](../chapters/05-ledger.md) | 超时、取消、裁决卖家胜 | 同文件 `releaseBalance`（第 174 行） |
+| 放币 = 扣减 + 入账 | [05 账本](../chapters/05-ledger.md) | 卖家确认或裁决买家胜 | 同文件 `consumeBalance`（第 227 行）、`postJournal`（第 70 行） |
+| 实名与 2FA | [03 账户、身份与安全](../chapters/03-account-identity-security.md) | 户名比对、放币二次验证 | `/Users/k/Workon/codex/web3-cex-demo/services/identity-service` |
+| 限额与反诈 | [09 风控](../chapters/09-risk-control.md) | 下单前检查、提币观察期 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src` |
 | 法币对账 | [B04 对账](../backstage/B04-reconciliation.md) | 银行流水 vs 账本 | 本仓库不做法币入金（见仓库 `README.md`） |
 | 反洗钱 | [B01 合规](../backstage/B01-compliance.md) | 可疑交易识别与上报 | 未实现 |
 

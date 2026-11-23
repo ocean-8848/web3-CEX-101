@@ -5,7 +5,7 @@
 > 2. 说出供应链、云基础设施、员工终端三条攻击路径各自的关键防线。
 > 3. 用一组安全指标和一张成熟度表，判断一个交易所安全团队处在哪个阶段。
 >
-> 前置章节：[B02 平台安全](B02-platform-security.md)（密钥、内控、供应链基础）、[B03 账户安全](B03-account-security.md)、[B07 应急响应](B07-incident-response.md)、[13 可靠性与安全事故](../13-reliability-security-incidents.md) 第 3.5 节
+> 前置章节：[B02 平台安全](B02-platform-security.md)（密钥、内控、供应链基础）、[B03 账户安全](B03-account-security.md)、[B07 应急响应](B07-incident-response.md)、[13 可靠性与安全事故](../chapters/13-reliability-security-incidents.md) 第 3.5 节
 > 交互实验：[architecture-explorer.html](../interactive/architecture-explorer.html)（找出提币路径上每个服务的信任边界）；相关篇：[B08 风控平台](B08-risk-platform.md)、[B09 全球牌照](B09-global-licensing.md)、[B10 税务与隐私](B10-tax-privacy.md)、[B12 事故案例集](B12-incident-casebook.md)
 
 ## 1. 一句话理解
@@ -288,7 +288,7 @@ flowchart TD
 | 控制项 | 做法（业界通用做法） |
 |---|---|
 | IAM 最小权限 | 人员不持有长期密钥；通过单点登录获取短期角色；权限定期用访问记录收紧 |
-| KMS 与 HSM | 数据加密密钥由 KMS 管理；签名密钥在 HSM 或 MPC 中，原理见 [04 章](../04-wallet-custody.md) |
+| KMS 与 HSM | 数据加密密钥由 KMS 管理；签名密钥在 HSM 或 MPC 中，原理见 [04 章](../chapters/04-wallet-custody.md) |
 | 网络分段 | 公网区、业务区、数据区、签名区分开，规则见 B02 第 4.6 节 |
 | 出站控制 | 签名区与数据区默认拒绝出站；只放行明确的域名或 IP |
 | 不可变基础设施 | 服务器不登录修改；任何变更都重新构建镜像并替换实例 |

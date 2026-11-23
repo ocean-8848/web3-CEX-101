@@ -14,87 +14,87 @@
     ],
     "parts": [
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP01-what-is-cex.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP01-what-is-cex.mp4",
         "p_title": "交易所到底是什么：托管、记账、撮合",
         "ep": "EP01"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP02-architecture-map.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP02-architecture-map.mp4",
         "p_title": "一张图看懂交易所架构",
         "ep": "EP02"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP03-order-journey.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP03-order-journey.mp4",
         "p_title": "一笔订单的旅程：调用链、同步异步与故障",
         "ep": "EP03"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP04-account-identity.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP04-account-identity.mp4",
         "p_title": "账户与身份：登录、2FA、API 签名、KYC",
         "ep": "EP04"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP05-deposit-confirmations.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP05-deposit-confirmations.mp4",
         "p_title": "充值：地址、确认数与链重组",
         "ep": "EP05"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP06-withdrawal-wallets-por.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP06-withdrawal-wallets-por.mp4",
         "p_title": "提币、冷热钱包与储备金证明",
         "ep": "EP06"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP07-ledger-double-entry.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP07-ledger-double-entry.mp4",
         "p_title": "账本：双分录与冻结",
         "ep": "EP07"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP08-ledger-reliability.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP08-ledger-reliability.mp4",
         "p_title": "账本可靠性：幂等、对账与热点账户",
         "ep": "EP08"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP09-order-book-rules.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP09-order-book-rules.mp4",
         "p_title": "订单簿与撮合规则",
         "ep": "EP09"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP10-matching-engine-internals.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP10-matching-engine-internals.mp4",
         "p_title": "撮合引擎内部：数据结构、定序与重放",
         "ep": "EP10"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP11-clearing-fees.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP11-clearing-fees.mp4",
         "p_title": "成交之后：清算、结算与手续费",
         "ep": "EP11"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP12-market-data.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP12-market-data.mp4",
         "p_title": "行情：深度、K 线与增量同步",
         "ep": "EP12"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP13-risk-control.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP13-risk-control.mp4",
         "p_title": "风控：交易前、交易中与限流",
         "ep": "EP13"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP14-perpetual-funding-mark.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP14-perpetual-funding-mark.mp4",
         "p_title": "永续合约：资金费率与标记价格",
         "ep": "EP14"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP15-margin-liquidation.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP15-margin-liquidation.mp4",
         "p_title": "保证金与强平：保险基金和 ADL",
         "ep": "EP15"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP16-business-model.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP16-business-model.mp4",
         "p_title": "交易所怎么赚钱：产品生态与商业模式",
         "ep": "EP16"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/EP17-reliability-incidents.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/EP17-reliability-incidents.mp4",
         "p_title": "交易所怎样倒下：可靠性与事故复盘",
         "ep": "EP17"
       }
@@ -115,57 +115,57 @@
     ],
     "parts": [
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P01-margin-and-loans.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P01-margin-and-loans.mp4",
         "p_title": "杠杆与借贷：钱从哪来，利率怎么定",
         "ep": "P01"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P02-convert-otc.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P02-convert-otc.mp4",
         "p_title": "闪兑与 OTC：平台报价背后的风险",
         "ep": "P02"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P03-p2p-fiat.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P03-p2p-fiat.mp4",
         "p_title": "P2P 与法币通道：担保交易和反诈",
         "ep": "P03"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P04-advanced-derivatives.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P04-advanced-derivatives.mp4",
         "p_title": "合约进阶：统一账户、组合保证金与期权",
         "ep": "P04"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P05-earn-savings-staking.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P05-earn-savings-staking.mp4",
         "p_title": "存币生息：活期、定期与流动性质押",
         "ep": "P05"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P06-structured-products.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P06-structured-products.mp4",
         "p_title": "双币投资：高收益背后的期权",
         "ep": "P06"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P07-listing-launch.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P07-listing-launch.mp4",
         "p_title": "上币与新币分发：Launchpad、Launchpool 与空投",
         "ep": "P07"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P08-strategy-copy-trading.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P08-strategy-copy-trading.mp4",
         "p_title": "策略交易与跟单：网格、定投与带单分润",
         "ep": "P08"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P09-pay-and-card.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P09-pay-and-card.mp4",
         "p_title": "支付与卡：交易所支付、礼品卡与加密借记卡",
         "ep": "P09"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P10-web3-wallet.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P10-web3-wallet.mp4",
         "p_title": "Web3 钱包：MPC、DEX 聚合与授权风险",
         "ep": "P10"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/P11-growth-institutional.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/P11-growth-institutional.mp4",
         "p_title": "增长与机构：推荐返佣、VIP、经纪商与做市商",
         "ep": "P11"
       }
@@ -186,62 +186,62 @@
     ],
     "parts": [
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B01-compliance.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B01-compliance.mp4",
         "p_title": "合规防护：KYC、反洗钱与 Travel Rule",
         "ep": "B01"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B02-platform-security.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B02-platform-security.mp4",
         "p_title": "平台安全：密钥、内控与供应链",
         "ep": "B02"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B03-account-security.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B03-account-security.mp4",
         "p_title": "账户安全：盗号攻击链与逐层防御",
         "ep": "B03"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B04-reconciliation.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B04-reconciliation.mp4",
         "p_title": "系统对账：全链路对账与提币熔断",
         "ep": "B04"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B05-business-risk.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B05-business-risk.mp4",
         "p_title": "业务风控：薅羊毛、市场操纵与信用风险",
         "ep": "B05"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B06-treasury-liquidity.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B06-treasury-liquidity.mp4",
         "p_title": "金库与流动性：储备、调拨与挤兑压力",
         "ep": "B06"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B07-incident-response.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B07-incident-response.mp4",
         "p_title": "应急响应：事故分级、止血与追回",
         "ep": "B07"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B08-risk-platform.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B08-risk-platform.mp4",
         "p_title": "实时风控平台：特征、规则、模型与灰度",
         "ep": "B08"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B09-global-licensing.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B09-global-licensing.mp4",
         "p_title": "全球监管与牌照：一家交易所怎样分区经营",
         "ep": "B09"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B10-tax-privacy.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B10-tax-privacy.mp4",
         "p_title": "税务报送与数据隐私：交易所也是信息报送人",
         "ep": "B10"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B11-security-engineering.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B11-security-engineering.mp4",
         "p_title": "安全工程：把安全做进研发与运营",
         "ep": "B11"
       },
       {
-        "file": "/Users/k/Workon/Learning/web3/CEX/video/output/B12-incident-casebook.mp4",
+        "file": "/Users/k/Workon/Learning/web3/web3-CEX-101/video/output/B12-incident-casebook.mp4",
         "p_title": "安全事故案例库：防线是怎样被突破的",
         "ep": "B12"
       }

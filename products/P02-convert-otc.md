@@ -5,7 +5,7 @@
 > 2. 用公式算出一笔闪兑的平台盈亏：价差收入 − 逆向选择损失 − 对冲成本。
 > 3. 说出银行卡买币的拒付（Chargeback）风险，以及 3DS 如何转移这部分风险。
 >
-> 前置章节：[05 账本](../05-ledger.md)、[06 订单与撮合](../06-order-matching.md)、[08 行情](../08-market-data.md)、[11 产品生态 §3.2 与 §3.4](../11-products-ecosystem.md)
+> 前置章节：[05 账本](../chapters/05-ledger.md)、[06 订单与撮合](../chapters/06-order-matching.md)、[08 行情](../chapters/08-market-data.md)、[11 产品生态 §3.2 与 §3.4](../chapters/11-products-ecosystem.md)
 > 交互实验：[convert-rfq.html](../interactive/convert-rfq.html)（闪兑报价沙盘）、[depth-slippage.html](../interactive/depth-slippage.html)（深度与滑点）
 
 > ⚠️ 警告：本章不构成投资建议。本章数值除标注"截至 2026 年公开资料"外，都是示例。币安会调整参数，请以官网为准。
@@ -86,7 +86,7 @@ stateDiagram-v2
 
 ### 1.4 系统组件与调用链
 
-服务名与 [02 系统总架构](../02-system-architecture.md) 一致。`convert-service`、`quote-engine`、`hedge-service` 是本章新增的产品服务（业界通用做法，本仓库未实现）。
+服务名与 [02 系统总架构](../chapters/02-system-architecture.md) 一致。`convert-service`、`quote-engine`、`hedge-service` 是本章新增的产品服务（业界通用做法，本仓库未实现）。
 
 ```mermaid
 sequenceDiagram
@@ -189,7 +189,7 @@ sequenceDiagram
 **风险二：库存风险（Inventory Risk）。** 平台成交后持有敞口。平台不对冲时，敞口随价格涨跌。业界通用做法：
 
 1. 先做内部净额。同一时段的买单和卖单互相抵消。
-2. 净额超过阈值后，再拆单送入订单簿（参见 [06 订单与撮合](../06-order-matching.md)）。
+2. 净额超过阈值后，再拆单送入订单簿（参见 [06 订单与撮合](../chapters/06-order-matching.md)）。
 3. 订单簿深度不足时，向外部做市商询价对冲。
 4. 敞口超过上限时，报价引擎提高该方向价差，或暂停该方向报价。
 
@@ -403,7 +403,7 @@ sequenceDiagram
 
 - 风控在授权前和入账后各介入一次。入账后设置提币冷却期，防止"买完立即提走"。
 - 平台不保存原始卡号，只保存支付通道返回的令牌（Token）。这是卡组织数据安全标准的要求（业界通用做法）。
-- 出错点：支付通道回调可能重复或乱序。`fiat-gateway` 必须按支付单号幂等处理，见 [05 账本 §3.5](../05-ledger.md)。
+- 出错点：支付通道回调可能重复或乱序。`fiat-gateway` 必须按支付单号幂等处理，见 [05 账本 §3.5](../chapters/05-ledger.md)。
 
 ### 3.5 定价与收益来源
 
@@ -450,12 +450,12 @@ flowchart LR
 
 | 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（web3-cex-demo） |
 |---|---|---|---|
-| 账本原子划转 | [05 账本](../05-ledger.md) | 闪兑、OTC、买币都靠一组分录完成换币 | `postJournal`，见 `/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 第 70 行 |
-| 冻结与扣减 | [05 账本 §3.4](../05-ledger.md) | 接受报价时先冻结，再扣减 | 同文件 `freezeBalance`（第 105 行）、`consumeBalance`（第 227 行） |
-| 对冲下单 | [06 订单与撮合](../06-order-matching.md) | 对冲单就是平台账户提交的普通订单 | `/Users/k/Workon/codex/web3-cex-demo/services/order-service/src/application/order-application-service.ts` |
-| 中间价与深度 | [08 行情](../08-market-data.md) | 报价引擎读取深度估算滑点 | `/Users/k/Workon/codex/web3-cex-demo/services/market-data-service` |
-| 限额与反欺诈 | [09 风控](../09-risk-control.md) | 首单限额、提币冷却、询价限流 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src` |
-| 收入归类 | [12 商业模式](../12-business-model.md) | 闪兑价差属于隐含交易收入 | 未实现 |
+| 账本原子划转 | [05 账本](../chapters/05-ledger.md) | 闪兑、OTC、买币都靠一组分录完成换币 | `postJournal`，见 `/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 第 70 行 |
+| 冻结与扣减 | [05 账本 §3.4](../chapters/05-ledger.md) | 接受报价时先冻结，再扣减 | 同文件 `freezeBalance`（第 105 行）、`consumeBalance`（第 227 行） |
+| 对冲下单 | [06 订单与撮合](../chapters/06-order-matching.md) | 对冲单就是平台账户提交的普通订单 | `/Users/k/Workon/codex/web3-cex-demo/services/order-service/src/application/order-application-service.ts` |
+| 中间价与深度 | [08 行情](../chapters/08-market-data.md) | 报价引擎读取深度估算滑点 | `/Users/k/Workon/codex/web3-cex-demo/services/market-data-service` |
+| 限额与反欺诈 | [09 风控](../chapters/09-risk-control.md) | 首单限额、提币冷却、询价限流 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src` |
+| 收入归类 | [12 商业模式](../chapters/12-business-model.md) | 闪兑价差属于隐含交易收入 | 未实现 |
 | 法币通道对账 | [B04 对账](../backstage/B04-reconciliation.md) | 支付通道流水与账本比对 | 本仓库不做法币入金（见仓库 `README.md`） |
 
 本仓库没有 `convert-service`、`quote-engine`、`hedge-service`、`otc-desk`、`fiat-gateway`。如果要扩展，业界通用做法是新增产品服务，调用已有的账本和订单服务，不修改账本本身。

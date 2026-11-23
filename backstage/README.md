@@ -104,8 +104,8 @@ flowchart LR
 
 | 主线章节 | 讲了什么 | 幕后篇补充什么 |
 |---|---|---|
-| [03 账户与身份](../03-account-identity-security.md) | 2FA、API 签名、KYC 等级 | B01 讲 KYC 的持续尽调；B03 讲完整攻击链 |
-| [04 钱包与托管](../04-wallet-custody.md) | 冷热钱包、PoR | B02 讲密钥生命周期；B06 讲金库运营 |
-| [05 账本](../05-ledger.md) | 双分录、对账基础 | B04 讲全链路对账矩阵和处置流程 |
-| [09 风控](../09-risk-control.md) | 交易前后风控、限流 | B05 讲市场操纵和营销反作弊 |
-| [13 可靠性与事故](../13-reliability-security-incidents.md) | 高可用、案例复盘 | B07 讲事故发生时的处置流程 |
+| [03 账户与身份](../chapters/03-account-identity-security.md) | 2FA、API 签名、KYC 等级 | B01 讲 KYC 的持续尽调；B03 讲完整攻击链 |
+| [04 钱包与托管](../chapters/04-wallet-custody.md) | 冷热钱包、PoR | B02 讲密钥生命周期；B06 讲金库运营 |
+| [05 账本](../chapters/05-ledger.md) | 双分录、对账基础 | B04 讲全链路对账矩阵和处置流程 |
+| [09 风控](../chapters/09-risk-control.md) | 交易前后风控、限流 | B05 讲市场操纵和营销反作弊 |
+| [13 可靠性与事故](../chapters/13-reliability-security-incidents.md) | 高可用、案例复盘 | B07 讲事故发生时的处置流程 |

@@ -5,7 +5,7 @@
 > 2. 说出 KYC/KYB 生命周期的状态机，以及"交易监控 → 告警 → 案件 → 可疑交易报告"的处理链。
 > 3. 解释链上 KYT 的直接暴露和间接暴露，Travel Rule 的数据如何随提币传递，以及制裁筛查的三个维度。
 >
-> 前置章节：[03 账户、身份与安全](../03-account-identity-security.md)（KYC 分级与冻结）、[09 风控](../09-risk-control.md)（KYT 与制裁硬规则）、[12 商业模式](../12-business-model.md)（牌照与 2023 年美国和解）
+> 前置章节：[03 账户、身份与安全](../chapters/03-account-identity-security.md)（KYC 分级与冻结）、[09 风控](../chapters/09-risk-control.md)（KYT 与制裁硬规则）、[12 商业模式](../chapters/12-business-model.md)（牌照与 2023 年美国和解）
 > 交互实验：[aml-graph.html](../interactive/aml-graph.html)（AML 资金流图谱）、[risk-rules-lab.html](../interactive/risk-rules-lab.html)（风控规则实验室）
 
 > ⚠️ 警告：本章仅用于学习交易所系统设计。本章不构成法律意见。各地法规会变化，读者应以监管机构的原文为准。本章的阈值除标注"公开资料"外，都是示例。

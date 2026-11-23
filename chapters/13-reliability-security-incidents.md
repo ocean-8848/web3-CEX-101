@@ -6,10 +6,10 @@
 > 3. 用因果图复盘 4 个真实事故，并说明账本隔离和储备金证明为什么重要。
 >
 > 前置章节：[02-system-architecture.md](02-system-architecture.md)、[04-wallet-custody.md](04-wallet-custody.md)、[05-ledger.md](05-ledger.md)
-> 交互实验：[proof-of-reserves.html](interactive/proof-of-reserves.html)、[architecture-explorer.html](interactive/architecture-explorer.html)、[deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html)
+> 交互实验：[proof-of-reserves.html](../interactive/proof-of-reserves.html)、[architecture-explorer.html](../interactive/architecture-explorer.html)、[deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)
 
 
-> 🔎 进阶：更多交易所安全事故及防线映射见 [B12 安全事故案例库](backstage/B12-incident-casebook.md)。
+> 🔎 进阶：更多交易所安全事故及防线映射见 [B12 安全事故案例库](../backstage/B12-incident-casebook.md)。
 
 ## 1. 一句话理解
 
@@ -253,7 +253,7 @@ flowchart LR
 
 - 这不是黑客事故，而是内控和治理失败。技术系统允许"有人绕过账本规则"。
 - 如果客户资产严格隔离，平台自有资金的亏损不会传导到客户资产。
-- 储备金证明（PoR，Proof of Reserves）让外部可以验证"平台持有的资产 ≥ 用户余额总和"。FTX 事件后，币安等交易所开始定期发布基于默克尔树的储备金证明（见 [proof-of-reserves.html](interactive/proof-of-reserves.html)）。
+- 储备金证明（PoR，Proof of Reserves）让外部可以验证"平台持有的资产 ≥ 用户余额总和"。FTX 事件后，币安等交易所开始定期发布基于默克尔树的储备金证明（见 [proof-of-reserves.html](../interactive/proof-of-reserves.html)）。
 - 局限：PoR 只证明某一时刻的资产，不证明负债的完整性。完整的保障还需要独立审计。
 
 ### 4.4 2014 年 Mt.Gox 倒闭
@@ -341,6 +341,6 @@ flowchart LR
 
 ## 8. 思考题
 
-1. 在 [proof-of-reserves.html](interactive/proof-of-reserves.html) 中构造一个"平台在快照前临时借入资产"的场景。PoR 能发现这个问题吗？还需要哪些机制？
+1. 在 [proof-of-reserves.html](../interactive/proof-of-reserves.html) 中构造一个"平台在快照前临时借入资产"的场景。PoR 能发现这个问题吗？还需要哪些机制？
 2. 撮合主节点在 seq=1005 处崩溃，热备只回放到 seq=1003。指令日志中 seq=1004 和 1005 已经持久化。切换后应该怎么做？如果 seq=1005 没有持久化又会怎样？
-3. 用第 3.5 节的四层防线，分析 2019 年币安被盗事件：哪一层被突破了？哪一层限制了损失？在 [deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html) 中设计一条能拦截这类批量提币的规则。
+3. 用第 3.5 节的四层防线，分析 2019 年币安被盗事件：哪一层被突破了？哪一层限制了损失？在 [deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html) 中设计一条能拦截这类批量提币的规则。

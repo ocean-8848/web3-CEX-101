@@ -5,7 +5,7 @@
 > 2. 把一条差异分到 6 个类别之一，并说出它走自动修复还是人工工单。
 > 3. 解释"资产 = 负债 + 权益"按币种核对、对账与 PoR 的关系，以及"对账不平就停提币"的熔断设计。
 >
-> 前置章节：[05-ledger.md](../05-ledger.md)（双分录、三方对账）、[07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md)（成交结算）、[04-wallet-custody.md](../04-wallet-custody.md)（充提、PoR）
+> 前置章节：[05-ledger.md](../chapters/05-ledger.md)（双分录、三方对账）、[07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md)（成交结算）、[04-wallet-custody.md](../chapters/04-wallet-custody.md)（充提、PoR）
 > 交互实验：[reconciliation-lab.html](../interactive/reconciliation-lab.html)（六源对账 + 注入差异 + 熔断）
 
 ---
@@ -14,7 +14,7 @@
 
 对账（Reconciliation）：用两个**独立**的数据源记录同一批业务，逐笔或逐汇总比较，找出不一致。
 
-[05 账本](../05-ledger.md) 第 3.7 节介绍了三类对账：内部、账链、账托。本章把范围扩大到**全链路**：从订单服务到银行流水，共 8 对数据源。每一对只能发现一类错误。一个错误如果漏过了它所在的那一对，下游的对账通常只能看到"总数不平"，看不到原因。
+[05 账本](../chapters/05-ledger.md) 第 3.7 节介绍了三类对账：内部、账链、账托。本章把范围扩大到**全链路**：从订单服务到银行流水，共 8 对数据源。每一对只能发现一类错误。一个错误如果漏过了它所在的那一对，下游的对账通常只能看到"总数不平"，看不到原因。
 
 > 🎯 打个比方：对账像超市的三道清点。收银员下班前清点钱箱（订单 ↔ 成交）。店长晚上核对钱箱和收银小票（成交 ↔ 结算 ↔ 账本）。总部月底核对门店报表和银行存款（账本 ↔ 链上 / 托管 / 银行）。钱箱少了 100 元，收银员当场能说出是哪一笔找错了零钱。如果拖到总部月底才发现，只能知道"这个月少了 100 元"。**越靠近源头的对账，定位越便宜。**
 
@@ -231,7 +231,7 @@ sequenceDiagram
 | 能否定位 | 能，到单笔业务 | 不能；只给出某一时刻的总数 |
 | 依赖关系 | PoR 的负债数据来自账本 | PoR 可信的前提是内部对账已平 |
 
-> 💡 注意：PoR 是对账结果的"对外快照"。如果内部对账不平，PoR 公布的负债总额本身就是错的。PoR 的机制见 [04-wallet-custody.md](../04-wallet-custody.md) 第 3.9 节和 [proof-of-reserves.html](../interactive/proof-of-reserves.html)。
+> 💡 注意：PoR 是对账结果的"对外快照"。如果内部对账不平，PoR 公布的负债总额本身就是错的。PoR 的机制见 [04-wallet-custody.md](../chapters/04-wallet-custody.md) 第 3.9 节和 [proof-of-reserves.html](../interactive/proof-of-reserves.html)。
 
 ### 5.4 熔断：对账不平就停提币
 
@@ -306,7 +306,7 @@ flowchart LR
 
 ### 6.2 2019 年币安热钱包被盗（币安官方公告）
 
-2019 年 5 月，攻击者从币安热钱包提走约 7,000 BTC。币安暂停了充提，并用 SAFU 基金承担损失。这一事件说明两点：账链对账（R5）能直接看到"热钱包余额下降"；用户负债不变时，资产缺口由平台权益（SAFU 基金）补足，恒等式重新成立。详细复盘见 [13-reliability-security-incidents.md](../13-reliability-security-incidents.md) 第 4.1 节。
+2019 年 5 月，攻击者从币安热钱包提走约 7,000 BTC。币安暂停了充提，并用 SAFU 基金承担损失。这一事件说明两点：账链对账（R5）能直接看到"热钱包余额下降"；用户负债不变时，资产缺口由平台权益（SAFU 基金）补足，恒等式重新成立。详细复盘见 [13-reliability-security-incidents.md](../chapters/13-reliability-security-incidents.md) 第 4.1 节。
 
 ---
 

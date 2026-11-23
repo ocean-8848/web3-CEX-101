@@ -5,7 +5,7 @@
 > 2. 解释幌骗、分层挂单、对敲、拉盘砸盘、内幕抢跑的检测规则，并用 Precision / Recall 评估检测器。
 > 3. 说明风险参数（杠杆、限额、指数权重）为什么必须走变更审批。
 >
-> 前置章节：[09-risk-control.md](../09-risk-control.md)（风控分层、Precision / Recall）、[10-derivatives-futures.md](../10-derivatives-futures.md)（指数价格、强平、保险基金）、[B03-account-security.md](B03-account-security.md)、[B04-reconciliation.md](B04-reconciliation.md)
+> 前置章节：[09-risk-control.md](../chapters/09-risk-control.md)（风控分层、Precision / Recall）、[10-derivatives-futures.md](../chapters/10-derivatives-futures.md)（指数价格、强平、保险基金）、[B03-account-security.md](B03-account-security.md)、[B04-reconciliation.md](B04-reconciliation.md)
 > 交互实验：[market-surveillance.html](../interactive/market-surveillance.html)（市场监控检测器）
 
 ---
@@ -14,7 +14,7 @@
 
 业务风控：识别"账户安全、规则合规，但行为在损害平台或其他用户"的业务风险。
 
-[09 风控](../09-risk-control.md) 讲的是交易前、提币、盗号这类**单笔请求**的拦截。本章讲的风险通常看不出单笔异常。它们只在**一群账户、一段时间、一批订单**里显现。所以业务风控以异步检测为主，以事后处置为主。
+[09 风控](../chapters/09-risk-control.md) 讲的是交易前、提币、盗号这类**单笔请求**的拦截。本章讲的风险通常看不出单笔异常。它们只在**一群账户、一段时间、一批订单**里显现。所以业务风控以异步检测为主，以事后处置为主。
 
 > 🎯 打个比方：交易所像一个大型商场。门口安检（09 章）检查每个人有没有带危险品。业务风控是商场的保安监控室：它看的是"这 30 个人一小时内办了 30 张新会员卡、领完赠品就走"（羊毛党），"这个摊位一直摆满货、顾客一靠近就收起来"（幌骗），"两个摊主互相买卖同一件货刷销量"（对敲）。每个人单独看都没违法，合起来就是作弊。
 
@@ -191,7 +191,7 @@ sequenceDiagram
 |---|---|---|
 | 杠杆借贷 | 抵押品价格下跌速度快于强平速度 | 分层保证金率；强平；借贷限额（见 [P01-margin-and-loans.md](../products/P01-margin-and-loans.md)） |
 | VIP 借贷 | 大额借款，抵押率可能低于普通产品 | 单客户敞口上限；人工授信；更频繁的盯市 |
-| 合约穿仓 | 强平成交价比破产价格更差 | 保险基金；自动减仓（ADL）（见 [10-derivatives-futures.md](../10-derivatives-futures.md) 第 3.7–3.8 节） |
+| 合约穿仓 | 强平成交价比破产价格更差 | 保险基金；自动减仓（ADL）（见 [10-derivatives-futures.md](../chapters/10-derivatives-futures.md) 第 3.7–3.8 节） |
 | 集中度 | 少数账户持有某币种大部分借款或持仓 | 单币种借贷总额上限；单账户持仓上限 |
 
 监控指标：全平台按币种的借出总额、抵押率分布、保险基金余额与日变化、穿仓次数。
@@ -201,7 +201,7 @@ sequenceDiagram
 | 风险 | 例子（据公开报道） | 平台动作（业界通用做法） |
 |---|---|---|
 | 稳定币脱锚 | 2022 年 5 月 UST 脱锚并崩溃；2023 年 3 月 USDC 因储备银行倒闭短暂跌破 1 美元 | 降低该币作为抵押品的折算率；暂停相关借贷；调高保证金 |
-| 指数源污染 | 2022 年 10 月 Mango Markets（链上协议）的预言机价格被操纵，协议损失超过 1 亿美元 | 指数由多个来源加权；单一来源偏离中位数时截断（见 [10 章](../10-derivatives-futures.md) 第 3.1 节）；薄流动性来源降权 |
+| 指数源污染 | 2022 年 10 月 Mango Markets（链上协议）的预言机价格被操纵，协议损失超过 1 亿美元 | 指数由多个来源加权；单一来源偏离中位数时截断（见 [10 章](../chapters/10-derivatives-futures.md) 第 3.1 节）；薄流动性来源降权 |
 | 项目方风险 | 上币后团队大额解锁抛售、合约后门、团队失联 | 链上监控项目方地址；监控标签；下架 |
 
 **监控标签**（Monitoring Tag）：币安对"波动和风险明显高于其他已上线代币"的代币加上的标签。用户交易这些代币前需要通过风险测验，每 90 天重新测验一次。带标签的代币如果持续不达标，可能被下架（截至 2026 年公开资料）。

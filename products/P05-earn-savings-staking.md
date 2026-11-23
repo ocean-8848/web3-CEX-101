@@ -5,7 +5,7 @@
 > 2. 写出申购、计息、赎回三个动作的账本分录。
 > 3. 用"汇率增长"模型解释 WBETH 和 BNSOL，并说明赎回为什么要排队。
 >
-> 前置章节：[../05-ledger.md](../05-ledger.md)、[../11-products-ecosystem.md](../11-products-ecosystem.md)（3.5 节）、[../12-business-model.md](../12-business-model.md)、[../10-derivatives-futures.md](../10-derivatives-futures.md)（第 4 节 2025-10-10 事件）
+> 前置章节：[../05-ledger.md](../chapters/05-ledger.md)、[../11-products-ecosystem.md](../chapters/11-products-ecosystem.md)（3.5 节）、[../12-business-model.md](../chapters/12-business-model.md)、[../10-derivatives-futures.md](../chapters/10-derivatives-futures.md)（第 4 节 2025-10-10 事件）
 > 关联深潜：[P01-margin-and-loans.md](P01-margin-and-loans.md)（借贷资金池）、[P06-structured-products.md](P06-structured-products.md)（双币投资）、[P07-listing-launch.md](P07-listing-launch.md)（Launchpool）
 > 交互实验：[../interactive/margin-loan-lab.html](../interactive/margin-loan-lab.html)（借贷利率如何随使用率变化）、[../interactive/ledger-double-entry.html](../interactive/ledger-double-entry.html)（内部划转分录）、[../interactive/launchpool-calc.html](../interactive/launchpool-calc.html)
 
@@ -169,7 +169,7 @@ sequenceDiagram
 ### 1.6 风险与对冲
 平台承担的风险：
 1. **期限错配**（Maturity Mismatch）：活期负债随时可取，资产（借款、质押）有期限。这与银行的结构相同。
-2. **借款人违约**：杠杆用户穿仓后，借款无法全额收回。平台用强平和保险基金兜底（见 [../10-derivatives-futures.md](../10-derivatives-futures.md)）。
+2. **借款人违约**：杠杆用户穿仓后，借款无法全额收回。平台用强平和保险基金兜底（见 [../10-derivatives-futures.md](../chapters/10-derivatives-futures.md)）。
 3. **挤兑**（Bank Run）：大量用户同时赎回。
 
 平台的兜底手段：
@@ -305,7 +305,7 @@ BNSOL 的模型相同。区别是 Solana 的奖励按纪元（Epoch，约 2 天�
 | 汇率更新错误 | 全体持有人 | 双人复核、上限校验（单日涨幅不超过阈值） |
 
 ### 2.7 失败场景与案例
-**2025-10-10 WBETH / BNSOL 指数偏离**（公开报道，详见 [../10-derivatives-futures.md](../10-derivatives-futures.md) 第 4 节）：
+**2025-10-10 WBETH / BNSOL 指数偏离**（公开报道，详见 [../10-derivatives-futures.md](../chapters/10-derivatives-futures.md) 第 4 节）：
 
 当天市场剧烈下跌。币安的 USDe、WBETH、BNSOL 三种资产在 UTC 21:36–22:16 出现价格偏离。用这些资产做统一账户保证金的用户被强平。币安随后补偿受影响用户。
 
@@ -424,7 +424,7 @@ flowchart LR
 
 读图要点：
 - 新币奖励由项目方支付。项目方用代币换取曝光和用户。
-- 用户为了参与活动持有 BNB，这增加了 BNB 需求（见 [../12-business-model.md](../12-business-model.md) BNB 代币经济）。
+- 用户为了参与活动持有 BNB，这增加了 BNB 需求（见 [../12-business-model.md](../chapters/12-business-model.md) BNB 代币经济）。
 
 ### 4.3 状态机
 BNB Vault 的状态机与 1.3 节的活期相同。区别只有一点：每个活动有独立的快照时点（见 4.4 节）。用户在快照前赎回，就失去该期活动的份额。快照只读取持仓，不冻结资产。
@@ -457,16 +457,16 @@ sequenceDiagram
 - 平台风险低。奖励来自项目方，平台不承担兑付义务。
 
 ### 4.7 失败场景与案例
-- **监管认定**（公开法律文件）：2023 年美国 SEC 起诉币安时，把 BNB Vault 和 Simple Earn 列为未注册证券发行。这类认定会迫使平台按地区下线产品（见 [../12-business-model.md](../12-business-model.md) 4.2 节）。
+- **监管认定**（公开法律文件）：2023 年美国 SEC 起诉币安时，把 BNB Vault 和 Simple Earn 列为未注册证券发行。这类认定会迫使平台按地区下线产品（见 [../12-business-model.md](../chapters/12-business-model.md) 4.2 节）。
 
 ## 5. 与主线章节的依赖
 | 本章内容 | 依赖的主线章节 | 依赖点 |
 |---|---|---|
-| 申购 / 赎回分录 | [05 账本](../05-ledger.md) | 内部划转、幂等键、冲回而不修改 |
-| 计息批处理 | [05 账本](../05-ledger.md) 3.9 | 热点账户：利息支出科目被大量写入 |
+| 申购 / 赎回分录 | [05 账本](../chapters/05-ledger.md) | 内部划转、幂等键、冲回而不修改 |
+| 计息批处理 | [05 账本](../chapters/05-ledger.md) 3.9 | 热点账户：利息支出科目被大量写入 |
 | 活期 APR | [P01 杠杆与借贷](P01-margin-and-loans.md) | 同一资金池的借贷利率曲线 |
-| WBETH 赎回 | [04 钱包与托管](../04-wallet-custody.md) | 验证者签名、链上退出 |
-| 2025-10-10 偏离 | [10 合约](../10-derivatives-futures.md) 第 4 节 | 保证金资产估价 |
+| WBETH 赎回 | [04 钱包与托管](../chapters/04-wallet-custody.md) | 验证者签名、链上退出 |
+| 2025-10-10 偏离 | [10 合约](../chapters/10-derivatives-futures.md) 第 4 节 | 保证金资产估价 |
 | 资金池对账 | [B04 对账](../backstage/B04-reconciliation.md) | 理财负债 vs 出借 + 质押 + 缓冲 |
 
 **本仓库对照**：[web3-cex-demo](/Users/k/Workon/codex/web3-cex-demo) 没有理财产品。可复用和需新增的部分：

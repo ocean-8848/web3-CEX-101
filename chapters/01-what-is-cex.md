@@ -6,7 +6,7 @@
 > 3. 区分交易所的"三本账"：链上资产、内部账本、撮合订单簿。
 >
 > 前置章节：无（本章是系列入口）
-> 交互实验：[architecture-explorer.html](interactive/architecture-explorer.html)、[deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html)
+> 交互实验：[architecture-explorer.html](../interactive/architecture-explorer.html)、[deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html)
 
 ---
 
@@ -69,7 +69,7 @@ CEX 用三件事解决这些问题：
 - 券商把"托管、记账、撮合"拆给三方。CEX 把三件事放在**同一家公司**里。这是 CEX 高效的原因，也是 CEX 最大的风险来源。
 - DEX 把三件事交给区块链。DEX 的透明度高，但速度和体验受链的限制。
 
-> ⚠️ 警告：CEX 上的余额是交易所对你的**负债**，不是你链上的资产。如果交易所挪用资产，账本上的数字不能兑现。2022 年 FTX 倒闭就是这种情况（公开报道和美国法院文件）。储备证明见 [proof-of-reserves.html](interactive/proof-of-reserves.html)。
+> ⚠️ 警告：CEX 上的余额是交易所对你的**负债**，不是你链上的资产。如果交易所挪用资产，账本上的数字不能兑现。2022 年 FTX 倒闭就是这种情况（公开报道和美国法院文件）。储备证明见 [proof-of-reserves.html](../interactive/proof-of-reserves.html)。
 
 ---
 
@@ -269,7 +269,7 @@ flowchart TB
 
 > ⚠️ 警告：CEX 的核心局限是**信任**。用户无法实时验证交易所是否真的持有全部资产。储备证明只能证明某一时刻的状态，不能证明负债完整。
 
-> 💡 注意：充值确认数、提币手续费、最小提币额都是可变参数。去 [deposit-withdraw-sim.html](interactive/deposit-withdraw-sim.html) 调整参数，观察入账时间和风险的变化。
+> 💡 注意：充值确认数、提币手续费、最小提币额都是可变参数。去 [deposit-withdraw-sim.html](../interactive/deposit-withdraw-sim.html) 调整参数，观察入账时间和风险的变化。
 
 ---
 
@@ -313,7 +313,7 @@ flowchart TB
 ## 8. 思考题
 
 1. 你在币安把 1 BTC 卖给另一个用户。比特币区块链上会出现一笔交易吗？为什么？
-2. 如果账本里所有用户的 USDT 余额之和是 100 万，而链上地址只有 80 万 USDT，会发生什么？打开 [proof-of-reserves.html](interactive/proof-of-reserves.html) 验证你的想法。
-3. 打开 [architecture-explorer.html](interactive/architecture-explorer.html)，运行"下单成交"场景。数一数这一笔交易修改了几本账。
+2. 如果账本里所有用户的 USDT 余额之和是 100 万，而链上地址只有 80 万 USDT，会发生什么？打开 [proof-of-reserves.html](../interactive/proof-of-reserves.html) 验证你的想法。
+3. 打开 [architecture-explorer.html](../interactive/architecture-explorer.html)，运行"下单成交"场景。数一数这一笔交易修改了几本账。
 
 下一章：[02-system-architecture.md](02-system-architecture.md) —— 把三件事拆成十几个服务。

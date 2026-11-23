@@ -5,7 +5,7 @@
 > 2. 画出私钥从生成到签名的全生命周期，并说明签名策略引擎检查哪些条件。
 > 3. 用 2025 年 Bybit 事件解释"所见即所签"为什么是最后一道防线。
 >
-> 前置章节：[04 钱包与托管](../04-wallet-custody.md)、[13 可靠性与安全事故](../13-reliability-security-incidents.md)（第 3.5 节"安全纵深"）
+> 前置章节：[04 钱包与托管](../chapters/04-wallet-custody.md)、[13 可靠性与安全事故](../chapters/13-reliability-security-incidents.md)（第 3.5 节"安全纵深"）
 > 交互实验：[architecture-explorer.html](../interactive/architecture-explorer.html)（查看签名服务在架构中的位置）；相关篇：[B03 账户安全](B03-account-security.md)、[B07 应急响应](B07-incident-response.md)
 
 ---
@@ -140,7 +140,7 @@ stateDiagram-v2
 | 分片 B | 机房 2 的 HSM | 策略服务（独立团队） | 签名服务被完全控制 |
 | 分片 C | 离线保险库 | 安全团队，需双人开箱 | 前两个机房同时故障 |
 
-HSM（Hardware Security Module，硬件安全模块）：私钥只在防篡改硬件内使用、不能导出的设备。MPC 和 HSM 的原理见 [04 钱包与托管](../04-wallet-custody.md) 第 3.7 节。
+HSM（Hardware Security Module，硬件安全模块）：私钥只在防篡改硬件内使用、不能导出的设备。MPC 和 HSM 的原理见 [04 钱包与托管](../chapters/04-wallet-custody.md) 第 3.7 节。
 
 > 💡 注意：MPC 的价值在于"分片由不同团队控制"。如果三个分片都由同一个运维账号管理，MPC 退化成单签。
 
@@ -301,10 +301,10 @@ CSP（Content Security Policy，内容安全策略）：网站告诉浏览器"�
 
 | 年份 | 事件 | 被突破的环节 | 来源类型 |
 |---|---|---|---|
-| 2019 | 币安热钱包被盗约 7,000 BTC | 用户凭证层 + 提币风控（非平台私钥） | 币安公告、媒体报道；见 [13 章 4.1 节](../13-reliability-security-incidents.md) |
-| 2022 | BNB Chain 跨链桥被伪造证明 | 链协议层 | 公开报道；见 [13 章 4.2 节](../13-reliability-security-incidents.md) |
+| 2019 | 币安热钱包被盗约 7,000 BTC | 用户凭证层 + 提币风控（非平台私钥） | 币安公告、媒体报道；见 [13 章 4.1 节](../chapters/13-reliability-security-incidents.md) |
+| 2022 | BNB Chain 跨链桥被伪造证明 | 链协议层 | 公开报道；见 [13 章 4.2 节](../chapters/13-reliability-security-incidents.md) |
 | 2025 | Bybit 冷钱包被盗约 40 万 ETH 及衍生代币（约 14.6 亿美元） | 供应链 + 签名界面 | Bybit 公告、Safe 声明、FBI 公告、安全公司分析 |
-| 2026 | 币安热钱包被盗约 63.4 亿美元，约 10 条链 | 员工终端 → 部署凭证 → 签名服务；以太坊上签出链上授权 | 币安初步调查、FBI、区块链分析公司；见 [04 章 5.6 节](../04-wallet-custody.md) |
+| 2026 | 币安热钱包被盗约 63.4 亿美元，约 10 条链 | 员工终端 → 部署凭证 → 签名服务；以太坊上签出链上授权 | 币安初步调查、FBI、区块链分析公司；见 [04 章 5.6 节](../chapters/04-wallet-custody.md) |
 
 ```mermaid
 flowchart LR

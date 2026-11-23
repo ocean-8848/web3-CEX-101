@@ -5,7 +5,7 @@
 > 2. 用公式算出 Launchpad、Launchpool、HODLer Airdrops、Megadrop 的个人分配额。
 > 3. 解释"快照取平均"如何防止临时拉高持仓，以及这些活动如何拉动 BNB 需求。
 >
-> 前置章节：[06 订单与撮合](../06-order-matching.md)、[04 钱包与托管](../04-wallet-custody.md)、[11 产品生态](../11-products-ecosystem.md)、[12 商业模式](../12-business-model.md)
+> 前置章节：[06 订单与撮合](../chapters/06-order-matching.md)、[04 钱包与托管](../chapters/04-wallet-custody.md)、[11 产品生态](../chapters/11-products-ecosystem.md)、[12 商业模式](../chapters/12-business-model.md)
 > 交互实验：[launchpool-calc.html](../interactive/launchpool-calc.html)（Launchpool 稀释 + Launchpad 超额认购）
 >
 > ⚠️ 本章不构成投资建议。新币价格波动极大，参与发行活动可能亏损。
@@ -90,7 +90,7 @@ stateDiagram-v2
 | 代币经济 | 总量、流通量、解锁计划、持币集中度 | 前 10 地址持有 90%（示例）、首年大量解锁 |
 | 合规 | 是否可能被认定为证券、制裁名单、隐私币 | 目标司法辖区监管风险过高 |
 
-技术接入的调用链（服务名与 [02 系统架构](../02-system-architecture.md) 一致；`listing-service` 是【示例】服务名）：
+技术接入的调用链（服务名与 [02 系统架构](../chapters/02-system-architecture.md) 一致；`listing-service` 是【示例】服务名）：
 
 ```mermaid
 sequenceDiagram
@@ -118,7 +118,7 @@ sequenceDiagram
 - `blockchain-indexer` 必须先跑通一次"小额充值 → 确认 → 入账"，才能对外开放充值。
 - 出错点：合约有非标准行为（例如转账扣税代币），扫链金额与到账金额不一致，账本出现差额。
 
-**交易对参数**（参见 [06 章 3.9 节](../06-order-matching.md)）：
+**交易对参数**（参见 [06 章 3.9 节](../chapters/06-order-matching.md)）：
 
 1. 运营按参考价确定 tickSize。一个 tick 约为价格的 0.01%–0.1%（【业界】经验值）。
 2. 【示例】参考价 0.0523 USDT：tickSize = 0.0001，stepSize = 1，minNotional = 5 USDT。
@@ -150,9 +150,9 @@ sequenceDiagram
 
 | 平台承担的风险 | 兜底方式 |
 |---|---|
-| 尽调遗漏，项目跑路或合约被黑 | 暂停充提、观察标签、下架；必要时动用用户保护基金（SAFU，见 [12 章](../12-business-model.md)） |
+| 尽调遗漏，项目跑路或合约被黑 | 暂停充提、观察标签、下架；必要时动用用户保护基金（SAFU，见 [12 章](../chapters/12-business-model.md)） |
 | 代币被监管认定为证券 | 按司法辖区限制交易；下架 |
-| 开盘拥堵，撮合延迟 | 集合竞价、仅限价阶段、单用户限频（见 [06 章 5.2 节](../06-order-matching.md)） |
+| 开盘拥堵，撮合延迟 | 集合竞价、仅限价阶段、单用户限频（见 [06 章 5.2 节](../chapters/06-order-matching.md)） |
 | 充值不一致（扣税代币、重组） | 小额试充、确认数阈值、对账告警 |
 
 > ⚠️ 警告：观察标签和种子标签代币可能在短时间内下架。下架后用户只能在提币窗口内转出资产。
@@ -185,7 +185,7 @@ flowchart LR
 
 读图要点：
 
-- 承诺阶段只冻结，不扣款。冻结使用 [05 账本](../05-ledger.md) 的"冻结/解冻"分录。
+- 承诺阶段只冻结，不扣款。冻结使用 [05 账本](../chapters/05-ledger.md) 的"冻结/解冻"分录。
 - 超额认购时，绝大部分 BNB 原路退回。真正扣除的只是分配额对应的部分。
 - 出错点：分配与退款必须在一个账本事务里完成。否则出现"代币到账、BNB 未退"的中间状态。
 
@@ -459,11 +459,11 @@ flowchart LR
 
 | 本章环节 | 依赖的主线能力 | 主线章节 |
 |---|---|---|
-| 交易对参数、开盘保护 | tickSize / stepSize、价格带 | [06 订单与撮合](../06-order-matching.md) |
-| 开放充值、确认数 | 扫链、热钱包 | [04 钱包与托管](../04-wallet-custody.md) |
-| 承诺冻结、奖励发放 | 冻结/解冻、幂等分录 | [05 账本](../05-ledger.md) |
-| 多账户识别 | KYC 唯一性、设备关联 | [03 账户安全](../03-account-identity-security.md)、[B05 业务风控](../backstage/B05-business-risk.md) |
-| BNB 飞轮 | 代币经济 | [12 商业模式](../12-business-model.md) |
+| 交易对参数、开盘保护 | tickSize / stepSize、价格带 | [06 订单与撮合](../chapters/06-order-matching.md) |
+| 开放充值、确认数 | 扫链、热钱包 | [04 钱包与托管](../chapters/04-wallet-custody.md) |
+| 承诺冻结、奖励发放 | 冻结/解冻、幂等分录 | [05 账本](../chapters/05-ledger.md) |
+| 多账户识别 | KYC 唯一性、设备关联 | [03 账户安全](../chapters/03-account-identity-security.md)、[B05 业务风控](../backstage/B05-business-risk.md) |
+| BNB 飞轮 | 代币经济 | [12 商业模式](../chapters/12-business-model.md) |
 | 理财池与 HODLer | Simple Earn | [P05 理财](P05-earn-savings-staking.md) |
 | 市场操纵监控 | 异常成交识别 | [B05 业务风控](../backstage/B05-business-risk.md) |
 

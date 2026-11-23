@@ -5,7 +5,7 @@
 > 2. 画出主账户 / 子账户 / 经纪商子账户三种账户树，以及资金和 API 权限的边界。
 > 3. 说明做市商计划的考核指标、负 Maker 费率的账本做法，以及场外结算（Off-Exchange Settlement）如何降低机构的交易所对手方风险。
 >
-> 前置章节：[../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md)（VIP 费率表、返佣分录，本章不重复）、[../03-account-identity-security.md](../03-account-identity-security.md) 第 3.5、3.7 节（API Key、子账户）、[../12-business-model.md](../12-business-model.md) 第 3.2 节（做市商计划）、[../05-ledger.md](../05-ledger.md)
+> 前置章节：[../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md)（VIP 费率表、返佣分录，本章不重复）、[../03-account-identity-security.md](../chapters/03-account-identity-security.md) 第 3.5、3.7 节（API Key、子账户）、[../12-business-model.md](../chapters/12-business-model.md) 第 3.2 节（做市商计划）、[../05-ledger.md](../chapters/05-ledger.md)
 > 交互实验：[../interactive/revenue-model.html](../interactive/revenue-model.html)（返佣与营销成本对收入的影响）、[../interactive/ledger-double-entry.html](../interactive/ledger-double-entry.html)（手续费与返佣计算器）、[../interactive/market-surveillance.html](../interactive/market-surveillance.html)（做市商与刷量识别）
 
 ## 0. 一句话理解
@@ -18,7 +18,7 @@
 
 ### 1.1 用户看到什么
 
-返佣比例、返现（Kickback）和基础分录已经在 [../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md) 第 3.6 节讲过。本节只补充"分账流程"和多级关系。
+返佣比例、返现（Kickback）和基础分录已经在 [../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md) 第 3.6 节讲过。本节只补充"分账流程"和多级关系。
 
 返佣比例的来源分两层：
 
@@ -138,7 +138,7 @@ flowchart TB
 
 ### 3.1 用户看到什么
 
-- VIP 等级与费率表见 [../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md) 第 3.4 节。VIP 用户获得专属客户经理、更高 API 限频、更高提币额度（业界通用做法）。
+- VIP 等级与费率表见 [../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md) 第 3.4 节。VIP 用户获得专属客户经理、更高 API 限频、更高提币额度（业界通用做法）。
 - 子账户：公开报道显示，币安 2019 年推出子账户，企业账户和 VIP 3 及以上用户可开通，最多 200 个（新闻报道，2019 年；当前数量以官网为准）。
 - 主账户可以：在子账户之间划转资金；为每个子账户创建独立 API Key；设置子账户的交易权限（现货 / 杠杆 / 合约）；统一查看资产。
 
@@ -242,14 +242,14 @@ sequenceDiagram
 
 **读图要点**
 
-- 所有请求都经过 `api-gateway` 的签名校验，与 [../03-account-identity-security.md](../03-account-identity-security.md) 第 3.5 节的 HMAC 签名相同。
+- 所有请求都经过 `api-gateway` 的签名校验，与 [../03-account-identity-security.md](../chapters/03-account-identity-security.md) 第 3.5 节的 HMAC 签名相同。
 - 经纪商的 API 限频是所有子账户共享还是单独计算，决定了经纪商能服务多少用户。这是经纪商谈判的重点（业界通用做法）。
 
 ## 5. 做市商接入
 
 ### 5.1 用户看到什么
 
-做市商计划的基本框架见 [../12-business-model.md](../12-business-model.md) 第 3.2 节。本节补充公开参数和账本做法。
+做市商计划的基本框架见 [../12-business-model.md](../chapters/12-business-model.md) 第 3.2 节。本节补充公开参数和账本做法。
 
 截至 2026 年公开资料（币安公告，参数会调整）：
 
@@ -333,8 +333,8 @@ sequenceDiagram
 
 **读图要点**
 
-- 资产始终在托管方。交易所倒闭时，机构的资产不在交易所资产负债表里。这正是 2022 年 FTX 倒闭后机构最关心的问题（见 [../13-reliability-security-incidents.md](../13-reliability-security-incidents.md)）。
-- 交易所的风险反过来了：机构在两次结算之间可能亏损超过托管额度。交易所需要按 [../09-risk-control.md](../09-risk-control.md) 的保证金规则实时监控，并在结算前要求追加。
+- 资产始终在托管方。交易所倒闭时，机构的资产不在交易所资产负债表里。这正是 2022 年 FTX 倒闭后机构最关心的问题（见 [../13-reliability-security-incidents.md](../chapters/13-reliability-security-incidents.md)）。
+- 交易所的风险反过来了：机构在两次结算之间可能亏损超过托管额度。交易所需要按 [../09-risk-control.md](../chapters/09-risk-control.md) 的保证金规则实时监控，并在结算前要求追加。
 - 结算是批量、净额的，比逐笔上链便宜得多。
 - 局限：结算周期、托管方签名格式、违约处理属于合同内容，未公开。
 
@@ -342,13 +342,13 @@ sequenceDiagram
 
 | 本章内容 | 依赖主线章节 | 依赖点 |
 |---|---|---|
-| 返佣分录 | [../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md) | 第 3.6 节返佣与返现 |
-| VIP 费率 | [../07-clearing-settlement-fees.md](../07-clearing-settlement-fees.md) | 第 3.4 节等级表 |
-| 体验金账本 | [../05-ledger.md](../05-ledger.md) | 多余额桶、冻结 |
-| 子账户 / API Key | [../03-account-identity-security.md](../03-account-identity-security.md) | 第 3.5、3.7 节 |
-| 做市商计划 | [../12-business-model.md](../12-business-model.md) | 第 3.2 节 |
-| 自成交防护 | [../06-order-matching.md](../06-order-matching.md) | 撮合规则 |
-| 场外结算风控 | [../09-risk-control.md](../09-risk-control.md)、[B06-treasury-liquidity.md](../backstage/B06-treasury-liquidity.md) | 保证金、头寸 |
+| 返佣分录 | [../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md) | 第 3.6 节返佣与返现 |
+| VIP 费率 | [../07-clearing-settlement-fees.md](../chapters/07-clearing-settlement-fees.md) | 第 3.4 节等级表 |
+| 体验金账本 | [../05-ledger.md](../chapters/05-ledger.md) | 多余额桶、冻结 |
+| 子账户 / API Key | [../03-account-identity-security.md](../chapters/03-account-identity-security.md) | 第 3.5、3.7 节 |
+| 做市商计划 | [../12-business-model.md](../chapters/12-business-model.md) | 第 3.2 节 |
+| 自成交防护 | [../06-order-matching.md](../chapters/06-order-matching.md) | 撮合规则 |
+| 场外结算风控 | [../09-risk-control.md](../chapters/09-risk-control.md)、[B06-treasury-liquidity.md](../backstage/B06-treasury-liquidity.md) | 保证金、头寸 |
 | 刷量与操纵 | [B05-business-risk.md](../backstage/B05-business-risk.md) | 营销作弊、做市商监控 |
 
 **本仓库对照（web3-cex-demo）**：

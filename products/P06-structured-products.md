@@ -5,7 +5,7 @@
 > 2. 用期权定价解释"高收益"从哪里来，以及平台抽成多少。
 > 3. 说出保本型产品（鲨鱼鳍）的拆解方式，以及平台的对冲风险。
 >
-> 前置章节：[../10-derivatives-futures.md](../10-derivatives-futures.md)、[../11-products-ecosystem.md](../11-products-ecosystem.md)（3.5.3 节）、[P05-earn-savings-staking.md](P05-earn-savings-staking.md)
+> 前置章节：[../10-derivatives-futures.md](../chapters/10-derivatives-futures.md)、[../11-products-ecosystem.md](../chapters/11-products-ecosystem.md)（3.5.3 节）、[P05-earn-savings-staking.md](P05-earn-savings-staking.md)
 > 关联深潜：[P04-advanced-derivatives.md](P04-advanced-derivatives.md)（期权）、[../backstage/B05-business-risk.md](../backstage/B05-business-risk.md)（平台业务风险）
 > 交互实验：[../interactive/dual-investment.html](../interactive/dual-investment.html)（双币投资拆解实验）
 
@@ -224,7 +224,7 @@ sequenceDiagram
 ### 1.7 失败场景与案例
 
 - **单日暴跌中的低买**（情景示例）：BTC 一天下跌 20%。所有目标价在区间内的低买订单全部被行权。用户按目标价接货，账面立即亏损。这时同类产品的新报价 APR 暴涨，吸引更多用户继续"接飞刀"。
-- **2025-10-10 极端行情**（公开报道，见 [../10-derivatives-futures.md](../10-derivatives-futures.md) 第 4 节）：全市场单日强平超过 190 亿美元。期权和永续市场流动性同时枯竭。对冲引擎在这类时刻最难调整仓位。
+- **2025-10-10 极端行情**（公开报道，见 [../10-derivatives-futures.md](../chapters/10-derivatives-futures.md) 第 4 节）：全市场单日强平超过 190 亿美元。期权和永续市场流动性同时枯竭。对冲引擎在这类时刻最难调整仓位。
 - **误解为保本**（业界常见投诉）：用户只看"无论涨跌都有收益"，忽略拿回的币种会变化。这是适当性评估和信息披露要解决的问题。
 
 ---
@@ -342,11 +342,11 @@ sequenceDiagram
 
 | 本章内容 | 依赖的主线章节 | 依赖点 |
 |---|---|---|
-| 申购冻结、到期结算 | [05 账本](../05-ledger.md) | 冻结—扣减、幂等键 |
-| 结算价、敲出判断 | [08 行情](../08-market-data.md)、[10 合约](../10-derivatives-futures.md) | 指数价格、抗插针 |
-| Delta 对冲 | [10 合约](../10-derivatives-futures.md)、[P04 高级衍生品](P04-advanced-derivatives.md) | 永续合约、期权 |
-| 适当性评估 | [03 账户与身份](../03-account-identity-security.md)、[B01 合规](../backstage/B01-compliance.md) | KYC 等级、地区限制 |
-| 期权差价收入 | [12 商业模式](../12-business-model.md) | "闪兑/双币价差"收入项 |
+| 申购冻结、到期结算 | [05 账本](../chapters/05-ledger.md) | 冻结—扣减、幂等键 |
+| 结算价、敲出判断 | [08 行情](../chapters/08-market-data.md)、[10 合约](../chapters/10-derivatives-futures.md) | 指数价格、抗插针 |
+| Delta 对冲 | [10 合约](../chapters/10-derivatives-futures.md)、[P04 高级衍生品](P04-advanced-derivatives.md) | 永续合约、期权 |
+| 适当性评估 | [03 账户与身份](../chapters/03-account-identity-security.md)、[B01 合规](../backstage/B01-compliance.md) | KYC 等级、地区限制 |
+| 期权差价收入 | [12 商业模式](../chapters/12-business-model.md) | "闪兑/双币价差"收入项 |
 | 平台对冲风险 | [B05 业务风险](../backstage/B05-business-risk.md) | 敞口限额、风险准备金 |
 
 **本仓库对照**：[web3-cex-demo](/Users/k/Workon/codex/web3-cex-demo) 没有理财或结构化产品，也没有期权市场。

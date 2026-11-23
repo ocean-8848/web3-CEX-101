@@ -6,7 +6,7 @@
 > 3. 说明 BNB 代币经济、全球合规成本和竞争格局如何影响交易所的利润。
 >
 > 前置章节：[07-clearing-settlement-fees.md](07-clearing-settlement-fees.md)、[11-products-ecosystem.md](11-products-ecosystem.md)
-> 交互实验：[revenue-model.html](interactive/revenue-model.html)
+> 交互实验：[revenue-model.html](../interactive/revenue-model.html)
 
 > 💡 注意：本章区分三类内容。**【事实】** 指有公开资料支持的内容；**【分析】** 指作者基于公开信息的推理；**【示例】** 指为了说明机制而假设的数字。币安是私营公司，不公开完整财报。本章所有收入比例都是示例，不是真实财务数据。本章不构成投资建议。
 
@@ -58,7 +58,7 @@ pie showData
 - 数据来源：本文作者的假设，不来自任何财报。
 - 手续费（合约 + 现货）占示例的 70%。这反映"交易所本质上是交易撮合平台"的业界共识。
 - 局限：真实比例随牛熊市剧烈变化。熊市交易量下降时，利息和理财收入的占比会上升。
-- 在 [revenue-model.html](interactive/revenue-model.html) 中调整参数，可以看到比例如何变化。
+- 在 [revenue-model.html](../interactive/revenue-model.html) 中调整参数，可以看到比例如何变化。
 
 ### 2.2 手续费的计算细节
 
@@ -105,9 +105,9 @@ flowchart LR
 - 实线是正循环。交易量本身也会直接改善流动性（D → A），因为更多订单让订单簿更厚。
 - 虚线是两个刹车：费率过高会流失用户；补贴过多会吃掉利润。
 - 出错点：飞轮也会反转。如果发生信任危机（例如安全事故、监管处罚），用户撤离会让流动性变差，再导致更多用户撤离。
-- 在 [revenue-model.html](interactive/revenue-model.html) 第二部分，你可以逐期运行这个循环，观察降费和补贴的长期效果。
+- 在 [revenue-model.html](../interactive/revenue-model.html) 第二部分，你可以逐期运行这个循环，观察降费和补贴的长期效果。
 
-【分析】飞轮的起点是流动性，不是手续费。新交易所即使零手续费，如果订单簿很薄，用户的滑点成本仍然高于老交易所的手续费。这就是为什么流动性有很强的"马太效应"（见 [depth-slippage.html](interactive/depth-slippage.html)）。
+【分析】飞轮的起点是流动性，不是手续费。新交易所即使零手续费，如果订单簿很薄，用户的滑点成本仍然高于老交易所的手续费。这就是为什么流动性有很强的"马太效应"（见 [depth-slippage.html](../interactive/depth-slippage.html)）。
 
 ### 3.2 做市商计划与流动性激励
 
@@ -195,7 +195,7 @@ flowchart LR
 
 【事实】据公开资料，币安在多个国家和地区获得了虚拟资产服务商注册或牌照，例如迪拜 VARA、阿布扎比 ADGM 等。币安也在部分国家退出或限制服务。
 
-【事实·据公开报道】币安曾在法国、意大利、西班牙等欧盟国家持有 MiCA 之前的本国注册。MiCA 过渡期于 2026 年 7 月 1 日结束。币安在 2026 年 6 月撤回了在希腊的 MiCA 申请，自 2026 年 7 月 1 日起停止向欧盟居民提供大部分服务：不能注册、充值、新下现货订单和使用理财，提币保持开放。币安表示将在其他欧盟成员国申请授权。各地现状见 [B09 全球监管与牌照](backstage/B09-global-licensing.md)。
+【事实·据公开报道】币安曾在法国、意大利、西班牙等欧盟国家持有 MiCA 之前的本国注册。MiCA 过渡期于 2026 年 7 月 1 日结束。币安在 2026 年 6 月撤回了在希腊的 MiCA 申请，自 2026 年 7 月 1 日起停止向欧盟居民提供大部分服务：不能注册、充值、新下现货订单和使用理财，提币保持开放。币安表示将在其他欧盟成员国申请授权。各地现状见 [B09 全球监管与牌照](../backstage/B09-global-licensing.md)。
 
 【业界通用做法】全球化交易所通常按地区设立独立法人实体：
 
@@ -240,7 +240,7 @@ flowchart LR
 | 主要挑战 | 监管历史、多地合规 | 多地合规 | 衍生品和全球市场受限 | Gas 成本、MEV、用户体验 |
 | 资产托管 | 平台托管 | 平台托管 | 平台托管 | 用户自托管 |
 
-【分析】CEX 与 DEX 的竞争不是零和。CEX 的优势是低延迟、法币通道、客服和复杂产品。DEX 的优势是透明和自托管。2022 年 FTX 倒闭后，"储备金证明"成为 CEX 回应透明度质疑的主要手段（见 [proof-of-reserves.html](interactive/proof-of-reserves.html) 和第 13 章）。
+【分析】CEX 与 DEX 的竞争不是零和。CEX 的优势是低延迟、法币通道、客服和复杂产品。DEX 的优势是透明和自托管。2022 年 FTX 倒闭后，"储备金证明"成为 CEX 回应透明度质疑的主要手段（见 [proof-of-reserves.html](../interactive/proof-of-reserves.html) 和第 13 章）。
 
 > 💡 注意：本表使用中性描述。各平台的市场份额随时间变化，读者应参考最新的第三方数据（例如 CoinGecko、The Block 等的公开统计）。
 
@@ -280,6 +280,6 @@ flowchart LR
 
 ## 8. 思考题
 
-1. 在 [revenue-model.html](interactive/revenue-model.html) 中，把 BNB 抵扣使用率从 0% 调到 80%。净手续费下降了多少？平台为什么仍然愿意提供这个折扣？
+1. 在 [revenue-model.html](../interactive/revenue-model.html) 中，把 BNB 抵扣使用率从 0% 调到 80%。净手续费下降了多少？平台为什么仍然愿意提供这个折扣？
 2. 在飞轮模拟中，比较"费率 0.10% 不补贴"和"费率 0.06% 加补贴"两种策略。运行 12 期后，哪种策略的累计利润更高？结果对哪个参数最敏感？
 3. 2023 年和解后，币安的合规成本上升。用本章的成本结构表，分析这部分成本更像固定成本还是变动成本，以及它对小型交易所和大型交易所的影响有什么不同。
