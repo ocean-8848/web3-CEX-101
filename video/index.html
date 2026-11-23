@@ -93,6 +93,7 @@
     <select id="sp" title="倍速"><option>0.75</option><option selected>1</option><option>1.25</option><option>1.5</option><option>2</option></select>
     <button id="bscr">📝 讲稿</button>
     <button id="bppt">🖼 PPT</button>
+    <span id="bdoc"></span>
     <span class="mut keys">N / P 切集 · 空格播放 · S 讲稿 · F PPT · Esc 关闭</span>
   </div>
   <h2 id="t"></h2>
@@ -153,6 +154,8 @@ function go(i, autoplay) {
   if (autoplay) v.play().catch(() => {});
   $('#t').textContent = `${e.id} ${e.title}`;
   $('#meta').innerHTML = `<a href="${bili(e)}" target="_blank" rel="noopener">B 站观看 ↗</a><a href="scripts/${e.base}.md">口播稿</a><a href="slides/${e.base}.html" target="_blank">动画讲解页 ↗</a>` + (e.timed ? `<a href="output/${e.base}.srt">字幕 SRT</a>` : '');
+  // 文档：本集对应的知识文档（章节 / 幕后 / 产品），多篇时按编号区分。
+  $('#bdoc').innerHTML = e.docs.map(d => `<a class="btn" href="${d.href}" target="_blank" title="${esc(d.title)}">📖 文档${e.docs.length > 1 ? ' ' + esc(d.href.match(/\/(\w+?)-/)[1]) : ''}</a>`).join(' ');
   renderScript();
   document.querySelectorAll('.ep').forEach(r => r.classList.toggle('on', +r.dataset.i === cur));
   const on = $('.ep.on');
