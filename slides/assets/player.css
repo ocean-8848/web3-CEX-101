@@ -39,6 +39,8 @@ body { font-family: var(--sans); color: var(--text); -webkit-font-smoothing: ant
 .caption { position: absolute; left: 50%; bottom: 44px; transform: translateX(-50%); max-width: 1600px; padding: 14px 30px;
   background: rgba(0,0,0,.72); border-radius: 10px; font-size: 38px; line-height: 1.45; text-align: center; z-index: 7; display: none; }
 .caption.on { display: block; }
+body.subs .caption { font-size: 32px; width: max-content; max-width: 1500px; }
+body.no-subs .caption, body.subs.notes .caption { display: none; }
 .hud { position: fixed; right: 12px; bottom: 12px; font: 12px var(--mono); color: #888; z-index: 10; }
 body.render .hud { display: none; }
 .notes-panel { position: fixed; left: 0; right: 0; bottom: 0; max-height: 34vh; overflow: auto; background: rgba(20,20,20,.95); color: #eee;

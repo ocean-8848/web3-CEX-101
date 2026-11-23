@@ -31,7 +31,7 @@
 <body>
 <div class="page">
   <h1>交易所系统讲解幻灯片</h1>
-  <p class="lead">以币安为例，讲清中心化交易所的系统组成与底层逻辑。主线 17 集、幕后核心 12 集、产品深潜 11 集。每集是一个可翻页的动画讲解页，右侧选集，点「新窗口打开」可全屏观看，按 → 逐步播放、N 显示讲稿。配音视频在 B 站（全 40 集）和 YouTube（EP01–EP10）在线观看。</p>
+  <p class="lead">以币安为例，讲清中心化交易所的系统组成与底层逻辑。主线 17 集、幕后核心 12 集、产品深潜 11 集。每集是一个可翻页的动画讲解页，右侧选集，点「新窗口打开」可全屏观看，按 → 逐步播放，字幕默认开启（C 开关）、N 显示讲稿。配音视频在 B 站（全 40 集）和 YouTube（EP01–EP10）在线观看。</p>
   <div class="player">
     <div>
       <iframe id="v" title="slide"></iframe>
@@ -96,7 +96,7 @@ function play(i) {
   v.src = base + '.html';
   document.getElementById('title').textContent = ep + ' ' + t;
   const part = +ep.replace(/\D/g, '');
-  document.getElementById('meta').innerHTML = `<a href="${base}.html" target="_blank" rel="noopener">新窗口打开</a> · <a href="${BILI[ep[0]]}?p=${part}" target="_blank" rel="noopener">B 站观看视频</a>` + (YT[ep] ? ` · <a href="${YT[ep]}" target="_blank" rel="noopener">YouTube</a>` : '') + ` · 按 N 显示讲稿`;
+  document.getElementById('meta').innerHTML = `<a href="${base}.html" target="_blank" rel="noopener">新窗口打开</a> · <a href="${BILI[ep[0]]}?p=${part}" target="_blank" rel="noopener">B 站观看视频</a>` + (YT[ep] ? ` · <a href="${YT[ep]}" target="_blank" rel="noopener">YouTube</a>` : '') + ` · C 开关字幕 · N 显示讲稿`;
   list.querySelectorAll('li[data-i]').forEach(li => li.toggleAttribute('aria-current', +li.dataset.i === i));
   try { localStorage.setItem('cex-ep-id', EPISODES[i][0]); } catch (e) {}
 }

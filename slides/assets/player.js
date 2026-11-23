@@ -3,7 +3,8 @@
  *   <ol class="say"><li>step 0 narration</li><li>step 1 narration</li>...</ol> </section> ... </div>
  * Visual elements with data-step="k" appear at step k; data-until="k" hides them after step k; data-dim="k" dims them from step k.
  * A scene may set data-onstep="fnName"; window[fnName](sceneEl, step) runs on every step (must be idempotent: render state for that step).
- * Keys: → / Space / click = next, ← = previous, N = narration panel, Home = start. ?render=1 = capture mode (used by the renderer).
+ * Keys: → / Space / click = next, ← = previous, C = subtitles on/off, N = narration panel, Home = start.
+ * Outside render mode the current step's narration shows as a subtitle in .caption (on by default). ?render=1 = capture mode (used by the renderer).
  */
 (function () {
   const stage = document.querySelector('.stage');
@@ -50,6 +51,7 @@
     progress.style.width = ((idx + 1) / flat.length * 100) + '%';
     hud.textContent = `${si + 1}.${st} / ${scenes.length} 场景 · ${meta[si].title}`;
     notes.textContent = meta[si].steps[st];
+    if (!render) { caption.textContent = meta[si].steps[st]; caption.classList.toggle('on', !!meta[si].steps[st]); }
     if (!render) history.replaceState(null, '', '#s' + (si + 1) + '-' + st);
   }
   function goFlat(i) { cur = Math.max(0, Math.min(flat.length - 1, i)); apply(...flat[cur]); }
@@ -60,7 +62,15 @@
     else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(e.key)) { e.preventDefault(); goFlat(cur - 1); }
     else if (e.key === 'Home') goFlat(0);
     else if (e.key.toLowerCase() === 'n') document.body.classList.toggle('notes');
+    else if (e.key.toLowerCase() === 'c') {
+      const off = document.body.classList.toggle('no-subs');
+      try { localStorage.setItem('deck-subs', off ? 'off' : 'on'); } catch (err) {}
+    }
   });
+  if (!render) {
+    document.body.classList.add('subs');
+    try { if (localStorage.getItem('deck-subs') === 'off') document.body.classList.add('no-subs'); } catch (err) {}
+  }
   stage.addEventListener('click', e => { if (!render && !e.target.closest('a,button,input,iframe')) goFlat(cur + 1); });
 
   window.deck = {
