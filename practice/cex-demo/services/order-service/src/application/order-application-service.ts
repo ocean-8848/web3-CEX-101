@@ -1,0 +1,1633 @@
+import { createHash } from "node:crypto";
+
+import {
+  DEFAULT_TRADE_EVENT_VERSION_GATE,
+  effectiveFeeRate,
+  getSpotMarketDefinition,
+  addAmounts,
+  compareAmounts,
+  engineOrderType,
+  fromAtomicUnits,
+  getTradeExecutedEventSchema,
+  isStopOrderType,
+  multiplyAmounts,
+  subtractAmounts,
+  toAtomicUnits,
+  type Order,
+  type SpotMarketDefinition,
+  type SpotMarket,
+  type Trade,
+  type TradeEventVersionGate,
+  type TradingEvent,
+  validateTradeExecutedEvent
+} from "@web3-cex/domain";
+import { currentTraceId } from "@web3-cex/telemetry";
+
+import { OrderServiceError } from "../domain/errors.js";
+import type {
+  LedgerOrderClient,
+  MatchingEngineClient,
+  RiskOrderClient,
+  SettlementOrderClient
+} from "../domain/clients.js";
+import type { OrderEventPublisher } from "../domain/event-publisher.js";
+import type { FeeTierResolver, UserFeeTier } from "../domain/fee-tier-repository.js";
+import type { OrderRepository } from "../domain/repository.js";
+import type {
+  CancelSpotOrderCommand,
+  CreateSpotOrderCommand,
+  ListSpotOrderAutomationExecutionsQuery,
+  ListSpotOrderRecoveryJobsQuery,
+  ListSpotOrdersQuery,
+  ListSpotTradesQuery,
+  SpotOrderAutomationExecution,
+  SpotOrderRecord,
+  SpotOrderRecoveryMetrics,
+  SpotOrderRecoveryJob,
+  SpotTradeRecord
+} from "../domain/types.js";
+import { selectTriggeredStopOrders } from "./stop-order-trigger.js";
+import type { StopTriggerGate, StopTriggerHoldReason } from "./stop-trigger-gate.js";
+
+interface ServiceOptions {
+  now?: () => Date;
+  createId?: () => string;
+  eventPublisher?: OrderEventPublisher;
+  recoveryDelayMs?: number;
+  recoveryMaxAttempts?: number;
+  recoveryLeaseMs?: number;
+  tradeEventVersionGate?: TradeEventVersionGate;
+  settlementMode?: "sync" | "async";
+  /** VIP tier resolver. Absent = every side pays the market default rate. */
+  feeTierResolver?: FeeTierResolver;
+  /**
+   * Holds crossed stop triggers while the market is halted / delisted or the
+   * API write freeze is on (see stop-trigger-gate.ts). Absent = never held.
+   */
+  stopTriggerGate?: StopTriggerGate;
+}
+
+interface RecoveryPlan {
+  jobId: string;
+  stage: SpotOrderRecoveryJob["stage"];
+  originalOrder: SpotOrderRecord;
+  takerNextOrder: SpotOrderRecord;
+  makerNextOrders: SpotOrderRecord[];
+  trades: SpotTradeRecord[];
+  releaseAmount: string;
+}
+
+export class OrderApplicationService {
+  private readonly now: () => Date;
+  private readonly createId: () => string;
+  private readonly eventPublisher: OrderEventPublisher;
+  private readonly recoveryDelayMs: number;
+  private readonly recoveryMaxAttempts: number;
+  private readonly recoveryLeaseMs: number;
+  private readonly tradeEventVersionGate: TradeEventVersionGate;
+  private readonly settlementMode: "sync" | "async";
+  private readonly feeTierResolver?: FeeTierResolver;
+  private readonly stopTriggerGate?: StopTriggerGate;
+
+  constructor(
+    private readonly repository: OrderRepository,
+    private readonly riskClient: RiskOrderClient,
+    private readonly ledgerClient: LedgerOrderClient,
+    private readonly settlementClient: SettlementOrderClient,
+    private readonly matchingEngineClient: MatchingEngineClient,
+    options: ServiceOptions = {}
+  ) {
+    this.now = options.now ?? (() => new Date());
+    this.createId =
+      options.createId ??
+      (() => {
+        if (typeof crypto.randomUUID === "function") {
+          return crypto.randomUUID();
+        }
+
+        return `order_${Date.now()}`;
+      });
+    this.eventPublisher = options.eventPublisher ?? {
+      async publish() {}
+    };
+    this.recoveryDelayMs = options.recoveryDelayMs ?? 5_000;
+    this.recoveryMaxAttempts = options.recoveryMaxAttempts ?? 20;
+    this.recoveryLeaseMs = options.recoveryLeaseMs ?? 30_000;
+    this.tradeEventVersionGate =
+      options.tradeEventVersionGate ?? DEFAULT_TRADE_EVENT_VERSION_GATE;
+    this.settlementMode = options.settlementMode ?? "sync";
+    this.feeTierResolver = options.feeTierResolver;
+    this.stopTriggerGate = options.stopTriggerGate;
+  }
+
+  async createOrder(command: CreateSpotOrderCommand): Promise<SpotOrderRecord> {
+    const existing = await this.repository.findOrderByIdempotencyKey(command.idempotencyKey);
+    if (existing) {
+      return existing;
+    }
+
+    const isStop = isStopOrderType(command.type);
+    const postOnly = command.postOnly === true || (command.postOnly as unknown) === "true";
+    const riskDecision = await this.riskClient.validateSpotOrder({
+      userId: command.userId,
+      accountId: command.accountId,
+      market: command.market,
+      side: command.side,
+      type: command.type,
+      timeInForce: command.timeInForce,
+      price: command.price,
+      quantity: command.quantity,
+      ...(postOnly ? { postOnly: true } : {}),
+      ...(command.stpMode ? { stpMode: command.stpMode } : {}),
+      ...(command.triggerPrice ? { triggerPrice: command.triggerPrice } : {})
+    });
+
+    const createdAt = this.now().toISOString();
+    const orderId = this.createId();
+    const order: SpotOrderRecord = {
+      orderId,
+      idempotencyKey: command.idempotencyKey,
+      traceId: command.traceId ?? `spot_order:${orderId}`,
+      otelTraceId: currentTraceId(),
+      userId: command.userId,
+      accountId: command.accountId,
+      market: command.market,
+      side: command.side,
+      type: command.type,
+      timeInForce: riskDecision.timeInForce,
+      price: command.price ?? "0",
+      quantity: command.quantity,
+      filledQuantity: "0",
+      restingQuantity: "0",
+      // Stop orders keep their funds frozen while they wait for the trigger.
+      status: isStop ? "pending_trigger" : "pending_risk",
+      lockAssetCode: riskDecision.lockAssetCode,
+      lockAmount: riskDecision.lockAmount,
+      createdAt,
+      updatedAt: createdAt,
+      ...(postOnly ? { postOnly: true } : {}),
+      ...(command.stpMode ? { stpMode: command.stpMode } : {}),
+      ...(isStop && command.triggerPrice ? { triggerPrice: command.triggerPrice } : {})
+    };
+
+    await this.repository.saveOrder(order);
+
+    try {
+      await this.ledgerClient.freezeBalance({
+        accountId: command.accountId,
+        assetCode: riskDecision.lockAssetCode,
+        amount: riskDecision.lockAmount,
+        referenceType: "spot_order",
+        referenceId: orderId
+      });
+    } catch (error) {
+      // The order row already exists; never leave it stuck in pending_risk.
+      await this.rejectBeforeMatching(order, ORDER_FREEZE_FAILED, error);
+      throw buildPreMatchingError(order, ORDER_FREEZE_FAILED, error);
+    }
+
+    if (isStop) {
+      await this.publishOrderEvent("order.updated", order);
+      return order;
+    }
+
+    return this.executeOrder(order);
+  }
+
+  /**
+   * Stop orders: hands every pending_trigger order of `market` whose trigger
+   * the last trade price has crossed (buy: last >= trigger, sell: last <=
+   * trigger) to the matching engine. The pending_trigger -> pending_risk
+   * transition is a compare-and-set, so concurrent workers or a restart never
+   * submit the same order twice, and a cancel that won the race is respected.
+   */
+  async triggerStopOrders(
+    market: SpotMarket,
+    lastPrice?: string
+  ): Promise<{
+    market: SpotMarket;
+    lastPrice?: string;
+    triggeredOrderIds: string[];
+    heldReason?: StopTriggerHoldReason;
+  }> {
+    const pending = await this.repository.listOrders({
+      market,
+      status: "pending_trigger",
+      limit: 200,
+      offset: 0
+    });
+    if (pending.length === 0) {
+      return { market, lastPrice, triggeredOrderIds: [] };
+    }
+
+    const price = lastPrice ?? (await this.repository.findLatestTrade(market))?.price;
+    if (!price) {
+      return { market, triggeredOrderIds: [] };
+    }
+
+    const crossed = selectTriggeredStopOrders(pending, price);
+    if (crossed.length > 0 && this.stopTriggerGate) {
+      // Halted market / API write freeze: keep the orders pending_trigger
+      // (funds stay frozen) and fire them on the first tick after it clears.
+      const gate = await this.stopTriggerGate.check(market);
+      if (gate.hold) {
+        return { market, lastPrice: price, triggeredOrderIds: [], heldReason: gate.reason };
+      }
+    }
+
+    const triggeredOrderIds: string[] = [];
+    for (const order of crossed) {
+      const triggeredAt = this.now().toISOString();
+      const claimed: SpotOrderRecord = {
+        ...order,
+        status: "pending_risk",
+        triggeredAt,
+        updatedAt: triggeredAt
+      };
+      if (!(await this.repository.saveOrderIfStatus(claimed, "pending_trigger"))) {
+        continue;
+      }
+      triggeredOrderIds.push(order.orderId);
+      try {
+        await this.executeOrder(claimed);
+      } catch (error) {
+        // executeOrder already rejected the order and released its funds.
+        console.warn(`stop order ${order.orderId} trigger failed: ${readErrorMessage(error)}`);
+      }
+    }
+
+    return { market, lastPrice: price, triggeredOrderIds };
+  }
+
+  /** Submits a persisted, funded order to the matching engine and applies the outcome. */
+  private async executeOrder(order: SpotOrderRecord): Promise<SpotOrderRecord> {
+    let compensationRequired = false;
+
+    try {
+      const engineType = engineOrderType(order.type);
+      const engineResult = await this.matchingEngineClient.submitOrder({
+        orderId: order.orderId,
+        market: order.market,
+        side: order.side,
+        type: engineType,
+        timeInForce: order.timeInForce,
+        price: engineType === "limit" || compareAmounts(order.price, "0") > 0 ? order.price : undefined,
+        quantity: order.quantity,
+        createdAt: bookTimeOf(order),
+        ownerId: order.accountId,
+        ...(order.stpMode ? { stpMode: order.stpMode } : {}),
+        ...(order.postOnly ? { postOnly: true } : {})
+      });
+
+      if (engineResult.expiredMakers?.length) {
+        await this.expireSelfTradeMakers(engineResult.expiredMakers);
+      }
+
+      if (engineResult.outcome === "resting") {
+        const acceptedOrder = {
+          ...order,
+          restingQuantity: order.quantity,
+          status: "accepted" as const,
+          updatedAt: this.now().toISOString()
+        };
+        await this.repository.saveOrder(acceptedOrder);
+        await this.publishOrderEvent("order.accepted", acceptedOrder);
+        return acceptedOrder;
+      }
+
+      if (engineResult.outcome === "cancelled" || engineResult.trades.length === 0) {
+        await this.ledgerClient.releaseBalance({
+          accountId: order.accountId,
+          assetCode: order.lockAssetCode,
+          referenceType: "spot_order",
+          referenceId: order.orderId
+        });
+
+        const rejectedOrder: SpotOrderRecord = {
+          ...order,
+          status: "rejected",
+          restingQuantity: "0",
+          rejectedReason:
+            engineResult.reason ??
+            `${order.type}:${order.timeInForce} could not find executable liquidity`,
+          updatedAt: this.now().toISOString()
+        };
+        await this.repository.saveOrder(rejectedOrder);
+        await this.publishOrderEvent("order.rejected", rejectedOrder);
+        return rejectedOrder;
+      }
+
+      compensationRequired = true;
+      const makerOrders = await this.loadMakerOrders(engineResult);
+      const feeTiers = await this.resolveFeeTiers(order, makerOrders);
+      const recoveryPlan = this.buildRecoveryPlan(order, engineResult, makerOrders, feeTiers);
+      await this.repository.saveRecoveryJob(this.createRecoveryJob(recoveryPlan));
+
+      try {
+        const takerNextOrder = await this.executeRecoveryPlan(recoveryPlan);
+        compensationRequired = false;
+        await this.completeRecoveryJob(recoveryPlan.jobId);
+        return takerNextOrder;
+      } catch (error) {
+        await this.failRecoveryJob(recoveryPlan, error, 1);
+        compensationRequired = false;
+        return this.markOrderRecoveryPending(order, recoveryPlan.jobId, error);
+      }
+    } catch (error) {
+      if (compensationRequired) {
+        await this.compensateByReplayingBook(order.market);
+      }
+
+      await this.rejectBeforeMatching(order, null, error);
+
+      throw error;
+    }
+  }
+
+  /**
+   * Moves an order that never reached a durable matching outcome to the terminal
+   * `rejected` state: best-effort release of whatever was frozen for it, persist
+   * the rejection with a reason code and publish `order.rejected`. A failing
+   * release does not keep the order open; the leftover lock is visible on the
+   * ledger (reference spot_order/<orderId>) and the reason says so.
+   */
+  private async rejectBeforeMatching(
+    order: SpotOrderRecord,
+    reasonCode: string | null,
+    error: unknown
+  ): Promise<SpotOrderRecord> {
+    let releaseNote = "";
+    try {
+      await this.ledgerClient.releaseBalance({
+        accountId: order.accountId,
+        assetCode: order.lockAssetCode,
+        referenceType: "spot_order",
+        referenceId: order.orderId
+      });
+    } catch (releaseError) {
+      // A freeze that failed usually left no lock (BALANCE_LOCK_NOT_FOUND), so
+      // only surface release failures for orders that did freeze funds.
+      if (reasonCode !== ORDER_FREEZE_FAILED) {
+        releaseNote = ` (lock release failed: ${readErrorMessage(releaseError)})`;
+      }
+    }
+
+    const message = readErrorMessage(error);
+    const rejectedOrder: SpotOrderRecord = {
+      ...order,
+      status: "rejected",
+      restingQuantity: "0",
+      rejectedReason: `${reasonCode ? `${reasonCode}: ` : ""}${message}${releaseNote}`,
+      updatedAt: this.now().toISOString()
+    };
+    await this.repository.saveOrder(rejectedOrder);
+    await this.publishOrderEvent("order.rejected", rejectedOrder);
+    return rejectedOrder;
+  }
+
+  /**
+   * Self-trade prevention (expire_maker / expire_both) removed these resting
+   * orders from the engine book: close them like a cancel and release the
+   * funds backing the removed quantity through the normal ledger path.
+   */
+  private async expireSelfTradeMakers(
+    expiredMakers: NonNullable<Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>["expiredMakers"]>
+  ): Promise<void> {
+    for (const expired of expiredMakers) {
+      try {
+        const maker = await this.repository.findOrderById(expired.orderId);
+        if (!maker || !this.isOrderOpen(maker)) {
+          continue;
+        }
+
+        const releaseAmount = this.calculateDesiredRemainingLock({
+          ...maker,
+          restingQuantity: this.normalizeQuantity(maker.market, expired.quantity)
+        });
+        const cancelledAt = this.now().toISOString();
+        const expiredOrder: SpotOrderRecord = {
+          ...maker,
+          restingQuantity: "0",
+          status: "cancelled",
+          rejectedReason: expired.reason,
+          cancelledAt,
+          updatedAt: cancelledAt
+        };
+        await this.repository.saveOrder(expiredOrder);
+        if (compareAmounts(releaseAmount, "0") > 0) {
+          await this.ledgerClient.releaseBalance({
+            accountId: maker.accountId,
+            assetCode: maker.lockAssetCode,
+            referenceType: "spot_order",
+            referenceId: maker.orderId,
+            amount: releaseAmount
+          });
+        }
+        await this.publishOrderEvent("order.cancelled", expiredOrder);
+      } catch (error) {
+        console.warn(`self-trade expiry of order ${expired.orderId} failed: ${readErrorMessage(error)}`);
+      }
+    }
+  }
+
+  async cancelOrder(command: CancelSpotOrderCommand): Promise<SpotOrderRecord> {
+    const order = await this.repository.findOrderById(command.orderId);
+    if (!order || order.userId !== command.userId) {
+      throw new OrderServiceError("ORDER_NOT_FOUND", 404, `Order ${command.orderId} not found`);
+    }
+
+    if (order.status === "pending_trigger") {
+      const cancelled = await this.cancelPendingStopOrder(order);
+      if (cancelled) {
+        return cancelled;
+      }
+      // Lost the race against the trigger: cancel whatever it became.
+      return this.cancelOrder(command);
+    }
+
+    if (!this.isOrderOpen(order)) {
+      if (order.status === "filled" || order.status === "cancelled" || order.status === "rejected") {
+        return order;
+      }
+
+      throw new OrderServiceError(
+        "ORDER_NOT_CANCELLABLE",
+        400,
+        `Order ${command.orderId} is ${order.status} and cannot be cancelled`
+      );
+    }
+
+    const cancelResult = await this.matchingEngineClient.cancelOrder({
+      orderId: order.orderId,
+      market: order.market
+    });
+    if (cancelResult.outcome === "not_found") {
+      throw new OrderServiceError(
+        "MATCHING_ENGINE_ORDER_NOT_FOUND",
+        409,
+        `Order ${order.orderId} is not present in matching engine`
+      );
+    }
+
+    // Release only the funds backing the quantity that was actually removed
+    // from the book. Fills that were matched but are still waiting for async
+    // settlement keep their share of the lock; releasing the whole lock here
+    // made those settlements fail with INVALID_BALANCE_LOCK_STATE.
+    const cancelledQuantity = this.normalizeQuantity(
+      order.market,
+      cancelResult.cancelledQuantity ?? order.restingQuantity
+    );
+    const releaseAmount = this.calculateDesiredRemainingLock({
+      ...order,
+      restingQuantity: cancelledQuantity
+    });
+    if (compareAmounts(releaseAmount, "0") > 0) {
+      await this.ledgerClient.releaseBalance({
+        accountId: order.accountId,
+        assetCode: order.lockAssetCode,
+        referenceType: "spot_order",
+        referenceId: order.orderId,
+        amount: releaseAmount
+      });
+    }
+
+    const cancelledAt = this.now().toISOString();
+    const cancelledOrder: SpotOrderRecord = {
+      ...order,
+      restingQuantity: "0",
+      status: "cancelled",
+      cancelledAt,
+      updatedAt: cancelledAt
+    };
+    await this.repository.saveOrder(cancelledOrder);
+    await this.publishOrderEvent("order.cancelled", cancelledOrder);
+    return cancelledOrder;
+  }
+
+  /** Untriggered stop orders never reached the engine: release the whole freeze. */
+  private async cancelPendingStopOrder(order: SpotOrderRecord): Promise<SpotOrderRecord | null> {
+    const cancelledAt = this.now().toISOString();
+    const cancelledOrder: SpotOrderRecord = {
+      ...order,
+      restingQuantity: "0",
+      status: "cancelled",
+      cancelledAt,
+      updatedAt: cancelledAt
+    };
+    if (!(await this.repository.saveOrderIfStatus(cancelledOrder, "pending_trigger"))) {
+      return null;
+    }
+
+    await this.ledgerClient.releaseBalance({
+      accountId: order.accountId,
+      assetCode: order.lockAssetCode,
+      referenceType: "spot_order",
+      referenceId: order.orderId
+    });
+    await this.publishOrderEvent("order.cancelled", cancelledOrder);
+    return cancelledOrder;
+  }
+
+  async getOrder(orderId: string): Promise<SpotOrderRecord | null> {
+    return this.repository.findOrderById(orderId);
+  }
+
+  async listOrders(query: ListSpotOrdersQuery): Promise<SpotOrderRecord[]> {
+    return this.repository.listOrders(query);
+  }
+
+  async listTrades(query: ListSpotTradesQuery): Promise<SpotTradeRecord[]> {
+    return this.repository.listTrades(query);
+  }
+
+  async getTrade(tradeId: string): Promise<SpotTradeRecord | null> {
+    return this.repository.findTradeById(tradeId);
+  }
+
+  async listTradeEvents(query: ListSpotTradesQuery): Promise<TradingEvent[]> {
+    const trades = await this.repository.listTrades(query);
+    return trades
+      .sort((left, right) => left.executionSequence - right.executionSequence)
+      .map((trade) => this.createTradeEvent(trade));
+  }
+
+  async acknowledgeTradeSettlement(command: {
+    tradeId: string;
+    settlementId: string;
+  }): Promise<SpotTradeRecord | null> {
+    const previous = await this.repository.findTradeById(command.tradeId);
+    const trade = await this.repository.updateTradeSettlement({
+      tradeId: command.tradeId,
+      settlementId: command.settlementId,
+      settlementUpdatedAt: this.now().toISOString()
+    });
+    // trade.executed reaches the gateway before asynchronous settlement posts
+    // the ledger entries; this second event lets it push the settled balances.
+    // Re-acks of replayed stream entries are skipped.
+    if (trade && previous?.settlementId !== command.settlementId) {
+      await this.publishSafely([this.createTradeSettledEvent(trade, command.settlementId)]);
+    }
+    return trade;
+  }
+
+  async listAutomationExecutions(
+    query: ListSpotOrderAutomationExecutionsQuery
+  ): Promise<SpotOrderAutomationExecution[]> {
+    return this.repository.listAutomationExecutions(query);
+  }
+
+  async listRecoveryJobs(
+    query: ListSpotOrderRecoveryJobsQuery
+  ): Promise<SpotOrderRecoveryJob[]> {
+    return this.repository.listRecoveryJobs(query);
+  }
+
+  async listDeadLetterRecoveryJobs(
+    query: Omit<ListSpotOrderRecoveryJobsQuery, "deadLettered">
+  ): Promise<SpotOrderRecoveryJob[]> {
+    return this.repository.listRecoveryJobs({
+      ...query,
+      deadLettered: true
+    });
+  }
+
+  async getRecoveryMetrics(): Promise<SpotOrderRecoveryMetrics> {
+    return this.repository.getRecoveryMetrics(this.now().toISOString());
+  }
+
+  async claimRecoveryJobs(
+    limit = 20,
+    workerId = this.createRecoveryWorkerId("worker")
+  ): Promise<SpotOrderRecoveryJob[]> {
+    const now = this.now();
+    return this.repository.claimRecoveryJobs({
+      workerId,
+      now: now.toISOString(),
+      leaseExpiresAt: new Date(now.getTime() + this.recoveryLeaseMs).toISOString(),
+      limit: Math.max(limit, 1)
+    });
+  }
+
+  async renewRecoveryLease(jobId: string, workerId: string): Promise<SpotOrderRecoveryJob> {
+    const now = this.now();
+    const renewed = await this.repository.renewRecoveryJobLease({
+      jobId,
+      workerId,
+      heartbeatAt: now.toISOString(),
+      leaseExpiresAt: new Date(now.getTime() + this.recoveryLeaseMs).toISOString()
+    });
+
+    if (!renewed) {
+      throw new OrderServiceError(
+        "RECOVERY_JOB_LEASE_NOT_HELD",
+        409,
+        `Recovery job ${jobId} is not currently leased by ${workerId}`
+      );
+    }
+
+    return renewed;
+  }
+
+  async recoverOrder(jobId: string, workerId = this.createRecoveryWorkerId("manual")): Promise<SpotOrderRecoveryJob> {
+    const job = await this.repository.findRecoveryJobById(jobId);
+    if (!job) {
+      throw new OrderServiceError("RECOVERY_JOB_NOT_FOUND", 404, `Recovery job ${jobId} not found`);
+    }
+
+    if (job.status === "completed") {
+      return job;
+    }
+
+    const claimed = await this.repository.claimRecoveryJob({
+      jobId,
+      workerId,
+      now: this.now().toISOString(),
+      leaseExpiresAt: new Date(this.now().getTime() + this.recoveryLeaseMs).toISOString(),
+      allowedStatuses: ["pending", "failed"]
+    });
+    if (!claimed) {
+      throw new OrderServiceError(
+        "RECOVERY_JOB_NOT_AVAILABLE",
+        409,
+        `Recovery job ${jobId} is currently leased or not recoverable`
+      );
+    }
+
+    return this.processClaimedRecoveryJob(claimed.jobId, workerId);
+  }
+
+  async processClaimedRecoveryJob(
+    jobId: string,
+    workerId: string
+  ): Promise<SpotOrderRecoveryJob> {
+    const job = await this.repository.findRecoveryJobById(jobId);
+    if (!job) {
+      throw new OrderServiceError("RECOVERY_JOB_NOT_FOUND", 404, `Recovery job ${jobId} not found`);
+    }
+
+    if (job.status !== "processing" || job.leaseOwner !== workerId) {
+      throw new OrderServiceError(
+        "RECOVERY_JOB_LEASE_NOT_HELD",
+        409,
+        `Recovery job ${jobId} is not currently leased by ${workerId}`
+      );
+    }
+
+    return this.recoverClaimedJob(job, workerId);
+  }
+
+  async requeueDeadLetterJob(jobId: string): Promise<SpotOrderRecoveryJob> {
+    const job = await this.repository.findRecoveryJobById(jobId);
+    if (!job) {
+      throw new OrderServiceError("RECOVERY_JOB_NOT_FOUND", 404, `Recovery job ${jobId} not found`);
+    }
+
+    if (!job.deadLetteredAt) {
+      throw new OrderServiceError(
+        "RECOVERY_JOB_NOT_DEAD_LETTERED",
+        409,
+        `Recovery job ${jobId} is not dead-lettered`
+      );
+    }
+
+    const requeued: SpotOrderRecoveryJob = {
+      ...job,
+      status: "pending",
+      updatedAt: this.now().toISOString(),
+      nextAttemptAt: this.now().toISOString(),
+      completedAt: undefined,
+      leaseOwner: undefined,
+      leaseExpiresAt: undefined,
+      leaseHeartbeatAt: undefined,
+      deadLetteredAt: undefined,
+      lastResult: "failed"
+    };
+    await this.repository.saveRecoveryJob(requeued);
+    return requeued;
+  }
+
+  async batchRequeueDeadLetterJobs(query: {
+    market?: SpotOrderRecord["market"];
+    limit?: number;
+  }): Promise<{ requeuedCount: number; jobIds: string[] }> {
+    const jobs = await this.listDeadLetterRecoveryJobs({
+      market: query.market,
+      status: "failed",
+      limit: Math.max(query.limit ?? 20, 1),
+      offset: 0
+    });
+    const jobIds: string[] = [];
+
+    for (const job of jobs) {
+      await this.requeueDeadLetterJob(job.jobId);
+      jobIds.push(job.jobId);
+    }
+
+    return {
+      requeuedCount: jobIds.length,
+      jobIds
+    };
+  }
+
+  async recoverPendingOrders(limit = 20, workerId = this.createRecoveryWorkerId("worker")): Promise<{
+    workerId: string;
+    claimedCount: number;
+    processedCount: number;
+    completedCount: number;
+    failedCount: number;
+    deadLetteredCount: number;
+    jobIds: string[];
+  }> {
+    const claimedJobs = await this.claimRecoveryJobs(limit, workerId);
+
+    let completedCount = 0;
+    let failedCount = 0;
+    let deadLetteredCount = 0;
+    for (const job of claimedJobs) {
+      const result = await this.processClaimedRecoveryJob(job.jobId, workerId);
+      if (result.status === "completed") {
+        completedCount += 1;
+      } else {
+        failedCount += 1;
+        if (result.deadLetteredAt) {
+          deadLetteredCount += 1;
+        }
+      }
+    }
+
+    return {
+      workerId,
+      claimedCount: claimedJobs.length,
+      processedCount: claimedJobs.length,
+      completedCount,
+      failedCount,
+      deadLetteredCount,
+      jobIds: claimedJobs.map((job) => job.jobId)
+    };
+  }
+
+  private buildTrade(
+    takerOrder: SpotOrderRecord,
+    makerOrder: SpotOrderRecord,
+    match: Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>["trades"][number],
+    feeTiers: Map<string, UserFeeTier> = new Map()
+  ): SpotTradeRecord {
+    const buyerOrder = takerOrder.side === "buy" ? takerOrder : makerOrder;
+    const sellerOrder = takerOrder.side === "sell" ? takerOrder : makerOrder;
+    const price = this.normalizePrice(takerOrder.market, match.price);
+    const quantity = this.normalizeQuantity(takerOrder.market, match.quantity);
+    const sellerLiquidity = makerOrder.orderId === sellerOrder.orderId ? "maker" : "taker";
+    const buyerLiquidity = makerOrder.orderId === buyerOrder.orderId ? "maker" : "taker";
+    const sellerTier = feeTiers.get(sellerOrder.userId);
+    const buyerTier = feeTiers.get(buyerOrder.userId);
+
+    return {
+      tradeId: createStableUuid(`trade:${match.executionId}`),
+      market: takerOrder.market,
+      price,
+      quantity,
+      makerOrderId: makerOrder.orderId,
+      takerOrderId: takerOrder.orderId,
+      buyerOrderId: buyerOrder.orderId,
+      sellerOrderId: sellerOrder.orderId,
+      buyerUserId: buyerOrder.userId,
+      sellerUserId: sellerOrder.userId,
+      buyerAccountId: buyerOrder.accountId,
+      sellerAccountId: sellerOrder.accountId,
+      // Maker / taker rate per side, from each user's VIP tier (min(tier,
+      // market)); each side pays in the asset it receives. Rate and tier are
+      // recorded so settlement / replay never re-resolve them.
+      sellerFeeRate: this.resolveFeeRate(takerOrder.market, sellerLiquidity, sellerTier),
+      buyerFeeRate: this.resolveFeeRate(takerOrder.market, buyerLiquidity, buyerTier),
+      ...(sellerTier ? { sellerFeeTier: sellerTier.tier } : {}),
+      ...(buyerTier ? { buyerFeeTier: buyerTier.tier } : {}),
+      executionId: match.executionId,
+      executionBatchId: match.executionBatchId,
+      executionSequence: match.executionSequence,
+      executionBatchSequence: match.executionBatchSequence,
+      replayCursor: match.replayCursor,
+      protocolVersion: match.protocolVersion,
+      settlementId: "pending",
+      executedAt: match.executedAt
+    };
+  }
+
+  private buildRecoveryPlan(
+    takerOrder: SpotOrderRecord,
+    result: Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>,
+    makerOrders: Map<string, SpotOrderRecord>,
+    feeTiers: Map<string, UserFeeTier> = new Map()
+  ): RecoveryPlan {
+    const normalizedResult = this.normalizeMatchingResult(takerOrder.market, result);
+    const updatedAt = this.now().toISOString();
+    const tradePlans = normalizedResult.trades.map((match) => {
+      const makerOrder = makerOrders.get(match.makerOrderId);
+      if (!makerOrder) {
+        throw new OrderServiceError(
+          "MAKER_ORDER_NOT_FOUND",
+          500,
+          `Maker order ${match.makerOrderId} not found in repository`
+        );
+      }
+
+      const trade = this.buildTrade(takerOrder, makerOrder, match, feeTiers);
+      return {
+        trade,
+        makerNextOrder: this.buildMakerOrderAfterTrade(
+          makerOrder,
+          match.quantity,
+          match.makerRemainingQuantity,
+          updatedAt
+        )
+      };
+    });
+
+    const makerNextOrders = new Map<string, SpotOrderRecord>();
+    for (const item of tradePlans) {
+      makerNextOrders.set(item.makerNextOrder.orderId, item.makerNextOrder);
+    }
+
+    const takerNextOrder = this.buildTakerOrderAfterTrades(takerOrder, normalizedResult, updatedAt);
+    const releaseAmount = this.calculateResidualReleaseAmount(
+      takerOrder,
+      takerNextOrder,
+      tradePlans.map((item) => item.trade)
+    );
+
+    return {
+      jobId: this.createId(),
+      stage: "persist_matched_outcome",
+      originalOrder: takerOrder,
+      takerNextOrder,
+      makerNextOrders: [...makerNextOrders.values()],
+      trades: tradePlans.map((item) => item.trade),
+      releaseAmount
+    };
+  }
+
+  private buildMakerOrderAfterTrade(
+    makerOrder: SpotOrderRecord,
+    fillQuantity: string,
+    remainingQuantity: string,
+    updatedAt: string
+  ): SpotOrderRecord {
+    const normalizedFillQuantity = this.normalizeQuantity(makerOrder.market, fillQuantity);
+    const normalizedRemainingQuantity = this.normalizeQuantity(makerOrder.market, remainingQuantity);
+    const filledQuantity = this.normalizeQuantity(
+      makerOrder.market,
+      addAmounts(makerOrder.filledQuantity, normalizedFillQuantity)
+    );
+    return {
+      ...makerOrder,
+      filledQuantity,
+      restingQuantity: normalizedRemainingQuantity,
+      status: this.isZeroAmount(normalizedRemainingQuantity) ? "filled" : "partially_filled",
+      updatedAt
+    };
+  }
+
+  private buildTakerOrderAfterTrades(
+    takerOrder: SpotOrderRecord,
+    result: Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>,
+    updatedAt: string
+  ): SpotOrderRecord {
+    const matchedQuantity = this.normalizeQuantity(
+      takerOrder.market,
+      this.sumTradeQuantities(result.trades)
+    );
+    const filledQuantity = this.normalizeQuantity(
+      takerOrder.market,
+      addAmounts(takerOrder.filledQuantity, matchedQuantity)
+    );
+    const restingQuantity =
+      result.takerStatus === "resting"
+        ? this.normalizeQuantity(
+            takerOrder.market,
+            result.takerRemainingQuantity ?? subtractAmounts(takerOrder.quantity, filledQuantity)
+          )
+        : "0";
+
+    let status: SpotOrderRecord["status"];
+    let cancelledAt: string | undefined;
+    let rejectedReason: string | undefined;
+
+    if (result.takerStatus === "resting") {
+      status = compareAmounts(filledQuantity, "0") > 0 ? "partially_filled" : "accepted";
+    } else if (compareAmounts(filledQuantity, takerOrder.quantity) === 0) {
+      status = "filled";
+    } else if (compareAmounts(filledQuantity, "0") > 0) {
+      status = "cancelled";
+      cancelledAt = updatedAt;
+      // e.g. stp_expired_taker: the unfilled rest was expired by the engine.
+      rejectedReason = result.reason;
+    } else {
+      status = "rejected";
+      rejectedReason = result.reason ?? "Order was cancelled by matching engine";
+    }
+
+    return {
+      ...takerOrder,
+      filledQuantity,
+      restingQuantity,
+      status,
+      cancelledAt,
+      rejectedReason,
+      updatedAt
+    };
+  }
+
+  private calculateResidualReleaseAmount(
+    originalOrder: SpotOrderRecord,
+    updatedOrder: SpotOrderRecord,
+    trades: SpotTradeRecord[]
+  ): string {
+    const desiredRemainingLock = this.calculateDesiredRemainingLock(updatedOrder);
+    const consumedAmount = this.calculateConsumedLockAmount(updatedOrder, trades);
+    const currentRemainingLock = subtractAmounts(originalOrder.lockAmount, consumedAmount);
+
+    if (compareAmounts(currentRemainingLock, desiredRemainingLock) <= 0) {
+      return "0";
+    }
+
+    return subtractAmounts(currentRemainingLock, desiredRemainingLock);
+  }
+
+  private calculateDesiredRemainingLock(order: SpotOrderRecord): string {
+    if (this.isZeroAmount(order.restingQuantity)) {
+      return "0";
+    }
+
+    if (order.side === "sell") {
+      return order.restingQuantity;
+    }
+
+    return multiplyAmounts(order.price, order.restingQuantity);
+  }
+
+  private calculateConsumedLockAmount(order: SpotOrderRecord, trades: SpotTradeRecord[]): string {
+    if (order.side === "sell") {
+      return trades.reduce((total, trade) => addAmounts(total, trade.quantity), "0");
+    }
+
+    return trades.reduce(
+      (total, trade) => addAmounts(total, multiplyAmounts(trade.price, trade.quantity)),
+      "0"
+    );
+  }
+
+  private normalizeMatchingResult(
+    market: SpotMarket,
+    result: Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>
+  ): Awaited<ReturnType<MatchingEngineClient["submitOrder"]>> {
+    return {
+      ...result,
+      takerRemainingQuantity:
+        result.takerRemainingQuantity === undefined
+          ? undefined
+          : this.normalizeQuantity(market, result.takerRemainingQuantity),
+      trades: result.trades.map((trade) => ({
+        ...trade,
+        price: this.normalizePrice(market, trade.price),
+        quantity: this.normalizeQuantity(market, trade.quantity),
+        makerRemainingQuantity: this.normalizeQuantity(market, trade.makerRemainingQuantity)
+      }))
+    };
+  }
+
+  private normalizePrice(market: SpotMarket, amount: string): string {
+    return roundAmountToStep(amount, this.getMarketDefinition(market).priceStep);
+  }
+
+  private normalizeQuantity(market: SpotMarket, amount: string): string {
+    return roundAmountToStep(amount, this.getMarketDefinition(market).quantityStep);
+  }
+
+  private getMarketDefinition(market: SpotMarket): SpotMarketDefinition {
+    const definition = getSpotMarketDefinition(market);
+    if (!definition) {
+      throw new OrderServiceError("UNSUPPORTED_MARKET", 400, `Market ${market} is not supported`);
+    }
+
+    return definition;
+  }
+
+  private isOrderOpen(order: SpotOrderRecord): boolean {
+    return (
+      (order.status === "accepted" || order.status === "partially_filled") &&
+      compareAmounts(order.restingQuantity, "0") > 0
+    );
+  }
+
+  private isZeroAmount(amount: string): boolean {
+    return compareAmounts(amount, "0") === 0;
+  }
+
+  private resolveFeeRate(
+    market: SpotMarket,
+    liquidity: "maker" | "taker",
+    tier: UserFeeTier | undefined
+  ): string {
+    const definition = getSpotMarketDefinition(market);
+    if (!definition) {
+      throw new OrderServiceError("UNSUPPORTED_MARKET", 400, `Market ${market} is not supported`);
+    }
+
+    return effectiveFeeRate(tier, definition, liquidity);
+  }
+
+  /**
+   * Resolves the VIP tier of the taker and every maker before trades are built.
+   * Runs after the engine already matched, so a failure must not fail the
+   * order: fall back to the market default rates (no tier recorded).
+   */
+  private async resolveFeeTiers(
+    takerOrder: SpotOrderRecord,
+    makerOrders: Map<string, SpotOrderRecord>
+  ): Promise<Map<string, UserFeeTier>> {
+    if (!this.feeTierResolver) {
+      return new Map();
+    }
+    try {
+      return await this.feeTierResolver.resolveMany([
+        takerOrder.userId,
+        ...[...makerOrders.values()].map((order) => order.userId)
+      ]);
+    } catch (error) {
+      console.warn(`fee tier resolution failed, using market default rates: ${readErrorMessage(error)}`);
+      return new Map();
+    }
+  }
+
+  private async publishTradeEvents(
+    trades: SpotTradeRecord[],
+    makerOrders: SpotOrderRecord[],
+    takerOrder: SpotOrderRecord
+  ): Promise<void> {
+    const events: TradingEvent[] = [
+      ...makerOrders.map((makerOrder) =>
+        this.createOrderEvent(this.mapOrderEventType(makerOrder), makerOrder)
+      ),
+      this.createOrderEvent(this.mapOrderEventType(takerOrder), takerOrder),
+      ...trades.map((trade) => this.createTradeEvent(trade))
+    ];
+
+    await this.publishSafely(events);
+  }
+
+  private async publishOrderEvent(
+    eventType: TradingEvent["eventType"],
+    order: SpotOrderRecord
+  ): Promise<void> {
+    await this.publishSafely([this.createOrderEvent(eventType, order)]);
+  }
+
+  private async publishSafely(events: TradingEvent[]): Promise<void> {
+    const publishableEvents = events.filter((event) => {
+      if (event.eventType !== "trade.executed") {
+        return true;
+      }
+
+      try {
+        validateTradeExecutedEvent(event, this.tradeEventVersionGate);
+        return true;
+      } catch (error) {
+        console.warn(`order trade event validation failed: ${readErrorMessage(error)}`);
+        return false;
+      }
+    });
+
+    if (publishableEvents.length === 0) {
+      return;
+    }
+
+    try {
+      await this.eventPublisher.publish(publishableEvents);
+    } catch (error) {
+      console.warn(`order event publish failed: ${readErrorMessage(error)}`);
+    }
+  }
+
+  private createOrderEvent(
+    eventType: TradingEvent["eventType"],
+    order: SpotOrderRecord
+  ): TradingEvent {
+    return {
+      eventId: this.createId(),
+      eventType,
+      aggregateType: "spot_order",
+      aggregateId: order.orderId,
+      traceId: order.traceId,
+      occurredAt: this.now().toISOString(),
+      payload: {
+        market: order.market,
+        userIds: [order.userId],
+        order: this.toDomainOrder(order)
+      }
+    };
+  }
+
+  private createTradeEvent(trade: SpotTradeRecord): TradingEvent {
+    const schema = getTradeExecutedEventSchema(trade.protocolVersion);
+    return {
+      eventId: trade.executionId,
+      eventType: "trade.executed",
+      aggregateType: "spot_trade",
+      aggregateId: trade.tradeId,
+      traceId: `execution:${trade.executionId}`,
+      occurredAt: trade.executedAt,
+      schemaId: schema?.schemaId,
+      schemaVersion: schema?.schemaVersion,
+      payload: {
+        market: trade.market,
+        userIds: [trade.buyerUserId, trade.sellerUserId],
+        trade: this.toDomainTrade(trade)
+      }
+    };
+  }
+
+  private createTradeSettledEvent(trade: SpotTradeRecord, settlementId: string): TradingEvent {
+    return {
+      eventId: this.createId(),
+      eventType: "trade.settled",
+      aggregateType: "spot_trade",
+      aggregateId: trade.tradeId,
+      traceId: `settlement:${settlementId}`,
+      occurredAt: this.now().toISOString(),
+      payload: {
+        market: trade.market,
+        userIds: [trade.buyerUserId, trade.sellerUserId]
+      }
+    };
+  }
+
+  private mapOrderEventType(order: SpotOrderRecord): TradingEvent["eventType"] {
+    switch (order.status) {
+      case "accepted":
+        return "order.accepted";
+      case "cancelled":
+        return "order.cancelled";
+      case "rejected":
+        return "order.rejected";
+      default:
+        return "order.updated";
+    }
+  }
+
+  private toDomainOrder(order: SpotOrderRecord): Order {
+    return {
+      orderId: order.orderId,
+      userId: order.userId,
+      market: order.market,
+      side: order.side,
+      type: order.type,
+      price: engineOrderType(order.type) === "market" ? null : order.price,
+      quantity: order.quantity,
+      filledQuantity: order.filledQuantity,
+      restingQuantity: order.restingQuantity,
+      timeInForce: order.timeInForce,
+      status: order.status,
+      createdAt: order.createdAt,
+      ...(order.postOnly ? { postOnly: true } : {}),
+      ...(order.stpMode ? { stpMode: order.stpMode } : {}),
+      ...(order.triggerPrice ? { triggerPrice: order.triggerPrice } : {}),
+      ...(order.triggeredAt ? { triggeredAt: order.triggeredAt } : {}),
+      ...(order.rejectedReason ? { rejectedReason: order.rejectedReason } : {})
+    };
+  }
+
+  private toDomainTrade(trade: SpotTradeRecord): Trade {
+    return {
+      tradeId: trade.tradeId,
+      market: trade.market,
+      price: trade.price,
+      quantity: trade.quantity,
+      makerOrderId: trade.makerOrderId,
+      takerOrderId: trade.takerOrderId,
+      buyerOrderId: trade.buyerOrderId,
+      sellerOrderId: trade.sellerOrderId,
+      buyerUserId: trade.buyerUserId,
+      sellerUserId: trade.sellerUserId,
+      buyerAccountId: trade.buyerAccountId,
+      sellerAccountId: trade.sellerAccountId,
+      sellerFeeRate: trade.sellerFeeRate,
+      buyerFeeRate: trade.buyerFeeRate,
+      ...(trade.sellerFeeTier ? { sellerFeeTier: trade.sellerFeeTier } : {}),
+      ...(trade.buyerFeeTier ? { buyerFeeTier: trade.buyerFeeTier } : {}),
+      executedAt: trade.executedAt,
+      executionId: trade.executionId,
+      executionBatchId: trade.executionBatchId,
+      executionSequence: trade.executionSequence,
+      executionBatchSequence: trade.executionBatchSequence,
+      replayCursor: trade.replayCursor,
+      protocolVersion: trade.protocolVersion
+    };
+  }
+
+  private async loadMakerOrders(
+    result: Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>
+  ): Promise<Map<string, SpotOrderRecord>> {
+    const makerOrderIds = [...new Set(result.trades.map((trade) => trade.makerOrderId))];
+    const makerOrders = await Promise.all(
+      makerOrderIds.map(async (makerOrderId) => {
+        const makerOrder = await this.repository.findOrderById(makerOrderId);
+        return makerOrder ? [makerOrderId, makerOrder] : null;
+      })
+    );
+
+    return new Map(
+      makerOrders.filter((item): item is [string, SpotOrderRecord] => item !== null)
+    );
+  }
+
+  private sumTradeQuantities(
+    trades: Awaited<ReturnType<MatchingEngineClient["submitOrder"]>>["trades"]
+  ): string {
+    return trades.reduce((total, trade) => addAmounts(total, trade.quantity), "0");
+  }
+
+  private async persistMatchedOutcome(
+    makerNextOrders: SpotOrderRecord[],
+    takerNextOrder: SpotOrderRecord,
+    trades: SpotTradeRecord[]
+  ): Promise<void> {
+    let lastError: unknown;
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      try {
+        await this.repository.withTransaction(async (repository) => {
+          for (const makerNextOrder of makerNextOrders) {
+            await repository.saveOrder(makerNextOrder);
+          }
+          await repository.saveOrder(takerNextOrder);
+          for (const trade of trades) {
+            await repository.saveTrade(trade);
+          }
+        });
+        return;
+      } catch (error) {
+        lastError = error;
+      }
+    }
+
+    throw lastError instanceof Error ? lastError : new Error("failed to persist matched outcome");
+  }
+
+  private async executeRecoveryPlan(plan: RecoveryPlan): Promise<SpotOrderRecord> {
+    const trades =
+      this.settlementMode === "async"
+        ? plan.trades.map((trade) => ({
+            ...trade,
+            settlementId: createStableUuid(`pending-settlement:${trade.tradeId}`)
+          }))
+        : await Promise.all(
+            plan.trades.map(async (trade) => {
+              const settlement = await this.settlementClient.settleTrade({
+                tradeId: trade.tradeId,
+                market: trade.market,
+                price: trade.price,
+                quantity: trade.quantity,
+                buyerOrderId: trade.buyerOrderId,
+                sellerOrderId: trade.sellerOrderId,
+                buyerUserId: trade.buyerUserId,
+                sellerUserId: trade.sellerUserId,
+                buyerAccountId: trade.buyerAccountId,
+                sellerAccountId: trade.sellerAccountId,
+                sellerFeeRate: trade.sellerFeeRate,
+                buyerFeeRate: trade.buyerFeeRate,
+                sellerFeeTier: trade.sellerFeeTier,
+                buyerFeeTier: trade.buyerFeeTier,
+                executionId: trade.executionId,
+                executionBatchId: trade.executionBatchId,
+                executionSequence: trade.executionSequence,
+                executionBatchSequence: trade.executionBatchSequence,
+                replayCursor: trade.replayCursor,
+                protocolVersion: trade.protocolVersion,
+                traceId: plan.originalOrder.traceId
+              });
+
+              return {
+                ...trade,
+                settlementId: settlement.settlementId
+              };
+            })
+          );
+
+    await this.persistMatchedOutcome(plan.makerNextOrders, plan.takerNextOrder, trades);
+
+    if (compareAmounts(plan.releaseAmount, "0") > 0) {
+      await this.ledgerClient.releaseBalance({
+        accountId: plan.originalOrder.accountId,
+        assetCode: plan.originalOrder.lockAssetCode,
+        referenceType: "spot_order",
+        referenceId: plan.originalOrder.orderId,
+        amount: plan.releaseAmount
+      });
+    }
+
+    await this.publishTradeEvents(trades, plan.makerNextOrders, plan.takerNextOrder);
+    return plan.takerNextOrder;
+  }
+
+  private createRecoveryJob(plan: RecoveryPlan): SpotOrderRecoveryJob {
+    const now = this.now().toISOString();
+    return {
+      jobId: plan.jobId,
+      orderId: plan.originalOrder.orderId,
+      market: plan.originalOrder.market,
+      stage: plan.stage,
+      status: "pending",
+      payload: serializeRecoveryPlan(plan),
+      attemptCount: 0,
+      nextAttemptAt: now,
+      createdAt: now,
+      updatedAt: now
+    };
+  }
+
+  private async completeRecoveryJob(
+    jobId: string,
+    durationMs?: number
+  ): Promise<SpotOrderRecoveryJob> {
+    const existing = await this.repository.findRecoveryJobById(jobId);
+    if (!existing) {
+      throw new OrderServiceError("RECOVERY_JOB_NOT_FOUND", 404, `Recovery job ${jobId} not found`);
+    }
+
+    const completedAt = this.now().toISOString();
+    const completed: SpotOrderRecoveryJob = {
+      ...existing,
+      status: "completed",
+      updatedAt: completedAt,
+      completedAt,
+      nextAttemptAt: completedAt,
+      lastError: undefined,
+      leaseOwner: undefined,
+      leaseExpiresAt: undefined,
+      leaseHeartbeatAt: undefined,
+      deadLetteredAt: undefined,
+      lastDurationMs: durationMs,
+      lastResult: "completed"
+    };
+    await this.repository.saveRecoveryJob(completed);
+    return completed;
+  }
+
+  private async failRecoveryJob(
+    plan: RecoveryPlan,
+    error: unknown,
+    attemptCount?: number,
+    durationMs?: number
+  ): Promise<SpotOrderRecoveryJob> {
+    const existing = await this.repository.findRecoveryJobById(plan.jobId);
+    const attempts = attemptCount ?? (existing?.attemptCount ?? 0);
+    const updatedAt = this.now().toISOString();
+    const exceededMaxAttempts = attempts >= this.recoveryMaxAttempts;
+    const failedJob: SpotOrderRecoveryJob = {
+      ...(existing ?? this.createRecoveryJob(plan)),
+      status: exceededMaxAttempts ? "failed" : "pending",
+      attemptCount: attempts,
+      lastError: readErrorMessage(error),
+      updatedAt,
+      nextAttemptAt: exceededMaxAttempts
+        ? updatedAt
+        : new Date(this.now().getTime() + this.recoveryDelayMs * Math.max(attempts, 1)).toISOString(),
+      completedAt: exceededMaxAttempts ? updatedAt : existing?.completedAt,
+      leaseOwner: undefined,
+      leaseExpiresAt: undefined,
+      leaseHeartbeatAt: undefined,
+      deadLetteredAt: exceededMaxAttempts ? updatedAt : existing?.deadLetteredAt,
+      lastDurationMs: durationMs,
+      lastResult: exceededMaxAttempts ? "dead_lettered" : "failed"
+    };
+    await this.repository.saveRecoveryJob(failedJob);
+    await this.compensateByReplayingBook(plan.originalOrder.market);
+    if (exceededMaxAttempts) {
+      await this.markOrderRecoveryTerminalFailure(plan.originalOrder, failedJob.jobId, error);
+    }
+    return failedJob;
+  }
+
+  private async markOrderRecoveryPending(
+    order: SpotOrderRecord,
+    jobId: string,
+    error: unknown
+  ): Promise<SpotOrderRecord> {
+    const recoveryOrder: SpotOrderRecord = {
+      ...order,
+      status: "recovery_pending",
+      rejectedReason: `recovery_job:${jobId}:${readErrorMessage(error)}`,
+      updatedAt: this.now().toISOString()
+    };
+    await this.repository.saveOrder(recoveryOrder);
+    await this.publishOrderEvent("order.updated", recoveryOrder);
+    return recoveryOrder;
+  }
+
+  private async markOrderRecoveryTerminalFailure(
+    order: SpotOrderRecord,
+    jobId: string,
+    error: unknown
+  ): Promise<void> {
+    const failedOrder: SpotOrderRecord = {
+      ...order,
+      status: "recovery_pending",
+      rejectedReason: `recovery_failed:${jobId}:${readErrorMessage(error)}`,
+      updatedAt: this.now().toISOString()
+    };
+    await this.repository.saveOrder(failedOrder);
+    await this.publishOrderEvent("order.updated", failedOrder);
+  }
+
+  private readRecoveryPlan(job: SpotOrderRecoveryJob): RecoveryPlan {
+    return deserializeRecoveryPlan(job.payload);
+  }
+
+  private async recoverClaimedJob(
+    job: SpotOrderRecoveryJob,
+    workerId: string
+  ): Promise<SpotOrderRecoveryJob> {
+    if (job.leaseOwner !== workerId) {
+      throw new OrderServiceError(
+        "RECOVERY_JOB_LEASE_MISMATCH",
+        409,
+        `Recovery job ${job.jobId} is not leased by worker ${workerId}`
+      );
+    }
+
+    const recoveryPlan = this.readRecoveryPlan(job);
+
+    const startedAt = this.now().getTime();
+
+    try {
+      await this.executeRecoveryPlan(recoveryPlan);
+      return this.completeRecoveryJob(job.jobId, this.now().getTime() - startedAt);
+    } catch (error) {
+      return this.failRecoveryJob(
+        recoveryPlan,
+        error,
+        job.attemptCount,
+        this.now().getTime() - startedAt
+      );
+    }
+  }
+
+  private createRecoveryWorkerId(scope: "manual" | "worker"): string {
+    return `${scope}:${this.createId()}`;
+  }
+
+  private async compensateByReplayingBook(market: SpotMarket): Promise<void> {
+    const startedAt = this.now();
+    try {
+      const [acceptedOrders, partiallyFilledOrders] = await Promise.all([
+        this.repository.listOrders({ market, status: "accepted", limit: 500, offset: 0 }),
+        this.repository.listOrders({ market, status: "partially_filled", limit: 500, offset: 0 })
+      ]);
+
+      const openOrders = [...acceptedOrders, ...partiallyFilledOrders]
+        .filter((order) => compareAmounts(order.restingQuantity, "0") > 0)
+        .sort((left, right) => bookTimeOf(left).localeCompare(bookTimeOf(right)));
+
+      await this.matchingEngineClient.resetBook({ market });
+      for (const openOrder of openOrders) {
+        await this.matchingEngineClient.seedOrder({
+          orderId: openOrder.orderId,
+          market: openOrder.market,
+          side: openOrder.side,
+          price: openOrder.price,
+          quantity: openOrder.restingQuantity,
+          createdAt: bookTimeOf(openOrder),
+          ownerId: openOrder.accountId
+        });
+      }
+      await this.persistAutomationExecutionSafely({
+        executionType: "compensation_replay",
+        status: "succeeded",
+        trigger: "automatic",
+        market,
+        summary: {
+          replayedOrderCount: openOrders.length,
+          replayedOrderIds: openOrders.map((order) => order.orderId)
+        },
+        startedAt: startedAt.toISOString(),
+        completedAt: this.now().toISOString(),
+        durationMs: this.now().getTime() - startedAt.getTime()
+      });
+    } catch (error) {
+      await this.persistAutomationExecutionSafely({
+        executionType: "compensation_replay",
+        status: "failed",
+        trigger: "automatic",
+        market,
+        summary: {},
+        errorMessage: readErrorMessage(error),
+        startedAt: startedAt.toISOString(),
+        completedAt: this.now().toISOString(),
+        durationMs: this.now().getTime() - startedAt.getTime()
+      });
+      console.warn(
+        `order compensation replay failed for ${market}: ${readErrorMessage(error)}`
+      );
+    }
+  }
+
+  async recordAutomationExecution(
+    execution: Omit<SpotOrderAutomationExecution, "executionId"> & { executionId?: string }
+  ): Promise<SpotOrderAutomationExecution> {
+    const record: SpotOrderAutomationExecution = {
+      ...execution,
+      executionId: execution.executionId ?? this.createId()
+    };
+    await this.repository.saveAutomationExecution(record);
+    return record;
+  }
+
+  async persistAutomationExecutionSafely(
+    execution: Omit<SpotOrderAutomationExecution, "executionId"> & { executionId?: string }
+  ): Promise<void> {
+    try {
+      await this.recordAutomationExecution(execution);
+    } catch (error) {
+      console.warn(`order automation execution persistence failed: ${readErrorMessage(error)}`);
+    }
+  }
+}
+
+/**
+ * Time priority of an order in the book: a triggered stop order queues from
+ * the moment it was triggered, not from when it was placed.
+ */
+export function bookTimeOf(order: Pick<SpotOrderRecord, "createdAt" | "triggeredAt">): string {
+  return order.triggeredAt ?? order.createdAt;
+}
+
+function readErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : "unknown order error";
+}
+
+/** Reason code stored on orders rejected because the ledger freeze failed. */
+export const ORDER_FREEZE_FAILED = "ORDER_FREEZE_FAILED";
+
+function buildPreMatchingError(
+  order: SpotOrderRecord,
+  code: string,
+  error: unknown
+): OrderServiceError {
+  // Keep upstream 4xx (e.g. insufficient balance) as a client error; anything
+  // else means a dependency failed.
+  const upstreamStatus = error instanceof OrderServiceError ? error.statusCode : 0;
+  const statusCode = upstreamStatus >= 400 && upstreamStatus < 500 ? upstreamStatus : 502;
+  return new OrderServiceError(
+    code,
+    statusCode,
+    `Order ${order.orderId} rejected: balance freeze failed: ${readErrorMessage(error)}`
+  );
+}
+
+export function createStableUuid(value: string): string {
+  const hex = createHash("sha256").update(value).digest("hex");
+  const version = `5${hex.slice(13, 16)}`;
+  const variant = ((parseInt(hex[16] ?? "0", 16) & 0x3) | 0x8).toString(16);
+  return [
+    hex.slice(0, 8),
+    hex.slice(8, 12),
+    version,
+    `${variant}${hex.slice(17, 20)}`,
+    hex.slice(20, 32)
+  ].join("-");
+}
+
+function roundAmountToStep(amount: string, step: string): string {
+  const valueAtomic = toAtomicUnits(amount);
+  const stepAtomic = toAtomicUnits(step);
+  if (stepAtomic <= 0n) {
+    throw new Error("Step must be greater than zero");
+  }
+
+  const roundedAtomic = ((valueAtomic + stepAtomic / 2n) / stepAtomic) * stepAtomic;
+  return fromAtomicUnits(roundedAtomic);
+}
+
+function serializeRecoveryPlan(plan: RecoveryPlan): Record<string, unknown> {
+  return {
+    jobId: plan.jobId,
+    stage: plan.stage,
+    originalOrder: plan.originalOrder,
+    takerNextOrder: plan.takerNextOrder,
+    makerNextOrders: plan.makerNextOrders,
+    trades: plan.trades,
+    releaseAmount: plan.releaseAmount
+  };
+}
+
+function deserializeRecoveryPlan(payload: Record<string, unknown>): RecoveryPlan {
+  const record = payload as unknown as RecoveryPlan;
+  return {
+    jobId: record.jobId,
+    stage: record.stage,
+    originalOrder: record.originalOrder,
+    takerNextOrder: record.takerNextOrder,
+    makerNextOrders: record.makerNextOrders,
+    trades: record.trades,
+    releaseAmount: record.releaseAmount
+  };
+}
