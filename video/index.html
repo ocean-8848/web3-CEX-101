@@ -61,6 +61,41 @@
   #ppt .h span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #ppt iframe { flex: 1; width: 100%; border: 0; background: #000; }
 
+  /* 知识文档弹窗 */
+  #doc { position: fixed; inset: 0; z-index: 10; background: rgba(0, 0, 0, .72); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; padding: 20px; }
+  #doc.on { display: flex; }
+  .doc-box { width: min(980px, 100%); height: min(90vh, 100%); background: var(--panel); border: 1px solid var(--line); border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 80px rgba(0, 0, 0, .65); }
+  .doc-h { display: flex; gap: 8px; align-items: center; padding: 10px 14px; background: #121418; border-bottom: 1px solid var(--line); }
+  .doc-h #dt { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: 14px; color: var(--gold); }
+  #dback { display: none; }
+  #dbody { flex: 1; overflow: auto; padding: 28px 36px 48px; line-height: 1.75; font-size: 15px; }
+  #dbody h1 { font-family: "Songti SC", serif; font-size: 26px; margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--line); line-height: 1.35; }
+  #dbody h2 { font-size: 19px; margin: 28px 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--line); color: var(--gold); }
+  #dbody h3 { font-size: 16px; margin: 22px 0 8px; color: #f6e7c1; }
+  #dbody h4 { font-size: 15px; margin: 16px 0 6px; color: var(--text); }
+  #dbody p { margin: 10px 0; }
+  #dbody hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0; }
+  #dbody blockquote { margin: 14px 0; padding: 10px 16px; border-left: 3px solid var(--gold); background: rgba(240, 185, 11, .07); border-radius: 0 8px 8px 0; color: #e2dfd8; }
+  #dbody blockquote > :first-child { margin-top: 0; }
+  #dbody blockquote > :last-child { margin-bottom: 0; }
+  #dbody ul, #dbody ol { margin: 8px 0; padding-left: 22px; }
+  #dbody li { margin: 4px 0; }
+  #dbody code { font-family: Menlo, ui-monospace, SFMono-Regular, monospace; font-size: 13px; background: rgba(255, 255, 255, .07); padding: 1px 6px; border-radius: 5px; color: #f7d36b; }
+  #dbody pre { background: #0d0e10; border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; overflow: auto; margin: 14px 0; line-height: 1.55; }
+  #dbody pre code { background: none; padding: 0; color: var(--text); font-size: 13px; }
+  #dbody .tbl-wrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--line); border-radius: 8px; }
+  #dbody table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  #dbody th, #dbody td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  #dbody th { background: rgba(240, 185, 11, .09); color: var(--gold); font-weight: 600; white-space: nowrap; }
+  #dbody tr:last-child td { border-bottom: 0; }
+  #dbody tr:hover td { background: rgba(255, 255, 255, .025); }
+  #dbody .mermaid-wrap { margin: 16px 0; padding: 16px; background: #0d0e10; border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; text-align: center; }
+  #dbody .mermaid-wrap svg { max-width: 100%; height: auto; }
+  #dbody .mermaid-raw { text-align: left; white-space: pre; font-family: Menlo, monospace; font-size: 12.5px; color: var(--text-2); margin: 0; }
+  #dbody a { color: var(--gold); text-decoration: none; border-bottom: 1px dashed rgba(240, 185, 11, .45); }
+  #dbody a:hover { border-bottom-style: solid; }
+  @media (max-width: 860px) { #doc { padding: 8px; } #dbody { padding: 18px 16px 32px; } }
+
   @media (max-width: 860px) {
     body { flex-direction: column-reverse; height: auto; }
     #side { width: auto; border-right: 0; border-top: 1px solid var(--line); }
@@ -94,7 +129,7 @@
     <button id="bscr">📝 讲稿</button>
     <button id="bppt">🖼 PPT</button>
     <span id="bdoc"></span>
-    <span class="mut keys">N / P 切集 · 空格播放 · S 讲稿 · F PPT · Esc 关闭</span>
+    <span class="mut keys">N / P 切集 · 空格播放 · S 讲稿 · F PPT · D 文档 · Esc 关闭</span>
   </div>
   <h2 id="t"></h2>
   <div id="meta" class="mut"></div>
@@ -104,8 +139,20 @@
   <div class="h"><span id="pt"></span><span class="mut">→ / 空格 下一步 · ← 上一步 · C 字幕</span><button id="pclose">关闭 ✕</button></div>
   <iframe id="pf" title="动画讲解页"></iframe>
 </div>
+<div id="doc" role="dialog" aria-modal="true">
+  <div class="doc-box">
+    <div class="doc-h">
+      <button id="dback">← 返回</button>
+      <span id="dt"></span>
+      <a class="btn" id="draw" target="_blank" rel="noopener">源文件 ↗</a>
+      <button id="dclose">关闭 ✕</button>
+    </div>
+    <article id="dbody"></article>
+  </div>
+</div>
 
 <script src="player-data.js"></script>
+<script src="docs-data.js"></script>
 <script>
 const BILI = { E: 'https://www.bilibili.com/video/BV15wpE6PETm/', B: 'https://www.bilibili.com/video/BV1jop76qE2y/', P: 'https://www.bilibili.com/video/BV1GKpE6hEE6/' };
 const $ = s => document.querySelector(s), v = $('#v');
@@ -154,8 +201,8 @@ function go(i, autoplay) {
   if (autoplay) v.play().catch(() => {});
   $('#t').textContent = `${e.id} ${e.title}`;
   $('#meta').innerHTML = `<a href="${bili(e)}" target="_blank" rel="noopener">B 站观看 ↗</a><a href="scripts/${e.base}.md">口播稿</a><a href="slides/${e.base}.html" target="_blank">动画讲解页 ↗</a>` + (e.timed ? `<a href="output/${e.base}.srt">字幕 SRT</a>` : '');
-  // 文档：本集对应的知识文档（章节 / 幕后 / 产品），多篇时按编号区分。
-  $('#bdoc').innerHTML = e.docs.map(d => `<a class="btn" href="${d.href}" target="_blank" title="${esc(d.title)}">📖 文档${e.docs.length > 1 ? ' ' + esc(d.href.match(/\/(\w+?)-/)[1]) : ''}</a>`).join(' ');
+  // 文档：本集对应的知识文档（章节 / 幕后 / 产品），多篇时按编号区分；点击弹出渲染后的阅读窗口。
+  $('#bdoc').innerHTML = e.docs.map(d => `<button type="button" data-doc-href="${esc(d.href)}" data-doc-title="${esc(d.title)}" title="${esc(d.title)}">📖 文档${e.docs.length > 1 ? ' ' + esc(d.href.match(/\/(\w+?)-/)[1]) : ''}</button>`).join(' ');
   renderScript();
   document.querySelectorAll('.ep').forEach(r => r.classList.toggle('on', +r.dataset.i === cur));
   const on = $('.ep.on');
@@ -222,6 +269,173 @@ function openPpt(step) {
 function closePpt() { $('#ppt').classList.remove('on'); $('#pf').removeAttribute('src'); }
 
 v.addEventListener('ended', () => { let i = cur + 1; while (i < EPS.length && !EPS[i].timed) i++; if (i < EPS.length) go(i, true); });
+// 知识文档弹窗：解析本地打包的 Markdown（支持表格、引用、代码块、Mermaid 图与站内文档跳转）。
+const docHist = [];
+let curDocHref = '';
+
+function resolveRel(baseHref, rel) {
+  if (!rel || /^(https?:|mailto:|#)/i.test(rel)) return rel;
+  const [p, hash] = rel.split('#');
+  const baseParts = baseHref.split('/'); baseParts.pop();
+  for (const seg of p.split('/')) {
+    if (!seg || seg === '.') continue;
+    if (seg === '..') baseParts.pop();
+    else baseParts.push(seg);
+  }
+  return baseParts.join('/') + (hash ? '#' + hash : '');
+}
+
+function renderInline(s, baseHref) {
+  const codes = [];
+  s = s.replace(/`([^`]+)`/g, (_, c) => { codes.push(`<code>${esc(c)}</code>`); return `\x00C${codes.length - 1}\x00`; });
+  s = esc(s);
+  s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_, alt, url) => `<img alt="${alt}" src="${esc(resolveRel(baseHref, url))}" style="max-width:100%">`);
+  s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, txt, url) => {
+    const resolved = resolveRel(baseHref, url);
+    const [pathOnly, hash] = resolved.split('#');
+    if (typeof DOC_MD !== 'undefined' && DOC_MD[pathOnly]) {
+      return `<a href="#" data-doc-href="${esc(pathOnly)}"${hash ? ` data-doc-hash="${esc(hash)}"` : ''}>${txt}</a>`;
+    }
+    if (url.startsWith('#')) return `<a href="${esc(url)}">${txt}</a>`;
+    return `<a href="${esc(resolved)}" target="_blank" rel="noopener">${txt}</a>`;
+  });
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/(^|[^*])\*([^*]+)\*(?!\*)/g, '$1<em>$2</em>');
+  s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  return s.replace(/\x00C(\d+)\x00/g, (_, i) => codes[+i]);
+}
+
+function renderMd(md, baseHref) {
+  const lines = md.replace(/\r\n?/g, '\n').split('\n');
+  const out = [];
+  let i = 0;
+  const isTblSep = l => /^\s*\|?\s*:?-{3,}:?\s*(\|\s*:?-{3,}:?\s*)+\|?\s*$/.test(l);
+  const splitRow = l => l.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(c => c.trim());
+  const isList = l => /^(\s*)([-*+]|\d+\.)\s+/.test(l);
+
+  while (i < lines.length) {
+    const line = lines[i];
+    if (!line.trim()) { i++; continue; }
+    const fm = line.match(/^```(\w*)/);
+    if (fm) {
+      const lang = fm[1].toLowerCase();
+      const buf = []; i++;
+      while (i < lines.length && !/^```\s*$/.test(lines[i])) { buf.push(lines[i]); i++; }
+      if (i < lines.length) i++;
+      const code = buf.join('\n');
+      if (lang === 'mermaid') out.push(`<div class="mermaid-wrap"><div class="mermaid">${esc(code)}</div></div>`);
+      else out.push(`<pre><code${lang ? ` class="lang-${esc(lang)}"` : ''}>${esc(code)}</code></pre>`);
+      continue;
+    }
+    const hm = line.match(/^(#{1,6})\s+(.+)$/);
+    if (hm) {
+      const lv = hm[1].length;
+      out.push(`<h${lv}>${renderInline(hm[2].trim(), baseHref)}</h${lv}>`);
+      i++; continue;
+    }
+    if (/^\s*([-*_])\s*\1\s*\1[\s\1]*$/.test(line)) { out.push('<hr>'); i++; continue; }
+    if (/^\s*>/.test(line)) {
+      const buf = [];
+      while (i < lines.length && /^\s*>/.test(lines[i])) { buf.push(lines[i].replace(/^\s*>\s?/, '')); i++; }
+      out.push(`<blockquote>${renderMd(buf.join('\n'), baseHref)}</blockquote>`);
+      continue;
+    }
+    if (line.includes('|') && i + 1 < lines.length && isTblSep(lines[i + 1])) {
+      const head = splitRow(line);
+      i += 2;
+      const rows = [];
+      while (i < lines.length && lines[i].trim() && lines[i].includes('|')) { rows.push(splitRow(lines[i])); i++; }
+      out.push('<div class="tbl-wrap"><table><thead><tr>' + head.map(c => `<th>${renderInline(c, baseHref)}</th>`).join('') + '</tr></thead><tbody>' + rows.map(r => '<tr>' + r.map(c => `<td>${renderInline(c, baseHref)}</td>`).join('') + '</tr>').join('') + '</tbody></table></div>');
+      continue;
+    }
+    if (isList(line)) {
+      const stack = [];
+      const html = [];
+      while (i < lines.length && isList(lines[i])) {
+        const m = lines[i].match(/^(\s*)([-*+]|\d+\.)\s+(.*)$/);
+        const ind = m[1].length, tag = /\d/.test(m[2]) ? 'ol' : 'ul';
+        while (stack.length && stack[stack.length - 1].ind > ind) { html.push(`</${stack.pop().tag}>`); }
+        if (!stack.length || stack[stack.length - 1].ind < ind) {
+          stack.push({ ind, tag }); html.push(`<${tag}>`);
+        } else if (stack[stack.length - 1].tag !== tag) {
+          html.push(`</${stack.pop().tag}>`); stack.push({ ind, tag }); html.push(`<${tag}>`);
+        }
+        html.push(`<li>${renderInline(m[3], baseHref)}</li>`);
+        i++;
+      }
+      while (stack.length) html.push(`</${stack.pop().tag}>`);
+      out.push(html.join(''));
+      continue;
+    }
+    const pbuf = [];
+    while (i < lines.length && lines[i].trim() && !/^(```|#{1,6}\s|\s*>)/.test(lines[i]) && !isList(lines[i]) && !/^\s*([-*_])\s*\1\s*\1[\s\1]*$/.test(lines[i]) && !(lines[i].includes('|') && i + 1 < lines.length && isTblSep(lines[i + 1]))) {
+      pbuf.push(lines[i].trim()); i++;
+    }
+    out.push(`<p>${renderInline(pbuf.join('<br>'), baseHref)}</p>`);
+  }
+  return out.join('\n');
+}
+
+let mermaidReady = null;
+function loadMermaid() {
+  if (window.mermaid) return Promise.resolve(window.mermaid);
+  if (mermaidReady) return mermaidReady;
+  mermaidReady = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js';
+    s.onload = () => {
+      window.mermaid.initialize({ startOnLoad: false, theme: 'dark', themeVariables: { primaryColor: '#242730', primaryTextColor: '#eceae4', primaryBorderColor: '#f0b90b', lineColor: '#9ea3ad', secondaryColor: '#1a1d24', tertiaryColor: '#16181c' } });
+      resolve(window.mermaid);
+    };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+  return mermaidReady;
+}
+
+async function renderMermaidIn(rootEl) {
+  const nodes = [...rootEl.querySelectorAll('.mermaid')];
+  if (!nodes.length) return;
+  try {
+    const m = await loadMermaid();
+    await m.run({ nodes });
+  } catch (_) {
+    nodes.forEach(n => { n.className = 'mermaid-raw'; });
+  }
+}
+
+function openDoc(href, title, mode) {
+  const md = typeof DOC_MD !== 'undefined' ? DOC_MD[href] : null;
+  if (!md) { window.open(href, '_blank', 'noopener'); return; }
+  if (mode === 'push' && curDocHref && curDocHref !== href) docHist.push(curDocHref);
+  else if (mode !== 'back') docHist.length = 0;
+  curDocHref = href;
+  v.pause();
+  const h1 = (md.match(/^#\s+(.+)$/m) || [])[1] || title || href;
+  $('#dt').textContent = '📖 ' + h1;
+  $('#draw').href = href;
+  $('#dback').style.display = docHist.length ? 'inline-block' : 'none';
+  $('#dbody').innerHTML = renderMd(md, href);
+  $('#dbody').scrollTop = 0;
+  $('#doc').classList.add('on');
+  renderMermaidIn($('#dbody'));
+}
+function closeDoc() { $('#doc').classList.remove('on'); curDocHref = ''; docHist.length = 0; }
+
+$('#bdoc').addEventListener('click', ev => {
+  const btn = ev.target.closest('button[data-doc-href]');
+  if (btn) openDoc(btn.dataset.docHref, btn.dataset.docTitle, 'reset');
+});
+$('#dbody').addEventListener('click', ev => {
+  const a = ev.target.closest('a[data-doc-href]');
+  if (!a) return;
+  ev.preventDefault();
+  openDoc(a.dataset.docHref, a.textContent, 'push');
+});
+$('#dback').onclick = () => { const prev = docHist.pop(); if (prev) openDoc(prev, '', 'back'); };
+$('#dclose').onclick = closeDoc;
+$('#doc').addEventListener('click', ev => { if (ev.target === $('#doc')) closeDoc(); });
+
 $('#prev').onclick = () => go(cur - 1, true);
 $('#next').onclick = () => go(cur + 1, true);
 $('#sp').onchange = () => { v.playbackRate = +$('#sp').value; store('sp', $('#sp').value); };
@@ -235,13 +449,15 @@ $('#only').onchange = () => { store('only', $('#only').checked ? 1 : 0); build()
 
 addEventListener('keydown', ev => {
   if (/INPUT|SELECT|TEXTAREA/.test(ev.target.tagName) || ev.metaKey || ev.ctrlKey || ev.altKey) return;
-  const k = ev.key.toLowerCase(), ppt = $('#ppt').classList.contains('on');
+  const k = ev.key.toLowerCase(), ppt = $('#ppt').classList.contains('on'), doc = $('#doc').classList.contains('on');
+  if (k === 'escape' && doc) { closeDoc(); return; }
   if (k === 'escape' && ppt) { closePpt(); return; }
-  if (ppt) return;
+  if (ppt || doc) return;
   if (k === 'n') go(cur + 1, true);
   else if (k === 'p') go(cur - 1, true);
   else if (k === 's') togScript();
   else if (k === 'f') openPpt();
+  else if (k === 'd' && EPS[cur].docs.length) openDoc(EPS[cur].docs[0].href, EPS[cur].docs[0].title, 'reset');
   else if (k === ' ' && ev.target !== v) { ev.preventDefault(); if ($('#nov').classList.contains('on')) return; v.paused ? v.play() : v.pause(); }
 });
 
