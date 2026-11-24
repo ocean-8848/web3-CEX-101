@@ -454,16 +454,16 @@ flowchart TD
 
 ## 末尾
 
-### 本仓库对照（web3-cex-demo）
+### 本仓库对照（CEX Demo）
 
 本仓库没有实现杠杆、借贷、计息或强平。可以复用的部分：
 
 | 本章需要 | 本仓库现有 | 文件 |
 |---|---|---|
-| 借款 / 还款 / 计息分录 | 双分录过账与幂等键 | `/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/domain/types.ts`（`PostJournalCommand.idempotencyKey`） |
-| 金额精度（避免浮点误差） | 18 位小数的 BigInt 金额 | `/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/domain/money.ts` |
-| 账户类型 | 只有 main、spot、funding、fee 等 | `/Users/k/Workon/codex/web3-cex-demo/packages/domain/src/index.ts`（需新增 margin、loan_pool、interest_receivable） |
-| 借款前额度检查 | 只校验现货订单 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src/application/risk-application-service.ts` |
+| 借款 / 还款 / 计息分录 | 双分录过账与幂等键 | `services/ledger-service/src/domain/types.ts`（`PostJournalCommand.idempotencyKey`） |
+| 金额精度（避免浮点误差） | 18 位小数的 BigInt 金额 | `services/ledger-service/src/domain/money.ts` |
+| 账户类型 | 只有 main、spot、funding、fee 等 | `packages/domain/src/index.ts`（需新增 margin、loan_pool、interest_receivable） |
+| 借款前额度检查 | 只校验现货订单 | `services/risk-service/src/application/risk-application-service.ts` |
 
 ### 与主线章节的依赖
 

@@ -314,11 +314,11 @@ flowchart LR
 | 新币活动 | [P07-listing-launch.md](P07-listing-launch.md) | 上币与 TGE |
 | 合规 | [B01-compliance.md](../backstage/B01-compliance.md) | 链上地址风险标签 |
 
-**本仓库对照（web3-cex-demo）**：本仓库没有用户自托管钱包，只有交易所侧托管。
+**本仓库对照（CEX Demo）**：本仓库没有用户自托管钱包，只有交易所侧托管。
 
-- 链上签名与广播：`/Users/k/Workon/codex/web3-cex-demo/services/custody-adapter/src/infrastructure/evm-custody-provider.ts`。它对应图 2.2 中"币安热钱包"的位置，不对应用户的 MPC 钱包。
-- 扫链与确认数：`/Users/k/Workon/codex/web3-cex-demo/services/blockchain-indexer/`，对应图 2.2 第 ⑤ 步。
-- 托管提供方抽象：`/Users/k/Workon/codex/web3-cex-demo/services/custody-adapter/src/domain/provider.ts`。接入第三方 MPC 托管时，可以在这里新增一个 provider。
+- 链上签名与广播：`services/custody-adapter/src/infrastructure/evm-custody-provider.ts`。它对应图 2.2 中"币安热钱包"的位置，不对应用户的 MPC 钱包。
+- 扫链与确认数：`services/blockchain-indexer/`，对应图 2.2 第 ⑤ 步。
+- 托管提供方抽象：`services/custody-adapter/src/domain/provider.ts`。接入第三方 MPC 托管时，可以在这里新增一个 provider。
 
 ## 8. 术语表
 

@@ -448,13 +448,13 @@ flowchart LR
 
 ## 末尾：与主线章节的依赖
 
-| 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（web3-cex-demo） |
+| 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（CEX Demo） |
 |---|---|---|---|
-| 账本原子划转 | [05 账本](../chapters/05-ledger.md) | 闪兑、OTC、买币都靠一组分录完成换币 | `postJournal`，见 `/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 第 70 行 |
+| 账本原子划转 | [05 账本](../chapters/05-ledger.md) | 闪兑、OTC、买币都靠一组分录完成换币 | `postJournal`，见 `services/ledger-service/src/application/ledger-application-service.ts` 第 70 行 |
 | 冻结与扣减 | [05 账本 §3.4](../chapters/05-ledger.md) | 接受报价时先冻结，再扣减 | 同文件 `freezeBalance`（第 105 行）、`consumeBalance`（第 227 行） |
-| 对冲下单 | [06 订单与撮合](../chapters/06-order-matching.md) | 对冲单就是平台账户提交的普通订单 | `/Users/k/Workon/codex/web3-cex-demo/services/order-service/src/application/order-application-service.ts` |
-| 中间价与深度 | [08 行情](../chapters/08-market-data.md) | 报价引擎读取深度估算滑点 | `/Users/k/Workon/codex/web3-cex-demo/services/market-data-service` |
-| 限额与反欺诈 | [09 风控](../chapters/09-risk-control.md) | 首单限额、提币冷却、询价限流 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src` |
+| 对冲下单 | [06 订单与撮合](../chapters/06-order-matching.md) | 对冲单就是平台账户提交的普通订单 | `services/order-service/src/application/order-application-service.ts` |
+| 中间价与深度 | [08 行情](../chapters/08-market-data.md) | 报价引擎读取深度估算滑点 | `services/market-data-service` |
+| 限额与反欺诈 | [09 风控](../chapters/09-risk-control.md) | 首单限额、提币冷却、询价限流 | `services/risk-service/src` |
 | 收入归类 | [12 商业模式](../chapters/12-business-model.md) | 闪兑价差属于隐含交易收入 | 未实现 |
 | 法币通道对账 | [B04 对账](../backstage/B04-reconciliation.md) | 支付通道流水与账本比对 | 本仓库不做法币入金（见仓库 `README.md`） |
 

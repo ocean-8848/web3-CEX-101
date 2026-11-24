@@ -349,15 +349,15 @@ sequenceDiagram
 | 期权差价收入 | [12 商业模式](../chapters/12-business-model.md) | "闪兑/双币价差"收入项 |
 | 平台对冲风险 | [B05 业务风险](../backstage/B05-business-risk.md) | 敞口限额、风险准备金 |
 
-**本仓库对照**：[web3-cex-demo](/Users/k/Workon/codex/web3-cex-demo) 没有理财或结构化产品，也没有期权市场。
+**本仓库对照**：[CEX Demo](https://github.com/ocean-8848/CEX-Demo) 没有理财或结构化产品，也没有期权市场。
 
 | 能力 | 仓库现状 | 需要新增 |
 |---|---|---|
-| 申购冻结、结算扣减 | [ledger-application-service.ts](/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts) 的 `freezeBalance`、`consumeBalance`、`postJournal` | 双币持仓科目、平台对冲账户 |
-| 指数价格 | [market-data-service](/Users/k/Workon/codex/web3-cex-demo/services/market-data-service) 只提供本所行情 | 多交易所指数和时间均价 |
+| 申购冻结、结算扣减 | [ledger-application-service.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/ledger-service/src/application/ledger-application-service.ts) 的 `freezeBalance`、`consumeBalance`、`postJournal` | 双币持仓科目、平台对冲账户 |
+| 指数价格 | [market-data-service](https://github.com/ocean-8848/CEX-Demo/blob/main/services/market-data-service) 只提供本所行情 | 多交易所指数和时间均价 |
 | 期权定价 | 无 | `pricing-engine`：Black-Scholes、IV 曲面、报价有效期 |
-| 对冲 | 无 | `hedge-engine`：净敞口汇总、下单到 [order-service](/Users/k/Workon/codex/web3-cex-demo/services/order-service) |
-| 适当性测评 | [identity-service](/Users/k/Workon/codex/web3-cex-demo/services/identity-service) 只有 KYC | 测评问卷、产品风险等级 |
+| 对冲 | 无 | `hedge-engine`：净敞口汇总、下单到 [order-service](https://github.com/ocean-8848/CEX-Demo/blob/main/services/order-service) |
+| 适当性测评 | [identity-service](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service) 只有 KYC | 测评问卷、产品风险等级 |
 
 ## 4. 术语表
 

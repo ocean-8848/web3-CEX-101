@@ -291,7 +291,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（web3-cex-demo）
+## 6. 本仓库对照（CEX Demo）
 
 | 主题 | 本仓库实现 | 与生产级做法的差距 |
 |---|---|---|
@@ -306,9 +306,9 @@ flowchart LR
 
 相关文件：
 
-- [services/market-data-service/README.md](/Users/k/Workon/codex/web3-cex-demo/services/market-data-service/README.md)
-- [services/market-data-service/src/http/market-data-realtime-server.ts](/Users/k/Workon/codex/web3-cex-demo/services/market-data-service/src/http/market-data-realtime-server.ts)
-- [docs/spot-trading-loop.md](/Users/k/Workon/codex/web3-cex-demo/docs/spot-trading-loop.md)
+- [services/market-data-service/README.md](https://github.com/ocean-8848/CEX-Demo/blob/main/services/market-data-service/README.md)
+- [services/market-data-service/src/http/market-data-realtime-server.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/market-data-service/src/http/market-data-realtime-server.ts)
+- [docs/architecture.md](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/architecture.md)
 
 > 💡 注意：本仓库每次推送完整深度快照。它简单可靠，但消息体积大。练习：给它加上递增的 `updateId`，并改成增量推送，然后按 3.4 节的规则写一个客户端。
 

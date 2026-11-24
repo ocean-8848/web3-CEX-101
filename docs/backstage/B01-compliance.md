@@ -387,21 +387,21 @@ flowchart LR
 
 ## 8. 本仓库对照
 
-本仓库（[web3-cex-demo](/Users/k/Workon/codex/web3-cex-demo)）是现货交易 MVP，合规模块大部分未实现。
+本仓库（[CEX Demo](https://github.com/ocean-8848/CEX-Demo)）是现货交易 MVP，合规模块大部分未实现。
 
 | 合规能力 | 本仓库现状 | 位置 |
 |---|---|---|
-| KYC 字段 | ⚠️ 领域模型列出 `kyc_level` 字段，代码中尚无 KYC 状态机 | `/Users/k/Workon/codex/web3-cex-demo/docs/domain-model.md` |
-| KYC/KYB 状态管理 | ⚠️ 架构文档把它分配给 identity-service，尚未实现 | `/Users/k/Workon/codex/web3-cex-demo/docs/architecture.md` |
-| AML、Travel Rule | ❌ 架构文档写"后续扩展到 AML、Travel Rule" | `/Users/k/Workon/codex/web3-cex-demo/docs/architecture.md`（risk-service 一节） |
-| 提币人工审核 | ✅ 已有审核动作，测试用例的审核备注为 "passed aml review" | `/Users/k/Workon/codex/web3-cex-demo/services/wallet-service/src/__tests__/wallet-application-service.test.ts` |
-| 高风险地址强制人工审核 | ❌ 设计要求已写，代码未实现 | `/Users/k/Workon/codex/web3-cex-demo/docs/security-and-ops.md` 第 3.2 节 |
-| KYC/AML 供应商接入 | ❌ 列为待决策项 | `/Users/k/Workon/codex/web3-cex-demo/docs/technical-design.md` 第 15 节 |
+| KYC 字段 | ✅ 用户带 `kyc_tier`，`unverified → L1 → L2` 逐级申请、运营审核，证件号只做格式校验并脱敏存储 | `services/identity-service/src/domain/kyc.ts` |
+| KYC/KYB 状态管理 | ⚠️ KYC 由 identity-service 实现，等级决定提现限额；没有 KYB（机构认证） | `docs/domain-model.md` 第 7 节 |
+| AML、Travel Rule | ❌ 本仓库未实现，架构文档把它列为与真实交易所的差异 | `docs/architecture.md` 第 9 节 |
+| 提币人工审核 | ✅ 已有审核动作，测试用例的审核备注为 "passed aml review" | `services/wallet-service/src/__tests__/wallet-application-service.test.ts` |
+| 高风险地址强制人工审核 | ⚠️ 简化 KYT：提现时按规则给目标地址打分并保存分数、等级和原因；黑名单（制裁 / 被盗资金 / 混币，带演示种子）直接拦截，已在队列中的提现自动拒绝并解冻；混币等高风险标签强制两名运营复核；运营后台可按风险等级筛选。没有真实 KYT 供应商和多跳资金溯源 | `services/wallet-service/src/domain/withdrawal-risk.ts`；`docs/security.md` 第 2.7 节 |
+| KYC/AML 供应商接入 | ❌ 本仓库未实现，KYC 不接任何第三方核验 | `docs/security.md` 第 1.2 节 |
 
 如果要补齐，建议按以下顺序：
 
 1. 在 identity-service 增加 KYC 状态机（4.1 节），状态变更写审计事件。
-2. 在 wallet-service 提币入口调用 risk-service：制裁地址硬规则 → KYT 评分 → `under_review`。
+2. 把 wallet-service 的规则评分接到真实 KYT 数据源，制裁名单改为定期同步（OFAC 等），并为命中记录生成合规告警。
 3. 新增异步交易监控消费者，订阅充值、提币、成交事件，输出告警表。
 4. 新增案件表：告警 → 案件 → 结论 → 报告编号。
 5. Travel Rule 网关作为 wallet-service 的前置检查，先支持"自托管地址声明"。

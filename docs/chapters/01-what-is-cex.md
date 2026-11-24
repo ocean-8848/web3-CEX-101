@@ -273,7 +273,7 @@ flowchart TB
 
 ---
 
-## 6. 本仓库对照（web3-cex-demo）
+## 6. 本仓库对照（CEX Demo）
 
 本仓库是一个教学用的最小 CEX。三件事对应的服务如下：
 
@@ -288,7 +288,7 @@ flowchart TB
 | 撮合 | 订单生命周期 | `services/order-service` |
 | 账户 | 注册、登录、2FA、API Key | `services/identity-service` |
 
-本仓库只做现货和加密资产，不做法币、合约和理财（见根目录 `README.md` 的 MVP 范围）。
+本仓库只做现货和加密资产，不做法币、合约和理财（见根目录 `README.zh-CN.md` 的"Demo 覆盖的能力"）。
 
 ---
 

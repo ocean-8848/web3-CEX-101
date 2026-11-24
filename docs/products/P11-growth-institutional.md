@@ -351,12 +351,12 @@ sequenceDiagram
 | 场外结算风控 | [../09-risk-control.md](../chapters/09-risk-control.md)、[B06-treasury-liquidity.md](../backstage/B06-treasury-liquidity.md) | 保证金、头寸 |
 | 刷量与操纵 | [B05-business-risk.md](../backstage/B05-business-risk.md) | 营销作弊、做市商监控 |
 
-**本仓库对照（web3-cex-demo）**：
+**本仓库对照（CEX Demo）**：
 
-- 账户类型：`/Users/k/Workon/codex/web3-cex-demo/packages/domain/src/index.ts` 的 `AccountType` 已有 `main`、`spot`、`funding`、`fee`。实现体验金时，可增加 `trial_fund` 和 `marketing_budget` 两种类型，提币服务只读取 `funding` 的可用余额。
-- 返佣与营销分录：可用 `/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 的 `postJournal` 实现，幂等键用"用户 + 周期"。
-- API Key 签名：`/Users/k/Workon/codex/web3-cex-demo/services/api-gateway/src/http/api-key-signature.ts`。本仓库没有子账户和经纪商；扩展时需在 Key 上增加"所属主账户"和"权限范围"字段。
-- 运营权限（RBAC）：`/Users/k/Workon/codex/web3-cex-demo/services/identity-service/src/domain/rbac.ts`，可作为子账户权限模型的参考。
+- 账户类型：`packages/domain/src/index.ts` 的 `AccountType` 已有 `main`、`spot`、`funding`、`fee`。实现体验金时，可增加 `trial_fund` 和 `marketing_budget` 两种类型，提币服务只读取 `funding` 的可用余额。
+- 返佣与营销分录：可用 `services/ledger-service/src/application/ledger-application-service.ts` 的 `postJournal` 实现，幂等键用"用户 + 周期"。
+- API Key 签名：`services/api-gateway/src/http/api-key-signature.ts`。本仓库没有子账户和经纪商；扩展时需在 Key 上增加"所属主账户"和"权限范围"字段。
+- 运营权限（RBAC）：`services/identity-service/src/domain/rbac.ts`，可作为子账户权限模型的参考。
 
 ## 8. 术语表
 

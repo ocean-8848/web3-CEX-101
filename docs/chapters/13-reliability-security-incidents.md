@@ -167,7 +167,7 @@ stateDiagram-v2
 
 > 💡 注意：交易所最重要的告警不是"服务挂了"，而是"资金对不上"。服务挂了，用户会立即发现。资金对不上，可能几天后才有人发现。
 
-告警分级示例（与本仓库 `docs/security-and-ops.md` 第 6.3 节一致）：
+告警分级示例（业界常见做法；本仓库 `ops-console` 按同样的思路把每条告警定为 P1/P2/P3，规则表见 `docs/security.md` 第 2.12 节）：
 
 - **P1**：资金错误、提币异常扩大、账实不一致。立即呼叫值班。
 - **P2**：核心交易受影响、订单堆积。15 分钟内响应（示例）。
@@ -303,19 +303,20 @@ flowchart LR
 4. **储备金证明的局限**：PoR 证明的是"某一时刻"。平台可以在快照前临时借入资产。PoR 也不能证明平台没有隐藏负债。
 5. **人是最弱的一环**：钓鱼、社会工程、内鬼。技术防线必须假设"某个员工的账号会被攻破"。
 
-## 6. 本仓库对照（web3-cex-demo 中的对应服务）
+## 6. 本仓库对照（CEX Demo 中的对应服务）
 
 | 本章概念 | 仓库实现 | 位置 |
 |---|---|---|
 | 撮合快照 | `matching-engine` 支持 book snapshot / reset / seed | `engines/matching-engine/src/main.rs` |
-| 订单簿重放 | `order-service` 支持订单簿 replay 和异常检测 | `README.md` 第 7 节 |
-| 账本重放与对账 | `ledger-service` 的 `reconcile-balances`、`replay-account`、`check-alerts` | `docs/troubleshooting-runbook.md` 第 3 节 |
-| 降级与紧急开关 | 设计文档定义了全站提币、单资产提币、单市场交易、API 写入四个开关 | `docs/security-and-ops.md` 第 7.3 节 |
-| 告警分级 | P1/P2/P3 三级 | `docs/security-and-ops.md` 第 6.3 节 |
-| 审计日志 | 审计字段含 `operator_id`、`before`、`after`、`trace_id` | `docs/security-and-ops.md` 第 4.2 节 |
-| 权限控制 | `ops-console` 细粒度 RBAC，资金操作与审核操作分离 | `docs/security-and-ops.md` 第 2.2 节 |
-| 托管熔断 | `custody-adapter` 多 provider 路由、失败熔断、健康检查 | `README.md` 第 7 节 |
-| 排障顺序 | 先看事实源，先只读检查，再修复 | `docs/troubleshooting-runbook.md` 第 2 节 |
+| 订单簿重放 | `order-service` 支持订单簿 replay 和异常检测 | `services/order-service/README.md` |
+| 账本重放与对账 | `ledger-service` 的 `reconcile-balances`、`replay-account`、`check-alerts` | `docs/ledger-service-design.md` 第 11 节、`docs/troubleshooting.md` 第 6.4 节 |
+| 降级与紧急开关 | 单市场交易开关（市场 `halted`，拒绝新单、撤单放行）；全站提币暂停、单资产提币暂停、API 写入冻结（只读模式，撤单放行）三个紧急开关，由 risk-service 持久化，在 api-gateway、wallet-service（申请 / 审批 / 广播）和下单风控中执行，ops-console「系统运维 → 紧急开关」操作（必填原因、二次确认、审计，仅 `ops_admin`）；trader-web 显示暂停 / 只读提示 | `services/risk-service/src/application/control-switch-service.ts`、`services/api-gateway/src/http/api-gateway-control-switch.guard.ts`、`apps/ops-console/client/features/controls-tab.tsx`、`docs/security.md` 第 2.11 节 |
+| 告警分级 | 已实现 P1/P2/P3：账本、对账、紧急开关、托管、链上观察、钱包、交易域与交易运行时告警逐条定级（P1 资金正确性 / 资金出口，P2 核心链路受损，P3 非核心），运营总览和系统运维按级别排序、着色、计数；没有值班呼叫 | `apps/ops-console/src/domain/alert-severity.ts`、`docs/security.md` 第 2.12 节 |
+| 对账与熔断 | ledger-service 定时（演示栈 30 秒）做余额对账与委托冻结对账，不平时自动暂停该币种提现并产生 P1 告警，人工恢复前需一轮一致的对账 | `services/ledger-service/src/application/reconciliation-job.ts`、`docs/ledger-service-design.md` 第 11.5 节 |
+| 审计日志 | `ops_action_audit_logs` 记录运营写操作的操作人、角色、权限、目标、请求 / 响应和结果；`withdrawal_audit_logs` 记录提现各状态的操作人、`trace_id` 和前后快照 | `docs/security.md` 第 2.8 节 |
+| 权限控制 | 6 个运营角色映射到细粒度权限，提现审核（`ops_reviewer`）与账本执行（`ops_finance_operator`）分属不同角色 | `services/identity-service/src/domain/rbac.ts`、`docs/security.md` 第 2.2 节 |
+| 托管熔断 | `custody-adapter` 多 provider 路由、失败熔断、健康检查 | `services/custody-adapter/README.md`、`docs/fault-lab.md` |
+| 排障顺序 | 先看日志和状态，先只读检查，再修复；不直接手改余额或状态列 | `docs/troubleshooting.md` 第 1、6.4 节 |
 
 关键观察：本仓库的排障原则"不直接手改余额快照或状态列"，正是对 FTX 和 Mt.Gox 教训的工程化表达。账本只追加不覆盖，所有资金变更可回放。
 

@@ -335,7 +335,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（web3-cex-demo）
+## 6. 本仓库对照（CEX Demo）
 
 | 层 | 服务 | 目录 | 端口 | 技术 |
 |---|---|---|---|---|
@@ -359,7 +359,7 @@ flowchart LR
 - 本仓库的撮合引擎是单进程。没有主备，没有按交易对分片。
 - 共享领域模型在 `packages/domain`。Kafka topic 规划见 `docs/event-catalog.md`。
 
-更多运行细节见 `docs/architecture.md` 和 `docs/system-runtime-guide.md`。
+更多运行细节见 `docs/architecture.md` 和 `docs/getting-started.md`。
 
 ---
 

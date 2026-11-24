@@ -457,15 +457,15 @@ flowchart TB
 | 拆单与滑点 | 深度 | [08 行情](../chapters/08-market-data.md) |
 | 带单员刷业绩监控 | 市场监控 | [B05 业务风控](../backstage/B05-business-risk.md) |
 
-**本仓库对照**（web3-cex-demo）：
+**本仓库对照**（CEX Demo）：
 
 | 主题 | 本仓库实现 | 差距 |
 |---|---|---|
-| 下单入口 | [services/order-service/src/application/order-application-service.ts](/Users/k/Workon/codex/web3-cex-demo/services/order-service/src/application/order-application-service.ts) 的 `createOrder` / `cancelOrder` | 策略引擎可以作为它的调用方；本仓库没有策略引擎 |
-| 限频 | [services/api-gateway/src/infrastructure/redis-rate-limiter.ts](/Users/k/Workon/codex/web3-cex-demo/services/api-gateway/src/infrastructure/redis-rate-limiter.ts) | 网关层按请求限频；没有"单策略"维度的限频 |
-| 下单风控 | [services/risk-service/src/application/risk-application-service.ts](/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src/application/risk-application-service.ts) | 策略子单会经过同样的 step 和价格偏离校验 |
+| 下单入口 | [services/order-service/src/application/order-application-service.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/order-service/src/application/order-application-service.ts) 的 `createOrder` / `cancelOrder` | 策略引擎可以作为它的调用方；本仓库没有策略引擎 |
+| 限频 | [services/api-gateway/src/infrastructure/redis-rate-limiter.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/infrastructure/redis-rate-limiter.ts) | 网关层按请求限频；没有"单策略"维度的限频 |
+| 下单风控 | [services/risk-service/src/application/risk-application-service.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/risk-service/src/application/risk-application-service.ts) | 策略子单会经过同样的 step 和价格偏离校验 |
 | 自动化任务 | order-service 中的 `SpotOrderAutomationExecution`（恢复、重放） | 这是运维自动化，不是交易策略 |
-| 撮合 | [engines/matching-engine/src/main.rs](/Users/k/Workon/codex/web3-cex-demo/engines/matching-engine/src/main.rs) | 只有连续撮合，不感知订单来源 |
+| 撮合 | [engines/matching-engine/src/main.rs](https://github.com/ocean-8848/CEX-Demo/blob/main/engines/matching-engine/src/main.rs) | 只有连续撮合，不感知订单来源 |
 
 ## 7. 术语表
 

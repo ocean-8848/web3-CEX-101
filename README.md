@@ -152,4 +152,4 @@ flowchart TD
 
 - **币安公开事实**：来自币安官网、API 文档、公告和公开新闻。
 - **业界通用做法**：交易所普遍采用的设计。币安内部实现未公开时使用此标注。
-- **本仓库实现**：本学习材料配套的 `web3-cex-demo` 演示仓库（`/Users/k/Workon/codex/web3-cex-demo`）中的服务实现，用于对照理解。
+- **本仓库实现**：本学习材料配套的 [CEX Demo](https://github.com/ocean-8848/CEX-Demo) 演示仓库中的服务实现，用于对照理解。各章「本仓库对照」一节里的代码路径（例如 `services/ledger-service`）都指这个仓库。

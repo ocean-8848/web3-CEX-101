@@ -338,13 +338,13 @@ sequenceDiagram
 
 ## 末尾：与主线章节的依赖
 
-| 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（web3-cex-demo） |
+| 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（CEX Demo） |
 |---|---|---|---|
-| P2P 托管 = 冻结 | [05 账本 §3.4](../chapters/05-ledger.md) | 下单冻结卖家币 | `freezeBalance`，`/Users/k/Workon/codex/web3-cex-demo/services/ledger-service/src/application/ledger-application-service.ts` 第 105 行 |
+| P2P 托管 = 冻结 | [05 账本 §3.4](../chapters/05-ledger.md) | 下单冻结卖家币 | `freezeBalance`，`services/ledger-service/src/application/ledger-application-service.ts` 第 105 行 |
 | 取消 = 解冻 | [05 账本 §3.4](../chapters/05-ledger.md) | 超时、取消、裁决卖家胜 | 同文件 `releaseBalance`（第 174 行） |
 | 放币 = 扣减 + 入账 | [05 账本](../chapters/05-ledger.md) | 卖家确认或裁决买家胜 | 同文件 `consumeBalance`（第 227 行）、`postJournal`（第 70 行） |
-| 实名与 2FA | [03 账户、身份与安全](../chapters/03-account-identity-security.md) | 户名比对、放币二次验证 | `/Users/k/Workon/codex/web3-cex-demo/services/identity-service` |
-| 限额与反诈 | [09 风控](../chapters/09-risk-control.md) | 下单前检查、提币观察期 | `/Users/k/Workon/codex/web3-cex-demo/services/risk-service/src` |
+| 实名与 2FA | [03 账户、身份与安全](../chapters/03-account-identity-security.md) | 户名比对、放币二次验证 | `services/identity-service` |
+| 限额与反诈 | [09 风控](../chapters/09-risk-control.md) | 下单前检查、提币观察期 | `services/risk-service/src` |
 | 法币对账 | [B04 对账](../backstage/B04-reconciliation.md) | 银行流水 vs 账本 | 本仓库不做法币入金（见仓库 `README.md`） |
 | 反洗钱 | [B01 合规](../backstage/B01-compliance.md) | 可疑交易识别与上报 | 未实现 |
 

@@ -491,15 +491,15 @@ flowchart LR
 
 | 本篇概念 | 本仓库位置 | 实现情况 |
 |---|---|---|
-| 威胁建模（STRIDE 风格的表格） | [`docs/web3-cex-demo-threat-model.md`](/Users/k/Workon/codex/web3-cex-demo/docs/web3-cex-demo-threat-model.md) 的 Threat model table | 已编写。TM-001 到 TM-008 覆盖内部服务、私钥、浏览器会话、API Key、WS、单人审批、行情放大、默认凭证 |
-| 安全验收标准与测试计划 | 同上，`Security acceptance criteria`、`Security test plan` | 已编写。SEC-AC-1 到 SEC-AC-6 可直接作为本篇第 4.6 节的发布门禁项；`Focus paths for security review` 相当于第 4.5 节的受保护文件清单 |
-| 密钥不进代码与日志 | [`docs/security-and-ops.md`](/Users/k/Workon/codex/web3-cex-demo/docs/security-and-ops.md) 第 2.4 节 | 设计原则已写明 |
-| 私钥从环境变量加载 | [`services/custody-adapter/src/infrastructure/evm-provider-config.ts`](/Users/k/Workon/codex/web3-cex-demo/services/custody-adapter/src/infrastructure/evm-provider-config.ts) | 演示用实现。违反第 4.10 节密钥管理规则，威胁模型 TM-002 评为 critical |
-| 网关审计日志 | [`services/api-gateway/src/http/api-gateway-audit.interceptor.ts`](/Users/k/Workon/codex/web3-cex-demo/services/api-gateway/src/http/api-gateway-audit.interceptor.ts) | 已实现。只记录 userId、apiKeyId、sessionId 等标识，不记录请求头中的签名和令牌，符合日志卫生；`path` 记录完整 URL，若查询串中带敏感参数会进入日志 |
-| 服务间鉴权 | [`services/identity-service/src/http/internal-service-auth.guard.ts`](/Users/k/Workon/codex/web3-cex-demo/services/identity-service/src/http/internal-service-auth.guard.ts) | HMAC 共享密钥。尚未达到第 4.8 节的 mTLS |
-| 依赖锁定 | [`pnpm-lock.yaml`](/Users/k/Workon/codex/web3-cex-demo/pnpm-lock.yaml) | 有锁文件。`package.json` 使用 `^` 范围，需配合冻结锁文件安装 |
-| 发布与变更 | [`docs/security-and-ops.md`](/Users/k/Workon/codex/web3-cex-demo/docs/security-and-ops.md) 第 8、10 节 | 设计文档。要求变更单、灰度、上线前检查清单 |
-| CI 安全扫描、SBOM、签名构建、SIEM、金丝雀令牌、红队 | — | 未实现。仓库没有 CI 流水线配置 |
+| 威胁建模（STRIDE 风格的表格） | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 3 节 | 已编写。按资产列出威胁、现有缓解和真实 CEX 的做法，覆盖客户会话、登录凭证、API Key、2FA 种子、运营审批、提现链路、热钱包私钥、账本、内部服务、撮合通道、行情与私有实时流、基础设施；没有逐项编号 |
+| 安全验收标准与测试计划 | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 4 节 | ⚠️ 没有成文的安全验收标准和测试计划；第 4 节按风险排序列出走向真实环境前的缺口，可作为本篇第 4.6 节发布门禁的起点 |
+| 密钥不进代码与日志 | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 1.2、4 节 | ⚠️ 内部签名密钥、API Key 加密主密钥、数据库口令都有公开的默认测试值；文档把"进入密钥管理系统、可轮换"列为缺口 |
+| 私钥从环境变量加载 | [`services/custody-adapter/src/infrastructure/evm-provider-config.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/custody-adapter/src/infrastructure/evm-provider-config.ts) | 演示用实现。违反第 4.10 节密钥管理规则，`docs/security.md` 第 4 节列为最高风险缺口 |
+| 网关审计日志 | [`services/api-gateway/src/http/api-gateway-audit.interceptor.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/http/api-gateway-audit.interceptor.ts) | 已实现。只记录 userId、apiKeyId、sessionId 等标识，不记录请求头中的签名和令牌，符合日志卫生；`path` 记录完整 URL，若查询串中带敏感参数会进入日志 |
+| 服务间鉴权 | [`services/identity-service/src/http/internal-service-auth.guard.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/http/internal-service-auth.guard.ts) | HMAC 共享密钥 + 调用方白名单，托管（[`custody-adapter`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/custody-adapter/src/http/internal-service-auth.guard.ts)）与链上索引（[`blockchain-indexer`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/blockchain-indexer/src/http/internal-service-auth.guard.ts)）入口也已校验，例如 `api-gateway` 直接调托管会被拒。尚未达到第 4.8 节的 mTLS |
+| 依赖锁定 | [`pnpm-lock.yaml`](https://github.com/ocean-8848/CEX-Demo/blob/main/pnpm-lock.yaml) | 有锁文件。`package.json` 使用 `^` 范围，需配合冻结锁文件安装 |
+| 发布与变更 | — | 本仓库未实现变更单、灰度和上线前检查清单 |
+| CI 安全扫描、SBOM、签名构建、SIEM、金丝雀令牌、红队 | `.github/workflows/ci.yml` | ⚠️ CI 只做构建、类型检查、单元测试和结构检查；安全扫描、SBOM 等未实现 |
 
 关键观察：本仓库已经有一份质量较高的威胁模型和验收标准，但没有 CI 把它们变成"自动阻断"。这正是 SDL 从 Level 1 走向 Level 2 的那一步：**把文档里的验收标准变成门禁里的检查项**。
 
@@ -525,7 +525,7 @@ flowchart LR
 
 ### 思考题
 
-1. 为"运营后台批量审核提币"功能补一张 STRIDE 工作表，至少写出 S、R、E 三行，并为每行写一个验证方式。对照本仓库 TM-006，哪一行已经被识别？
+1. 为"运营后台批量审核提币"功能补一张 STRIDE 工作表，至少写出 S、R、E 三行，并为每行写一个验证方式。对照本仓库 `docs/security.md` 第 3 节"运营会话与审批权"一行，哪一行已经被识别？
 2. 一名新入职的工程师收到"猎头"发来的 GitHub 编程测试。按第 4.9 节的防线，列出至少三个环节可以阻止这段代码接触到签名区。
 3. 打开 [architecture-explorer.html](../../interactive/architecture-explorer.html)，找到提币路径上的所有服务。哪些服务属于"资金路径"，应该列入 CODEOWNERS 并要求双人评审？
 
