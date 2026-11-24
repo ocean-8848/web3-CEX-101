@@ -16,7 +16,8 @@ web3-CEX-101/
 ├── interactive/          交互实验（HTML，浏览器直接打开）
 ├── slides/               讲解幻灯片 40 集（视频画面源文件）
 ├── video/                视频播放器、口播稿、渲染工具、发布记录
-└── practice/             动手实践：可运行的 CEX Demo + 知识点到代码的对照
+├── practice/             动手实践：可运行的 CEX Demo + 知识点到代码的对照
+└── tools/build-site/      在线学习站构建工具
 ```
 
 ## 1. 一张图看懂学习路径

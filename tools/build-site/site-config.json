@@ -1,0 +1,93 @@
+{
+  "nav": [
+    {
+      "key": "start",
+      "name": "开始",
+      "items": [
+        "home",
+        "guide"
+      ]
+    },
+    {
+      "key": "main",
+      "name": "主线 · 交易所如何运转",
+      "items": [
+        "c01",
+        "c02",
+        "c03",
+        "c04",
+        "c05",
+        "c06",
+        "c07",
+        "c08",
+        "c09",
+        "c10",
+        "c11",
+        "c12",
+        "c13"
+      ]
+    },
+    {
+      "key": "prod",
+      "name": "下篇 · 产品深潜",
+      "items": [
+        "products",
+        "p01",
+        "p02",
+        "p03",
+        "p04",
+        "p05",
+        "p06",
+        "p07",
+        "p08",
+        "p09",
+        "p10",
+        "p11"
+      ]
+    },
+    {
+      "key": "back",
+      "name": "下篇 · 幕后核心",
+      "items": [
+        "backstage",
+        "b01",
+        "b02",
+        "b03",
+        "b04",
+        "b05",
+        "b06",
+        "b07",
+        "b08",
+        "b09",
+        "b10",
+        "b11",
+        "b12"
+      ]
+    }
+  ],
+  "labTitles": {
+    "aml-graph.html": "AML 资金流图谱",
+    "architecture-explorer.html": "交易所架构探索",
+    "ato-defense.html": "盗号攻防实验",
+    "convert-rfq.html": "闪兑报价沙盘",
+    "deposit-withdraw-sim.html": "充提模拟器",
+    "depth-slippage.html": "深度与滑点",
+    "dual-investment.html": "双币投资拆解",
+    "grid-bot.html": "网格策略回测",
+    "incident-explorer.html": "事故案例浏览器",
+    "launchpool-calc.html": "新币挖矿计算器",
+    "ledger-double-entry.html": "迷你账本实验",
+    "license-matrix.html": "牌照监管矩阵",
+    "margin-loan-lab.html": "杠杆借贷实验室",
+    "market-surveillance.html": "市场监控实验",
+    "order-book-matching.html": "撮合引擎实验",
+    "p2p-escrow.html": "P2P 担保托管",
+    "perpetual-liquidation.html": "永续合约实验室",
+    "proof-of-reserves.html": "储备金证明",
+    "reconciliation-lab.html": "对账实验室",
+    "revenue-model.html": "商业模型沙盘",
+    "risk-pipeline-lab.html": "风控流水线实验",
+    "risk-rules-lab.html": "风控规则实验室",
+    "../slides/index.html": "动画讲解幻灯片（40 集）"
+  }
+}

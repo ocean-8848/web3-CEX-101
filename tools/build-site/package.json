@@ -1,0 +1,8 @@
+{
+  "name": "cex-learning-site-build",
+  "private": true,
+  "type": "module",
+  "description": "Builds the CEX learning site (single page + labs + slides) from this repo",
+  "scripts": { "build": "node build.mjs" },
+  "dependencies": { "marked": "12.0.2" }
+}
