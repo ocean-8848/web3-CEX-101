@@ -103,6 +103,6 @@ HTTP 接口（全部要求内部服务 HMAC 签名，默认允许 `wallet-servic
 
 延伸阅读:
 
-- [04 钱包与托管](../../learning/04-wallet-custody.md)
-- [B06 资金与流动性管理](../../learning/backstage/B06-treasury-liquidity.md)
+- [04 钱包与托管](../../../../docs/chapters/04-wallet-custody.md)
+- [B06 资金与流动性管理](../../../../docs/backstage/B06-treasury-liquidity.md)
 - [故障实验室](../../docs/fault-lab.md)

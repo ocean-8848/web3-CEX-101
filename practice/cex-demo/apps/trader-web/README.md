@@ -101,6 +101,6 @@ pnpm test:trader-web:local                    # 对真实全栈跑端到端（�
 
 ## 延伸阅读
 
-- [03 账户、身份与安全](../../learning/03-account-identity-security.md)
-- [06 订单与撮合](../../learning/06-order-matching.md)、[05 账本](../../learning/05-ledger.md)、[07 清算结算与手续费](../../learning/07-clearing-settlement-fees.md)
+- [03 账户、身份与安全](../../../../docs/chapters/03-account-identity-security.md)
+- [06 订单与撮合](../../../../docs/chapters/06-order-matching.md)、[05 账本](../../../../docs/chapters/05-ledger.md)、[07 清算结算与手续费](../../../../docs/chapters/07-clearing-settlement-fees.md)
 - [演示走查](../../docs/demo-walkthrough.md)、[API 契约](../../docs/api-contracts.md)

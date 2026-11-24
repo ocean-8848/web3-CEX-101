@@ -26,8 +26,8 @@
 
 ### 延伸学习
 
-- [../../learning/06-order-matching.md](../../learning/06-order-matching.md)
-- [../../learning/08-market-data.md](../../learning/08-market-data.md)
+- [06-order-matching.md](../../../../docs/chapters/06-order-matching.md)
+- [08-market-data.md](../../../../docs/chapters/08-market-data.md)
 
 ## 2. 市场选择与头部统计
 
@@ -67,7 +67,7 @@
 
 ### 延伸学习
 
-- [../../learning/08-market-data.md](../../learning/08-market-data.md)
+- [08-market-data.md](../../../../docs/chapters/08-market-data.md)
 
 ## 4. 订单簿与最新成交
 
@@ -97,7 +97,7 @@
 
 ### 延伸学习
 
-- [../../learning/06-order-matching.md](../../learning/06-order-matching.md)
+- [06-order-matching.md](../../../../docs/chapters/06-order-matching.md)
 
 ## 5. 下单表单
 
@@ -165,10 +165,10 @@
 
 ### 延伸学习
 
-- [../../learning/06-order-matching.md](../../learning/06-order-matching.md)
-- [../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)
-- [../../learning/09-risk-control.md](../../learning/09-risk-control.md)
-- [../../learning/12-business-model.md](../../learning/12-business-model.md)
+- [06-order-matching.md](../../../../docs/chapters/06-order-matching.md)
+- [07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)
+- [09-risk-control.md](../../../../docs/chapters/09-risk-control.md)
+- [12-business-model.md](../../../../docs/chapters/12-business-model.md)
 
 ## 6. 底部表格：当前委托 / 历史委托 / 成交记录 / 资产
 
@@ -201,7 +201,7 @@
 
 ### 延伸学习
 
-- [../../learning/05-ledger.md](../../learning/05-ledger.md)
+- [05-ledger.md](../../../../docs/chapters/05-ledger.md)
 
 ## 7. 订单中心
 
@@ -269,8 +269,8 @@
 
 ### 延伸学习
 
-- [../../learning/05-ledger.md](../../learning/05-ledger.md)
-- [../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)
+- [05-ledger.md](../../../../docs/chapters/05-ledger.md)
+- [07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)
 - [../ledger-service-design.md](../ledger-service-design.md)
 
 ---

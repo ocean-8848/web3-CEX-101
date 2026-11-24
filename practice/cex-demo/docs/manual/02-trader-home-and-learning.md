@@ -31,8 +31,8 @@
 
 ### 延伸学习
 
-- [../../learning/01-what-is-cex.md](../../learning/01-what-is-cex.md)
-- [../../learning/02-system-architecture.md](../../learning/02-system-architecture.md)
+- [01-what-is-cex.md](../../../../docs/chapters/01-what-is-cex.md)
+- [02-system-architecture.md](../../../../docs/chapters/02-system-architecture.md)
 - [../architecture.md](../architecture.md)
 
 ## 2. 学习模式
@@ -67,8 +67,8 @@
 
 ### 延伸学习
 
-- [../../learning/02-system-architecture.md](../../learning/02-system-architecture.md)
-- [../../learning/13-reliability-security-incidents.md](../../learning/13-reliability-security-incidents.md)（链路追踪部分）
+- [02-system-architecture.md](../../../../docs/chapters/02-system-architecture.md)
+- [13-reliability-security-incidents.md](../../../../docs/chapters/13-reliability-security-incidents.md)（链路追踪部分）
 
 ## 3. 撮合回放
 
@@ -98,7 +98,7 @@
 
 ### 延伸学习
 
-- [../../learning/06-order-matching.md](../../learning/06-order-matching.md)
+- [06-order-matching.md](../../../../docs/chapters/06-order-matching.md)
 
 ## 4. 场景导览
 
@@ -158,7 +158,7 @@
 
 ### 延伸学习
 
-- [../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)
+- [04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)
 
 ## 6. 主题切换
 
@@ -195,7 +195,7 @@
 
 ### 延伸学习
 
-- [../../learning/08-market-data.md](../../learning/08-market-data.md)
+- [08-market-data.md](../../../../docs/chapters/08-market-data.md)
 
 ---
 

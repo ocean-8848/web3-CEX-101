@@ -170,6 +170,6 @@ pnpm --filter @web3-cex/api-gateway start
 
 延伸阅读:
 
-- [03 账户、身份与安全](../../learning/03-account-identity-security.md)
-- [02 系统架构](../../learning/02-system-architecture.md)
+- [03 账户、身份与安全](../../../../docs/chapters/03-account-identity-security.md)
+- [02 系统架构](../../../../docs/chapters/02-system-architecture.md)
 - [API 契约](../../docs/api-contracts.md)、[安全设计](../../docs/security.md)

@@ -28,7 +28,7 @@
 - **想理解系统**：打开前台的「学习模式」后再操作，并对照每节末尾的「背后的服务」和「延伸学习」。
 - **想看完整链路**：直接读 [10 端到端场景](10-scenarios.md)。
 
-更多文档：[安装与运行](../getting-started.md) · [演示导览](../demo-walkthrough.md) · [系统架构](../architecture.md) · [交易所学习材料](../../learning/README.md)
+更多文档：[安装与运行](../getting-started.md) · [演示导览](../demo-walkthrough.md) · [系统架构](../architecture.md) · [交易所学习材料](../../../../README.md)
 
 ## 重新生成截图
 

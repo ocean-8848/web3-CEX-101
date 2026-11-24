@@ -102,6 +102,6 @@ pnpm -s ops:totp                              # 打印演示运营账户当前�
 
 ## 延伸阅读
 
-- [B07 应急响应](../../learning/backstage/B07-incident-response.md)、[B04 系统对账](../../learning/backstage/B04-reconciliation.md)、[B06 资金与流动性管理](../../learning/backstage/B06-treasury-liquidity.md)、[B05 业务风控](../../learning/backstage/B05-business-risk.md)
-- [13 可靠性与安全事故](../../learning/13-reliability-security-incidents.md)
+- [B07 应急响应](../../../../docs/backstage/B07-incident-response.md)、[B04 系统对账](../../../../docs/backstage/B04-reconciliation.md)、[B06 资金与流动性管理](../../../../docs/backstage/B06-treasury-liquidity.md)、[B05 业务风控](../../../../docs/backstage/B05-business-risk.md)
+- [13 可靠性与安全事故](../../../../docs/chapters/13-reliability-security-incidents.md)
 - [故障实验室](../../docs/fault-lab.md)、[安全设计](../../docs/security.md)

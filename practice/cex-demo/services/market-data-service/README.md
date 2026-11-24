@@ -76,6 +76,6 @@
 
 延伸阅读:
 
-- [08 行情](../../learning/08-market-data.md)
-- [06 订单与撮合](../../learning/06-order-matching.md)
+- [08 行情](../../../../docs/chapters/08-market-data.md)
+- [06 订单与撮合](../../../../docs/chapters/06-order-matching.md)
 - [事件目录](../../docs/event-catalog.md)

@@ -123,7 +123,7 @@ HTTP 接口:
 
 延伸阅读:
 
-- [09 风控](../../learning/09-risk-control.md)
-- [B08 实时风控平台](../../learning/backstage/B08-risk-platform.md)
-- [B05 业务风控](../../learning/backstage/B05-business-risk.md)（市场监控）
+- [09 风控](../../../../docs/chapters/09-risk-control.md)
+- [B08 实时风控平台](../../../../docs/backstage/B08-risk-platform.md)
+- [B05 业务风控](../../../../docs/backstage/B05-business-risk.md)（市场监控）
 - [市场配置](../../config/README.md)

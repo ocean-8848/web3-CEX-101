@@ -48,5 +48,5 @@ Rust 实现的现货撮合引擎，`order-service` 通过 TCP（按行 JSON）�
 
 ## 延伸阅读
 
-- [06 订单与撮合](../../learning/06-order-matching.md)
+- [06 订单与撮合](../../../../docs/chapters/06-order-matching.md)
 - [故障实验室](../../docs/fault-lab.md)（撮合引擎重置实验）

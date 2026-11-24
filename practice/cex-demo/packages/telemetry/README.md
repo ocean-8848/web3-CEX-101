@@ -23,5 +23,5 @@ pnpm --filter @web3-cex/telemetry test
 
 延伸阅读:
 
-- [13 可靠性与安全事故](../../learning/13-reliability-security-incidents.md)
+- [13 可靠性与安全事故](../../../../docs/chapters/13-reliability-security-incidents.md)
 - [系统架构](../../docs/architecture.md)

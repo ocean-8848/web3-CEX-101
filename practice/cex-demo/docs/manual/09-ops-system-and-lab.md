@@ -195,10 +195,10 @@
 ### 延伸学习
 
 - [故障注入实验室](../fault-lab.md)
-- [../../learning/13-reliability-security-incidents.md](../../learning/13-reliability-security-incidents.md)
-- [../../learning/backstage/B07-incident-response.md](../../learning/backstage/B07-incident-response.md)
-- [../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)（托管通道与热钱包）
-- [../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)（结算链路）
+- [13-reliability-security-incidents.md](../../../../docs/chapters/13-reliability-security-incidents.md)
+- [backstage/B07-incident-response.md](../../../../docs/backstage/B07-incident-response.md)
+- [04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)（托管通道与热钱包）
+- [07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)（结算链路）
 
 ---
 
@@ -243,8 +243,8 @@
 ### 延伸学习
 
 - [../security.md](../security.md) 第 2.11、2.12 节（紧急开关与告警分级）
-- [../../learning/backstage/B07-incident-response.md](../../learning/backstage/B07-incident-response.md)（止血与紧急开关）
-- [../../learning/backstage/B04-reconciliation.md](../../learning/backstage/B04-reconciliation.md)（对账不平就停提币）
+- [backstage/B07-incident-response.md](../../../../docs/backstage/B07-incident-response.md)（止血与紧急开关）
+- [backstage/B04-reconciliation.md](../../../../docs/backstage/B04-reconciliation.md)（对账不平就停提币）
 
 ---
 

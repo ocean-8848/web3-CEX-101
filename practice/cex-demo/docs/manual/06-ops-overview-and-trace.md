@@ -52,7 +52,7 @@ RBAC 里还定义了 `ops_finance_operator`、`ops_risk_operator`、`ops_platfor
 ### 延伸学习
 
 - [../security.md](../security.md)（RBAC 与职责分离）
-- [../../learning/backstage/B07-incident-response.md](../../learning/backstage/B07-incident-response.md)
+- [backstage/B07-incident-response.md](../../../../docs/backstage/B07-incident-response.md)
 
 ## 2. 运营总览
 
@@ -88,7 +88,7 @@ RBAC 里还定义了 `ops_finance_operator`、`ops_risk_operator`、`ops_platfor
 ### 延伸学习
 
 - [../architecture.md](../architecture.md)
-- [../../learning/13-reliability-security-incidents.md](../../learning/13-reliability-security-incidents.md)
+- [13-reliability-security-incidents.md](../../../../docs/chapters/13-reliability-security-incidents.md)
 
 ## 3. 业务追踪
 
@@ -139,7 +139,7 @@ RBAC 里还定义了 `ops_finance_operator`、`ops_risk_operator`、`ops_platfor
 ### 延伸学习
 
 - [../architecture.md](../architecture.md)
-- [../../learning/backstage/B07-incident-response.md](../../learning/backstage/B07-incident-response.md)
+- [backstage/B07-incident-response.md](../../../../docs/backstage/B07-incident-response.md)
 
 ## 4. 操作审计
 
@@ -170,7 +170,7 @@ RBAC 里还定义了 `ops_finance_operator`、`ops_risk_operator`、`ops_platfor
 
 ### 延伸学习
 
-- [../../learning/backstage/B01-compliance.md](../../learning/backstage/B01-compliance.md)
+- [backstage/B01-compliance.md](../../../../docs/backstage/B01-compliance.md)
 - [../security.md](../security.md)
 
 ---

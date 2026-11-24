@@ -2,14 +2,14 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
-A runnable, end-to-end **centralized crypto exchange (CEX) demo** plus a structured **learning curriculum** on how real exchanges work. Built for learning: every asset is test data and the chain is a local simulated EVM chain.
+A runnable, end-to-end **centralized crypto exchange (CEX) demo**, kept in the [web3-CEX-101](../../README.md) handbook as hands-on practice material. Built for learning: every asset is test data and the chain is a local simulated EVM chain.
 
-The repository has two parts:
+It sits next to the handbook:
 
 | Part | What it is | Start here |
 |---|---|---|
 | **CEX Demo** | A spot exchange monorepo: trader web app, ops console, API gateway, 10 backend services, a Rust matching engine, and a market-maker / chain simulator. | [Quick start](#quick-start) · [docs/](docs/README.md) |
-| **Learning materials** | 13 core chapters, 12 "backstage" topics, 11 product deep dives, 22 interactive labs, and 40 animated slide decks explaining exchange systems. | [learning/](learning/README.md) · [online handbook](https://claude.ai/artifact/HYgzfN2Zk8SRLbAskxh8nJ) |
+| **Learning materials** (outside this folder) | 13 core chapters, 12 "backstage" topics, 11 product deep dives, 22 interactive labs, and 40 animated slide decks explaining exchange systems. | [handbook](../../README.md) · [concept → code map](../README.md) |
 
 > Most documentation and learning content is written in **Simplified Chinese**. Code, commands and identifiers are in English.
 
@@ -78,7 +78,6 @@ config/        markets.json: markets and assets, the single source of truth
 infra/local/   docker-compose for PostgreSQL / Redis / Kafka / ClickHouse / Jaeger
 scripts/       stack lifecycle, demo seeding, simulator, verification and E2E
 docs/          demo documentation (setup, walkthrough, architecture, APIs, security)
-learning/      exchange learning materials (chapters, labs, slides)
 ```
 
 ## Testing
@@ -92,12 +91,10 @@ pnpm test:e2e        # against a running, seeded stack (after pnpm demo:up)
 
 ## Learning path
 
-The learning materials are also available as an online handbook with search, zoomable diagrams, the interactive labs and the slides in one place: [CEX learning handbook](https://claude.ai/artifact/HYgzfN2Zk8SRLbAskxh8nJ) (Chinese).
-
-1. Read [learning/01-what-is-cex.md](learning/01-what-is-cex.md) and [learning/02-system-architecture.md](learning/02-system-architecture.md).
+1. Read [01-what-is-cex.md](../../docs/chapters/01-what-is-cex.md) and [02-system-architecture.md](../../docs/chapters/02-system-architecture.md).
 2. Run the demo and follow [docs/demo-walkthrough.md](docs/demo-walkthrough.md) with learning mode on.
-3. Go deeper per module: ledger ([chapter 05](learning/05-ledger.md)), matching ([06](learning/06-order-matching.md)), clearing ([07](learning/07-clearing-settlement-fees.md)), and so on. Each chapter ends with a section that maps the concept to this repo's code.
-4. Try the interactive labs in [learning/interactive/](learning/interactive/index.html) and the slides in [learning/slides/](learning/slides/index.html). Both open directly in a browser with no server.
+3. Go deeper per module: ledger ([chapter 05](../../docs/chapters/05-ledger.md)), matching ([06](../../docs/chapters/06-order-matching.md)), clearing ([07](../../docs/chapters/07-clearing-settlement-fees.md)), and so on. The [concept → code map](../README.md) shows where each topic lives in this demo.
+4. Try the interactive labs in [interactive/](../../interactive/index.html) and the slides in [slides/](../../slides/index.html). Both open directly in a browser with no server.
 
 ## Purpose
 

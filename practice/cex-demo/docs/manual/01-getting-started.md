@@ -99,7 +99,7 @@ pnpm -s ops:totp reviewer   # ops-reviewer@example.com
 
 ### 延伸学习
 
-- [../../learning/03-account-identity-security.md](../../learning/03-account-identity-security.md)
+- [03-account-identity-security.md](../../../../docs/chapters/03-account-identity-security.md)
 - [../security.md](../security.md)
 
 ## 5. ops-console 登录
@@ -128,7 +128,7 @@ pnpm -s ops:totp reviewer   # ops-reviewer@example.com
 
 ### 延伸学习
 
-- [../../learning/03-account-identity-security.md](../../learning/03-account-identity-security.md)
+- [03-account-identity-security.md](../../../../docs/chapters/03-account-identity-security.md)
 
 ## 6. 停止环境
 

@@ -109,9 +109,9 @@
 
 ### 延伸学习
 
-- [../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)
-- [../../learning/09-risk-control.md](../../learning/09-risk-control.md)
-- [../../learning/backstage/B01-compliance.md](../../learning/backstage/B01-compliance.md)
+- [04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)
+- [09-risk-control.md](../../../../docs/chapters/09-risk-control.md)
+- [backstage/B01-compliance.md](../../../../docs/backstage/B01-compliance.md)
 - [../security.md](../security.md)
 
 ## 2. 充值与链上
@@ -162,8 +162,8 @@
 
 ### 延伸学习
 
-- [../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)
-- [../../learning/backstage/B04-reconciliation.md](../../learning/backstage/B04-reconciliation.md)
+- [04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)
+- [backstage/B04-reconciliation.md](../../../../docs/backstage/B04-reconciliation.md)
 
 ## 3. 用户与资产
 
@@ -300,9 +300,9 @@
 
 ### 延伸学习
 
-- [../../learning/backstage/B01-compliance.md](../../learning/backstage/B01-compliance.md)
-- [../../learning/09-risk-control.md](../../learning/09-risk-control.md)
-- [../../learning/05-ledger.md](../../learning/05-ledger.md)
+- [backstage/B01-compliance.md](../../../../docs/backstage/B01-compliance.md)
+- [09-risk-control.md](../../../../docs/chapters/09-risk-control.md)
+- [05-ledger.md](../../../../docs/chapters/05-ledger.md)
 
 ---
 

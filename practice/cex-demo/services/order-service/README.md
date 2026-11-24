@@ -188,6 +188,6 @@ HTTP 接口:
 
 延伸阅读:
 
-- [06 订单与撮合](../../learning/06-order-matching.md)
-- [07 清算结算与手续费](../../learning/07-clearing-settlement-fees.md)、[12 商业模式](../../learning/12-business-model.md)
+- [06 订单与撮合](../../../../docs/chapters/06-order-matching.md)
+- [07 清算结算与手续费](../../../../docs/chapters/07-clearing-settlement-fees.md)、[12 商业模式](../../../../docs/chapters/12-business-model.md)
 - [事件目录](../../docs/event-catalog.md)、[故障实验室](../../docs/fault-lab.md)

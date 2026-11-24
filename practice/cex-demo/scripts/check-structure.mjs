@@ -16,7 +16,6 @@ const requiredPaths = [
   "docs/api-contracts.md",
   "docs/event-catalog.md",
   "docs/security.md",
-  "learning/README.md",
   "docs/domain-model.md",
   "infra/local/docker-compose.yml",
   "scripts/full-stack-lib.mjs",

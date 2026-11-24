@@ -101,6 +101,6 @@ HTTP 接口:
 
 延伸阅读:
 
-- [07 清算结算与手续费](../../learning/07-clearing-settlement-fees.md)
-- [05 账本](../../learning/05-ledger.md)
+- [07 清算结算与手续费](../../../../docs/chapters/07-clearing-settlement-fees.md)
+- [05 账本](../../../../docs/chapters/05-ledger.md)
 - [事件目录](../../docs/event-catalog.md)、[故障实验室](../../docs/fault-lab.md)

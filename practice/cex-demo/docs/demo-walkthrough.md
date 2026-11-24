@@ -78,7 +78,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `market-data-service`（ticker、K 线、公共 WebSocket） | [../learning/02-system-architecture.md](../learning/02-system-architecture.md)、[../learning/08-market-data.md](../learning/08-market-data.md) |
+| `market-data-service`（ticker、K 线、公共 WebSocket） | [02-system-architecture.md](../../../docs/chapters/02-system-architecture.md)、[08-market-data.md](../../../docs/chapters/08-market-data.md) |
 
 ### 3.2 登录与注册（`#/login`）
 
@@ -92,7 +92,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `api-gateway`（登录限流、会话校验）、`identity-service`（密码、TOTP、签发 session） | [../learning/03-account-identity-security.md](../learning/03-account-identity-security.md) |
+| `api-gateway`（登录限流、会话校验）、`identity-service`（密码、TOTP、签发 session） | [03-account-identity-security.md](../../../docs/chapters/03-account-identity-security.md) |
 
 ### 3.3 交易页（`#/trade/ETH-USDT`）
 
@@ -139,7 +139,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `api-gateway` → `order-service` → `risk-service`（数量、步长、价格偏离、市场是否暂停）→ `ledger-service`（冻结）→ `matching-engine`（价格优先、时间优先）→ `settlement-service` → `ledger-service`（分录）→ `market-data-service` / `api-gateway`（推送） | [../learning/06-order-matching.md](../learning/06-order-matching.md)、[../learning/09-risk-control.md](../learning/09-risk-control.md)、[../learning/08-market-data.md](../learning/08-market-data.md) |
+| `api-gateway` → `order-service` → `risk-service`（数量、步长、价格偏离、市场是否暂停）→ `ledger-service`（冻结）→ `matching-engine`（价格优先、时间优先）→ `settlement-service` → `ledger-service`（分录）→ `market-data-service` / `api-gateway`（推送） | [06-order-matching.md](../../../docs/chapters/06-order-matching.md)、[09-risk-control.md](../../../docs/chapters/09-risk-control.md)、[08-market-data.md](../../../docs/chapters/08-market-data.md) |
 
 ### 3.4 T 型账户视图
 
@@ -155,7 +155,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `settlement-service`（生成分录）、`ledger-service`（双分录账本） | [../learning/05-ledger.md](../learning/05-ledger.md)、[../learning/07-clearing-settlement-fees.md](../learning/07-clearing-settlement-fees.md)、[ledger-service-design.md](./ledger-service-design.md) |
+| `settlement-service`（生成分录）、`ledger-service`（双分录账本） | [05-ledger.md](../../../docs/chapters/05-ledger.md)、[07-clearing-settlement-fees.md](../../../docs/chapters/07-clearing-settlement-fees.md)、[ledger-service-design.md](./ledger-service-design.md) |
 
 ### 3.5 订单中心（`#/orders`）
 
@@ -197,8 +197,8 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| 充值：`demo-simulator` → `blockchain-indexer`（确认数）→ `wallet-service`（充值单）→ `ledger-service`（入账） | [../learning/04-wallet-custody.md](../learning/04-wallet-custody.md) |
-| 提现：`api-gateway` → `wallet-service`（白名单、限额、2FA、冷却期）→ `ledger-service`（冻结） | [../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)、[../learning/09-risk-control.md](../learning/09-risk-control.md) |
+| 充值：`demo-simulator` → `blockchain-indexer`（确认数）→ `wallet-service`（充值单）→ `ledger-service`（入账） | [04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md) |
+| 提现：`api-gateway` → `wallet-service`（白名单、限额、2FA、冷却期）→ `ledger-service`（冻结） | [04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)、[09-risk-control.md](../../../docs/chapters/09-risk-control.md) |
 
 ### 3.7 资金流水（`#/assets/ledger`）
 
@@ -211,7 +211,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `ledger-service`（分录与冻结事件） | [../learning/05-ledger.md](../learning/05-ledger.md) |
+| `ledger-service`（分录与冻结事件） | [05-ledger.md](../../../docs/chapters/05-ledger.md) |
 
 #### 储备金证明（`#/assets/reserves`）
 
@@ -222,7 +222,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `api-gateway` → `wallet-service`（快照与自己的路径），叶子来自 `ledger-service` 用户负债 | [../learning/04-wallet-custody.md](../learning/04-wallet-custody.md) 第 3.9 节 |
+| `api-gateway` → `wallet-service`（快照与自己的路径），叶子来自 `ledger-service` 用户负债 | [04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md) 第 3.9 节 |
 
 ### 3.8 账户页（`#/account`）
 
@@ -248,7 +248,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 | 涉及服务 | 学习章节 |
 | --- | --- |
-| `identity-service`（会话、2FA、恢复码、KYC 申请、API Key）、`api-gateway`（HMAC 验签、nonce 防重放）、`wallet-service`（按 KYC 等级校验提现限额） | [../learning/03-account-identity-security.md](../learning/03-account-identity-security.md)、[security.md](./security.md) |
+| `identity-service`（会话、2FA、恢复码、KYC 申请、API Key）、`api-gateway`（HMAC 验签、nonce 防重放）、`wallet-service`（按 KYC 等级校验提现限额） | [03-account-identity-security.md](../../../docs/chapters/03-account-identity-security.md)、[security.md](./security.md) |
 
 ### 3.9 通知中心
 
@@ -314,7 +314,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 - 第二位运营看到的按钮是「复核批准」（详情抽屉里是「复核批准并广播」）。批准后显示「2/2 已批准」，进入广播和链上确认。
 - 详情抽屉的「双人复核」区列出每一位批准人和时间；「审计轨迹」记录 `first_approved` → `approved` 两次状态迁移。
 
-学习章节：[../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)、[../learning/09-risk-control.md](../learning/09-risk-control.md)。
+学习章节：[04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)、[09-risk-control.md](../../../docs/chapters/09-risk-control.md)。
 
 ### 4.5 充值与链上（`#/deposits`）
 
@@ -322,7 +322,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 - 「充值记录」页签：按状态、币种筛选。
 - 「待确认观察」页签：尚未达到确认阈值的充值观察，显示区块和确认进度。卡住的观察可以单笔或批量「重放」（按确认数重放，等待入账）或「关闭」（关闭后这笔观察不再入账，例如链重组后交易已不存在）。
 
-学习章节：[../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)。
+学习章节：[04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)。
 
 ### 4.6 用户与资产（`#/users`）
 
@@ -337,7 +337,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 - 用户详情的「KYC 等级」区可以直接「调整为 未认证 / L1 / L2」，需要填写调整原因。
 - 批准 KYC 后用户立即获得对应等级的提现限额，审核人和备注写入 KYC 事件和操作审计。
 
-学习章节：[../learning/03-account-identity-security.md](../learning/03-account-identity-security.md)。
+学习章节：[03-account-identity-security.md](../../../docs/chapters/03-account-identity-security.md)。
 
 ### 4.7 交易与结算（`#/trading`）
 
@@ -347,7 +347,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 - 「结算」页签：按状态筛选，分列「卖方费 (quote)」「买方费 (base)」；未结算的行可以「重试结算」。
 - 「订单簿健康」页签：「数据库 vs 撮合引擎」对比 DB 挂单、引擎买单、引擎卖单和异常数，下方是「异常清单」。撮合引擎的订单簿在内存中，`order-service` 的数据库是事实源；两者不一致时点「从数据库重建引擎订单簿」。
 
-学习章节：[../learning/06-order-matching.md](../learning/06-order-matching.md)、[../learning/07-clearing-settlement-fees.md](../learning/07-clearing-settlement-fees.md)。
+学习章节：[06-order-matching.md](../../../docs/chapters/06-order-matching.md)、[07-clearing-settlement-fees.md](../../../docs/chapters/07-clearing-settlement-fees.md)。
 
 ### 4.8 市场管理（`#/markets`）
 
@@ -358,7 +358,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 暂停 / 恢复需要 `ops.markets.manage` 权限，由 `risk-service` 持久化并写入操作审计。新增 / 下架市场、改步长或费率需要编辑 `config/markets.json` 后重启服务，见 [config/README.md](../config/README.md)。
 
-学习章节：[../learning/09-risk-control.md](../learning/09-risk-control.md)。
+学习章节：[09-risk-control.md](../../../docs/chapters/09-risk-control.md)。
 
 ### 4.9 业务追踪（`#/trace`）
 
@@ -374,7 +374,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 - 「投递 Outbox 事件」手动驱动一轮 Outbox 投递。`pnpm stack:start` 会常驻运行 `ledger-outbox-publisher`，积压持续增长通常意味着 publisher 或 Kafka 异常。
 - 页面底部「对账原理」解释了分录净额、活跃冻结、期望值和回放的含义。
 
-学习章节：[../learning/05-ledger.md](../learning/05-ledger.md)、[ledger-service-design.md](./ledger-service-design.md)。
+学习章节：[05-ledger.md](../../../docs/chapters/05-ledger.md)、[ledger-service-design.md](./ledger-service-design.md)。
 
 #### 钱包与储备金（`#/treasury`）
 
@@ -394,7 +394,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 | 自动化作业 | 作业模板、定时计划、最近执行；每次执行都写入操作审计 |
 | 实验室 | 故障注入实验室，可直接用 `#/system?tab=lab` 打开，详见 [fault-lab.md](./fault-lab.md) |
 
-学习章节：[../learning/13-reliability-security-incidents.md](../learning/13-reliability-security-incidents.md)。
+学习章节：[13-reliability-security-incidents.md](../../../docs/chapters/13-reliability-security-incidents.md)。
 
 ### 4.12 操作审计（`#/audit`）
 
@@ -417,7 +417,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 | 6 | 到 `ops-console` →「交易与结算」→「成交」/「结算」 | 同一笔成交已结算，卖方费与买方费分列 | `order-service`、`settlement-service` |
 | 7 | 把 `tradeId` 粘贴到「业务追踪」 | 订单、成交、结算、账本分录串在一起 | 多个模块 |
 
-学习章节：[../learning/06-order-matching.md](../learning/06-order-matching.md)、[../learning/07-clearing-settlement-fees.md](../learning/07-clearing-settlement-fees.md)、[../learning/05-ledger.md](../learning/05-ledger.md)。
+学习章节：[06-order-matching.md](../../../docs/chapters/06-order-matching.md)、[07-clearing-settlement-fees.md](../../../docs/chapters/07-clearing-settlement-fees.md)、[05-ledger.md](../../../docs/chapters/05-ledger.md)。
 
 ### 5.2 充值
 
@@ -432,7 +432,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 为什么要等 12 个确认：确认数不够时，链重组可能把交易回滚。可以在故障实验室的「链重组」实验里亲眼看到确认数跌回再重新累积，见 [fault-lab.md](./fault-lab.md)。
 
-学习章节：[../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)。
+学习章节：[04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)。
 
 ### 5.3 提现与审核
 
@@ -455,7 +455,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 4. 退出，用 `ops-reviewer@example.com` / `OpsReviewerPass123!`（动态码用 `pnpm -s ops:totp reviewer`）登录，点「复核批准」。显示「2/2 已批准」，随后进入广播和链上确认。
 5. 提现详情的「双人复核」与「审计轨迹」能看到两次批准及各自的操作人。
 
-学习章节：[../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)、[../learning/09-risk-control.md](../learning/09-risk-control.md)、[../learning/03-account-identity-security.md](../learning/03-account-identity-security.md)。
+学习章节：[04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)、[09-risk-control.md](../../../docs/chapters/09-risk-control.md)、[03-account-identity-security.md](../../../docs/chapters/03-account-identity-security.md)。
 
 ### 5.4 排查一次结算异常
 
@@ -473,7 +473,7 @@ pnpm demo:verify    # 校验余额、充值地址、盘口和后台模块
 
 结算消费者暂停期间，撮合照常进行；这正是“撮合”和“结算”分成两个阶段、通过事件流异步衔接的结果。其他三个故障实验见 [fault-lab.md](./fault-lab.md)。
 
-学习章节：[../learning/07-clearing-settlement-fees.md](../learning/07-clearing-settlement-fees.md)、[../learning/13-reliability-security-incidents.md](../learning/13-reliability-security-incidents.md)。
+学习章节：[07-clearing-settlement-fees.md](../../../docs/chapters/07-clearing-settlement-fees.md)、[13-reliability-security-incidents.md](../../../docs/chapters/13-reliability-security-incidents.md)。
 
 ## 6. 讲解顺序建议
 

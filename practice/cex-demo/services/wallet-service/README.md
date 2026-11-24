@@ -191,6 +191,6 @@ HTTP 接口:
 
 延伸阅读:
 
-- [04 钱包与托管](../../learning/04-wallet-custody.md)
-- [B06 资金与流动性管理](../../learning/backstage/B06-treasury-liquidity.md)
+- [04 钱包与托管](../../../../docs/chapters/04-wallet-custody.md)
+- [B06 资金与流动性管理](../../../../docs/backstage/B06-treasury-liquidity.md)
 - [安全设计](../../docs/security.md)

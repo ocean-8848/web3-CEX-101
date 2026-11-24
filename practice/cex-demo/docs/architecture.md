@@ -232,7 +232,7 @@ sequenceDiagram
 - 重组检测：同一笔交易报告的 `blockNumber` / `blockHash` 变化时，indexer 记录 `reorg_detected_at`，扫描游标打上重组标记触发告警。模拟器的重组深度始终小于确认阈值，避免已入账的充值被孤立（账本无法撤销）。
 - 用户在钱包侧看到充值单时，它已经是 `confirmed`/`credited`；确认中的进度来自 indexer 观测（水龙头状态接口读的就是它）。
 
-对应学习章节：[04 钱包与托管](../learning/04-wallet-custody.md)、[05 账本](../learning/05-ledger.md)。
+对应学习章节：[04 钱包与托管](../../../docs/chapters/04-wallet-custody.md)、[05 账本](../../../docs/chapters/05-ledger.md)。
 
 ### 5.2 提币
 
@@ -286,7 +286,7 @@ sequenceDiagram
 - 双人复核阈值默认 `USDT=5000, USDC=5000, ETH=2, BTC=0.1, SOL=50`（`WITHDRAWAL_DUAL_APPROVAL_THRESHOLD_BY_ASSET`），两次批准必须来自不同运营账号。
 - 安全冷却期：修改 2FA 或新增提币地址后一段时间内禁止提币；演示栈默认 `WITHDRAWAL_SECURITY_COOLDOWN_SECONDS=0` 关闭。
 
-对应学习章节：[03 账户、身份与安全](../learning/03-account-identity-security.md)、[04 钱包与托管](../learning/04-wallet-custody.md)、[09 风控](../learning/09-risk-control.md)。
+对应学习章节：[03 账户、身份与安全](../../../docs/chapters/03-account-identity-security.md)、[04 钱包与托管](../../../docs/chapters/04-wallet-custody.md)、[09 风控](../../../docs/chapters/09-risk-control.md)。
 
 ### 5.3 现货交易
 
@@ -384,7 +384,7 @@ sequenceDiagram
 - 触发时不再调用下单风控，但会读取 `risk-service` 的市场状态与紧急开关：市场暂停 / 下架或 API 写入冻结期间，越过触发价的止损单保持 `pending_trigger`（不拒单、资金继续冻结），解除后的下一轮立即触发（`src/application/stop-trigger-gate.ts`）。
 - 触发后产生的成交可能继续触发其他止损单（下一次轮询处理）。
 
-对应学习章节：[06 订单与撮合](../learning/06-order-matching.md)、[07 清算结算与手续费](../learning/07-clearing-settlement-fees.md)、[08 行情](../learning/08-market-data.md)、[09 风控](../learning/09-risk-control.md)。
+对应学习章节：[06 订单与撮合](../../../docs/chapters/06-order-matching.md)、[07 清算结算与手续费](../../../docs/chapters/07-clearing-settlement-fees.md)、[08 行情](../../../docs/chapters/08-market-data.md)、[09 风控](../../../docs/chapters/09-risk-control.md)。
 
 ### 5.5 冷热分层、归集与储备金证明
 
@@ -453,7 +453,7 @@ sequenceDiagram
 - **与提现风控的关系**：提现先经 KYT 评分与黑名单拦截，批准时再查一次黑名单，通过后才由热钱包广播；只有已广播 / 已确认的提现计入热钱包流出，被拦截或自动拒绝的提现不影响持仓。归集和冷热调拨的目标是服务端固定的平台地址，不经过用户提现风控。
 - **链上确认的来源**：真实环境由链扫描器发现内部转账上链；演示中由 `demo-simulator` 直接把确认数报给 `wallet-service`，与它推进提币确认的方式一致。
 
-对应学习章节：[04 钱包与托管](../learning/04-wallet-custody.md) 第 3.5、3.6、3.9 节，[B06 资金与流动性管理](../learning/backstage/B06-treasury-liquidity.md)，[B04 系统对账](../learning/backstage/B04-reconciliation.md)。
+对应学习章节：[04 钱包与托管](../../../docs/chapters/04-wallet-custody.md) 第 3.5、3.6、3.9 节，[B06 资金与流动性管理](../../../docs/backstage/B06-treasury-liquidity.md)，[B04 系统对账](../../../docs/backstage/B04-reconciliation.md)。
 
 ### 5.6 紧急开关与对账熔断
 
@@ -529,16 +529,16 @@ flowchart LR
 
 | 本文内容 | 学习章节 |
 | --- | --- |
-| 系统分层与服务清单 | [02 系统总架构](../learning/02-system-architecture.md) |
-| 身份、会话、2FA、KYC、内部认证 | [03 账户、身份与安全](../learning/03-account-identity-security.md) |
-| 充值、提币、indexer、托管、冷热分层、储备金证明 | [04 钱包与托管](../learning/04-wallet-custody.md)、[B06 资金与流动性管理](../learning/backstage/B06-treasury-liquidity.md)、[B04 系统对账](../learning/backstage/B04-reconciliation.md) |
-| 账本、冻结、outbox | [05 账本](../learning/05-ledger.md) |
-| 订单、风控预检、撮合引擎 | [06 订单与撮合](../learning/06-order-matching.md) |
-| 结算与手续费、VIP 等级 | [07 清算结算与手续费](../learning/07-clearing-settlement-fees.md)、[12 商业模式](../learning/12-business-model.md) |
-| 行情快照、公共 WS、K 线 | [08 行情](../learning/08-market-data.md) |
-| 风控规则、提币限额、市场暂停 | [09 风控](../learning/09-risk-control.md) |
-| 市场监控（对敲、幌骗、成交集中、价格异动） | [B05 业务风控](../learning/backstage/B05-business-risk.md) |
-| 恢复队列、故障实验室、追踪、紧急开关、告警分级 | [13 可靠性与安全事故](../learning/13-reliability-security-incidents.md)、[B07 应急响应](../learning/backstage/B07-incident-response.md) |
-| 定时对账与对账熔断 | [B04 系统对账](../learning/backstage/B04-reconciliation.md) |
+| 系统分层与服务清单 | [02 系统总架构](../../../docs/chapters/02-system-architecture.md) |
+| 身份、会话、2FA、KYC、内部认证 | [03 账户、身份与安全](../../../docs/chapters/03-account-identity-security.md) |
+| 充值、提币、indexer、托管、冷热分层、储备金证明 | [04 钱包与托管](../../../docs/chapters/04-wallet-custody.md)、[B06 资金与流动性管理](../../../docs/backstage/B06-treasury-liquidity.md)、[B04 系统对账](../../../docs/backstage/B04-reconciliation.md) |
+| 账本、冻结、outbox | [05 账本](../../../docs/chapters/05-ledger.md) |
+| 订单、风控预检、撮合引擎 | [06 订单与撮合](../../../docs/chapters/06-order-matching.md) |
+| 结算与手续费、VIP 等级 | [07 清算结算与手续费](../../../docs/chapters/07-clearing-settlement-fees.md)、[12 商业模式](../../../docs/chapters/12-business-model.md) |
+| 行情快照、公共 WS、K 线 | [08 行情](../../../docs/chapters/08-market-data.md) |
+| 风控规则、提币限额、市场暂停 | [09 风控](../../../docs/chapters/09-risk-control.md) |
+| 市场监控（对敲、幌骗、成交集中、价格异动） | [B05 业务风控](../../../docs/backstage/B05-business-risk.md) |
+| 恢复队列、故障实验室、追踪、紧急开关、告警分级 | [13 可靠性与安全事故](../../../docs/chapters/13-reliability-security-incidents.md)、[B07 应急响应](../../../docs/backstage/B07-incident-response.md) |
+| 定时对账与对账熔断 | [B04 系统对账](../../../docs/backstage/B04-reconciliation.md) |
 
 相关文档：[domain-model.md](./domain-model.md) · [event-catalog.md](./event-catalog.md) · [api-contracts.md](./api-contracts.md) · [ledger-service-design.md](./ledger-service-design.md) · [fault-lab.md](./fault-lab.md) · [troubleshooting.md](./troubleshooting.md)

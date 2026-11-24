@@ -97,6 +97,6 @@ SQL schema:
 
 延伸阅读:
 
-- [04 钱包与托管](../../learning/04-wallet-custody.md)
-- [B04 系统对账](../../learning/backstage/B04-reconciliation.md)
+- [04 钱包与托管](../../../../docs/chapters/04-wallet-custody.md)
+- [B04 系统对账](../../../../docs/backstage/B04-reconciliation.md)
 - [故障实验室](../../docs/fault-lab.md)

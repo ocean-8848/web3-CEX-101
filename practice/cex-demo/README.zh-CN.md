@@ -2,14 +2,14 @@
 
 [English](README.md) | **简体中文**
 
-一个可以完整运行的**中心化加密货币交易所（CEX）演示系统**，加上一套讲解真实交易所如何运作的**系统学习材料**。本项目用于学习：所有资产都是测试数据，链是本地模拟的 EVM 链。
+一个可以完整运行的**中心化加密货币交易所（CEX）演示系统**，作为 [web3-CEX-101](../../README.md) 学习手册的动手实践材料。本项目用于学习：所有资产都是测试数据，链是本地模拟的 EVM 链。
 
-仓库分为两部分：
+它和学习手册的关系：
 
 | 部分 | 内容 | 入口 |
 |---|---|---|
 | **CEX Demo** | 现货交易所 monorepo：交易前台、运营后台、API 网关、10 个后端服务、Rust 撮合引擎、做市与链模拟器。 | [快速开始](#快速开始) · [docs/](docs/README.md) |
-| **学习材料** | 13 章主线、12 篇幕后核心、11 篇产品深潜、22 个交互实验、40 集动画讲解幻灯片。 | [learning/](learning/README.md) · [在线手册](https://claude.ai/artifact/HYgzfN2Zk8SRLbAskxh8nJ) |
+| **学习材料**（本目录之外） | 13 章主线、12 篇幕后核心、11 篇产品深潜、22 个交互实验、40 集动画讲解幻灯片。 | [学习手册](../../README.md) · [知识点 → 代码对照](../README.md) |
 
 ## Demo 覆盖的能力
 
@@ -76,7 +76,6 @@ config/        markets.json：市场与币种的唯一来源
 infra/local/   PostgreSQL / Redis / Kafka / ClickHouse / Jaeger 的 docker-compose
 scripts/       全栈启停、演示数据、模拟器、验证与 E2E
 docs/          Demo 文档（安装、演示、架构、接口、安全）
-learning/      交易所学习材料（章节、交互实验、幻灯片）
 ```
 
 ## 测试
@@ -90,12 +89,10 @@ pnpm test:e2e        # 需要先 pnpm demo:up 启动并播种全栈
 
 ## 学习路线
 
-学习材料也有在线版：[CEX 交易所学习手册](https://claude.ai/artifact/HYgzfN2Zk8SRLbAskxh8nJ)，支持全文搜索、流程图放大，交互实验和幻灯片都能在页面里直接打开。
-
-1. 先读 [learning/01-what-is-cex.md](learning/01-what-is-cex.md) 和 [learning/02-system-architecture.md](learning/02-system-architecture.md)。
+1. 先读 [01-what-is-cex.md](../../docs/chapters/01-what-is-cex.md) 和 [02-system-architecture.md](../../docs/chapters/02-system-architecture.md)。
 2. 启动 Demo，打开学习模式，按 [docs/demo-walkthrough.md](docs/demo-walkthrough.md) 走一遍。
-3. 按模块深入：账本（[第 05 章](learning/05-ledger.md)）、撮合（[06](learning/06-order-matching.md)）、清结算（[07](learning/07-clearing-settlement-fees.md)）等。每章末尾的「本仓库对照」一节把概念对应到本仓库代码。
-4. 动手做 [learning/interactive/](learning/interactive/index.html) 里的交互实验，看 [learning/slides/](learning/slides/index.html) 里的幻灯片。两者都可以直接用浏览器打开，不需要服务器。
+3. 按模块深入：账本（[第 05 章](../../docs/chapters/05-ledger.md)）、撮合（[06](../../docs/chapters/06-order-matching.md)）、清结算（[07](../../docs/chapters/07-clearing-settlement-fees.md)）等。[知识点 → 代码对照](../README.md) 列出每个主题在本 Demo 里的代码位置。
+4. 动手做 [interactive/](../../interactive/index.html) 里的交互实验，看 [slides/](../../slides/index.html) 里的幻灯片。两者都可以直接用浏览器打开，不需要服务器。
 
 ## 用途
 

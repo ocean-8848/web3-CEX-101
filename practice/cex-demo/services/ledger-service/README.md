@@ -154,6 +154,6 @@ HTTP 接口:
 
 延伸阅读:
 
-- [05 账本](../../learning/05-ledger.md)
-- [07 清算结算与手续费](../../learning/07-clearing-settlement-fees.md)
-- [B04 系统对账](../../learning/backstage/B04-reconciliation.md)
+- [05 账本](../../../../docs/chapters/05-ledger.md)
+- [07 清算结算与手续费](../../../../docs/chapters/07-clearing-settlement-fees.md)
+- [B04 系统对账](../../../../docs/backstage/B04-reconciliation.md)

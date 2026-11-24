@@ -2,7 +2,7 @@
 
 `ledger-service` 是平台资金的唯一事实源：所有“钱从哪来、到哪去”都以双分录 journal 的形式记在这里，余额只是 journal 和冻结记录的快照。充值入账、下单冻结、撤单释放、成交结算、提币出账最终都会落到本服务的几个原语上。
 
-- 概念入门：[../learning/05-ledger.md](../learning/05-ledger.md)
+- 概念入门：[05-ledger.md](../../../docs/chapters/05-ledger.md)
 - HTTP 接口清单：[api-contracts.md](api-contracts.md#62-ledger-serviceapiv1ledgerhmac)
 - outbox 事件：[event-catalog.md](event-catalog.md)
 - 运行脚本与环境变量：[../services/ledger-service/README.md](../services/ledger-service/README.md)

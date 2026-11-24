@@ -8,7 +8,7 @@
 - 接口与鉴权头格式：[api-contracts.md](api-contracts.md)
 - 账本不变量：[ledger-service-design.md](ledger-service-design.md)
 - 故障演练：[fault-lab.md](fault-lab.md)
-- 课程背景：[账户与身份安全](../learning/03-account-identity-security.md)、[钱包与托管](../learning/04-wallet-custody.md)、[风控](../learning/09-risk-control.md)、[可靠性与安全事件](../learning/13-reliability-security-incidents.md)、[平台安全](../learning/backstage/B02-platform-security.md)、[账户安全](../learning/backstage/B03-account-security.md)、[安全工程](../learning/backstage/B11-security-engineering.md)
+- 课程背景：[账户与身份安全](../../../docs/chapters/03-account-identity-security.md)、[钱包与托管](../../../docs/chapters/04-wallet-custody.md)、[风控](../../../docs/chapters/09-risk-control.md)、[可靠性与安全事件](../../../docs/chapters/13-reliability-security-incidents.md)、[平台安全](../../../docs/backstage/B02-platform-security.md)、[账户安全](../../../docs/backstage/B03-account-security.md)、[安全工程](../../../docs/backstage/B11-security-engineering.md)
 
 ## 1. 安全边界与定位
 
@@ -183,7 +183,7 @@
 **与真实环境的差距**（演示简化）：
 
 - 热钱包、冷钱包都只是派生出来的演示地址，冷钱包"签名"同样经 `custody-adapter`（转账元数据标注 `cold-wallet (simulated offline signing)`），没有离线签名、多签 / MPC、硬件隔离。
-- 冷→热补充只要一人审批，没有分级审批、时间窗、单笔上限和白名单变更审批（见 [B06](../learning/backstage/B06-treasury-liquidity.md) 第 5.2 节）。
+- 冷→热补充只要一人审批，没有分级审批、时间窗、单笔上限和白名单变更审批（见 [B06](../../../docs/backstage/B06-treasury-liquidity.md) 第 5.2 节）。
 - 演示环境的储备由"注资上链"（genesis）记录补足：模拟器把期初权益发给用户的余额对应为平台自有资金上链（`DEMO_RESERVE_KEEPER_ENABLED`）。真实交易所的储备必须来自链上可查的地址余额，并由第三方审计。
 - 储备金证明只有 Merkle 包含证明，没有 zk-SNARK 证明"无负余额叶子、叶子总和等于负债"；资产端没有链上地址签名证明（proof of control）。
 

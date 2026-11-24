@@ -42,7 +42,7 @@
 
 ### 延伸学习
 
-[../../learning/06-order-matching.md](../../learning/06-order-matching.md)、[../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)、[../../learning/05-ledger.md](../../learning/05-ledger.md)。前后台界面细节见 [03 · 交易](03-trader-trading.md) 和 [08 · 交易与账本运营](08-ops-trading-and-ledger.md)。
+[06-order-matching.md](../../../../docs/chapters/06-order-matching.md)、[07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)、[05-ledger.md](../../../../docs/chapters/05-ledger.md)。前后台界面细节见 [03 · 交易](03-trader-trading.md) 和 [08 · 交易与账本运营](08-ops-trading-and-ledger.md)。
 
 ---
 
@@ -67,7 +67,7 @@
 
 ### 延伸学习
 
-[../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)。为什么要等 12 个确认：故障实验室的「链重组」实验能看到确认数回落再重新累积，见 [../fault-lab.md](../fault-lab.md)。
+[04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)。为什么要等 12 个确认：故障实验室的「链重组」实验能看到确认数回落再重新累积，见 [../fault-lab.md](../fault-lab.md)。
 
 ---
 
@@ -118,7 +118,7 @@
 
 ### 延伸学习
 
-[../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)、[../../learning/09-risk-control.md](../../learning/09-risk-control.md)。后台界面细节见 [06 · 总览与业务追踪](06-ops-overview-and-trace.md) 和 [07 · 资金运营](07-ops-funds.md)。
+[04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)、[09-risk-control.md](../../../../docs/chapters/09-risk-control.md)。后台界面细节见 [06 · 总览与业务追踪](06-ops-overview-and-trace.md) 和 [07 · 资金运营](07-ops-funds.md)。
 
 ---
 
@@ -156,7 +156,7 @@
 
 ### 延伸学习
 
-[../../learning/09-risk-control.md](../../learning/09-risk-control.md)、[../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)、[../../learning/03-account-identity-security.md](../../learning/03-account-identity-security.md)、[../security.md](../security.md)。
+[09-risk-control.md](../../../../docs/chapters/09-risk-control.md)、[04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)、[03-account-identity-security.md](../../../../docs/chapters/03-account-identity-security.md)、[../security.md](../security.md)。
 
 ---
 
@@ -184,7 +184,7 @@
 
 ### 延伸学习
 
-[../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)、[../../learning/13-reliability-security-incidents.md](../../learning/13-reliability-security-incidents.md)、[../../learning/backstage/B04-reconciliation.md](../../learning/backstage/B04-reconciliation.md)、[../fault-lab.md](../fault-lab.md)、[../demo-walkthrough.md](../demo-walkthrough.md)。
+[07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)、[13-reliability-security-incidents.md](../../../../docs/chapters/13-reliability-security-incidents.md)、[backstage/B04-reconciliation.md](../../../../docs/backstage/B04-reconciliation.md)、[../fault-lab.md](../fault-lab.md)、[../demo-walkthrough.md](../demo-walkthrough.md)。
 
 ---
 

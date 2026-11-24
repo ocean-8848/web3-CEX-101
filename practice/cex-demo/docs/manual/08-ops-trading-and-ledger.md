@@ -80,8 +80,8 @@
 
 ### 延伸学习
 
-- [../../learning/06-order-matching.md](../../learning/06-order-matching.md)
-- [../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)
+- [06-order-matching.md](../../../../docs/chapters/06-order-matching.md)
+- [07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)
 - [../architecture.md](../architecture.md)
 
 ## 2. 市场管理
@@ -123,8 +123,8 @@
 
 ### 延伸学习
 
-- [../../learning/09-risk-control.md](../../learning/09-risk-control.md)
-- [../../learning/backstage/B07-incident-response.md](../../learning/backstage/B07-incident-response.md)
+- [09-risk-control.md](../../../../docs/chapters/09-risk-control.md)
+- [backstage/B07-incident-response.md](../../../../docs/backstage/B07-incident-response.md)
 
 ## 3. 账本对账
 
@@ -180,8 +180,8 @@
 
 ### 延伸学习
 
-- [../../learning/05-ledger.md](../../learning/05-ledger.md)
-- [../../learning/backstage/B04-reconciliation.md](../../learning/backstage/B04-reconciliation.md)
+- [05-ledger.md](../../../../docs/chapters/05-ledger.md)
+- [backstage/B04-reconciliation.md](../../../../docs/backstage/B04-reconciliation.md)
 - [../ledger-service-design.md](../ledger-service-design.md)
 
 ## 4. 钱包与储备金
@@ -247,9 +247,9 @@
 
 ### 延伸学习
 
-- [../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md) 第 3.5 节（热 / 温 / 冷钱包与水位）、3.6 节（归集）、3.9 节（储备金证明）
-- [../../learning/backstage/B06-treasury-liquidity.md](../../learning/backstage/B06-treasury-liquidity.md)
-- [../../learning/backstage/B04-reconciliation.md](../../learning/backstage/B04-reconciliation.md) 第 5.3 节（对账与 PoR）
+- [04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md) 第 3.5 节（热 / 温 / 冷钱包与水位）、3.6 节（归集）、3.9 节（储备金证明）
+- [backstage/B06-treasury-liquidity.md](../../../../docs/backstage/B06-treasury-liquidity.md)
+- [backstage/B04-reconciliation.md](../../../../docs/backstage/B04-reconciliation.md) 第 5.3 节（对账与 PoR）
 - [../architecture.md](../architecture.md) 第 5.5 节
 
 ## 5. 市场监控
@@ -298,8 +298,8 @@
 
 ### 延伸学习
 
-- [../../learning/backstage/B05-business-risk.md](../../learning/backstage/B05-business-risk.md)
-- [../../learning/backstage/B08-risk-platform.md](../../learning/backstage/B08-risk-platform.md)
+- [backstage/B05-business-risk.md](../../../../docs/backstage/B05-business-risk.md)
+- [backstage/B08-risk-platform.md](../../../../docs/backstage/B08-risk-platform.md)
 
 ---
 

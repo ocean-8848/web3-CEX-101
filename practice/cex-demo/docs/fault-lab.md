@@ -58,7 +58,7 @@
 
 这是 `trader-web`「🧭 场景导览」里「排查一次结算异常」使用的实验，完整演示步骤见 [demo-walkthrough.md](./demo-walkthrough.md#54-排查一次结算异常)。
 
-学习章节：[../learning/07-clearing-settlement-fees.md](../learning/07-clearing-settlement-fees.md)。
+学习章节：[07-clearing-settlement-fees.md](../../../docs/chapters/07-clearing-settlement-fees.md)。
 
 ### ② 托管广播连续失败
 
@@ -76,7 +76,7 @@
 
 归集和冷热调拨也经 `custody-adapter` 广播。故障期间如果主备通道都不可用，归集会记为 `failed` 并把充值释放回待归集池，下一轮归集（默认每 10 个块）自动重试；失败的调拨可在「钱包与储备金」页点「重新广播」。暂停出块期间模拟器也暂停归集与水位检查。
 
-学习章节：[../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)、[../learning/13-reliability-security-incidents.md](../learning/13-reliability-security-incidents.md)。
+学习章节：[04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)、[13-reliability-security-incidents.md](../../../docs/chapters/13-reliability-security-incidents.md)。
 
 ### ③ 链重组
 
@@ -96,7 +96,7 @@
 - 回退深度可传 1–11，始终小于确认阈值，所以已入账充值不受影响。
 - 想慢一点观察，可以先「暂停出块」：暂停期间确认数不再增长，水龙头充值会停在确认中。
 
-学习章节：[../learning/04-wallet-custody.md](../learning/04-wallet-custody.md)。
+学习章节：[04-wallet-custody.md](../../../docs/chapters/04-wallet-custody.md)。
 
 ### ④ 撮合引擎重置
 
@@ -110,7 +110,7 @@
 | 观察位置 | 卡片上的「引擎异常」数和「数据库挂单 / 引擎挂单」对比，以及最近一次重置的「异常 x → y」；「交易与结算」→「订单簿健康」；`trader-web` 交易页盘口 |
 | 恢复 | 点「从数据库重建订单簿」（`POST /api/v1/ops/spot/ops/replay-engine`），按数据库挂单的价格和时间优先级回放进引擎，异常归零 |
 
-学习章节：[../learning/06-order-matching.md](../learning/06-order-matching.md)。
+学习章节：[06-order-matching.md](../../../docs/chapters/06-order-matching.md)。
 
 ### ⑤ 账本对账差额（对账熔断）
 
@@ -124,7 +124,7 @@
 | 观察位置 | 「账本对账」→「定时对账与熔断」的历史记录与熔断动作；「系统运维」→「紧急开关」的单币种表（来源「对账熔断」）；告警页 P1；运营总览的告警计数 |
 | 恢复 | 先点「清除差额」，再「立即对账」确认结果恢复一致，最后在「系统运维」→「紧急开关」填写恢复依据并恢复该币种提现。在没有一致的对账结果前恢复会被拒绝（`409 RECONCILIATION_NOT_CLEAN`） |
 
-学习章节：[../learning/backstage/B04-reconciliation.md](../learning/backstage/B04-reconciliation.md)、[../learning/backstage/B07-incident-response.md](../learning/backstage/B07-incident-response.md)。
+学习章节：[backstage/B04-reconciliation.md](../../../docs/backstage/B04-reconciliation.md)、[backstage/B07-incident-response.md](../../../docs/backstage/B07-incident-response.md)。
 
 ## 4. 一键恢复
 

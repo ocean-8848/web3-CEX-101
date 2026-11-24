@@ -222,10 +222,10 @@
 
 ## 延伸学习
 
-- 账户、身份、2FA、API Key：[../../learning/03-account-identity-security.md](../../learning/03-account-identity-security.md)
-- 账户安全的后台视角：[../../learning/backstage/B03-account-security.md](../../learning/backstage/B03-account-security.md)
-- 提现限额与风控：[../../learning/09-risk-control.md](../../learning/09-risk-control.md)
-- 手续费与 VIP 等级：[../../learning/07-clearing-settlement-fees.md](../../learning/07-clearing-settlement-fees.md)、[../../learning/12-business-model.md](../../learning/12-business-model.md)
+- 账户、身份、2FA、API Key：[03-account-identity-security.md](../../../../docs/chapters/03-account-identity-security.md)
+- 账户安全的后台视角：[backstage/B03-account-security.md](../../../../docs/backstage/B03-account-security.md)
+- 提现限额与风控：[09-risk-control.md](../../../../docs/chapters/09-risk-control.md)
+- 手续费与 VIP 等级：[07-clearing-settlement-fees.md](../../../../docs/chapters/07-clearing-settlement-fees.md)、[12-business-model.md](../../../../docs/chapters/12-business-model.md)
 - 项目安全设计说明：[../security.md](../security.md)
 
 ---

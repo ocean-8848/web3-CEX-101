@@ -240,11 +240,11 @@
 
 ## 延伸学习
 
-- 钱包、充值确认数、提现状态机：[../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md)
-- 双分录账本、可用 / 冻结：[../../learning/05-ledger.md](../../learning/05-ledger.md)
-- 提现限额、白名单、双人复核：[../../learning/09-risk-control.md](../../learning/09-risk-control.md)
-- 对账：[../../learning/backstage/B04-reconciliation.md](../../learning/backstage/B04-reconciliation.md)
-- 冷热钱包、储备金证明：[../../learning/04-wallet-custody.md](../../learning/04-wallet-custody.md) 第 3.5、3.9 节，交互实验 [../../learning/interactive/proof-of-reserves.html](../../learning/interactive/proof-of-reserves.html)
+- 钱包、充值确认数、提现状态机：[04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md)
+- 双分录账本、可用 / 冻结：[05-ledger.md](../../../../docs/chapters/05-ledger.md)
+- 提现限额、白名单、双人复核：[09-risk-control.md](../../../../docs/chapters/09-risk-control.md)
+- 对账：[backstage/B04-reconciliation.md](../../../../docs/backstage/B04-reconciliation.md)
+- 冷热钱包、储备金证明：[04-wallet-custody.md](../../../../docs/chapters/04-wallet-custody.md) 第 3.5、3.9 节，交互实验 [interactive/proof-of-reserves.html](../../../../interactive/proof-of-reserves.html)
 - 演示脚本中的对应步骤：[../demo-walkthrough.md](../demo-walkthrough.md)
 
 ---

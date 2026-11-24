@@ -136,6 +136,6 @@ API Key:
 
 延伸阅读:
 
-- [03 账户、身份与安全](../../learning/03-account-identity-security.md)
-- [B03 账户安全风控](../../learning/backstage/B03-account-security.md)、[B01 合规](../../learning/backstage/B01-compliance.md)
+- [03 账户、身份与安全](../../../../docs/chapters/03-account-identity-security.md)
+- [B03 账户安全风控](../../../../docs/backstage/B03-account-security.md)、[B01 合规](../../../../docs/backstage/B01-compliance.md)
 - [安全设计](../../docs/security.md)

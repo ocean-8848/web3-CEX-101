@@ -255,4 +255,4 @@ sequenceDiagram
 - [domain-model.md](./domain-model.md)：状态机与不变量
 - [ledger-service-design.md](./ledger-service-design.md)：账本细节
 - [fault-lab.md](./fault-lab.md)：暂停结算消费者、引擎重置等故障演练
-- 学习章节：[05 账本](../learning/05-ledger.md)、[07 清算结算与手续费](../learning/07-clearing-settlement-fees.md)、[08 行情](../learning/08-market-data.md)、[13 可靠性与安全事故](../learning/13-reliability-security-incidents.md)
+- 学习章节：[05 账本](../../../docs/chapters/05-ledger.md)、[07 清算结算与手续费](../../../docs/chapters/07-clearing-settlement-fees.md)、[08 行情](../../../docs/chapters/08-market-data.md)、[13 可靠性与安全事故](../../../docs/chapters/13-reliability-security-incidents.md)

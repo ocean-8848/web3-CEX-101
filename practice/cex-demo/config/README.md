@@ -109,6 +109,6 @@ VIP 手续费等级的唯一来源，`packages/domain/src/fee-tiers.ts` 的 `par
 
 ## 延伸阅读
 
-- [11 产品生态及其背后实现](../learning/11-products-ecosystem.md)、[P07 上币与新币发行](../learning/products/P07-listing-launch.md)
+- [11 产品生态及其背后实现](../../../docs/chapters/11-products-ecosystem.md)、[P07 上币与新币发行](../../../docs/products/P07-listing-launch.md)
 - [领域模型](../docs/domain-model.md)
-- [07 清算结算与手续费](../learning/07-clearing-settlement-fees.md)、[12 商业模式](../learning/12-business-model.md)
+- [07 清算结算与手续费](../../../docs/chapters/07-clearing-settlement-fees.md)、[12 商业模式](../../../docs/chapters/12-business-model.md)

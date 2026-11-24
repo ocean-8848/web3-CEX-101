@@ -1,6 +1,6 @@
 # 文档索引
 
-这里是 CEX Demo 的使用与设计文档。交易所通用知识（不限于本仓库）见 [../learning/README.md](../learning/README.md)。
+这里是 CEX Demo 的使用与设计文档。交易所通用知识（不限于本仓库）见 [学习手册](../../../README.md)。
 
 ## 上手
 
@@ -36,4 +36,4 @@
 1. [getting-started.md](getting-started.md)：先跑起来。
 2. [demo-walkthrough.md](demo-walkthrough.md)：打开学习模式走一遍主链。
 3. [architecture.md](architecture.md)：建立全局视图，再按兴趣读账本、事件、接口。
-4. 对照 [../learning/](../learning/README.md) 的相应章节理解真实交易所的做法。
+4. 对照 [学习手册](../../../README.md) 的相应章节理解真实交易所的做法。

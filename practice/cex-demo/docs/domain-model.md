@@ -469,11 +469,11 @@ interface DomainEvent<TPayload> {
 
 ## 相关学习章节
 
-- [03 账户、身份与安全](../learning/03-account-identity-security.md)：用户、会话、2FA、KYC
-- [04 钱包与托管](../learning/04-wallet-custody.md)：充值、提币、观测与托管
-- [05 账本](../learning/05-ledger.md)：账户、冻结、双分录
-- [06 订单与撮合](../learning/06-order-matching.md)：订单状态机
-- [07 清算结算与手续费](../learning/07-clearing-settlement-fees.md)：结算分录与手续费
-- [09 风控](../learning/09-risk-control.md)：风控规则、限额、市场状态
-- [12 商业模式](../learning/12-business-model.md)：VIP 手续费等级、做市商计划
-- [B05 业务风控](../learning/backstage/B05-business-risk.md)：市场监控告警
+- [03 账户、身份与安全](../../../docs/chapters/03-account-identity-security.md)：用户、会话、2FA、KYC
+- [04 钱包与托管](../../../docs/chapters/04-wallet-custody.md)：充值、提币、观测与托管
+- [05 账本](../../../docs/chapters/05-ledger.md)：账户、冻结、双分录
+- [06 订单与撮合](../../../docs/chapters/06-order-matching.md)：订单状态机
+- [07 清算结算与手续费](../../../docs/chapters/07-clearing-settlement-fees.md)：结算分录与手续费
+- [09 风控](../../../docs/chapters/09-risk-control.md)：风控规则、限额、市场状态
+- [12 商业模式](../../../docs/chapters/12-business-model.md)：VIP 手续费等级、做市商计划
+- [B05 业务风控](../../../docs/backstage/B05-business-risk.md)：市场监控告警
