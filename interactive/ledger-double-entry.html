@@ -203,7 +203,7 @@
     </table></div>
   </div>
 
-  <footer class="note">本页为教学模型。账户、费率、规则均为简化示例，不代表币安内部实现。对应本仓库：services/ledger-service（双分录、幂等、冻结状态机）与 services/settlement-service（成交结算、手续费入账）。</footer>
+  <footer class="note">本页为教学模型。账户、费率、规则均为简化示例，不代表币安内部实现。</footer>
 </div>
 
 <script>
@@ -382,7 +382,7 @@
     render();
   }
 
-  // 结算：把成交事件翻译成两组 journal（与本仓库 settlement-service 一致：base / quote 分开）
+  // 结算：把成交事件翻译成两组 journal（base / quote 分开）
   function settle(ev) {
     var noFee = $('bugNoFee').checked;
     var netA = ev.qty - ev.feeA, netB = ev.quote - ev.feeB;

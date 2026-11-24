@@ -620,22 +620,7 @@ flowchart LR
 
 ---
 
-## 8. 本仓库对照
-
-| 本篇攻击路径 | 本仓库现状 | 位置 |
-|---|---|---|
-| P1 热钱包密钥泄露 | `custody-adapter` 的 `evm-hot-wallet` provider 可从环境变量读取私钥或助记词，直接签名广播（默认走 mock provider）；安全文档把它列为最高风险缺口 | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 3、4 节、`services/custody-adapter/src/infrastructure/evm-provider-config.ts` |
-| P2 签名流程操纵 | 未实现签名策略引擎和意图校验 | 同上，见 [B02 第 8 节](B02-platform-security.md) |
-| P3 / P4 内部人员与员工 | 大额提现（超过分资产阈值）需两名不同运营批准，阈值以下单人审批即可推进广播；运营强制 2FA，会话 token 放在 HttpOnly Cookie | `services/wallet-service/src/domain/withdrawal-policy.ts`、`apps/ops-console/src/http/ops-session-cookie.ts` |
-| P5 账户批量接管 | 已有提币 2FA、白名单、额度与 KYC 分级限额、安全冷却期，API Key 有 nonce 防重放；没有设备绑定和异常登录检测 | `services/identity-service/src/application/identity-application-service.ts`、`services/api-gateway/src/http/api-key-signature.ts` |
-| P8 内部挪用 | 账本只追加、可重放，有对账命令 | 见 [13 章第 6 节](../chapters/13-reliability-security-incidents.md) |
-| L5 止血开关 | 单市场暂停（市场 `halted` 拒绝新单）、全站 / 单资产提币暂停、API 写入冻结（只读模式）；账本对账不平时自动暂停该资产提币 | `services/risk-service/src/application/control-switch-service.ts`、`services/ledger-service/src/application/reconciliation-breaker.ts`、`docs/security.md` 第 2.11 节 |
-
-关键观察：本仓库最突出的两个缺口，环境变量私钥和阈值以下单人审批，分别对应本篇 P1 和 P3/P4。也就是说，案例库里出现最多的两类路径，正是本仓库接入真实资产前必须补齐的缺口。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 

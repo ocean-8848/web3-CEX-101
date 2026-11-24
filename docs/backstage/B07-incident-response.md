@@ -302,24 +302,7 @@ flowchart LR
 
 ---
 
-## 8. 本仓库对照
-
-| 本篇概念 | 本仓库位置 | 实现情况 |
-|---|---|---|
-| 告警分级 P1/P2/P3 | [`apps/ops-console/src/domain/alert-severity.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/apps/ops-console/src/domain/alert-severity.ts) | 已实现。每条告警按规则表定为 P1（资金正确性 / 资金出口）、P2（核心链路受损）、P3（非核心），运营总览与系统运维按级别排序、着色、计数；没有值班呼叫 |
-| 处置原则 | [`docs/troubleshooting.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/troubleshooting.md) 第 6.4 节 | 没有成文的事件处置原则；排障文档要求先跑只读检查再修复，不直接手改余额或状态列 |
-| 紧急开关 | [`services/risk-service/src/application/control-switch-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/risk-service/src/application/control-switch-service.ts)、[`apps/ops-console/client/features/controls-tab.tsx`](https://github.com/ocean-8848/CEX-Demo/blob/main/apps/ops-console/client/features/controls-tab.tsx) | 已实现：单市场交易开关（`halted`）、全站提币暂停、单资产提币暂停、API 写入冻结（撤单放行）；必填原因、二次确认、审计，仅 `ops_admin` 可操作 |
-| 对账异常处置 | [`docs/ledger-service-design.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/ledger-service-design.md) 第 11 节 | 有余额对账、单账户回放、阈值告警，以及定时对账 + 对账熔断：不平时自动暂停相关资产提币（决策树 A5）并告警 P1，恢复需人工且要一轮一致的对账 |
-| 排障顺序与 runbook | [`docs/troubleshooting.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/troubleshooting.md) 第 1、6 节 | 已编写。先看日志和状态，先只读检查，再修复 |
-| 运营操作审计 | [`apps/ops-console/src/domain/action-audit.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/apps/ops-console/src/domain/action-audit.ts) | 已实现。事件中的人工操作可追溯 |
-| 账户冻结 | [`services/identity-service/src/application/identity-application-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/application/identity-application-service.ts) | 已实现 `freezeUser` / `unfreezeUser` |
-| 战情室工具、复盘模板 | — | 未实现（自动熔断见上方「对账异常处置」） |
-
-关键观察：本仓库的"上线前检查清单"包含"紧急开关验证通过"和"对账流程演练完成"。这对应本篇第 4.7 节的演练要求。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 

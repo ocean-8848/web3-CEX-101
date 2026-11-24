@@ -86,7 +86,7 @@ stateDiagram-v2
 
 ### 1.4 系统组件与调用链
 
-服务名与 [02 系统总架构](../chapters/02-system-architecture.md) 一致。`convert-service`、`quote-engine`、`hedge-service` 是本章新增的产品服务（业界通用做法，本仓库未实现）。
+服务名与 [02 系统总架构](../chapters/02-system-architecture.md) 一致。`convert-service`、`quote-engine`、`hedge-service` 是本章新增的产品服务（业界通用做法）。
 
 ```mermaid
 sequenceDiagram
@@ -448,17 +448,15 @@ flowchart LR
 
 ## 末尾：与主线章节的依赖
 
-| 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（CEX Demo） |
-|---|---|---|---|
-| 账本原子划转 | [05 账本](../chapters/05-ledger.md) | 闪兑、OTC、买币都靠一组分录完成换币 | `postJournal`，见 `services/ledger-service/src/application/ledger-application-service.ts` 第 70 行 |
-| 冻结与扣减 | [05 账本 §3.4](../chapters/05-ledger.md) | 接受报价时先冻结，再扣减 | 同文件 `freezeBalance`（第 105 行）、`consumeBalance`（第 227 行） |
-| 对冲下单 | [06 订单与撮合](../chapters/06-order-matching.md) | 对冲单就是平台账户提交的普通订单 | `services/order-service/src/application/order-application-service.ts` |
-| 中间价与深度 | [08 行情](../chapters/08-market-data.md) | 报价引擎读取深度估算滑点 | `services/market-data-service` |
-| 限额与反欺诈 | [09 风控](../chapters/09-risk-control.md) | 首单限额、提币冷却、询价限流 | `services/risk-service/src` |
-| 收入归类 | [12 商业模式](../chapters/12-business-model.md) | 闪兑价差属于隐含交易收入 | 未实现 |
-| 法币通道对账 | [B04 对账](../backstage/B04-reconciliation.md) | 支付通道流水与账本比对 | 本仓库不做法币入金（见仓库 `README.md`） |
-
-本仓库没有 `convert-service`、`quote-engine`、`hedge-service`、`otc-desk`、`fiat-gateway`。如果要扩展，业界通用做法是新增产品服务，调用已有的账本和订单服务，不修改账本本身。
+| 本章能力 | 依赖的主线章节 | 关系 |
+|---|---|---|
+| 账本原子划转 | [05 账本](../chapters/05-ledger.md) | 闪兑、OTC、买币都靠一组分录完成换币 |
+| 冻结与扣减 | [05 账本 §3.4](../chapters/05-ledger.md) | 接受报价时先冻结，再扣减 |
+| 对冲下单 | [06 订单与撮合](../chapters/06-order-matching.md) | 对冲单就是平台账户提交的普通订单 |
+| 中间价与深度 | [08 行情](../chapters/08-market-data.md) | 报价引擎读取深度估算滑点 |
+| 限额与反欺诈 | [09 风控](../chapters/09-risk-control.md) | 首单限额、提币冷却、询价限流 |
+| 收入归类 | [12 商业模式](../chapters/12-business-model.md) | 闪兑价差属于隐含交易收入 |
+| 法币通道对账 | [B04 对账](../backstage/B04-reconciliation.md) | 支付通道流水与账本比对 |
 
 ## 术语表
 

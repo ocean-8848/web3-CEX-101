@@ -469,17 +469,6 @@ sequenceDiagram
 | 2025-10-10 偏离 | [10 合约](../chapters/10-derivatives-futures.md) 第 4 节 | 保证金资产估价 |
 | 资金池对账 | [B04 对账](../backstage/B04-reconciliation.md) | 理财负债 vs 出借 + 质押 + 缓冲 |
 
-**本仓库对照**：[CEX Demo](https://github.com/ocean-8848/CEX-Demo) 没有理财产品。可复用和需新增的部分：
-
-| 能力 | 仓库现状 | 需要新增 |
-|---|---|---|
-| 内部划转 | [ledger-application-service.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/ledger-service/src/application/ledger-application-service.ts) 的 `postJournal`（第 70 行）已支持幂等分录 | 无 |
-| 赎回冻结 | 同文件 `freezeBalance` / `consumeBalance`（第 105、227 行） | 无 |
-| 理财科目 | [packages/domain/src/index.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/packages/domain/src/index.ts) 的 `AccountType` 只有 main/spot/funding/fee 等 | 新增 `earn` 账户类型和"利息支出"平台账户 |
-| 产品服务 | 无 | `earn-service`：产品配置、额度、持仓、赎回额度 |
-| 计息批处理 | 无 | 快照 + 批量分录任务，参考 `src/scripts/reconcile-balances.ts` 的批处理结构 |
-| 质押 | [custody-adapter](https://github.com/ocean-8848/CEX-Demo/blob/main/services/custody-adapter) 只做充提签名 | 验证者管理、汇率更新任务 |
-
 ## 6. 术语表
 | 术语 | 英文 | 定义 |
 |---|---|---|

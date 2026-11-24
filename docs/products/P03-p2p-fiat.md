@@ -97,7 +97,7 @@ stateDiagram-v2
 
 ### 1.4 系统组件与调用链
 
-`p2p-service`、`appeal-service` 是业界通用的产品服务划分，本仓库未实现。
+`p2p-service`、`appeal-service` 是业界通用的产品服务划分。
 
 ```mermaid
 sequenceDiagram
@@ -338,17 +338,17 @@ sequenceDiagram
 
 ## 末尾：与主线章节的依赖
 
-| 本章能力 | 依赖的主线章节 | 关系 | 本仓库对照（CEX Demo） |
-|---|---|---|---|
-| P2P 托管 = 冻结 | [05 账本 §3.4](../chapters/05-ledger.md) | 下单冻结卖家币 | `freezeBalance`，`services/ledger-service/src/application/ledger-application-service.ts` 第 105 行 |
-| 取消 = 解冻 | [05 账本 §3.4](../chapters/05-ledger.md) | 超时、取消、裁决卖家胜 | 同文件 `releaseBalance`（第 174 行） |
-| 放币 = 扣减 + 入账 | [05 账本](../chapters/05-ledger.md) | 卖家确认或裁决买家胜 | 同文件 `consumeBalance`（第 227 行）、`postJournal`（第 70 行） |
-| 实名与 2FA | [03 账户、身份与安全](../chapters/03-account-identity-security.md) | 户名比对、放币二次验证 | `services/identity-service` |
-| 限额与反诈 | [09 风控](../chapters/09-risk-control.md) | 下单前检查、提币观察期 | `services/risk-service/src` |
-| 法币对账 | [B04 对账](../backstage/B04-reconciliation.md) | 银行流水 vs 账本 | 本仓库不做法币入金（见仓库 `README.md`） |
-| 反洗钱 | [B01 合规](../backstage/B01-compliance.md) | 可疑交易识别与上报 | 未实现 |
+| 本章能力 | 依赖的主线章节 | 关系 |
+|---|---|---|
+| P2P 托管 = 冻结 | [05 账本 §3.4](../chapters/05-ledger.md) | 下单冻结卖家币 |
+| 取消 = 解冻 | [05 账本 §3.4](../chapters/05-ledger.md) | 超时、取消、裁决卖家胜 |
+| 放币 = 扣减 + 入账 | [05 账本](../chapters/05-ledger.md) | 卖家确认或裁决买家胜 |
+| 实名与 2FA | [03 账户、身份与安全](../chapters/03-account-identity-security.md) | 户名比对、放币二次验证 |
+| 限额与反诈 | [09 风控](../chapters/09-risk-control.md) | 下单前检查、提币观察期 |
+| 法币对账 | [B04 对账](../backstage/B04-reconciliation.md) | 银行流水 vs 账本 |
+| 反洗钱 | [B01 合规](../backstage/B01-compliance.md) | 可疑交易识别与上报 |
 
-关键观察：P2P 担保托管在账本上只需要冻结、解冻、扣减三个操作。本仓库 `ledger-service` 已经具备。难点不在账本，而在账本之外：法币事实的验证、证据仲裁和反诈。
+关键观察：P2P 担保托管在账本上只需要冻结、解冻、扣减三个操作。现货交易的账本已经具备这三个操作。难点不在账本，而在账本之外：法币事实的验证、证据仲裁和反诈。
 
 ## 术语表
 

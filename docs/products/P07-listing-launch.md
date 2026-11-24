@@ -467,15 +467,6 @@ flowchart LR
 | 理财池与 HODLer | Simple Earn | [P05 理财](P05-earn-savings-staking.md) |
 | 市场操纵监控 | 异常成交识别 | [B05 业务风控](../backstage/B05-business-risk.md) |
 
-**本仓库对照**（CEX Demo）：
-
-| 主题 | 本仓库实现 | 差距 |
-|---|---|---|
-| 交易对参数 | [packages/domain/src/index.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/packages/domain/src/index.ts) 的 `SPOT_MARKET_DEFINITIONS`：`priceStep`、`quantityStep`、`minQuantity`、`maxPriceDeviationRatio` | 交易对写死在代码里，只有 BTC-USDT、ETH-USDT；没有上币后台 |
-| 参数校验 | [services/risk-service/src/application/risk-application-service.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/risk-service/src/application/risk-application-service.ts) 校验 step 对齐和价格偏离 | 对应 `PRICE_FILTER`、`LOT_SIZE`、`PERCENT_PRICE` 思路 |
-| 冻结与发放 | [services/ledger-service/src/application/ledger-application-service.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/ledger-service/src/application/ledger-application-service.ts) 的 `freezeBalance` / `releaseBalance` / `postJournal` | 可用来实现 Launchpad 冻结和退款；没有快照服务和活动服务 |
-| 开盘保护 | 无集合竞价 | 撮合引擎只支持连续撮合 |
-
 ## 7. 术语表
 
 | 术语 | 英文 | 定义 |

@@ -447,27 +447,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-| 本章概念 | 本仓库位置 | 实现情况 |
-|---|---|---|
-| 充值地址分配 | `services/wallet-service`：`createDepositAddress` | 已实现，EVM 链每用户独立地址 |
-| 链上监听、确认数推进 | `services/blockchain-indexer`：EVM 原生币与 ERC-20 `Transfer` 扫描 | 已实现，按阈值回调 `wallet-service /deposits/confirm` |
-| 链重组处理 | `blockchain-indexer` 对非最终区块尾部重扫；记录 `block_hash` 变化 | 已实现最小版本 |
-| 充值状态 | `DepositStatus = detected / confirming / confirmed / credited / failed` | 对应本章 PENDING / CONFIRMING / CREDITED / DROPPED |
-| 提币状态 | `WithdrawalStatus = requested / under_review / approved / broadcasted / confirmed / failed / rejected` | 与本章状态机基本一致 |
-| 提币冻结、消耗、解冻 | `wallet-service` 调用 `ledger-service` 的 `freeze` / `consume` / `release` | 已实现 |
-| 签名与广播 | `services/custody-adapter`：`mock-custody`、`evm-hot-wallet` provider | 已实现，支持路由、熔断、重试 |
-| 陈旧提币清理 | `reconcile-stale-withdrawals` 脚本 | 已实现 |
-| 冷热分层（3.5） | `services/wallet-service` 的 treasury 模块：持仓分 充值地址 / 热钱包 / 冷钱包 三层，由 `src/domain/treasury-policy.ts` 的 `computeTreasuryHoldings` 从充值、提现、`treasury_transfers` 推导；提现一律从热钱包付出 | 已实现（账面分层；冷钱包没有真正的离线签名，见 `docs/security.md` 第 2.10 节） |
-| 水位调拨 | `evaluateHotWalletWatermark`（`TREASURY_HOT_WALLET_WATERMARKS`）：高于上限提出 热→冷、低于下限提出 冷→热；提案在 ops-console「钱包与储备金」审批，提案人不能批准自己的提案 | 已实现（单人审批，无分级审批） |
-| 归集（3.6） | `TreasuryService.runSweeps`：已入账充值按 (充值地址, 币种) 各发一笔 `sweep` 到热钱包，经 `custody-adapter` 广播、模拟链确认；`demo-simulator` 每 10 个块触发一次 | 已实现（不模拟 ERC-20 归集前的 Gas 补充） |
-| 储备金证明（3.9） | `services/wallet-service/src/domain/proof-of-reserves.ts` 构建 Merkle 树（叶子 = 盐化用户哈希 + 各币种余额）；ops-console 生成快照；trader-web「资产 → 储备金证明」用 Web Crypto 在浏览器里逐层验证（`apps/trader-web/src/client/lib/por-verify.ts`），并展示逐币种储备率 | 已实现 Merkle 包含证明；没有 zk-SNARK，资产端没有链上地址控制权证明 |
-| 钱包 vs 账本 | `GET /api/v1/wallet/treasury/reconciliation`：链上储备 vs `ledger-service` 用户负债（扣除在途提现） | 已实现 |
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -492,7 +472,7 @@ flowchart LR
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 某条链出块时间 15 秒，攻击者重写 6 个区块的成本是 2 万美元（示例）。交易所把入账阈值设为 6，单笔充值上限应该设为多少才安全？打开 [deposit-withdraw-sim.html](../../interactive/deposit-withdraw-sim.html)，观察不同阈值下的重组损失。
 2. 热钱包上限从 500 BTC 降到 100 BTC（示例），被盗风险暴露量下降了。代价出现在哪里？用交互页的水位实验验证你的答案。

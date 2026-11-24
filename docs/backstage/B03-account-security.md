@@ -297,25 +297,7 @@ flowchart LR
 
 ---
 
-## 8. 本仓库对照
-
-| 本篇概念 | 本仓库位置 | 实现情况 |
-|---|---|---|
-| TOTP 2FA | [`services/identity-service/src/domain/totp.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/domain/totp.ts) | 已实现 |
-| 密码哈希 | [`services/identity-service/src/domain/password.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/domain/password.ts) | 已实现（PBKDF2） |
-| 会话吊销、账户冻结 | [`services/identity-service/src/application/identity-application-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/application/identity-application-service.ts) | 已实现 |
-| API Key 签名校验 | [`services/api-gateway/src/http/api-key-signature.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/http/api-key-signature.ts) | 已实现 HMAC + 5 分钟时间窗、nonce 防重放、`read / trade / withdraw` scope；没有 IP 白名单 |
-| 提币白名单 | [`services/wallet-service/src/application/wallet-application-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/wallet-service/src/application/wallet-application-service.ts) 的 `whitelistWithdrawalAddress` 与 `requireWhitelist` 规则 | 已实现；新增地址或修改 2FA 后有安全冷却期（`WITHDRAWAL_SECURITY_COOLDOWN_SECONDS`） |
-| 登录记录、新设备提醒、设备管理 | [`services/identity-service/src/application/login-security-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/application/login-security-service.ts) | 已实现：登录事件（时间 / IP / UA / 设备 ID / 结果）、新设备站内提醒、按设备吊销会话（用户在 trader-web 账户页、运营在用户详情）；设备 ID 是 trader-web 保存的随机值而不是设备指纹；新设备登录后暂停提现是可选策略（`WITHDRAWAL_NEW_DEVICE_LOCK_SECONDS`，默认关闭），没有新设备强制 2FA 挑战 |
-| 撞库防护 | [`services/identity-service/src/domain/login-security.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/domain/login-security.ts) 的 `evaluateLoginLock` | 已实现：连续 5 次密码 / 动态码错误锁定 5 分钟（按账户计，可配置）；没有按 IP 的限速和验证码 |
-| 会话存储风险 | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 2.4 节 | 已缓解：token 由 Web Host / BFF 写入 `HttpOnly; SameSite=Strict` Cookie，页面脚本读不到；写操作走 double-submit CSRF。仍没有 CSP 等安全响应头 |
-| 风险评分、挑战升级、Passkey | — | 未实现 |
-
-关键观察：本仓库早期把 token 放在 `localStorage`，恶意浏览器扩展可直接读取，正是本篇"恶意插件"剧本的现实版本；现在改为 HttpOnly Cookie 后页面脚本读不到 token，但扩展仍可在页面里代用户发起操作，所以敏感操作还需要 2FA 等二次确认。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 

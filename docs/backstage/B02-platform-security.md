@@ -10,7 +10,6 @@
 
 ---
 
-
 > 🔎 进阶：研发与运营中的安全工程见 [B11](B11-security-engineering.md)；历年事故按攻击路径分类见 [B12](B12-incident-casebook.md)。
 
 ## 1. 一句话理解
@@ -24,7 +23,7 @@ B03 讲"用户账户被盗"。本篇讲"平台本身被攻破"。用户账户被
 > 开门要在规定时间（时间窗），要在监控下（审计），要先核对"今天要取哪几袋钱、送到哪家分行"（签名策略）。
 > 2025 年 Bybit 的教训是：三个保管员都核对了单据，但单据本身是假的。所以最后还要再加一条规则：**保管员亲眼看到的，必须就是金库真正执行的**。
 
-> 💡 注意：本篇区分三层信息。**币安公开的事实**会标注"截至 2026 年公开资料"。**业界通用做法**用于币安未公开的内部实现。**本仓库实现**见第 8 节。
+> 💡 注意：本篇区分两类信息。**币安公开的事实**会标注"截至 2026 年公开资料"。**业界通用做法**用于币安未公开的内部实现。
 
 ---
 
@@ -348,24 +347,7 @@ flowchart LR
 
 ---
 
-## 8. 本仓库对照
-
-| 本篇概念 | 本仓库位置 | 实现情况 |
-|---|---|---|
-| 运营后台 RBAC、职责分离 | [`services/identity-service/src/domain/rbac.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/domain/rbac.ts) | 已实现。`ops_reviewer`（审核提币）和 `ops_finance_operator`（执行账本）是不同角色；`ops_admin` 仍拥有全部权限 |
-| 运营操作审计 | [`apps/ops-console/sql/001_schema.sql`](https://github.com/ocean-8848/CEX-Demo/blob/main/apps/ops-console/sql/001_schema.sql) 的 `ops_action_audit_logs` 表；[`apps/ops-console/src/domain/action-audit.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/apps/ops-console/src/domain/action-audit.ts) | 已实现。审计写入普通 Postgres 表，不是 WORM 存储 |
-| 服务间鉴权 | [`services/identity-service/src/http/internal-service-auth.guard.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/identity-service/src/http/internal-service-auth.guard.ts) | 已实现 HMAC 共享密钥鉴权，覆盖 identity / wallet / ledger / order / risk / settlement / blockchain-indexer / custody-adapter，均带调用方白名单；所有服务默认监听 `127.0.0.1`。尚未升级到 mTLS |
-| 网关审计与限流 | [`services/api-gateway/src/http/api-gateway-audit.interceptor.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/http/api-gateway-audit.interceptor.ts)、[`api-gateway-rate-limit.guard.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/http/api-gateway-rate-limit.guard.ts) | 已实现；客户端 IP 默认取 socket 对端地址，仅在 `GATEWAY_TRUST_PROXY=true` 时信任 `X-Forwarded-For`（[`client-ip.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/http/client-ip.ts)） |
-| 安全基线与紧急开关 | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 2、4 节（紧急开关见第 2.11 节）；[`services/risk-service/src/application/control-switch-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/risk-service/src/application/control-switch-service.ts) | 已编写，按代码列出已实现的控制和缺口。紧急开关：单市场暂停（市场 `halted`）、全站 / 单资产提币暂停、API 写入冻结，开关权限 `ops.controls.manage` 只给 `ops_admin`，每次变更必填原因并写审计；对账不平时自动暂停单资产提币。变更单（开关的双人审批）流程未实现 |
-| 威胁模型 | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 3 节 | 已编写。按资产列出威胁、现有缓解和真实 CEX 的做法；第 4 节把"`custody-adapter` 从环境变量读私钥 / 助记词"列为最高风险缺口 |
-| 签名策略引擎、MPC/HSM、意图校验 | — | 未实现。`custody-adapter` 仍可用环境变量中的私钥直接签名 |
-| 四眼审批、JIT、PAM | [`docs/security.md`](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/security.md) 第 2.7 节 | ⚠️ 只有提现大额双人审批（超过分资产阈值需两名不同运营批准，同一人不能批两次）；JIT、PAM 未实现 |
-
-关键观察：本仓库只对超过阈值的大额提现做双人审批，阈值以下单人审批即可推进广播。这正是本篇第 4.5 节四眼原则要解决的问题。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 

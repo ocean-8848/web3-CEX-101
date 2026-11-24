@@ -460,12 +460,6 @@ sequenceDiagram
 | 对账 | [B04-reconciliation.md](../backstage/B04-reconciliation.md) | 卡清算文件逐笔匹配 |
 | 法币头寸 | [B06-treasury-liquidity.md](../backstage/B06-treasury-liquidity.md) | 发卡行预存资金 |
 
-**本仓库对照（CEX Demo）**：本仓库没有 Pay、礼品卡、卡服务。可以用账本服务的三个接口模拟：
-
-- 站内转账 ≈ `postJournal`：见 `services/ledger-service/src/application/ledger-application-service.ts`。
-- 礼品卡创建与兑换 ≈ `freezeBalance` + `consumeBalance`，同一文件。
-- 账户类型定义见 `packages/domain/src/index.ts` 的 `AccountType`。若要做 Pay，可增加 `pay_in_transit`、`giftcard_liability` 两种类型。
-
 ## 5. 术语表
 
 | 术语 | 英文 | 定义 |

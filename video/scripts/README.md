@@ -18,7 +18,7 @@
 | B12 | [安全事故案例库：防线是怎样被突破的](B12-incident-casebook.md) | 14 | 3977 | 13.7 分钟 |
 | EP01 | [交易所到底是什么：托管、记账、撮合](EP01-what-is-cex.md) | 14 | 3075 | 10.6 分钟 |
 | EP02 | [一张图看懂交易所架构](EP02-architecture-map.md) | 12 | 3018 | 10.4 分钟 |
-| EP03 | [一笔订单的旅程：调用链、同步异步与故障](EP03-order-journey.md) | 12 | 3104 | 10.7 分钟 |
+| EP03 | [一笔订单的旅程：调用链、同步异步与故障](EP03-order-journey.md) | 12 | 3101 | 10.7 分钟 |
 | EP04 | [账户与身份：登录、2FA、API 签名、KYC](EP04-account-identity.md) | 14 | 3836 | 13.2 分钟 |
 | EP05 | [充值：地址、确认数与链重组](EP05-deposit-confirmations.md) | 12 | 3268 | 11.3 分钟 |
 | EP06 | [提币、冷热钱包与储备金证明](EP06-withdrawal-wallets-por.md) | 13 | 3584 | 12.4 分钟 |

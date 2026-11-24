@@ -385,33 +385,7 @@ sequenceDiagram
 
 ---
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-本仓库的 `services/ledger-service` 是资金事实源。设计见 [docs/ledger-service-design.md](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/ledger-service-design.md)。
-
-| 本章概念 | 本仓库实现 |
-|---|---|
-| 双分录 | `postJournal`：一个 journal 带多条 entries，校验同一资产借贷平衡（错误码 `JOURNAL_NOT_BALANCED`） |
-| 借贷方向 | 用户账户按负债类处理：`credit` 增加可用余额，`debit` 减少 |
-| 幂等 | `ledger_journals.idempotency_key` 有唯一约束；同键同内容（含并发）返回原 journal，同键不同内容返回 409 `DUPLICATE_IDEMPOTENCY_KEY`，并发撞唯一索引也不会变成 500（[`journal-idempotency.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/ledger-service/src/application/journal-idempotency.ts)） |
-| 冻结状态机 | `balance_locks` 表，状态 `locked` → `consumed` / `released`；`remaining_amount` 支持部分成交 |
-| 余额分层 | `balances` 表的 `available` 和 `locked` 两列 |
-| 快照可重建 | `reconcile-balances` 脚本用 `ledger_entries` + 活跃锁重算快照 |
-| 流水回放 | `replay-account` 脚本按时间序回放单个账户 |
-| 精确算术 | `src/domain/money.ts` 用 BigInt，按 18 位小数换算；数据库用 `numeric(36, 18)` |
-| Outbox | `outbox_events` 与账本同事务提交；`publish-outbox` 发布到 Kafka，带重试和死信 |
-| 告警 | `check-alerts` 覆盖 outbox 堆积、死信、超时锁、快照不一致、负余额 |
-| 用户负债 / 储备对账 | `GET /ops/liabilities`（`src/application/ledger-liabilities.ts`）汇总用户账户可用 + 冻结；wallet-service 用它与链上储备做逐币种覆盖率对账，并为储备金证明生成叶子。本章的"热钱包资产"科目没有记进账本：链上持仓由 wallet-service treasury 单独记录（见 [docs/ledger-service-design.md](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/ledger-service-design.md) 第 4 节） |
-
-本仓库与生产级账本的差距：
-
-- 没有手续费账户分桶。手续费账户是单个 `platform:spot:fee:<asset>`。
-- 钱包 vs 账本对账基于 treasury 自己记录的持仓，没有和真实链上地址余额、托管方报告做三方对账，也没有定时任务。
-- 冻结记录本身不写 journal，只更新快照和锁表。本章的交互页把冻结也写成分录，便于观察。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -434,7 +408,7 @@ sequenceDiagram
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 在 [ledger-double-entry.html](../../interactive/ledger-double-entry.html) 中打开"忘记记手续费分录"，完成一笔成交。哪一条恒等式先变红？为什么"资产 = 负债 + 权益"也会同时失败？
 2. 打开"关闭幂等"，然后点击"重投最近成交事件"。每个 journal 自身仍然借贷平衡，"资产 = 负债 + 权益"也仍然成立。系统靠什么发现错误？如果没有这项检查，用户 A 能做什么？

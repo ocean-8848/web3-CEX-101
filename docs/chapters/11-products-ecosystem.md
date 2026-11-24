@@ -432,23 +432,7 @@ flowchart TB
 
 > ⚠️ 警告：所有"高收益"产品都有对应的风险。收益越高，风险结构越复杂。本章内容不构成投资建议。
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-本仓库 MVP 只覆盖现货交易，不做法币入金（见 `README.zh-CN.md` 的"Demo 覆盖的能力"）。本章产品在仓库中的对应关系：
-
-| 本章产品 | 仓库现状 | 可以复用的服务 |
-|---|---|---|
-| 杠杆/借贷 | 未实现 | `ledger-service`（冻结/解冻）、`risk-service`（前置校验） |
-| 闪兑 | 未实现 | `order-service`（可以把对冲单作为市价单提交） |
-| P2P | 未实现 | `ledger-service` 的冻结/释放就是担保托管的基础 |
-| 法币出入金 | 明确不在 MVP 范围 | — |
-| 理财 | 未实现 | `ledger-service` 的内部划转分录 |
-| 上币 | 部分：交易对配置 | `matching-engine` 的 market 配置、`blockchain-indexer` 的链支持 |
-| Pay | 未实现 | `ledger-service` 的 `postJournal` 可以实现账本内划转 |
-
-关键观察：本仓库的 `ledger-service` 已提供 `freezeBalance`、`releaseBalance`、`consumeBalance`。P2P 担保托管的"冻结 → 放币 / 解冻"正好映射到这三个操作。后续扩展产品时，应在账本之上新增产品服务，而不是修改账本本身。
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -465,7 +449,7 @@ flowchart TB
 | 带单员 | Lead Trader | 跟单交易中被复制的交易者 |
 | 多方计算 | MPC, Multi-Party Computation | 多方各持密钥分片，共同完成签名 |
 
-## 8. 思考题
+## 7. 思考题
 
 1. 闪兑宣传"零手续费"。打开 [revenue-model.html](../../interactive/revenue-model.html)，想一想：如果把闪兑的价差折算成费率，它应该放进哪一类收入？
 2. 双币投资中，如果 BTC 到期价格是目标价的 1.5 倍，用户相对于"一直持有 BTC"少赚了多少？用期权的语言解释这个差额。

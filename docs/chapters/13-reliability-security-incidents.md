@@ -8,7 +8,6 @@
 > 前置章节：[02-system-architecture.md](02-system-architecture.md)、[04-wallet-custody.md](04-wallet-custody.md)、[05-ledger.md](05-ledger.md)
 > 交互实验：[proof-of-reserves.html](../../interactive/proof-of-reserves.html)、[architecture-explorer.html](../../interactive/architecture-explorer.html)、[deposit-withdraw-sim.html](../../interactive/deposit-withdraw-sim.html)
 
-
 > 🔎 进阶：更多交易所安全事故及防线映射见 [B12 安全事故案例库](../backstage/B12-incident-casebook.md)。
 
 ## 1. 一句话理解
@@ -167,7 +166,7 @@ stateDiagram-v2
 
 > 💡 注意：交易所最重要的告警不是"服务挂了"，而是"资金对不上"。服务挂了，用户会立即发现。资金对不上，可能几天后才有人发现。
 
-告警分级示例（业界常见做法；本仓库 `ops-console` 按同样的思路把每条告警定为 P1/P2/P3，规则表见 `docs/security.md` 第 2.12 节）：
+告警分级示例（业界常见做法）：
 
 - **P1**：资金错误、提币异常扩大、账实不一致。立即呼叫值班。
 - **P2**：核心交易受影响、订单堆积。15 分钟内响应（示例）。
@@ -303,26 +302,7 @@ flowchart LR
 4. **储备金证明的局限**：PoR 证明的是"某一时刻"。平台可以在快照前临时借入资产。PoR 也不能证明平台没有隐藏负债。
 5. **人是最弱的一环**：钓鱼、社会工程、内鬼。技术防线必须假设"某个员工的账号会被攻破"。
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-| 本章概念 | 仓库实现 | 位置 |
-|---|---|---|
-| 撮合快照 | `matching-engine` 支持 book snapshot / reset / seed | `engines/matching-engine/src/main.rs` |
-| 订单簿重放 | `order-service` 支持订单簿 replay 和异常检测 | `services/order-service/README.md` |
-| 账本重放与对账 | `ledger-service` 的 `reconcile-balances`、`replay-account`、`check-alerts` | `docs/ledger-service-design.md` 第 11 节、`docs/troubleshooting.md` 第 6.4 节 |
-| 降级与紧急开关 | 单市场交易开关（市场 `halted`，拒绝新单、撤单放行）；全站提币暂停、单资产提币暂停、API 写入冻结（只读模式，撤单放行）三个紧急开关，由 risk-service 持久化，在 api-gateway、wallet-service（申请 / 审批 / 广播）和下单风控中执行，ops-console「系统运维 → 紧急开关」操作（必填原因、二次确认、审计，仅 `ops_admin`）；trader-web 显示暂停 / 只读提示 | `services/risk-service/src/application/control-switch-service.ts`、`services/api-gateway/src/http/api-gateway-control-switch.guard.ts`、`apps/ops-console/client/features/controls-tab.tsx`、`docs/security.md` 第 2.11 节 |
-| 告警分级 | 已实现 P1/P2/P3：账本、对账、紧急开关、托管、链上观察、钱包、交易域与交易运行时告警逐条定级（P1 资金正确性 / 资金出口，P2 核心链路受损，P3 非核心），运营总览和系统运维按级别排序、着色、计数；没有值班呼叫 | `apps/ops-console/src/domain/alert-severity.ts`、`docs/security.md` 第 2.12 节 |
-| 对账与熔断 | ledger-service 定时（演示栈 30 秒）做余额对账与委托冻结对账，不平时自动暂停该币种提现并产生 P1 告警，人工恢复前需一轮一致的对账 | `services/ledger-service/src/application/reconciliation-job.ts`、`docs/ledger-service-design.md` 第 11.5 节 |
-| 审计日志 | `ops_action_audit_logs` 记录运营写操作的操作人、角色、权限、目标、请求 / 响应和结果；`withdrawal_audit_logs` 记录提现各状态的操作人、`trace_id` 和前后快照 | `docs/security.md` 第 2.8 节 |
-| 权限控制 | 6 个运营角色映射到细粒度权限，提现审核（`ops_reviewer`）与账本执行（`ops_finance_operator`）分属不同角色 | `services/identity-service/src/domain/rbac.ts`、`docs/security.md` 第 2.2 节 |
-| 托管熔断 | `custody-adapter` 多 provider 路由、失败熔断、健康检查 | `services/custody-adapter/README.md`、`docs/fault-lab.md` |
-| 排障顺序 | 先看日志和状态，先只读检查，再修复；不直接手改余额或状态列 | `docs/troubleshooting.md` 第 1、6.4 节 |
-
-关键观察：本仓库的排障原则"不直接手改余额快照或状态列"，正是对 FTX 和 Mt.Gox 教训的工程化表达。账本只追加不覆盖，所有资金变更可回放。
-
-当前缺口（来自仓库文档）：撮合引擎是单进程，没有热备和自动主备切换；多机房部署不在 MVP 范围内。
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -340,7 +320,7 @@ flowchart LR
 | 储备金证明 | PoR, Proof of Reserves | 证明平台资产不少于用户负债的方法 |
 | 安全资产基金 | SAFU | 币安设立的用户资产保护基金 |
 
-## 8. 思考题
+## 7. 思考题
 
 1. 在 [proof-of-reserves.html](../../interactive/proof-of-reserves.html) 中构造一个"平台在快照前临时借入资产"的场景。PoR 能发现这个问题吗？还需要哪些机制？
 2. 撮合主节点在 seq=1005 处崩溃，热备只回放到 seq=1003。指令日志中 seq=1004 和 1005 已经持久化。切换后应该怎么做？如果 seq=1005 没有持久化又会怎样？

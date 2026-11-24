@@ -417,16 +417,6 @@ sequenceDiagram
 
 ## 末尾
 
-### 本仓库对照（CEX Demo）
-
-本仓库只实现现货，不含合约、期权或组合保证金（见第 10 章 §6）。可以参考的模式：
-
-| 本章需要 | 本仓库可参考的模式 | 文件 |
-|---|---|---|
-| 交易前限额校验 | 现货下单风控校验入口 | `services/risk-service/src/application/risk-application-service.ts`（`validateSpotOrder`） |
-| 多资产记账 | 资产代码与账户类型 | `packages/domain/src/index.ts` |
-| 期权结算划转 | 幂等过账 | `services/ledger-service/src/domain/types.ts` |
-
 ### 与主线章节的依赖
 
 | 本章内容 | 依赖章节 | 依赖点 |

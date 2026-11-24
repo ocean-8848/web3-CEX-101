@@ -475,31 +475,7 @@ flowchart TD
 
 ---
 
-## 8. 本仓库对照
-
-本仓库（[CEX Demo](https://github.com/ocean-8848/CEX-Demo)）是现货交易 MVP，没有税务报送和隐私治理模块。
-
-| 能力 | 本仓库现状 | 位置 |
-|---|---|---|
-| 用户身份字段 | ⚠️ `identity_users` 只有 `email`、`status` 等字段，邮箱为明文列；没有 KYC、税务字段 | `services/identity-service/sql/001_schema.sql` |
-| TOTP 密钥存储 | ⚠️ `user_two_factor_profiles.secret` 为 `text` 列，未做字段级加密 | `services/identity-service/sql/001_schema.sql` |
-| API Key 存储 | ✅ 只存 `token_hash` 和前缀，不存明文 | `services/identity-service/sql/001_schema.sql` |
-| 运营 RBAC | ✅ 已有角色与权限表，例如 `ops.users.read`；⚠️ 没有字段掩码和按工单授权 | `services/identity-service/src/domain/rbac.ts` |
-| 审计字段 | ✅ `ops_action_audit_logs` 记录操作人、角色、所用权限、目标、请求 / 响应；`withdrawal_audit_logs` 另有 `trace_id` 和前后快照；⚠️ 只审计运营写操作，未覆盖"查看个人资料"等只读访问 | `apps/ops-console/sql/001_schema.sql`、`docs/security.md` 第 2.8 节 |
-| 税务事件来源 | ⚠️ `ledger_journals.business_type` 可作为交易分类的输入；分录不记录法币估值 | `services/ledger-service/sql/001_schema.sql` |
-| 删除与留存 | ❌ 外键使用 `on delete cascade`，删除用户会连带删除 2FA 资料；没有留存计划和法律保全 | `services/identity-service/sql/001_schema.sql` |
-| 账本假名化 | ✅ 账本按 `account_id`、`user_id`（UUID）记账，不含姓名和邮箱，天然适合假名化 | `services/ledger-service/sql/001_schema.sql` |
-
-如果要补齐，建议按以下顺序：
-
-1. 在 identity-service 为邮箱和 TOTP 密钥增加字段级加密，密钥来自 KMS。
-2. 新增 tax-profile 表：辖区、TIN 令牌、自我证明状态和有效期（3.3 节）。
-3. 新增只读的税务事件任务：消费账本分录，按 `business_type` 映射（4.2 节），并实现 4.6 节的数量守恒检查。
-4. 把"查看用户资料"写入审计日志，实现 PV-03 告警。把 `on delete cascade` 改为软删除 + 留存计划 + 法律保全标记（7.1 节）。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 
@@ -526,7 +502,7 @@ flowchart TD
 
 1. 用户 A 在 2026 年 3 月从外部钱包充值 2 ETH，6 月用其中 1 ETH 换 USDT，9 月把 USDT 卖成欧元。请按 4.2 节写出税务事件序列。哪一步交易所不知道成本？报表应如何标注？
 2. 一名欧盟用户关闭账户后第 2 年发来删除请求。同时，合规团队正在调查他 3 年前的一笔可疑充值。请按 7.1 节的流程图，写出每类数据（营销偏好、KYC 证件、交易流水、登录日志）的处理结果。
-3. 对照 6.1 节的 Coinbase 案例，请为本仓库的 ops-console 设计一条"批量查看告警"规则。规则的阈值设多少？会误伤哪类正常工作（例如处理群体投诉）？
+3. 对照 6.1 节的 Coinbase 案例，请为交易所运营后台设计一条"批量查看告警"规则。规则的阈值设多少？会误伤哪类正常工作（例如处理群体投诉）？
 
 ## 参考来源
 

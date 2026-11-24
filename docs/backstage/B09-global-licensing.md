@@ -436,28 +436,7 @@ flowchart LR
 
 ---
 
-## 8. 本仓库对照
-
-本仓库（[CEX Demo](https://github.com/ocean-8848/CEX-Demo)）是单实体现货 MVP，没有多辖区设计。
-
-| 能力 | 本仓库现状 | 位置 |
-|---|---|---|
-| 用户 KYC 等级 | ⚠️ 领域模型有 `kyc_level` 字段，没有国家或实体字段 | `docs/domain-model.md` |
-| 风控与合规需求 | ⚠️ 已实现余额、价格保护、市场暂停、提现规则（限额、KYC 分级、白名单、冷却期、双人审批）、限频、账户冻结；没有按国家或辖区区分的规则 | `docs/security.md` 第 2 节 |
-| 实体路由、地理围栏 | ❌ 未设计 | — |
-| 产品可用性矩阵 | ❌ 未设计；交易对没有"按辖区可见"属性 | — |
-| 上币状态机与下架流程 | ❌ 未设计 | — |
-
-如果要补齐，建议按以下顺序：
-
-1. 在用户表增加 `residence_country`、`legal_entity_id`、`client_category`（零售 / 专业 / 机构）。
-2. 新增配置表 `product_availability(entity_id, product, client_category, status)`，由后端在下单、充值、申购入口统一检查。
-3. 交易对增加 `listing_status` 与 `entity_visibility`，支持"只允许提币"状态。
-4. 用户每次接受条款，记录 `entity_id` 和条款版本号。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 

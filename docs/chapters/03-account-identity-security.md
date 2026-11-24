@@ -388,32 +388,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-| 本章概念 | 本仓库位置 | 实现情况 |
-|---|---|---|
-| 注册、登录、会话 | `services/identity-service`：`registerCustomer`、`createCustomerSession`、`introspectCustomerSession`、`revokeCustomerSession` | 已实现，使用服务端可吊销会话 |
-| TOTP 2FA | `services/identity-service/src/domain/totp.ts` | 已实现，默认 30 秒周期、6 位数字，校验支持时间窗容差 |
-| API Key 签名 | `services/api-gateway/src/http/api-key-signature.ts` | 已实现，见下方说明 |
-| 提币时校验 2FA | `wallet-service` 的 `requestWithdrawal` 调用 `identity-service /two-factor/verify` | 已实现 |
-| 提币白名单 | `wallet-service` 的 `withdrawal-address-book` 接口 | 已实现 |
-| 账户冻结 | `identity-service` 的 `freezeUser` / `unfreezeUser`；用户状态 `active / suspended / disabled` | 已实现 |
-| 运营后台 RBAC | `identity-service` 的 ops 会话与 RBAC | 已实现 |
-| 登录记录与设备管理 | `services/identity-service/src/application/login-security-service.ts`、`src/domain/login-security.ts`；trader-web「账户 → 设备管理 / 登录记录」 | 已实现：每次登录（成功 / 失败 / 锁定）记录时间、IP、User-Agent、设备 ID；trader-web 在 localStorage 保存长期随机设备 ID（不是设备指纹）；用户可以「退出该设备」吊销其全部会话 |
-| 新设备提醒 | 同上 + `services/identity-service/src/infrastructure/http-wallet-security-notifier.ts` | 已实现：账户已有设备时，第一次出现的设备标记为新设备，并在站内信发送「新设备登录」；可选策略 `WITHDRAWAL_NEW_DEVICE_LOCK_SECONDS`（默认关闭）在新设备登录后暂停提现 |
-| 登录失败锁定 | `evaluateLoginLock`（`src/domain/login-security.ts`） | 已实现：自上次成功登录起、15 分钟内 5 次密码 / 动态码错误后锁定 5 分钟（返回 429），可用 `IDENTITY_LOGIN_*` 调整 |
-| 子账户、反钓鱼码 | — | 未实现，属于 MVP 之外 |
-
-本仓库 API Key 签名方案与币安的差异：
-
-- 请求头使用 `X-API-Key`、`X-API-Timestamp`、`X-API-Signature`。
-- 待签名串是 `方法\nURL\n时间戳\nSHA256(请求体)`，各段用换行连接。币安直接签"查询字符串 + 请求体"。
-- 时间容差由 `GATEWAY_API_KEY_MAX_DRIFT_MS` 控制，默认 300000 毫秒（5 分钟）。它相当于固定的 `recvWindow`。
-- 签名比较使用 Node.js 的 `timingSafeEqual`，是常量时间比较。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -436,7 +411,7 @@ flowchart LR
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 某用户的 `recvWindow` 设为 60000 毫秒。攻击者截获了一笔下单请求。攻击者最多有多长时间可以重放它？如果订单带了 `newClientOrderId`，重放会成功吗？
 2. 攻击者拿到了用户的密码和 TOTP 密钥，但用户开启了提币白名单和 24 小时冷静期（示例）。攻击者还能做什么？平台在哪个环节最有机会拦截？打开 [risk-rules-lab.html](../../interactive/risk-rules-lab.html)，试着设计一条拦截规则。

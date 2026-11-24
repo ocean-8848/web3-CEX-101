@@ -488,33 +488,7 @@ flowchart LR
 
 ---
 
-## 8. 本仓库对照
-
-本仓库（CEX Demo）的风控是**单个同步服务**，没有事件总线、特征库和模型。
-
-| 本篇概念 | 本仓库位置 | 实现情况 |
-|---|---|---|
-| 交易前同步检查 | [`services/risk-service/src/application/risk-application-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/risk-service/src/application/risk-application-service.ts) 的 `validateSpotOrder` | 已实现：价格偏离、最小数量、可用余额；每项检查写入 `checks` 数组，相当于简化的原因码 |
-| 决策结果结构 | [`services/risk-service/src/domain/types.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/risk-service/src/domain/types.ts) 的 `RiskCheckResult` | 只有 `passed` / `failed` 两种状态，没有挑战、暂扣、审核 |
-| 风控故障时的默认动作 | [`services/order-service/src/infrastructure/http-risk-client.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/order-service/src/infrastructure/http-risk-client.ts) | 风控返回非 2xx 时抛出 `RISK_UPSTREAM_FAILED`，订单不创建。效果上是 Fail-Closed，但没有显式的降级配置 |
-| 速度计数器 | [`services/api-gateway/src/infrastructure/redis-rate-limiter.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/infrastructure/redis-rate-limiter.ts) | Redis `INCR` 固定窗口计数。只用于限频，没有作为风控特征输出 |
-| 决策日志 | [`services/api-gateway/src/http/api-gateway-audit.interceptor.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/api-gateway/src/http/api-gateway-audit.interceptor.ts) | 记录请求、状态码和 `durationMs`。没有特征快照、规则版本、模型版本 |
-| 转审核与案件 | [`services/wallet-service/src/application/wallet-application-service.ts`](https://github.com/ocean-8848/CEX-Demo/blob/main/services/wallet-service/src/application/wallet-application-service.ts) 的 `requestWithdrawal` | 每笔提币初始 `reviewStatus` 都是 `pending`，即全部人工审核。没有风险分排序、案件合并、结论码 |
-| 事件总线、在线 / 离线特征库、图引擎 | — | 未实现 |
-| 规则 DSL、版本、影子、金丝雀、回测 | — | 未实现；风控参数来自环境变量和 `SPOT_MARKET_DEFINITIONS` |
-| 模型服务、漂移监控 | — | 未实现 |
-
-如果要在本仓库上补齐，建议顺序：
-
-1. 让 `RiskCheckResult` 支持五种动作和原因码。
-2. 在 risk-service 写决策日志：输入、检查结果、参数版本。
-3. 把 api-gateway 的计数器扩展为按用户、按 IP 的速度特征，供提币风控读取。
-4. 在 wallet-service 提币入口调用风控打分。低分自动放行，高分转审核，替代"全部人工"。
-5. 为风控参数加版本号和影子开关，再做回测脚本（读决策日志重放）。
-
----
-
-## 9. 术语表 / 思考题
+## 8. 术语表 / 思考题
 
 ### 术语表
 

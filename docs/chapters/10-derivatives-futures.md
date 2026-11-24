@@ -347,32 +347,7 @@ ADL（Auto-Deleveraging）选择"盈利最多、杠杆最高"的对手方先减�
 
 ---
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-本仓库（CEX Demo）**只实现了现货交易**，没有任何衍生品功能。代码中不存在合约、杠杆、标记价格或强平相关的服务。
-
-如果要增加 U 本位永续合约，至少需要新增以下组件：
-
-| 新组件 | 职责 | 依赖的现有服务 |
-|---|---|---|
-| index-price-service | 聚合多个外部现货价格，计算指数价格 | market-data-service |
-| mark-price-service | 计算标记价格、溢价指数、资金费率 | index-price-service |
-| futures-order-service + 合约撮合 | 合约订单簿与撮合；支持只减仓（reduce-only） | 可复用 order-service 的撮合模式 |
-| position-service | 维护仓位、开仓均价、未实现盈亏 | ledger-service |
-| margin-risk-service | 开仓前检查初始保证金与杠杆分层 | 现有 risk-service 的模式 |
-| liquidation-engine | 订阅标记价格，计算保证金率，接管仓位 | position-service、futures 撮合 |
-| insurance-fund 账户 | 在账本中新增保险基金账户类型 | ledger-service |
-| funding-settlement job | 每个周期按资金费率在多空之间记账 | ledger-service、settlement-service |
-
-现有服务需要的改动：
-
-1. ledger-service 增加账户类型：合约保证金账户、保险基金账户、资金费中转账户。
-2. risk-service 目前只校验现货订单（`POST /api/v1/risk/spot-orders/validate`）。需要增加合约订单校验接口。
-3. 事件目录（`docs/event-catalog.md`）增加 `position.opened`、`position.liquidated`、`funding.settled` 等事件。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -400,7 +375,7 @@ ADL（Auto-Deleveraging）选择"盈利最多、杠杆最高"的对手方先减�
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 打开 [perpetual-liquidation.html](../../interactive/perpetual-liquidation.html)。多仓、开仓价 50,000、MMR 0.4%。把杠杆从 10x 拖到 125x。强平价离开仓价的距离如何变化？距离和杠杆是什么关系？
 2. 在资金费率标签页，把溢价指数设为 0.03%。资金费率是多少？为什么它等于 0.01%，而不是 0.03%？把溢价指数设为 0.2% 呢？

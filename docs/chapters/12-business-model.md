@@ -252,20 +252,7 @@ flowchart LR
 4. **平台代币的双刃剑**：BNB 把用户与平台绑定。平台出问题时，BNB 价格下跌会进一步削弱用户信心。
 5. **监管不确定性**：一个地区的禁令可能让该地区的收入瞬间归零。
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-| 本章概念 | 仓库现状 |
-|---|---|
-| 交易手续费 | `settlement-service` 在成交结算时生成手续费分录（见 `services/settlement-service/README.md` "生成手续费入账"） |
-| 手续费账户对账 | 本仓库未实现专门的手续费日级对账。手续费账户 `platform:spot:fee:<asset>` 和其他账户一样，由 `ledger-service` 的 `reconcile-balances` 按 journal 校验余额快照（见 `docs/ledger-service-design.md` 第 11 节） |
-| 费率等级、VIP | 已实现：`config/fee-tiers.json`（VIP0–VIP3，按 30 日 USDT 成交量，VIP0 = 市场默认费率），`order-service` 的 `src/application/fee-tier-service.ts` 在成交时解析等级并把费率写进成交；用户在 trader-web 账户页「手续费等级」查看等级、30 日成交量和升级进度，下单面板按本人费率预估手续费 |
-| 返佣、BNB 抵扣 | 未实现 |
-| 做市商计划 | 部分实现：`config/fee-tiers.json` 的 `marketMakers` 列出做市账户（演示的两个做市账户固定 VIP0），ops-console 用户详情可为任意账户「指定」等级（备注必填、写审计，见 `spot_fee_tier_override_audit`）；没有负费率（返还）。做市流动性由 `demo-simulator` 模拟 |
-| 地区合规路由 | 未实现。`identity-service` 已有 KYC 状态字段，可作为扩展入口 |
-
-建议的扩展顺序（【分析】）：先实现"费率配置表 + Maker/Taker 区分"，再实现 VIP 等级，最后实现返佣。原因是返佣涉及跨用户的分账，需要账本支持更多科目。
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -278,7 +265,7 @@ flowchart LR
 | 独立合规监察 | Independent Monitor | 监管机构指定的第三方，监督公司合规整改 |
 | 去中心化交易所 | DEX | 在链上通过智能合约完成交易的平台 |
 
-## 8. 思考题
+## 7. 思考题
 
 1. 在 [revenue-model.html](../../interactive/revenue-model.html) 中，把 BNB 抵扣使用率从 0% 调到 80%。净手续费下降了多少？平台为什么仍然愿意提供这个折扣？
 2. 在飞轮模拟中，比较"费率 0.10% 不补贴"和"费率 0.06% 加补贴"两种策略。运行 12 期后，哪种策略的累计利润更高？结果对哪个参数最敏感？

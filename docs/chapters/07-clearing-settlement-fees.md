@@ -304,31 +304,7 @@ stateDiagram-v2
 
 ---
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-本仓库的 `services/settlement-service` 负责结算。主链说明见 [docs/architecture.md](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/architecture.md)。
-
-| 本章概念 | 本仓库实现 |
-|---|---|
-| 结算入口 | `POST /api/v1/settlement/trades/settle`，当前由 `order-service` **同步**调用（不是异步消费） |
-| 幂等 | 按 `tradeId` 幂等；journal 幂等键为 `spot_trade:base:<tradeId>` 和 `spot_trade:quote:<tradeId>` |
-| 清算中间户 | `platform:spot:settlement:<asset>`：先 `consumeBalance` 把冻结转入，再 `postJournal` 转给对手方 |
-| 手续费账户 | `platform:spot:fee:<asset>`（卖方 quote 费、买方 base 费各入对应资产的账户），未分桶 |
-| 手续费规则 | 双边收费：卖方按 `sellerFeeRate` 收 quote，买方按 `buyerFeeRate` 收 base；Maker / Taker 费率按订单在本笔成交中的角色区分 |
-| VIP 等级 | `config/fee-tiers.json` 定义 VIP0–VIP3（30 日 USDT 成交量门槛 + Maker / Taker 费率，VIP0 = 市场默认费率），由 `packages/domain/src/fee-tiers.ts` 校验；`order-service` 的 `src/application/fee-tier-service.ts` 在成交时解析双方等级（运营指定 > 做市商计划 > 30 日成交量），费率取 `min(等级费率, 市场费率)` |
-| 费率记录与重放 | 费率和等级写进 `spot_trades`（`buyer_fee_rate` / `buyer_fee_tier` 等）与 `trade.executed`，`settlement-service` 只按记录值收费并在 `trade_settlements` 保存一份，重放同一笔成交手续费不变 |
-| 部分成交 | 买方 quote 按实际成交额部分消耗冻结，冻结记录保留 `remaining_amount` |
-| 失败补偿 | recovery jobs：自动重试、单笔人工恢复 `POST /trades/:tradeId/recover`、终态失败标记 |
-| 结算报表 | 物化汇总表驱动的 settlement report |
-
-本仓库与本章的差距：
-
-- 没有平台币抵扣和返佣；VIP 成交量只统计 USDT 计价市场，没有资产余额（持仓）维度的等级条件。
-- 结算是同步调用。改成"消息队列 + 消费端幂等"后，才是 3.1 图中的形态。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -347,7 +323,7 @@ stateDiagram-v2
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 在 [ledger-double-entry.html](../../interactive/ledger-double-entry.html) 中，让 B 分 3 次吃完 A 的 0.1 BTC 买单。A 的 USDT 冻结最后是否正好为 0？如果成交价有很多位小数，尾差会去哪里？
 2. 在同一页面的手续费计算器里，把 30 天交易量设为 2,500 万 USD，BNB 持仓设为 50。切换"同时满足"和"满足任一"规则，等级和月手续费分别变成多少？

@@ -12,7 +12,6 @@
 
 ---
 
-
 > 🔎 进阶：风控系统怎样工程化，见 [B08 实时风控平台工程](../backstage/B08-risk-platform.md)；业务风控见 [B05](../backstage/B05-business-risk.md)。
 
 ## 1. 一句话理解
@@ -235,7 +234,7 @@ sequenceDiagram
 
 > ⚠️ 警告：客户端收到 429 后必须停止并按 `Retry-After` 等待。立刻重试会把 429 升级为 418 封禁，影响同一 IP 下的全部程序。
 
-> 💡 注意：币安文档没有说明内部用令牌桶还是固定窗口。"令牌桶"是业界通用做法，本章用它解释原理。本仓库实际用的是固定窗口计数器，见第 6 节。
+> 💡 注意：币安文档没有说明内部用令牌桶还是固定窗口。"令牌桶"是业界通用做法，本章用它解释原理。另一种常见实现是固定窗口计数器。
 
 ### 3.9 误杀与漏放：Precision / Recall
 
@@ -340,31 +339,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（CEX Demo 中的对应服务）
-
-| 风控层 | 本仓库现状 | 位置 |
-|---|---|---|
-| 交易前：余额 | ✅ 已实现。调用 ledger-service 查询可用余额，返回需冻结的资产和金额 | `services/risk-service/src/application/risk-application-service.ts` |
-| 交易前：价格保护带 | ✅ 已实现。`maxPriceDeviationRatio` 为 0.2（即 ±20%） | `packages/domain/src/index.ts` 的 `SPOT_MARKET_DEFINITIONS` |
-| 交易前：精度与最小数量 | ✅ 已实现。`minQuantity`、`priceStep`、`quantityStep` | 同上 |
-| 交易前：参考价 | ⚠️ 来自环境变量 `RISK_REFERENCE_PRICE_*`，不是实时行情 | `services/risk-service/README.md` |
-| 限频 | ✅ 已实现。API 网关用**固定窗口计数器**：窗口 60 秒，匿名 30 次，已认证 120 次；超限返回 429 | `services/api-gateway/src/infrastructure/redis-rate-limiter.ts` |
-| 资金：提币审核 | ✅ 已有状态 `under_review` 和人工审核动作 | `services/wallet-service/src/domain/types.ts` |
-| 资金：限额、黑名单、KYT | ✅ 单笔 / 日累计限额和 KYC 分级限额；简化 KYT：规则评分（黑名单 → 拦截，混币 / 高风险标签 +70，首次地址 +10、首次且大额 +40、地址簿新地址 +30，白名单 / 已用过的地址不加分），≥60 高风险强制双人复核；运营后台「用户与资产 → 地址黑名单」维护黑名单（带原因、审计、`ops.risk.manage` 权限），新加入的地址会自动拒绝待审核提现并解冻资金。没有接入真实 KYT 供应商，地址标签是演示数据 | `services/wallet-service/src/domain/withdrawal-risk.ts`、`withdrawal-policy.ts`；`docs/security.md` 第 2.7 节 |
-| 交易中：STP、刷量监察 | ❌ 未实现 | — |
-| 账户：设备与盗号检测 | ⚠️ 已实现登录记录、新设备识别与站内提醒、按设备吊销会话、登录失败临时锁定、可选的新设备提现锁（默认关闭）；没有设备指纹、IP 信誉和异常登录评分 | `services/identity-service/src/application/login-security-service.ts`；`docs/security.md` 第 2.2 节 |
-
-如果要补齐，建议按以下顺序：
-
-1. 把参考价切换到 market-data-service 的实时价格，并加"参考价过期即暂停"。
-2. 把 wallet-service 内的规则评分接到真实 KYT 数据源（地址标签、资金来源多跳暴露），并支持影子模式试运行新规则。
-3. 把固定窗口限频改成令牌桶或滑动窗口。固定窗口在窗口边界允许 2 倍突发。
-4. 在撮合引擎加 STP 参数。
-5. 新增一个异步"市场监察"消费者，订阅成交事件。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -386,8 +361,8 @@ flowchart LR
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 打开 [risk-rules-lab.html](../../interactive/risk-rules-lab.html)。把"单笔提币限额"从最高拖到最低。误杀率和漏放率分别怎么变？人工审核队列长度怎么变？哪一个阈值让"误杀率 + 漏放率"最小？
 2. 在实验室里关闭"改密后冷却"规则，只生成"盗号者"事件。漏放率变成多少？这说明账户风控信号对资金风控有什么作用？
-3. 本仓库的限频是 60 秒固定窗口、120 次。一个客户端在第 59 秒发 120 次、第 61 秒再发 120 次。2 秒内服务端收到多少请求？换成令牌桶（速率 2 次/秒，容量 120）结果是多少？
+3. 假设某个服务用固定窗口限频：60 秒内最多 120 次。一个客户端在第 59 秒发 120 次、第 61 秒再发 120 次。2 秒内服务端收到多少请求？换成令牌桶（速率 2 次/秒，容量 120）结果是多少？

@@ -273,26 +273,7 @@ flowchart TB
 
 ---
 
-## 6. 本仓库对照（CEX Demo）
-
-本仓库是一个教学用的最小 CEX。三件事对应的服务如下：
-
-| CEX 本质 | 本仓库服务 | 目录 |
-|---|---|---|
-| 托管 | 充值地址、提币单据 | `services/wallet-service` |
-| 托管 | 链上扫描、确认数推进 | `services/blockchain-indexer` |
-| 托管 | 对接托管商 / 热钱包广播 | `services/custody-adapter` |
-| 记账 | 双分录账本、冻结、解冻 | `services/ledger-service` |
-| 记账 | 成交后的资金结算 | `services/settlement-service` |
-| 撮合 | Rust 内存订单簿 | `engines/matching-engine` |
-| 撮合 | 订单生命周期 | `services/order-service` |
-| 账户 | 注册、登录、2FA、API Key | `services/identity-service` |
-
-本仓库只做现货和加密资产，不做法币、合约和理财（见根目录 `README.zh-CN.md` 的"Demo 覆盖的能力"）。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -310,7 +291,7 @@ flowchart TB
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 你在币安把 1 BTC 卖给另一个用户。比特币区块链上会出现一笔交易吗？为什么？
 2. 如果账本里所有用户的 USDT 余额之和是 100 万，而链上地址只有 80 万 USDT，会发生什么？打开 [proof-of-reserves.html](../../interactive/proof-of-reserves.html) 验证你的想法。

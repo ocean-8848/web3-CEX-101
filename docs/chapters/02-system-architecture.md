@@ -170,7 +170,7 @@ sequenceDiagram
 - 实线箭头（第 1–15 步）是**同步**调用，直接决定用户请求的成败。
 - 虚线箭头（`-)`）是**异步**事件，走 Kafka。行情推送慢几百毫秒，不影响资金正确性。
 - 最危险的一步是"冻结成功之后、撮合之前"。如果撮合引擎此时宕机，资金已冻结但订单没进簿，系统必须解冻。
-- 本仓库是同步调用结算服务。大型交易所的业界通用做法是撮合把成交写入日志流，结算服务异步消费。
+- 小型系统可以同步调用结算服务。大型交易所的业界通用做法是撮合把成交写入日志流，结算服务异步消费。
 
 ### 3.4 充值调用链
 
@@ -318,7 +318,6 @@ flowchart LR
 1. **撮合宕机，资金已冻结。**
    - 用户看到：下单失败。
    - 系统补偿：订单服务把订单标记为 rejected，调用账本解冻。
-   - 本仓库：`order-service` 的 recovery queue 负责重试和补偿。
 2. **Kafka 堆积。**
    - 用户看到：订单已成交，但余额和成交推送延迟。
    - 系统补偿：账本已经正确，只是事件慢了。消费者追上后自动恢复。
@@ -335,35 +334,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（CEX Demo）
-
-| 层 | 服务 | 目录 | 端口 | 技术 |
-|---|---|---|---|---|
-| ① 接入层 | 用户前端 | `apps/trader-web` | — | Next.js |
-| ① 接入层 | 网关 | `services/api-gateway` | 3007 | NestJS + Redis 限流 |
-| ② 交易核心 | 订单 | `services/order-service` | 3009 | NestJS |
-| ② 交易核心 | 风控 | `services/risk-service` | 3008 | NestJS |
-| ② 交易核心 | 撮合 | `engines/matching-engine` | 3011 | Rust，TCP JSON line |
-| ② 交易核心 | 结算 | `services/settlement-service` | 3010 | NestJS |
-| ③ 资金层 | 账本 | `services/ledger-service` | 3001 | PostgreSQL + Kafka outbox |
-| ③ 资金层 | 钱包 | `services/wallet-service` | 3002 | NestJS |
-| ③ 资金层 | 身份 | `services/identity-service` | 3005 | TOTP 2FA、RBAC |
-| ④ 链上层 | 索引器 | `services/blockchain-indexer` | 3003 | EVM 扫描、重组回滚 |
-| ④ 链上层 | 托管适配 | `services/custody-adapter` | 3004 | evm-hot-wallet provider |
-| ⑤ 数据层 | 行情 | `services/market-data-service` | 3012 | Redis + ClickHouse |
-| ⑥ 运营后台 | 运营控制台 | `apps/ops-console` | 3006 | 审核、对账、恢复 |
-
-本仓库和大型交易所的差异：
-
-- 本仓库的订单服务**同步**调用结算服务。大型交易所通常让结算异步消费成交流。
-- 本仓库的撮合引擎是单进程。没有主备，没有按交易对分片。
-- 共享领域模型在 `packages/domain`。Kafka topic 规划见 `docs/event-catalog.md`。
-
-更多运行细节见 `docs/architecture.md` 和 `docs/getting-started.md`。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -380,7 +351,7 @@ flowchart LR
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 为什么撮合引擎不直接修改账本余额？如果它直接改，会出现什么问题？
 2. 在 [architecture-explorer.html](../../interactive/architecture-explorer.html) 中把 Kafka 设为故障，然后运行"下单成交"。用户的资金是否正确？用户看到的是否正确？

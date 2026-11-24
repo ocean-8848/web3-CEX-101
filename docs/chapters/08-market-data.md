@@ -291,30 +291,7 @@ flowchart LR
 
 ---
 
-## 6. 本仓库对照（CEX Demo）
-
-| 主题 | 本仓库实现 | 与生产级做法的差距 |
-|---|---|---|
-| 行情服务 | `services/market-data-service`，HTTP 端口 3012 | — |
-| REST | `tickers`、`ticker`、`depth`、`trades` 四个接口 | 缺少 K 线查询接口 |
-| 公共 WebSocket | `WS /api/v1/market-data/ws`，频道 `ticker` / `depth` / `trades` | 每次事件推送完整快照，不是增量；没有 `U` / `u` 序号 |
-| 事件来源 | 订阅 Redis 频道 `web3-cex:trading.events` | 生产级通常用 Kafka 等可重放的总线 |
-| 深度生成 | 从 `order-service` 拉取挂单列表，`aggregateLevels` 按价格汇总 | 生产级直接消费撮合引擎的订单簿变化事件 |
-| K 线 | ClickHouse 物化视图生成 `1m` K 线 | 还没有更长周期 |
-| 快照缓存 | Redis 存 ticker / depth / trades 快照 | 思路一致 |
-| 私有推送 | `api-gateway` 的 `/api/v1/gateway/realtime`，频道 `orders` / `trades` / `notifications` / `balances`，需要 token 或 API Key 签名 | 思路一致 |
-
-相关文件：
-
-- [services/market-data-service/README.md](https://github.com/ocean-8848/CEX-Demo/blob/main/services/market-data-service/README.md)
-- [services/market-data-service/src/http/market-data-realtime-server.ts](https://github.com/ocean-8848/CEX-Demo/blob/main/services/market-data-service/src/http/market-data-realtime-server.ts)
-- [docs/architecture.md](https://github.com/ocean-8848/CEX-Demo/blob/main/docs/architecture.md)
-
-> 💡 注意：本仓库每次推送完整深度快照。它简单可靠，但消息体积大。练习：给它加上递增的 `updateId`，并改成增量推送，然后按 3.4 节的规则写一个客户端。
-
----
-
-## 7. 术语表
+## 6. 术语表
 
 | 术语 | 英文 | 定义 |
 |---|---|---|
@@ -334,7 +311,7 @@ flowchart LR
 
 ---
 
-## 8. 思考题
+## 7. 思考题
 
 1. 在 3.4 节的流程中，如果先拉快照、后开 WebSocket，会丢失哪一段事件？请画出时间线说明。
 2. 打开 [depth-slippage.html](../../interactive/depth-slippage.html)，把流动性调到最薄，下一个大额市价单。再切换"做市商撤单"。滑点变化了多少？这对依赖最新价做强平的系统有什么风险？
