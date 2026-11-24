@@ -1,5 +1,5 @@
 // Render a video deck to MP4 with synthesized Chinese narration and captions.
-// Usage: node render.mjs ../slides/EP01-xxx.html [--engine edge|say] [--voice NAME] [--rate R] [--pitch P] [--out ../output]
+// Usage: node render.mjs ../../slides/EP01-xxx.html [--engine edge|say] [--voice NAME] [--rate R] [--pitch P] [--out ../output]
 //   edge (default): Microsoft neural voices via `edge-tts`, default zh-CN-YunxiNeural at +0% rate, +0Hz pitch
 //   say:            macOS voices, e.g. --engine say --voice Tingting --rate 200
 // Needs: Google Chrome, ffmpeg/ffprobe, and `edge-tts` (pip install edge-tts) or macOS `say`.
@@ -15,7 +15,7 @@ const ENGINE = opt('--engine', 'edge');
 const VOICE = opt('--voice', ENGINE === 'edge' ? 'zh-CN-YunxiNeural' : 'Tingting');
 const RATE = opt('--rate', ENGINE === 'edge' ? '+0%' : '200');
 const PITCH = opt('--pitch', '+0Hz');
-const OUT = path.resolve(opt('--out', path.join(path.dirname(deckPath), '..', 'output')));
+const OUT = path.resolve(opt('--out', path.join(path.dirname(new URL(import.meta.url).pathname), '..', 'output')));
 const GAP = 0.32;        // silence after each sentence (s)
 const STEP_GAP = 0.55;   // extra silence when the picture changes (s)
 const base = path.basename(deckPath, '.html');

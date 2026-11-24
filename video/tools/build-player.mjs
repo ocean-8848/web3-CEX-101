@@ -61,7 +61,7 @@ const files = fs.readdirSync(path.join(root, 'scripts')).filter(f => /^(EP\d\d|B
 });
 
 // Knowledge docs per episode, from the "来源" column of ../README.md:
-// "02（…）" / "11、12" → chapters/NN-*.md; "backstage/B01" / "products/P01" → that folder's file.
+// "02（…）" / "11、12" → docs/chapters/NN-*.md; "backstage/B01" / "products/P01" → docs/<folder>/ file.
 const repo = path.join(root, '..');
 const docTitle = rel => (fs.readFileSync(path.join(repo, rel), 'utf8').match(/^# (.+)$/m) || [])[1] || rel;
 const findDoc = (dir, prefix) => {
@@ -74,7 +74,7 @@ for (const line of fs.readFileSync(path.join(root, 'README.md'), 'utf8').split('
   if (!/^(EP|B|P)\d\d$/.test(cols[1] || '')) continue;
   const src = cols[3].replace(/（.*?）/g, '');
   const m = src.match(/^(backstage|products)\/([BP]\d\d)$/);
-  const rels = m ? [findDoc(m[1], m[2])] : (src.match(/\d\d/g) || []).map(n => findDoc('chapters', n));
+  const rels = m ? [findDoc('docs/' + m[1], m[2])] : (src.match(/\d\d/g) || []).map(n => findDoc('docs/chapters', n));
   DOCS[cols[1]] = rels.filter(Boolean).map(rel => ({ href: '../' + rel, title: docTitle(rel) }));
 }
 
@@ -106,7 +106,7 @@ fs.writeFileSync(path.join(root, 'player-data.js'), out);
 
 // Bundle knowledge Markdown files into docs-data.js so video/index.html can render them over file:// without fetch.
 const docMap = {};
-for (const dir of ['chapters', 'backstage', 'products']) {
+for (const dir of ['docs/chapters', 'docs/backstage', 'docs/products']) {
   const fullDir = path.join(repo, dir);
   if (!fs.existsSync(fullDir)) continue;
   for (const f of fs.readdirSync(fullDir).filter(x => x.endsWith('.md')).sort()) {
@@ -114,7 +114,7 @@ for (const dir of ['chapters', 'backstage', 'products']) {
     docMap[rel] = fs.readFileSync(path.join(fullDir, f), 'utf8');
   }
 }
-for (const top of ['README.md', 'WRITING-GUIDE.md']) {
+for (const top of ['README.md', 'docs/README.md', 'docs/WRITING-GUIDE.md']) {
   const p = path.join(repo, top);
   if (fs.existsSync(p)) docMap[`../${top}`] = fs.readFileSync(p, 'utf8');
 }

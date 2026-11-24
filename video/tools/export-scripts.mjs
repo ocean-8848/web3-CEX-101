@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const here = path.dirname(new URL(import.meta.url).pathname);
-const slidesDir = path.join(here, '..', 'slides');
+const slidesDir = path.join(here, '..', '..', 'slides');
 const outDir = path.join(here, '..', 'scripts');
 fs.mkdirSync(outDir, { recursive: true });
 const decks = fs.readdirSync(slidesDir).filter(f => /^(EP(0[1-9]|1\d)|P\d\d|B\d\d)-.*\.html$/.test(f)).sort();

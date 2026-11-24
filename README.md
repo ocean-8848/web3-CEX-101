@@ -2,7 +2,21 @@
 
 > 目标：由浅入深，理解中心化交易所（CEX）的**底层系统逻辑**和**业务/商业逻辑**。
 > 形式：Markdown 章节（文字 + Mermaid 图）+ HTML 交互实验（按钮、滑块、动画）。
-> 风格：80% 遵循 ASD-STE100 受控语言（短句、主动语态、一词一义），20% 用比喻和案例。见 [WRITING-GUIDE.md](WRITING-GUIDE.md)。
+> 风格：80% 遵循 ASD-STE100 受控语言（短句、主动语态、一词一义），20% 用比喻和案例。见 [WRITING-GUIDE.md](docs/WRITING-GUIDE.md)。
+
+## 0. 仓库结构
+
+```
+web3-CEX-101/
+├── docs/                 文字教材（Markdown + Mermaid）
+│   ├── chapters/         主线 01–13 章
+│   ├── products/         下篇 · 产品深潜 P01–P11
+│   ├── backstage/        下篇 · 幕后核心 B01–B12
+│   └── WRITING-GUIDE.md  写作规范
+├── interactive/          交互实验（HTML，浏览器直接打开）
+├── slides/               讲解幻灯片 40 集（视频画面源文件）
+└── video/                视频播放器、口播稿、渲染工具、发布记录
+```
 
 ## 1. 一张图看懂学习路径
 
@@ -51,52 +65,52 @@ flowchart TD
 
 | # | 章节 | 你会学到 | 交互实验 |
 |---|---|---|---|
-| 01 | [什么是 CEX](chapters/01-what-is-cex.md) | CEX 的本质：托管 + 记账 + 撮合；币安业务版图；用户旅程 | — |
-| 02 | [系统总架构](chapters/02-system-architecture.md) | 分层架构、调用链、同步与异步边界、单点与故障 | [架构探索器](interactive/architecture-explorer.html) |
-| 03 | [账户、身份与安全](chapters/03-account-identity-security.md) | 登录、2FA、API Key 签名、KYC 状态机 | — |
-| 04 | [钱包与托管](chapters/04-wallet-custody.md) | 充值确认数、链重组、提币流程、冷热钱包、储备金证明 | [充提模拟器](interactive/deposit-withdraw-sim.html) · [储备金证明](interactive/proof-of-reserves.html) |
-| 05 | [账本](chapters/05-ledger.md) | 双分录、冻结/解冻、幂等、对账、热点账户 | [双分录账本](interactive/ledger-double-entry.html) |
-| 06 | [订单与撮合](chapters/06-order-matching.md) | 订单簿、价格-时间优先、订单类型、撮合引擎实现 | [撮合引擎](interactive/order-book-matching.html) |
-| 07 | [清算、结算与手续费](chapters/07-clearing-settlement-fees.md) | 成交后的分录、Maker/Taker、VIP、BNB 抵扣 | [双分录账本 · 手续费计算器](interactive/ledger-double-entry.html) |
-| 08 | [行情](chapters/08-market-data.md) | 深度、K 线、增量同步、WebSocket 扇出 | [深度与滑点](interactive/depth-slippage.html) |
-| 09 | [风控](chapters/09-risk-control.md) | 交易前/中/后风控、提币风控、限流、误杀与漏放 | [风控规则实验室](interactive/risk-rules-lab.html) |
-| 10 | [合约与衍生品](chapters/10-derivatives-futures.md) | 永续合约、资金费率、标记价格、强平、保险基金、ADL | [永续合约实验室](interactive/perpetual-liquidation.html) |
-| 11 | [产品生态](chapters/11-products-ecosystem.md) | 杠杆、闪兑、P2P、理财、Launchpool、上币流程 | — |
-| 12 | [商业模式](chapters/12-business-model.md) | 收入结构、飞轮、BNB 代币经济、合规 | [商业模型沙盘](interactive/revenue-model.html) |
-| 13 | [可靠性与安全事故](chapters/13-reliability-security-incidents.md) | 高可用、降级、真实事故复盘（币安 2019、FTX、Mt.Gox） | — |
+| 01 | [什么是 CEX](docs/chapters/01-what-is-cex.md) | CEX 的本质：托管 + 记账 + 撮合；币安业务版图；用户旅程 | — |
+| 02 | [系统总架构](docs/chapters/02-system-architecture.md) | 分层架构、调用链、同步与异步边界、单点与故障 | [架构探索器](interactive/architecture-explorer.html) |
+| 03 | [账户、身份与安全](docs/chapters/03-account-identity-security.md) | 登录、2FA、API Key 签名、KYC 状态机 | — |
+| 04 | [钱包与托管](docs/chapters/04-wallet-custody.md) | 充值确认数、链重组、提币流程、冷热钱包、储备金证明 | [充提模拟器](interactive/deposit-withdraw-sim.html) · [储备金证明](interactive/proof-of-reserves.html) |
+| 05 | [账本](docs/chapters/05-ledger.md) | 双分录、冻结/解冻、幂等、对账、热点账户 | [双分录账本](interactive/ledger-double-entry.html) |
+| 06 | [订单与撮合](docs/chapters/06-order-matching.md) | 订单簿、价格-时间优先、订单类型、撮合引擎实现 | [撮合引擎](interactive/order-book-matching.html) |
+| 07 | [清算、结算与手续费](docs/chapters/07-clearing-settlement-fees.md) | 成交后的分录、Maker/Taker、VIP、BNB 抵扣 | [双分录账本 · 手续费计算器](interactive/ledger-double-entry.html) |
+| 08 | [行情](docs/chapters/08-market-data.md) | 深度、K 线、增量同步、WebSocket 扇出 | [深度与滑点](interactive/depth-slippage.html) |
+| 09 | [风控](docs/chapters/09-risk-control.md) | 交易前/中/后风控、提币风控、限流、误杀与漏放 | [风控规则实验室](interactive/risk-rules-lab.html) |
+| 10 | [合约与衍生品](docs/chapters/10-derivatives-futures.md) | 永续合约、资金费率、标记价格、强平、保险基金、ADL | [永续合约实验室](interactive/perpetual-liquidation.html) |
+| 11 | [产品生态](docs/chapters/11-products-ecosystem.md) | 杠杆、闪兑、P2P、理财、Launchpool、上币流程 | — |
+| 12 | [商业模式](docs/chapters/12-business-model.md) | 收入结构、飞轮、BNB 代币经济、合规 | [商业模型沙盘](interactive/revenue-model.html) |
+| 13 | [可靠性与安全事故](docs/chapters/13-reliability-security-incidents.md) | 高可用、降级、真实事故复盘（币安 2019、FTX、Mt.Gox） | — |
 
-### 下篇 · 产品深潜（[products/](products/README.md)）
-
-| # | 主题 | 交互实验 |
-|---|---|---|
-| P01 | [杠杆与借贷](products/P01-margin-and-loans.md) | [借贷与杠杆实验室](interactive/margin-loan-lab.html) |
-| P02 | [闪兑与 OTC](products/P02-convert-otc.md) | [闪兑报价沙盘](interactive/convert-rfq.html) |
-| P03 | [P2P 与法币通道](products/P03-p2p-fiat.md) | [P2P 担保交易](interactive/p2p-escrow.html) |
-| P04 | [合约进阶：统一账户、组合保证金、期权](products/P04-advanced-derivatives.md) | — |
-| P05 | [理财 I：存币生息与质押](products/P05-earn-savings-staking.md) | — |
-| P06 | [理财 II：结构化产品](products/P06-structured-products.md) | [双币投资拆解](interactive/dual-investment.html) |
-| P07 | [上币与新币分发](products/P07-listing-launch.md) | [Launchpool 计算器](interactive/launchpool-calc.html) |
-| P08 | [策略交易与跟单](products/P08-strategy-copy-trading.md) | [网格策略回测](interactive/grid-bot.html) |
-| P09 | [支付与卡](products/P09-pay-and-card.md) | — |
-| P10 | [Web3 钱包与链上](products/P10-web3-wallet.md) | — |
-| P11 | [增长与机构](products/P11-growth-institutional.md) | — |
-
-### 下篇 · 幕后核心（[backstage/](backstage/README.md)）
+### 下篇 · 产品深潜（[docs/products/](docs/products/README.md)）
 
 | # | 主题 | 交互实验 |
 |---|---|---|
-| B01 | [合规防护](backstage/B01-compliance.md) | [AML 资金流图谱](interactive/aml-graph.html) |
-| B02 | [平台安全防护](backstage/B02-platform-security.md) | — |
-| B03 | [账户安全风控](backstage/B03-account-security.md) | [盗号攻防实验](interactive/ato-defense.html) |
-| B04 | [系统对账](backstage/B04-reconciliation.md) | [对账实验室](interactive/reconciliation-lab.html) |
-| B05 | [业务风控](backstage/B05-business-risk.md) | [市场监控实验](interactive/market-surveillance.html) |
-| B06 | [资金与流动性管理](backstage/B06-treasury-liquidity.md) | — |
-| B07 | [应急响应](backstage/B07-incident-response.md) | — |
-| B08 | [实时风控平台工程](backstage/B08-risk-platform.md) | [风控决策流水线](interactive/risk-pipeline-lab.html) |
-| B09 | [全球监管与牌照](backstage/B09-global-licensing.md) | [牌照与监管矩阵](interactive/license-matrix.html) |
-| B10 | [税务报送与数据隐私](backstage/B10-tax-privacy.md) | — |
-| B11 | [安全工程](backstage/B11-security-engineering.md) | — |
-| B12 | [安全事故案例库](backstage/B12-incident-casebook.md) | [事故案例浏览器](interactive/incident-explorer.html) |
+| P01 | [杠杆与借贷](docs/products/P01-margin-and-loans.md) | [借贷与杠杆实验室](interactive/margin-loan-lab.html) |
+| P02 | [闪兑与 OTC](docs/products/P02-convert-otc.md) | [闪兑报价沙盘](interactive/convert-rfq.html) |
+| P03 | [P2P 与法币通道](docs/products/P03-p2p-fiat.md) | [P2P 担保交易](interactive/p2p-escrow.html) |
+| P04 | [合约进阶：统一账户、组合保证金、期权](docs/products/P04-advanced-derivatives.md) | — |
+| P05 | [理财 I：存币生息与质押](docs/products/P05-earn-savings-staking.md) | — |
+| P06 | [理财 II：结构化产品](docs/products/P06-structured-products.md) | [双币投资拆解](interactive/dual-investment.html) |
+| P07 | [上币与新币分发](docs/products/P07-listing-launch.md) | [Launchpool 计算器](interactive/launchpool-calc.html) |
+| P08 | [策略交易与跟单](docs/products/P08-strategy-copy-trading.md) | [网格策略回测](interactive/grid-bot.html) |
+| P09 | [支付与卡](docs/products/P09-pay-and-card.md) | — |
+| P10 | [Web3 钱包与链上](docs/products/P10-web3-wallet.md) | — |
+| P11 | [增长与机构](docs/products/P11-growth-institutional.md) | — |
+
+### 下篇 · 幕后核心（[docs/backstage/](docs/backstage/README.md)）
+
+| # | 主题 | 交互实验 |
+|---|---|---|
+| B01 | [合规防护](docs/backstage/B01-compliance.md) | [AML 资金流图谱](interactive/aml-graph.html) |
+| B02 | [平台安全防护](docs/backstage/B02-platform-security.md) | — |
+| B03 | [账户安全风控](docs/backstage/B03-account-security.md) | [盗号攻防实验](interactive/ato-defense.html) |
+| B04 | [系统对账](docs/backstage/B04-reconciliation.md) | [对账实验室](interactive/reconciliation-lab.html) |
+| B05 | [业务风控](docs/backstage/B05-business-risk.md) | [市场监控实验](interactive/market-surveillance.html) |
+| B06 | [资金与流动性管理](docs/backstage/B06-treasury-liquidity.md) | — |
+| B07 | [应急响应](docs/backstage/B07-incident-response.md) | — |
+| B08 | [实时风控平台工程](docs/backstage/B08-risk-platform.md) | [风控决策流水线](interactive/risk-pipeline-lab.html) |
+| B09 | [全球监管与牌照](docs/backstage/B09-global-licensing.md) | [牌照与监管矩阵](interactive/license-matrix.html) |
+| B10 | [税务报送与数据隐私](docs/backstage/B10-tax-privacy.md) | — |
+| B11 | [安全工程](docs/backstage/B11-security-engineering.md) | — |
+| B12 | [安全事故案例库](docs/backstage/B12-incident-casebook.md) | [事故案例浏览器](interactive/incident-explorer.html) |
 
 ### 讲解幻灯片与视频 · 40 集（[slides/](slides/index.html)）
 
@@ -106,7 +120,7 @@ flowchart TD
 
 | 系列 | B 站 | YouTube |
 | --- | --- | --- |
-| 主线 EP01–EP17 | [合集](https://www.bilibili.com/video/BV15wpE6PETm/) | EP01–EP10 已发布，见 [published.tsv](video/youtube/published.tsv) |
+| 主线 EP01–EP17 | [合集](https://www.bilibili.com/video/BV15wpE6PETm/) | EP01–EP10 已发布，见 [youtube-published.tsv](video/publish/youtube-published.tsv) |
 | 幕后核心 B01–B12 | [合集](https://www.bilibili.com/video/BV1jop76qE2y/) | — |
 | 产品深潜 P01–P11 | [合集](https://www.bilibili.com/video/BV1GKpE6hEE6/) | — |
 

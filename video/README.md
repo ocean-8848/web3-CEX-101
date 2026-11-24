@@ -1,7 +1,7 @@
 # 视频系列：交易所系统技术讲解（主线 17 集 + 幕后核心 12 集 + 产品深潜 11 集）
 
 > 来源：主线 01–13 章。每集 10–15 分钟，技术教学风格。
-> 形式：每集一个动画讲解页（`slides/EPxx-*.html`），口播写在页面里；渲染脚本自动合成配音、字幕和章节，输出 MP4。
+> 形式：每集一个动画讲解页（仓库根目录 `slides/EPxx-*.html`），口播写在页面里；渲染脚本自动合成配音、字幕和章节，输出 MP4。
 > **观看**：用浏览器打开 [index.html](index.html)（选集播放器：讲稿逐句同步、点句跳转、PPT 模式、倍速连播；本地没有成片时回退到 B 站）。成片在 `output/`，口播稿在 [scripts/](scripts/README.md)。渲染新集后运行 `node tools/build-player.mjs` 刷新播放器数据 `player-data.js`。
 
 ## 1. 剧集表
@@ -71,7 +71,7 @@
 
 ## 3. 动画讲解页写法
 
-参考模板：[slides/EP00-template.html](slides/EP00-template.html)。共用样式和播放器：`slides/assets/player.css`、`player.js`（不要修改）。
+参考模板：[slides/EP00-template.html](../slides/EP00-template.html)。共用样式和播放器：`slides/assets/player.css`、`player.js`（不要修改）。
 
 - 画布固定 1920×1080，深色交易终端风格。字号大：正文 ≥ 30px，标题 ≥ 56px。
 - 每个 `<section class="scene" data-title="...">` 是一个场景，`data-title` 会成为视频章节名。
@@ -92,7 +92,7 @@
 
 ```bash
 cd video/tools && npm install
-node render.mjs ../slides/EP01-what-is-cex.html
+node render.mjs ../../slides/EP01-what-is-cex.html
 ```
 
 一次渲染全部 17 集（4 集并行，约 15–20 分钟）：
@@ -114,3 +114,21 @@ video/tools/render-all.sh
 `scripts/EPxx-*.md` 由讲解页自动导出（`node tools/export-scripts.mjs`），包含每个场景的口播全文和对应画面步骤，可直接作为真人录制的提词稿。
 
 `player-data.js` 由 `node tools/build-player.mjs` 生成：读取口播稿的场景和步骤，再把 `output/*.srt` 的每句字幕对齐到步骤，供播放器显示带时间戳的讲稿，并在 PPT 模式中打开对应步骤。没有 SRT 的集只显示讲稿文字。
+
+## 6. 发布与网页版转码
+
+- `tools/web-transcode.sh [输出目录]`：把 `output/*.mp4` 压成 720p 网页版（默认输出到 `output-web-final/`，已存在的文件跳过）。
+- `publish/`：视频平台发布记录。`youtube-plan.json`、`bilibili-plan.json` 是上传计划；`youtube-published.tsv`、`bilibili-published.tsv` 是已发布链接；`covers/` 是封面源文件（`cover.html`）和截图脚本（`shot.mjs`）。
+
+## 7. 目录结构
+
+```
+video/
+├── index.html          选集播放器
+├── player-data.js      播放器数据（build-player.mjs 生成）
+├── docs-data.js        播放器内嵌的知识文档（build-player.mjs 生成）
+├── scripts/            口播稿（export-scripts.mjs 生成）
+├── tools/              渲染、导出、转码工具
+├── publish/            YouTube / B 站发布计划、记录和封面
+└── output*/            本地渲染产物（不进 git）
+```

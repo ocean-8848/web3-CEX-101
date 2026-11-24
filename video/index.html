@@ -200,7 +200,7 @@ function go(i, autoplay) {
   v.playbackRate = +$('#sp').value;
   if (autoplay) v.play().catch(() => {});
   $('#t').textContent = `${e.id} ${e.title}`;
-  $('#meta').innerHTML = `<a href="${bili(e)}" target="_blank" rel="noopener">B 站观看 ↗</a><a href="scripts/${e.base}.md">口播稿</a><a href="slides/${e.base}.html" target="_blank">动画讲解页 ↗</a>` + (e.timed ? `<a href="output/${e.base}.srt">字幕 SRT</a>` : '');
+  $('#meta').innerHTML = `<a href="${bili(e)}" target="_blank" rel="noopener">B 站观看 ↗</a><a href="scripts/${e.base}.md">口播稿</a><a href="../slides/${e.base}.html" target="_blank">动画讲解页 ↗</a>` + (e.timed ? `<a href="output/${e.base}.srt">字幕 SRT</a>` : '');
   // 文档：本集对应的知识文档（章节 / 幕后 / 产品），多篇时按编号区分；点击弹出渲染后的阅读窗口。
   $('#bdoc').innerHTML = e.docs.map(d => `<button type="button" data-doc-href="${esc(d.href)}" data-doc-title="${esc(d.title)}" title="${esc(d.title)}">📖 文档${e.docs.length > 1 ? ' ' + esc(d.href.match(/\/(\w+?)-/)[1]) : ''}</button>`).join(' ');
   renderScript();
@@ -255,7 +255,7 @@ function openPpt(step) {
   if (!step) { const p = nowLine(); step = p && v.currentTime > 0 ? p.dataset.s : '1-0'; }
   v.pause();
   $('#pt').textContent = `PPT · ${e.id} ${e.title}`;
-  $('#pf').src = `slides/${e.base}.html#s${step}`;
+  $('#pf').src = `../slides/${e.base}.html#s${step}`;
   $('#ppt').classList.add('on');
   $('#pf').onload = () => {
     try {
